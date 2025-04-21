@@ -336,6 +336,7 @@ position = Vector2(-6, -16)
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(1, 7)
 zoom = Vector2(4, 4)
+position_smoothing_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1

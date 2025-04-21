@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cws2mh1ko3mg8"]
 
-[ext_resource type="Script" path="res://Player.cs" id="1_ljybg"]
-[ext_resource type="Texture2D" uid="uid://ci2xmi06upe74" path="res://Idle.png" id="2_fk8ig"]
+[ext_resource type="Script" path="res://player.gd" id="1_enxr5"]
+[ext_resource type="Texture2D" uid="uid://ci2xmi06upe74" path="res://assets/sprites/Idle.png" id="2_fk8ig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1q6n"]
 atlas = ExtResource("2_fk8ig")
@@ -44,7 +44,7 @@ radius = 4.0
 height = 22.0
 
 [node name="player" type="CharacterBody2D"]
-script = ExtResource("1_ljybg")
+script = ExtResource("1_enxr5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(10.125, -12.0522)
@@ -52,7 +52,6 @@ scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.163633
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(6, -11)
