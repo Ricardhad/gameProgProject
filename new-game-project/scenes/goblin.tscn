@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://csnfqbub5lcrd"]
+
+[ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/goblin/Idle.png" id="1_3vkl3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wypt8"]
+atlas = ExtResource("1_3vkl3")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtkqa"]
+atlas = ExtResource("1_3vkl3")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lfsy"]
+atlas = ExtResource("1_3vkl3")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phyos"]
+atlas = ExtResource("1_3vkl3")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw64g"]
+atlas = ExtResource("1_3vkl3")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3wv71"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wypt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtkqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lfsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phyos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sw64g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucug6"]
+size = Vector2(18.5, 31)
+
+[node name="Goblin" type="RigidBody2D"]
+position = Vector2(247, -74)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(414, 260)
+scale = Vector2(0.601563, 0.601563)
+sprite_frames = SubResource("SpriteFrames_3wv71")
+autoplay = "default"
+frame_progress = 0.267558
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(417.25, 282.5)
+shape = SubResource("RectangleShape2D_ucug6")
