@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bly5as6id03dn"
-path="res://.godot/imported/Jump.png-8424c6cffac9b8b60356e8058f4095ea.ctex"
+uid="uid://bqtwub5hugd7c"
+path="res://.godot/imported/1.png-a89884541e7638152a5a5efc9bcad0d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/class/knight/Jump.png"
-dest_files=["res://.godot/imported/Jump.png-8424c6cffac9b8b60356e8058f4095ea.ctex"]
+source_file="res://assets/grass/bg/1.png"
+dest_files=["res://.godot/imported/1.png-a89884541e7638152a5a5efc9bcad0d2.ctex"]
 
 [params]
 

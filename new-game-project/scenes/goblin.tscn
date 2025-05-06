@@ -49,10 +49,10 @@ animations = [{
 size = Vector2(18.5, 31)
 
 [node name="Goblin" type="RigidBody2D"]
-position = Vector2(247, -74)
+position = Vector2(-67, -135)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(414, 260)
+position = Vector2(106, 97)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_3wv71")
 autoplay = "default"
@@ -60,5 +60,5 @@ frame_progress = 0.267558
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(417.25, 282.5)
+position = Vector2(109, 120)
 shape = SubResource("RectangleShape2D_ucug6")
