@@ -175,7 +175,6 @@ autoplay = true
 
 [node name="OptionsPopup" type="PopupMenu" parent="."]
 auto_translate_mode = 1
-visible = true
 item_count = 2
 item_1/id = 1
 

@@ -359,8 +359,10 @@ script = ExtResource("1_enxr5")
 position = Vector2(9, -15)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"dash"
+animation = &"attack1"
 autoplay = "idle"
+frame = 3
+frame_progress = 0.13389
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -11)

@@ -12,10 +12,31 @@ var current_attack_index = 0
 var was_running = false
 var attack_animations = ["attack", "attack1", "attack2"]
 
+const DASH_SPEED = 500.0
+const DASH_DURATION = 0.2
+
+var is_dashing = false
+var dash_time = 0.0
+
 func _ready():
 	randomize()
 
 func _physics_process(delta: float) -> void:
+	# Dash logic
+	if is_dashing:
+		dash_time -= delta
+		if dash_time <= 0:
+			is_dashing = false
+		else:
+			move_and_slide()
+			return
+	if Input.is_action_just_pressed("dash") and not is_attacking and not is_guarding :
+		var direction = Input.get_axis("left", "right")
+		if direction != 0:
+			dash(direction)
+			return
+
+
 	if global_position.y > 2000:
 		global_position = respawn_position
 		velocity = Vector2.ZERO
@@ -98,3 +119,9 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.animation = "run"
 		else:
 			animated_sprite_2d.animation = "idle"
+			
+func dash(direction: float):
+	is_dashing = true
+	dash_time = DASH_DURATION
+	velocity.x = direction * DASH_SPEED
+	animated_sprite_2d.animation = "run"
