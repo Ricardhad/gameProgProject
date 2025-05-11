@@ -122,6 +122,7 @@ texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/Button3"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 11.0
 offset_right = 187.0
@@ -139,6 +140,7 @@ texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/Button4"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 14.0
 offset_right = 182.0
