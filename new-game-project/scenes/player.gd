@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -350.0
+const JUMP_VELOCITY = -480.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 var respawn_position = Vector2(100, 100)
@@ -12,11 +12,15 @@ var current_attack_index = 0
 var was_running = false
 var attack_animations = ["attack", "attack1", "attack2"]
 
+#dash var
 const DASH_SPEED = 500.0
 const DASH_DURATION = 0.2
-
 var is_dashing = false
 var dash_time = 0.0
+#jumpvar
+var max_jumps = 2
+var jump_count = 0
+
 
 func _ready():
 	randomize()
@@ -99,9 +103,16 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	if is_on_floor():
+		jump_count = 0
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
 		velocity.y = JUMP_VELOCITY
+		jump_count += 1
 
 	var direction := Input.get_axis("left", "right")
 	if direction:
