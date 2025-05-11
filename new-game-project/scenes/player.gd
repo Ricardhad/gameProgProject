@@ -4,6 +4,7 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -350.0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
+var respawn_position = Vector2(100, 100)
 
 var is_attacking = false
 var is_guarding = false
@@ -15,6 +16,14 @@ func _ready():
 	randomize()
 
 func _physics_process(delta: float) -> void:
+	if global_position.y > 2000:
+		global_position = respawn_position
+		velocity = Vector2.ZERO
+		is_attacking = false
+		is_guarding = false
+		current_attack_index = 0
+		animated_sprite_2d.animation = "idle"
+		return
 	if Input.is_action_pressed("guard") and not is_attacking:
 		if not is_guarding:
 			is_guarding = true

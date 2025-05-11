@@ -19,9 +19,18 @@ func _on_load_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_options_pressed() -> void:
-	pass # Replace with function body.
+func _on_options_pressed():
+	$OptionsPopup.popup_centered()
 
-
+func _on_options_popup_id_pressed(id):
+	match id:
+		0:
+			print("Graphics Settings selected")
+		1:
+			print("Audio Settings selected")
+		2:
+			print("Controls selected")
+			
 func _on_exit_pressed() -> void:
+	#$VBoxContainer/Button4/PopupExit.popup_centered()
 	get_tree().quit()

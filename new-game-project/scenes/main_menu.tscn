@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dew713h72nevn"]
+[gd_scene load_steps=10 format=3 uid="uid://dew713h72nevn"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_mengp"]
 [ext_resource type="Texture2D" uid="uid://c3wh1vocs21bh" path="res://assets/main_menu/background.jpg" id="2_pnv7h"]
 [ext_resource type="Texture2D" uid="uid://iuitvc3u81qh" path="res://assets/main_menu/menu_box.png" id="3_dxrfl"]
 [ext_resource type="Texture2D" uid="uid://cdvs6qogfpnf7" path="res://assets/main_menu/Chat_Cloud.png" id="4_p23ar"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="5_cb6hv"]
 [ext_resource type="FontFile" uid="uid://koihkxmi6b18" path="res://assets/font_style/Tektur-ExtraBold.ttf" id="5_ole02"]
 [ext_resource type="AudioStream" uid="uid://dfahdqllpinwp" path="res://assets/music/Menu.mp3" id="6_1pkv4"]
 
@@ -83,14 +84,18 @@ stretch_mode = 0
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.093
-anchor_top = 0.375
-anchor_right = 0.938
+anchor_top = 0.319
+anchor_right = 0.933
 anchor_bottom = 0.734
-offset_left = 65.993
-offset_right = -62.162
-offset_bottom = 0.0239983
+offset_left = -1.507
+offset_top = -8.416
+offset_right = 2.33299
+offset_bottom = 10.024
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
 text = "Start
 "
+horizontal_alignment = 1
 
 [node name="Button2" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
@@ -98,17 +103,53 @@ size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
 
+[node name="Label" type="Label" parent="VBoxContainer/Button2"]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 14.0
+offset_right = 179.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Load
+"
+horizontal_alignment = 1
+
 [node name="Button3" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
 
+[node name="Label" type="Label" parent="VBoxContainer/Button3"]
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 187.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Option
+"
+horizontal_alignment = 1
+
 [node name="Button4" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/Button4"]
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 182.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"
+horizontal_alignment = 1
+
+[node name="PopupExit" type="PopupMenu" parent="VBoxContainer/Button4"]
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -131,6 +172,12 @@ vertical_alignment = 1
 stream = ExtResource("6_1pkv4")
 volume_db = -7.5
 autoplay = true
+
+[node name="OptionsPopup" type="PopupMenu" parent="."]
+auto_translate_mode = 1
+visible = true
+item_count = 2
+item_1/id = 1
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_load_pressed"]
