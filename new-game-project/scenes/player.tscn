@@ -233,6 +233,11 @@ animations = [{
 "name": &"attack2",
 "speed": 10.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ahjon")
@@ -354,10 +359,8 @@ script = ExtResource("1_enxr5")
 position = Vector2(9, -15)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"attack1"
+animation = &"dash"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.204732
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -11)
