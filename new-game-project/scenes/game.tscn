@@ -500,11 +500,8 @@ zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.75
 
-[node name="Goblin2" parent="." instance=ExtResource("4_t8afd")]
-position = Vector2(252, 127)
-
 [node name="Goblin" parent="." instance=ExtResource("4_t8afd")]
-position = Vector2(389, 126)
+position = Vector2(246, 126)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_mms8s")
@@ -513,6 +510,7 @@ autoplay = true
 parameters/looping = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)

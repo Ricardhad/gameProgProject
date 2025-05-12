@@ -1,6 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://csnfqbub5lcrd"]
+[gd_scene load_steps=16 format=3 uid="uid://csnfqbub5lcrd"]
 
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/goblin/Idle.png" id="1_3vkl3"]
+[ext_resource type="Script" path="res://scenes/goblin.gd" id="1_c35ym"]
+[ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/goblin/Dead.png" id="2_oj3is"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0skox"]
+atlas = ExtResource("2_oj3is")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g8bf"]
+atlas = ExtResource("2_oj3is")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_suu5q"]
+atlas = ExtResource("2_oj3is")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfvkn"]
+atlas = ExtResource("2_oj3is")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pylag"]
+atlas = ExtResource("2_oj3is")
+region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wypt8"]
 atlas = ExtResource("1_3vkl3")
@@ -26,6 +48,26 @@ region = Rect2(640, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0skox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g8bf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_suu5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfvkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pylag")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wypt8")
 }, {
 "duration": 1.0,
@@ -41,7 +83,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_sw64g")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 10.0
 }]
 
@@ -50,15 +92,23 @@ size = Vector2(18.5, 31)
 
 [node name="Goblin" type="RigidBody2D"]
 position = Vector2(-67, -135)
+collision_layer = 5
+collision_mask = 3
+script = ExtResource("1_c35ym")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(106, 97)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_3wv71")
-autoplay = "default"
-frame_progress = 0.267558
+animation = &"dead"
+autoplay = "idle"
+frame_progress = 0.833403
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(109, 120)
 shape = SubResource("RectangleShape2D_ucug6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
