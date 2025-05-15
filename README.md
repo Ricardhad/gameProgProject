@@ -1,1 +1,2 @@
-credit sprite: https://brackeysgames.itch.io/brackeys-platformer-bundle
+credit sprite:
+-https://craftpix.net/
