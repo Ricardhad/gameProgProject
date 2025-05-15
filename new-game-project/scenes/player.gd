@@ -2,6 +2,10 @@ extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
+var dash_cooldown_timer = 0.0
+var jump_cooldown_timer = 0.0
+var jump_cd = 2
+var dash_cd = 2
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 var respawn_position = Vector2(100, 100)
@@ -31,6 +35,11 @@ func _ready():
 	randomize()
 
 func _physics_process(delta: float) -> void:
+	# Reduce cooldown timers
+	if dash_cooldown_timer > 0:
+		dash_cooldown_timer -= delta
+	if jump_cooldown_timer > 0:
+		jump_cooldown_timer -= delta
 	# Dash logic
 	if is_dashing:
 		dash_time -= delta
@@ -40,11 +49,13 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 			return
 
-	if Input.is_action_just_pressed("dash") and not is_attacking and not is_guarding:
+	if Input.is_action_just_pressed("dash") and not is_attacking and not is_guarding and dash_cooldown_timer <= 0:
 		var direction = Input.get_axis("left", "right")
 		if direction != 0:
 			dash(direction)
+			dash_cooldown_timer = dash_cd  # Reset cooldown
 			return
+
 
 	if global_position.y > 1000:
 		global_position = respawn_position
@@ -99,8 +110,16 @@ func _physics_process(delta: float) -> void:
 		jump_count = 0
 
 	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
-		velocity.y = JUMP_VELOCITY
-		jump_count += 1
+		# First jump: no cooldown
+		if jump_count == 0:
+			velocity.y = JUMP_VELOCITY
+			jump_count += 1
+		# Second jump: check cooldown
+		elif jump_count == 1 and jump_cooldown_timer <= 0:
+			velocity.y = JUMP_VELOCITY
+			jump_count += 1
+			jump_cooldown_timer = jump_cd  # Set cooldown only for the second jump
+
 
 	var direction := Input.get_axis("left", "right")
 	if direction:

@@ -20,11 +20,11 @@ func _on_load_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
-	$Panel2.visible = true
+	$OptionPanel.visible = true
 
 func _on_ButtonBack_pressed() -> void:
 	print("Back button pressed")
-	$Panel2.visible = false
+	$OptionPanel.visible = false
 
 
 func _on_CheckButton_toggled(button_pressed: bool) -> void:

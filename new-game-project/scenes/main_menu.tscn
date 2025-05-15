@@ -28,7 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mengp")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="ExitPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,7 +184,7 @@ auto_translate_mode = 1
 item_count = 2
 item_1/id = 1
 
-[node name="Panel2" type="Panel" parent="."]
+[node name="OptionPanel" type="Panel" parent="."]
 visible = false
 layout_mode = 0
 offset_left = 307.0
@@ -193,7 +193,7 @@ offset_right = 883.0
 offset_bottom = 435.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_hmmug")
 
-[node name="CheckButton" type="CheckButton" parent="Panel2"]
+[node name="CheckButton" type="CheckButton" parent="OptionPanel"]
 top_level = true
 layout_mode = 0
 offset_left = 390.0
@@ -202,7 +202,8 @@ offset_right = 434.0
 offset_bottom = 150.0
 scale = Vector2(2, 2)
 
-[node name="ButtonBack" type="TextureButton" parent="Panel2"]
+[node name="ButtonBack" type="TextureButton" parent="OptionPanel"]
+layout_mode = 0
 offset_left = 200.0
 offset_top = 281.0
 offset_right = 329.0
@@ -211,7 +212,7 @@ size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Panel2/ButtonBack"]
+[node name="Label" type="Label" parent="OptionPanel/ButtonBack"]
 layout_mode = 0
 offset_left = -20.0
 offset_top = 4.0
@@ -227,6 +228,6 @@ horizontal_alignment = 1
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_exit_pressed"]
-[connection signal="toggled" from="Panel2/CheckButton" to="." method="_on_CheckButton_toggled"]
-[connection signal="pressed" from="Panel2/ButtonBack" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="Panel2/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="toggled" from="OptionPanel/CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_ButtonBack_pressed"]
