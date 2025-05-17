@@ -23,10 +23,6 @@ window/stretch/aspect="expand"
 
 project/assembly_name="New Game Project"
 
-[global_group]
-
-Sword=""
-
 [input]
 
 left={

@@ -24,8 +24,8 @@ var dash_time = 0.0
 var max_jumps = 2
 var jump_count = 0
 
-@onready var attack_area_1: CollisionShape2D = $Sword/Attack12
-@onready var attack_area_2: CollisionShape2D = $Sword/Attack3
+@onready var attack_area_1: CollisionShape2D = $HitBox/Attack12
+@onready var attack_area_2: CollisionShape2D = $HitBox/Attack3
 var original_attack_offset_x = 0.0
 var original_attack2_offset_x = 0.0
 

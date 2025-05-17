@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://csnfqbub5lcrd"]
+[gd_scene load_steps=18 format=3 uid="uid://csnfqbub5lcrd"]
 
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/goblin/Idle.png" id="1_3vkl3"]
 [ext_resource type="Script" path="res://scenes/goblin.gd" id="1_c35ym"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="2_3aplt"]
 [ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/goblin/Dead.png" id="2_oj3is"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="4_tkeqn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0skox"]
 atlas = ExtResource("2_oj3is")
@@ -59,10 +61,10 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wfvkn")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_pylag")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -102,13 +104,26 @@ scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_3wv71")
 animation = &"dead"
 autoplay = "idle"
-frame_progress = 0.833403
+frame = 4
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(109, 120)
 shape = SubResource("RectangleShape2D_ucug6")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_tkeqn")
+health = NodePath("Health")
+
+[node name="Health" type="Node" parent="HurtBox"]
+script = ExtResource("2_3aplt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(109, 120)
+shape = SubResource("RectangleShape2D_ucug6")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="child_entered_tree" from="CollisionShape2D" to="." method="_on_collision_shape_2d_child_entered_tree"]
+[connection signal="health_depleted" from="HurtBox/Health" to="." method="_on_health_health_depleted"]
