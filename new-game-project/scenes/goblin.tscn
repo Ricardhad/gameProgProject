@@ -118,7 +118,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bp4ty")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -196,7 +196,7 @@ animations = [{
 size = Vector2(20.75, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh74x"]
-size = Vector2(21, 13)
+size = Vector2(21, 16)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_hfgq4")
@@ -205,9 +205,8 @@ script = ExtResource("1_hfgq4")
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 4
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -236,8 +235,9 @@ collision_layer = 0
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
-position = Vector2(-20.5, -24.5)
+position = Vector2(-20.5, -23)
 shape = SubResource("RectangleShape2D_sh74x")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="health_depleted" from="HurtBox/Health" to="." method="_on_health_health_depleted"]
+[connection signal="body_entered" from="PlayerDetect" to="." method="_on_player_detect_body_entered"]
