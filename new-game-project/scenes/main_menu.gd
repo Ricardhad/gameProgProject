@@ -34,7 +34,20 @@ func _on_CheckButton_toggled(button_pressed: bool) -> void:
 	else:
 		$AudioStreamPlayer.stream_paused = false
 
+func _on_CheckButton2_toggled(button_pressed: bool) -> void:
+	if button_pressed:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_exit_pressed() -> void:
-	#$VBoxContainer/Button4/PopupExit.popup_centered()
+	$AreYouSure.visible = true
+
+func _on_ButtonYes_pressed() -> void:
+	print("User confirmed exit.")
 	get_tree().quit()
+
+
+func _on_ButtonNo_pressed() -> void:
+	print("User canceled exit.")
+	$AreYouSure.visible = false  # Sembunyikan popup

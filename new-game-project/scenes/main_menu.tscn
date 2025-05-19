@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dew713h72nevn"]
+[gd_scene load_steps=13 format=3 uid="uid://dew713h72nevn"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_mengp"]
 [ext_resource type="Texture2D" uid="uid://c3wh1vocs21bh" path="res://assets/main_menu/background.jpg" id="2_pnv7h"]
@@ -17,6 +17,9 @@ modulate_color = Color(0.77084, 0.770839, 0.770839, 1)
 load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmmug"]
+texture = ExtResource("8_s8r4g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xumax"]
 texture = ExtResource("8_s8r4g")
 
 [node name="MainMenu" type="Control"]
@@ -196,10 +199,18 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_hmmug")
 [node name="CheckButton" type="CheckButton" parent="OptionPanel"]
 top_level = true
 layout_mode = 0
-offset_left = 390.0
-offset_top = 126.0
-offset_right = 434.0
-offset_bottom = 150.0
+offset_left = 389.0
+offset_top = 167.0
+offset_right = 433.0
+offset_bottom = 191.0
+scale = Vector2(2, 2)
+
+[node name="CheckButton2" type="CheckButton" parent="OptionPanel"]
+top_level = true
+offset_left = 388.0
+offset_top = 219.0
+offset_right = 432.0
+offset_bottom = 243.0
 scale = Vector2(2, 2)
 
 [node name="ButtonBack" type="TextureButton" parent="OptionPanel"]
@@ -224,10 +235,105 @@ text = "Back
 "
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="OptionPanel"]
+offset_left = 179.0
+offset_top = 44.0
+offset_right = 345.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Option
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="OptionPanel"]
+offset_left = 134.0
+offset_top = 120.0
+offset_right = 308.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Music
+"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="OptionPanel"]
+offset_left = 171.0
+offset_top = 171.0
+offset_right = 356.0
+offset_bottom = 216.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "FullScreen
+"
+horizontal_alignment = 1
+
+[node name="AreYouSure" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 310.0
+offset_top = 76.0
+offset_right = 863.0
+offset_bottom = 541.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_xumax")
+
+[node name="yes" type="TextureButton" parent="AreYouSure"]
+offset_left = 64.0
+offset_top = 257.0
+offset_right = 260.0
+offset_bottom = 328.0
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_c3ahi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="AreYouSure/yes"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 187.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Yes"
+horizontal_alignment = 1
+
+[node name="no" type="TextureButton" parent="AreYouSure"]
+offset_left = 267.0
+offset_top = 258.0
+offset_right = 463.0
+offset_bottom = 329.0
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_c3ahi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="AreYouSure/no"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 187.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "No"
+horizontal_alignment = 1
+
+[node name="Label_areyousure" type="Label" parent="AreYouSure"]
+offset_left = 73.0
+offset_top = 160.0
+offset_right = 403.0
+offset_bottom = 205.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Are You Sure Hero?"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_exit_pressed"]
 [connection signal="toggled" from="OptionPanel/CheckButton" to="." method="_on_CheckButton_toggled"]
-[connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_options_pressed"]
+[connection signal="toggled" from="OptionPanel/CheckButton2" to="." method="_on_CheckButton2_toggled"]
 [connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="pressed" from="AreYouSure/yes" to="." method="_on_ButtonYes_pressed"]
+[connection signal="pressed" from="AreYouSure/no" to="." method="_on_ButtonNo_pressed"]
