@@ -207,27 +207,28 @@ scale = Vector2(2, 2)
 
 [node name="CheckButton2" type="CheckButton" parent="OptionPanel"]
 top_level = true
+layout_mode = 0
 offset_left = 388.0
-offset_top = 219.0
+offset_top = 207.0
 offset_right = 432.0
-offset_bottom = 243.0
+offset_bottom = 231.0
 scale = Vector2(2, 2)
 
 [node name="ButtonBack" type="TextureButton" parent="OptionPanel"]
 layout_mode = 0
 offset_left = 200.0
-offset_top = 281.0
+offset_top = 294.0
 offset_right = 329.0
-offset_bottom = 332.0
+offset_bottom = 345.0
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_c3ahi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="OptionPanel/ButtonBack"]
 layout_mode = 0
-offset_left = -20.0
+offset_left = -17.0
 offset_top = 4.0
-offset_right = 154.0
+offset_right = 157.0
 offset_bottom = 49.0
 theme_override_fonts/font = ExtResource("5_cb6hv")
 theme_override_font_sizes/font_size = 40
@@ -236,10 +237,11 @@ text = "Back
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="OptionPanel"]
-offset_left = 179.0
-offset_top = 44.0
-offset_right = 345.0
-offset_bottom = 98.0
+layout_mode = 0
+offset_left = 191.0
+offset_top = 50.0
+offset_right = 357.0
+offset_bottom = 104.0
 theme_override_fonts/font = ExtResource("5_cb6hv")
 theme_override_font_sizes/font_size = 40
 text = "Option
@@ -247,6 +249,7 @@ text = "Option
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="OptionPanel"]
+layout_mode = 0
 offset_left = 134.0
 offset_top = 120.0
 offset_right = 308.0
@@ -258,15 +261,53 @@ text = "Music
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="OptionPanel"]
+layout_mode = 0
 offset_left = 171.0
-offset_top = 171.0
+offset_top = 159.0
 offset_right = 356.0
-offset_bottom = 216.0
+offset_bottom = 204.0
 theme_override_fonts/font = ExtResource("5_cb6hv")
 theme_override_font_sizes/font_size = 40
 text = "FullScreen
 "
 horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="OptionPanel"]
+offset_left = 169.0
+offset_top = 200.0
+offset_right = 354.0
+offset_bottom = 245.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Cutscenes
+"
+horizontal_alignment = 1
+
+[node name="CheckButton3" type="CheckButton" parent="OptionPanel"]
+top_level = true
+offset_left = 388.0
+offset_top = 246.0
+offset_right = 432.0
+offset_bottom = 270.0
+scale = Vector2(2, 2)
+
+[node name="Label5" type="Label" parent="OptionPanel"]
+offset_left = 158.0
+offset_top = 240.0
+offset_right = 343.0
+offset_bottom = 285.0
+theme_override_fonts/font = ExtResource("5_cb6hv")
+theme_override_font_sizes/font_size = 40
+text = "Subtitles"
+horizontal_alignment = 1
+
+[node name="CheckButton4" type="CheckButton" parent="OptionPanel"]
+top_level = true
+offset_left = 387.0
+offset_top = 287.0
+offset_right = 431.0
+offset_bottom = 311.0
+scale = Vector2(2, 2)
 
 [node name="AreYouSure" type="Panel" parent="."]
 visible = false
@@ -278,6 +319,7 @@ offset_bottom = 541.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_xumax")
 
 [node name="yes" type="TextureButton" parent="AreYouSure"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 257.0
 offset_right = 260.0
@@ -298,6 +340,7 @@ text = "Yes"
 horizontal_alignment = 1
 
 [node name="no" type="TextureButton" parent="AreYouSure"]
+layout_mode = 0
 offset_left = 267.0
 offset_top = 258.0
 offset_right = 463.0
@@ -318,6 +361,7 @@ text = "No"
 horizontal_alignment = 1
 
 [node name="Label_areyousure" type="Label" parent="AreYouSure"]
+layout_mode = 0
 offset_left = 73.0
 offset_top = 160.0
 offset_right = 403.0
@@ -335,5 +379,7 @@ horizontal_alignment = 1
 [connection signal="toggled" from="OptionPanel/CheckButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="toggled" from="OptionPanel/CheckButton2" to="." method="_on_CheckButton2_toggled"]
 [connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_ButtonBack_pressed"]
+[connection signal="toggled" from="OptionPanel/CheckButton3" to="." method="_on_CheckButton2_toggled"]
+[connection signal="toggled" from="OptionPanel/CheckButton4" to="." method="_on_CheckButton2_toggled"]
 [connection signal="pressed" from="AreYouSure/yes" to="." method="_on_ButtonYes_pressed"]
 [connection signal="pressed" from="AreYouSure/no" to="." method="_on_ButtonNo_pressed"]
