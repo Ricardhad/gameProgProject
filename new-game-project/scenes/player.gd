@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 		#climb_ledge()
 	if not is_on_floor() and not is_attacking and not is_guarding and not is_dashing:
 		if not is_hanging:
-			if $LedgeCheckLeft.is_colliding() or $LedgeCheckRight.is_colliding():
+			if can_hang():
 				is_hanging = true
 				velocity = Vector2.ZERO
 				animated_sprite_2d.animation = "guard"
@@ -210,3 +210,11 @@ func drop_ledge():
 	is_hanging = false
 	global_position.y += 10  # move player down a bit
 	velocity.y = 200
+	
+func can_hang():
+	var hanging_left = $LedgeCheckLeft.is_colliding() and not $CheckFloorAboveLeft.is_colliding()
+	var hanging_right = $LedgeCheckRight.is_colliding() and not $CheckFloorAboveRight.is_colliding()
+	return hanging_left or hanging_right
+
+#func can_climb_up():
+	#return $ClimbUpFloorRayCast2D.is_colliding()

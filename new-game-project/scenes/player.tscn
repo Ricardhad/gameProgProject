@@ -352,9 +352,21 @@ shape = SubResource("RectangleShape2D_88e0o")
 disabled = true
 
 [node name="LedgeCheckLeft" type="RayCast2D" parent="."]
-position = Vector2(8, -20)
+position = Vector2(8, -14)
 target_position = Vector2(-6, 0)
 
 [node name="LedgeCheckRight" type="RayCast2D" parent="."]
-position = Vector2(8, -20)
+position = Vector2(8, -14)
 target_position = Vector2(6, 0)
+
+[node name="CheckFloor" type="RayCast2D" parent="."]
+position = Vector2(8, 0)
+target_position = Vector2(0, 10)
+
+[node name="CheckFloorAboveLeft" type="RayCast2D" parent="."]
+position = Vector2(8, -16)
+target_position = Vector2(-10, -5)
+
+[node name="CheckFloorAboveRight" type="RayCast2D" parent="."]
+position = Vector2(8, -16)
+target_position = Vector2(10, -5)
