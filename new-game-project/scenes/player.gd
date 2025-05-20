@@ -6,6 +6,7 @@ var dash_cooldown_timer = 0.0
 var jump_cooldown_timer = 0.0
 var jump_cd = 2
 var dash_cd = 2
+var is_hanging = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 var respawn_position = Vector2(100, 100)
@@ -46,8 +47,40 @@ func _physics_process(delta: float) -> void:
 		if dash_time <= 0:
 			is_dashing = false
 		else:
+			# apply gravity while dashing
+			velocity.y += get_gravity().y * delta
 			move_and_slide()
 			return
+	if dash_time <= 0:
+		is_dashing = false
+		velocity.x = 0  # stop horizontal speed after dash
+
+
+	#ledge logic
+
+
+	#if is_on_wall() and not is_on_floor() and can_climb_ledge():
+		#print("Ledge detected, should climb.")
+		#climb_ledge()
+	if not is_on_floor() and not is_attacking and not is_guarding and not is_dashing:
+		if not is_hanging:
+			if $LedgeCheckLeft.is_colliding() or $LedgeCheckRight.is_colliding():
+				is_hanging = true
+				velocity = Vector2.ZERO
+				animated_sprite_2d.animation = "guard"
+				return
+		else:
+			# While hanging, listen for climb/drop input
+			if Input.is_action_just_pressed("jump"):
+				climb_ledge()
+				return
+			elif Input.is_action_just_pressed("down"):
+				drop_ledge()
+				return
+				
+	if is_hanging:
+		return
+
 
 	if Input.is_action_just_pressed("dash") and not is_attacking and not is_guarding and dash_cooldown_timer <= 0:
 		var direction = Input.get_axis("left", "right")
@@ -65,7 +98,8 @@ func _physics_process(delta: float) -> void:
 		current_attack_index = 0
 		animated_sprite_2d.animation = "idle"
 		return
-
+		
+		
 	if Input.is_action_pressed("guard") and not is_attacking:
 		if not is_guarding:
 			is_guarding = true
@@ -165,3 +199,14 @@ func dash(direction: float):
 	dash_time = DASH_DURATION
 	velocity.x = direction * DASH_SPEED
 	animated_sprite_2d.animation = "run"
+
+func climb_ledge():
+	is_hanging = false
+	global_position.y -= 20  # move up
+	velocity.y = JUMP_VELOCITY
+	animated_sprite_2d.animation = "jump"
+	
+func drop_ledge():
+	is_hanging = false
+	global_position.y += 10  # move player down a bit
+	velocity.y = 200
