@@ -273,6 +273,7 @@ text = "FullScreen
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="OptionPanel"]
+layout_mode = 0
 offset_left = 169.0
 offset_top = 200.0
 offset_right = 354.0
@@ -285,6 +286,7 @@ horizontal_alignment = 1
 
 [node name="CheckButton3" type="CheckButton" parent="OptionPanel"]
 top_level = true
+layout_mode = 0
 offset_left = 388.0
 offset_top = 246.0
 offset_right = 432.0
@@ -292,6 +294,7 @@ offset_bottom = 270.0
 scale = Vector2(2, 2)
 
 [node name="Label5" type="Label" parent="OptionPanel"]
+layout_mode = 0
 offset_left = 158.0
 offset_top = 240.0
 offset_right = 343.0
@@ -303,6 +306,7 @@ horizontal_alignment = 1
 
 [node name="CheckButton4" type="CheckButton" parent="OptionPanel"]
 top_level = true
+layout_mode = 0
 offset_left = 387.0
 offset_top = 287.0
 offset_right = 431.0
