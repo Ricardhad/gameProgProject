@@ -1,4 +1,3 @@
-
 extends CharacterBody2D
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
@@ -69,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			if can_hang():
 				is_hanging = true
 				velocity = Vector2.ZERO
-				animated_sprite_2d.animation = "guard"
+				animated_sprite_2d.animation = "hang"
 				return
 		else:
 			# While hanging, listen for climb/drop input
@@ -204,9 +203,9 @@ func dash(direction: float):
 
 func climb_ledge():
 	is_hanging = false
-	global_position.y -= 20  # move up
+	global_position.y -= 5  # move up
 	velocity.y = JUMP_VELOCITY
-	animated_sprite_2d.animation = "jump"
+	animated_sprite_2d.animation = "pull_up"
 	
 func drop_ledge():
 	is_hanging = false
