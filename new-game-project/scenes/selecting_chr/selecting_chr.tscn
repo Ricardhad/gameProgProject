@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=3 uid="uid://bw2atj771aunb"]
+
+[ext_resource type="Script" path="res://scenes/selecting_chr/selecting_chr.gd" id="1_r6al4"]
+[ext_resource type="Texture2D" uid="uid://c3wh1vocs21bh" path="res://assets/main_menu/background.jpg" id="2_xcilc"]
+[ext_resource type="Texture2D" uid="uid://d3jneibdoktxq" path="res://assets/selecting_menu/menubox.png" id="3_hbt1d"]
+[ext_resource type="Texture2D" uid="uid://bth3gogb826eh" path="res://assets/option_menu/arrow_left.png" id="4_1hsav"]
+[ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="5_3xild"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="6_nlxxv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rigya"]
+texture = ExtResource("2_xcilc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_unh1v"]
+texture = ExtResource("3_hbt1d")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_klq6g"]
+texture = ExtResource("5_3xild")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eoat0"]
+load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
+
+[node name="SelectingChr" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r6al4")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1149.0
+offset_bottom = 583.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_rigya")
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 10.0
+offset_right = 766.0
+offset_bottom = 318.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_unh1v")
+
+[node name="Button" type="TextureButton" parent="Panel"]
+offset_left = 236.0
+offset_top = 84.0
+offset_right = 394.0
+offset_bottom = 261.0
+size_flags_vertical = 3
+texture_normal = ExtResource("4_1hsav")
+stretch_mode = 0
+
+[node name="Button2" type="TextureButton" parent="Panel"]
+offset_left = 800.0
+offset_top = 109.0
+offset_right = 958.0
+offset_bottom = 286.0
+size_flags_vertical = 3
+texture_normal = ExtResource("4_1hsav")
+stretch_mode = 0
+
+[node name="Panel2" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 320.0
+offset_right = 912.0
+offset_bottom = 584.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_klq6g")
+
+[node name="Label" type="Label" parent="Panel/Panel2"]
+offset_left = 233.0
+offset_top = 41.0
+offset_right = 399.0
+offset_bottom = 86.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_nlxxv")
+theme_override_font_sizes/font_size = 40
+text = "Knight"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/Panel2"]
+offset_left = 129.0
+offset_top = 94.0
+offset_right = 295.0
+offset_bottom = 139.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("6_nlxxv")
+theme_override_font_sizes/font_size = 40
+text = "HP: 150"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Panel/Panel2"]
+offset_left = 136.0
+offset_top = 123.0
+offset_right = 302.0
+offset_bottom = 168.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("6_nlxxv")
+theme_override_font_sizes/font_size = 40
+text = "Mana: 70
+"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Panel/Panel2"]
+offset_left = 139.0
+offset_top = 156.0
+offset_right = 574.0
+offset_bottom = 202.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("6_nlxxv")
+theme_override_font_sizes/font_size = 40
+text = "Passive: Immune to Bleed"
+horizontal_alignment = 1
+
+[node name="Button4" type="TextureButton" parent="."]
+offset_left = 13.0
+offset_top = 8.0
+offset_right = 212.0
+offset_bottom = 80.0
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_eoat0")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Button4"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 182.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("6_nlxxv")
+theme_override_font_sizes/font_size = 40
+text = "Back
+"
+horizontal_alignment = 1
+
+[node name="Button5" type="TextureButton" parent="."]
+offset_left = 926.0
+offset_top = 496.0
+offset_right = 1125.0
+offset_bottom = 568.0
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_eoat0")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Button5"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 182.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("6_nlxxv")
+theme_override_font_sizes/font_size = 40
+text = "Start
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Button5" to="." method="_on_start_pressed"]

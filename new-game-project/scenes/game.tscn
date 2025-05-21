@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=21 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="2_i1mgc"]
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="3_6yele"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://xdha11gj4bn3" path="res://assets/grass/bg/6.png" id="10_nvdlj"]
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/grass/bg/7.png" id="11_bfio0"]
 [ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/goblin.tscn" id="13_b7bae"]
+[ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="13_rho03"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="14_dx7hq"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -19,12 +21,32 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$PanelPause.process_mode = Node.PROCESS_MODE_ALWAYS
+	for child in $PanelPause.get_children():
+		child.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_cancel\"):
+		if not get_tree().paused:
+			$PanelPause.visible = true
+			get_tree().paused = true
+		else:
+			$PanelPause.visible = false
+			get_tree().paused = false
+
+func _on_Button1_pressed() -> void:
+	print(\"Resume pressed\")
+	$PanelPause.visible = false
+	get_tree().paused = false
+
+func _on_Button4_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rhwu4"]
@@ -805,6 +827,15 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_rhwu4")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_thhto"]
+texture = ExtResource("13_rho03")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7vnx"]
+texture = ExtResource("13_rho03")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ix27y"]
+load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
+
 [node name="game" type="Node2D"]
 script = SubResource("GDScript_xck3o")
 
@@ -830,6 +861,12 @@ position = Vector2(9, -35)
 zoom = Vector2(2.5, 2.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.75
+
+[node name="Control" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_mms8s")
@@ -904,3 +941,151 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
 position = Vector2(288, 273)
 texture = ExtResource("11_bfio0")
+
+[node name="PanelPause" type="Panel" parent="."]
+visible = false
+top_level = true
+offset_left = 164.0
+offset_top = 90.0
+offset_right = 405.0
+offset_bottom = 280.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_thhto")
+
+[node name="Label" type="Label" parent="PanelPause"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 27.0
+offset_right = 228.0
+offset_bottom = 72.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Pause
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PanelPause"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 57.0
+offset_right = 182.0
+offset_bottom = 105.0
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Buff List"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="PanelPause"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 111.0
+offset_right = 170.0
+offset_bottom = 159.0
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Items"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="PanelPause"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = 4.0
+offset_right = -2.0
+offset_bottom = 142.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_f7vnx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelPause/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.5
+offset_top = -37.0
+offset_right = 157.5
+offset_bottom = 243.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+
+[node name="Button" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_ix27y")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.093
+anchor_top = 0.319
+anchor_right = 0.933
+anchor_bottom = 0.734
+offset_left = -1.507
+offset_top = -8.416
+offset_right = 2.33299
+offset_bottom = 10.024
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+horizontal_alignment = 1
+
+[node name="Button2" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_ix27y")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button2"]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 14.0
+offset_right = 179.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Restard"
+horizontal_alignment = 1
+
+[node name="Button3" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_ix27y")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button3"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 187.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Option
+"
+horizontal_alignment = 1
+
+[node name="Button4" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = SubResource("CompressedTexture2D_ix27y")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button4"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 182.0
+offset_bottom = 59.0
+theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="PanelPause/Panel/VBoxContainer/Button" to="." method="_on_Button1_pressed"]
+[connection signal="pressed" from="PanelPause/Panel/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]

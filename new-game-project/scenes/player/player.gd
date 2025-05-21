@@ -216,6 +216,10 @@ func can_hang():
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 	return hanging_left or hanging_right
+	
+
+
+
 
 #func can_climb_up():
 	#return $ClimbUpFloorRayCast2D.is_colliding()
