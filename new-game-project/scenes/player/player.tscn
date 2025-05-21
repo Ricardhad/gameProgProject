@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://cws2mh1ko3mg8"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_enxr5"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_enxr5"]
 [ext_resource type="Texture2D" uid="uid://b18q26imgxm3" path="res://assets/class/knight/player_sprites.png" id="2_8dkoq"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="2_m6yly"]
 [ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="5_b4k1q"]
@@ -351,22 +351,24 @@ position = Vector2(24, -10)
 shape = SubResource("RectangleShape2D_88e0o")
 disabled = true
 
-[node name="LedgeCheckLeft" type="RayCast2D" parent="."]
+[node name="WallRayCast" type="Node2D" parent="."]
+
+[node name="CheckFloorAboveRight" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(8, -16)
+target_position = Vector2(10, -5)
+
+[node name="LedgeCheckLeft" type="RayCast2D" parent="WallRayCast"]
 position = Vector2(8, -14)
 target_position = Vector2(-6, 0)
 
-[node name="LedgeCheckRight" type="RayCast2D" parent="."]
+[node name="LedgeCheckRight" type="RayCast2D" parent="WallRayCast"]
 position = Vector2(8, -14)
 target_position = Vector2(6, 0)
 
-[node name="CheckFloor" type="RayCast2D" parent="."]
+[node name="CheckFloor" type="RayCast2D" parent="WallRayCast"]
 position = Vector2(8, 0)
 target_position = Vector2(0, 10)
 
-[node name="CheckFloorAboveLeft" type="RayCast2D" parent="."]
+[node name="CheckFloorAboveLeft" type="RayCast2D" parent="WallRayCast"]
 position = Vector2(8, -16)
 target_position = Vector2(-10, -5)
-
-[node name="CheckFloorAboveRight" type="RayCast2D" parent="."]
-position = Vector2(8, -16)
-target_position = Vector2(10, -5)

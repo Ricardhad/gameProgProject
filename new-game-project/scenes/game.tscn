@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player.tscn" id="2_i1mgc"]
+[ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="2_i1mgc"]
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="3_6yele"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="5_fbwcd"]
 [ext_resource type="AudioStream" uid="uid://brrgbhxmfi3mr" path="res://assets/music/Grassland.mp3" id="5_mms8s"]

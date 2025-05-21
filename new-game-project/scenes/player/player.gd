@@ -1,5 +1,5 @@
-extends CharacterBody2D
 
+extends CharacterBody2D
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 var dash_cooldown_timer = 0.0
@@ -7,6 +7,8 @@ var jump_cooldown_timer = 0.0
 var jump_cd = 2
 var dash_cd = 2
 var is_hanging = false
+
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 var respawn_position = Vector2(100, 100)
@@ -212,8 +214,8 @@ func drop_ledge():
 	velocity.y = 200
 	
 func can_hang():
-	var hanging_left = $LedgeCheckLeft.is_colliding() and not $CheckFloorAboveLeft.is_colliding()
-	var hanging_right = $LedgeCheckRight.is_colliding() and not $CheckFloorAboveRight.is_colliding()
+	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
+	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 	return hanging_left or hanging_right
 
 #func can_climb_up():
