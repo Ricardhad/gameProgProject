@@ -1,6 +1,5 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=20 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="2_i1mgc"]
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="3_6yele"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="5_fbwcd"]
 [ext_resource type="AudioStream" uid="uid://brrgbhxmfi3mr" path="res://assets/music/Grassland.mp3" id="5_mms8s"]
@@ -18,9 +17,14 @@
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
 
+var knight_scene = preload(\"res://scenes/player/player.tscn\")
+#var ninja_scene = preload(\"res://Ninja.tscn\")
+
+var current_player = knight_scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawn_character(current_player)
 	$CanvasLayer/PanelPause.process_mode = Node.PROCESS_MODE_ALWAYS
 	for child in $CanvasLayer/PanelPause.get_children():
 		child.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -43,6 +47,26 @@ func _on_Resumebtn_pressed() -> void:
 	print(\"Resume pressed\")
 	$CanvasLayer/PanelPause.visible = false
 	get_tree().paused = false
+	
+func remove_existing_players():
+	for child in get_children():
+		print(child)
+		if child is CharacterBody2D:
+			child.queue_free()
+
+func spawn_character(character_scene: PackedScene):
+	
+	var player = character_scene.instantiate()
+	player.global_position = Vector2(100, 100)
+	player.scale = Vector2(2, 2)
+	add_child(player)
+	
+	#if current_player:
+		#current_player.queue_free()
+	#
+	#current_player = character_scene.instantiate()
+	#current_player.global_position = Vector2(100, 100)
+	#add_child(current_player)
 
 
 
@@ -852,22 +876,6 @@ position = Vector2(408, 255)
 
 [node name="Goblin2" parent="Enemy" instance=ExtResource("13_b7bae")]
 position = Vector2(605, 255)
-
-[node name="Player" parent="." instance=ExtResource("2_i1mgc")]
-position = Vector2(213, 264)
-scale = Vector2(2, 2)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(9, -35)
-zoom = Vector2(2.5, 2.5)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.75
-
-[node name="Control" type="Control" parent="Player/Camera2D"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_mms8s")
