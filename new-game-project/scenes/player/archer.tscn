@@ -313,7 +313,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -393,4 +393,4 @@ animations = [{
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_m04qe")
 animation = &"idle"
-frame_progress = 0.7872
+frame_progress = 0.346022
