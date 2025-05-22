@@ -80,27 +80,27 @@ region = Rect2(396, 430, 132, 86)
 atlas = ExtResource("2_8dkoq")
 region = Rect2(528, 430, 132, 86)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_10c63"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsfuh"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(0, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_evij1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx6hj"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(128, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kferq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hir2k"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(256, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_16xot"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnj7t"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(384, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cxr8c"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ums2d"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(512, 0, 128, 128)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jnv62"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t45t7"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(640, 0, 128, 128)
 
@@ -288,22 +288,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_10c63")
+"texture": SubResource("AtlasTexture_fsfuh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_evij1")
+"texture": SubResource("AtlasTexture_bx6hj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kferq")
+"texture": SubResource("AtlasTexture_hir2k")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_16xot")
+"texture": SubResource("AtlasTexture_fnj7t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cxr8c")
+"texture": SubResource("AtlasTexture_ums2d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jnv62")
+"texture": SubResource("AtlasTexture_t45t7")
 }],
 "loop": true,
 "name": &"hang",
@@ -417,9 +417,8 @@ script = ExtResource("1_enxr5")
 position = Vector2(9, -15)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"pull_up"
+animation = &"hang"
 autoplay = "idle"
-frame_progress = 0.362912
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -11)
@@ -451,21 +450,21 @@ disabled = true
 [node name="WallRayCast" type="Node2D" parent="."]
 
 [node name="CheckFloorAboveRight" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -16)
-target_position = Vector2(10, -5)
+position = Vector2(8, -22)
+target_position = Vector2(10, -3)
 
 [node name="LedgeCheckLeft" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -14)
-target_position = Vector2(-6, 0)
+position = Vector2(8, -20)
+target_position = Vector2(-6, 1)
 
 [node name="LedgeCheckRight" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -14)
-target_position = Vector2(6, 0)
+position = Vector2(8, -20)
+target_position = Vector2(6, 1)
 
 [node name="CheckFloor" type="RayCast2D" parent="WallRayCast"]
 position = Vector2(8, 0)
 target_position = Vector2(0, 10)
 
 [node name="CheckFloorAboveLeft" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -16)
-target_position = Vector2(-10, -5)
+position = Vector2(8, -22)
+target_position = Vector2(-10, -3)

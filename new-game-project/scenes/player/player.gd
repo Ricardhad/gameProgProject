@@ -6,6 +6,9 @@ var jump_cooldown_timer = 0.0
 var jump_cd = 2
 var dash_cd = 2
 var is_hanging = false
+var hang_grace_timer = 0.0
+const HANG_GRACE_TIME = 0.2
+
 
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -63,6 +66,11 @@ func _physics_process(delta: float) -> void:
 	#if is_on_wall() and not is_on_floor() and can_climb_ledge():
 		#print("Ledge detected, should climb.")
 		#climb_ledge()
+	if is_on_wall():
+		hang_grace_timer = HANG_GRACE_TIME
+	else:
+		hang_grace_timer -= delta
+
 	if not is_on_floor() and not is_attacking and not is_guarding and not is_dashing:
 		if not is_hanging:
 			if can_hang():
@@ -73,9 +81,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			# While hanging, listen for climb/drop input
 			if Input.is_action_just_pressed("jump"):
+				print("climbing")
 				climb_ledge()
 				return
 			elif Input.is_action_just_pressed("down"):
+				print("drop")
 				drop_ledge()
 				return
 				
@@ -203,7 +213,8 @@ func dash(direction: float):
 
 func climb_ledge():
 	is_hanging = false
-	global_position.y -= 5  # move up
+	global_position.y -= 10  # move up
+	#global_position.x -= 10  
 	velocity.y = JUMP_VELOCITY
 	animated_sprite_2d.animation = "pull_up"
 	
@@ -213,9 +224,19 @@ func drop_ledge():
 	velocity.y = 200
 	
 func can_hang():
+	# Only check for hanging if touching a wall
+	if not is_on_wall():
+		return false
+	print("Left Ledge: ", $WallRayCast/LedgeCheckLeft.is_colliding())
+	print("Right Ledge: ", $WallRayCast/LedgeCheckRight.is_colliding())
+	print("Left floor: ",$WallRayCast/CheckFloorAboveLeft.is_colliding())
+	print("Right floor: ",  $WallRayCast/CheckFloorAboveRight.is_colliding())
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
-	return hanging_left or hanging_right
+
+	#return hanging_left or hanging_right
+	if hang_grace_timer > 0 and (hanging_left or hanging_right):
+		return true
 	
 
 

@@ -946,8 +946,9 @@ texture = ExtResource("11_bfio0")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PanelPause" type="Panel" parent="CanvasLayer"]
+visible = false
 top_level = true
-custom_minimum_size = Vector2(500, 190)
+custom_minimum_size = Vector2(241, 190)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
