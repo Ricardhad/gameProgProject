@@ -21,8 +21,8 @@ script/source = "extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$PanelPause.process_mode = Node.PROCESS_MODE_ALWAYS
-	for child in $PanelPause.get_children():
+	$CanvasLayer/PanelPause.process_mode = Node.PROCESS_MODE_ALWAYS
+	for child in $CanvasLayer/PanelPause.get_children():
 		child.process_mode = Node.PROCESS_MODE_ALWAYS
 
 
@@ -33,20 +33,21 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(\"ui_cancel\"):
 		if not get_tree().paused:
-			$PanelPause.visible = true
+			$CanvasLayer/PanelPause.visible = true
 			get_tree().paused = true
 		else:
-			$PanelPause.visible = false
+			$CanvasLayer/PanelPause.visible = false
 			get_tree().paused = false
 
-func _on_Button1_pressed() -> void:
+func _on_Resumebtn_pressed() -> void:
 	print(\"Resume pressed\")
-	$PanelPause.visible = false
+	$CanvasLayer/PanelPause.visible = false
 	get_tree().paused = false
 
-func _on_Button4_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_file(\"res://scenes/main_menu.tscn\")
+
+
+func _on_Exitbtn_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/ui/main_menu.tscn\")
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rhwu4"]
@@ -942,7 +943,9 @@ motion_mirroring = Vector2(576, 0)
 position = Vector2(288, 273)
 texture = ExtResource("11_bfio0")
 
-[node name="PanelPause" type="Panel" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelPause" type="Panel" parent="CanvasLayer"]
 visible = false
 top_level = true
 offset_left = 164.0
@@ -951,7 +954,7 @@ offset_right = 405.0
 offset_bottom = 280.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_thhto")
 
-[node name="Label" type="Label" parent="PanelPause"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
 offset_left = 75.0
 offset_top = 27.0
@@ -965,7 +968,7 @@ text = "Pause
 "
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PanelPause"]
+[node name="Label2" type="Label" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
 offset_left = 29.0
 offset_top = 57.0
@@ -977,7 +980,7 @@ theme_override_font_sizes/font_size = 40
 text = "Buff List"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="PanelPause"]
+[node name="Label3" type="Label" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 111.0
@@ -989,7 +992,7 @@ theme_override_font_sizes/font_size = 40
 text = "Items"
 horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="PanelPause"]
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
 offset_left = -121.0
 offset_top = 4.0
@@ -997,7 +1000,7 @@ offset_right = -2.0
 offset_bottom = 142.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_f7vnx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelPause/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelPause/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1012,13 +1015,13 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 
-[node name="Button" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+[node name="Resumebtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Resumebtn"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.093
@@ -1034,13 +1037,13 @@ theme_override_font_sizes/font_size = 40
 text = "Resume"
 horizontal_alignment = 1
 
-[node name="Button2" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+[node name="Restartbtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button2"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Restartbtn"]
 layout_mode = 2
 offset_left = 21.0
 offset_top = 14.0
@@ -1051,13 +1054,13 @@ theme_override_font_sizes/font_size = 40
 text = "Restard"
 horizontal_alignment = 1
 
-[node name="Button3" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+[node name="Optionbtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button3"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Optionbtn"]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 11.0
@@ -1069,13 +1072,13 @@ text = "Option
 "
 horizontal_alignment = 1
 
-[node name="Button4" type="TextureButton" parent="PanelPause/Panel/VBoxContainer"]
+[node name="Exitbtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="PanelPause/Panel/VBoxContainer/Button4"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Exitbtn"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 14.0
@@ -1087,5 +1090,5 @@ text = "Exit
 "
 horizontal_alignment = 1
 
-[connection signal="pressed" from="PanelPause/Panel/VBoxContainer/Button" to="." method="_on_Button1_pressed"]
-[connection signal="pressed" from="PanelPause/Panel/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelPause/Panel/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelPause/Panel/VBoxContainer/Exitbtn" to="." method="_on_Exitbtn_pressed"]
