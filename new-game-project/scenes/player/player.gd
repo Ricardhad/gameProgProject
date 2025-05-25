@@ -235,7 +235,9 @@ func can_hang():
 	#return hanging_left or hanging_right
 	if hang_grace_timer > 0 and (hanging_left or hanging_right):
 		return true
-	
+		
+		
+
 
 
 

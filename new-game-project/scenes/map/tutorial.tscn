@@ -57,8 +57,9 @@ func spawn_character(character_scene: PackedScene):
 	var player = character_scene.instantiate()
 	player.global_position = Vector2(100, 200)
 	player.scale = Vector2(2, 2)
+	current_player = player
 	add_child(player)
-	
+	player.add_to_group(\"player\")
 	#if current_player:
 		#current_player.queue_free()
 	#

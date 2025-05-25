@@ -33,8 +33,8 @@ func _ready() -> void:
 	collision_shape_1_original_x = abs(collision_shape1.position.x)
 	collision_shape_2_original_x = abs(collision_shape2.position.x)
 	health.health_changed.connect(_on_health_changed)
-	health.set_max_health(5)
-	health.set_health(5)
+	health.set_max_health(1)
+	health.set_health(1)
 
 func _on_health_changed(diff: int) -> void:
 	if is_dead:
@@ -128,8 +128,13 @@ func drop_coins() -> void:
 		print("Coin scene not assigned!")
 		return
 
-	var coin_count = randi_range(1, 3)  # Drop 1 to 3 coins
+	var coin_count = randi_range(1, 3)
 	for i in coin_count:
 		var coin = coin_scene.instantiate()
 		get_parent().add_child(coin)
 		coin.global_position = global_position + Vector2(randf_range(-8, 8), -8)
+		
+		# Find and assign the player
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			coin.player = player
