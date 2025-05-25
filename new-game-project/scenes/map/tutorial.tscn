@@ -1,18 +1,18 @@
 [gd_scene load_steps=20 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="3_6yele"]
-[ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="5_fbwcd"]
-[ext_resource type="AudioStream" uid="uid://brrgbhxmfi3mr" path="res://assets/music/Grassland.mp3" id="5_mms8s"]
-[ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/grass/bg/2.png" id="6_ee8dt"]
-[ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="6_mli3u"]
-[ext_resource type="Texture2D" uid="uid://dfcwsowvc7emt" path="res://assets/grass/bg/3.png" id="7_ani2l"]
-[ext_resource type="Texture2D" uid="uid://c0lr3m2mn0tlq" path="res://assets/grass/bg/4.png" id="8_5m27l"]
-[ext_resource type="Texture2D" uid="uid://dyvbucb24iaw3" path="res://assets/grass/bg/5.png" id="9_gioy0"]
-[ext_resource type="Texture2D" uid="uid://xdha11gj4bn3" path="res://assets/grass/bg/6.png" id="10_nvdlj"]
-[ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/grass/bg/7.png" id="11_bfio0"]
-[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/goblin.tscn" id="13_b7bae"]
-[ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="13_rho03"]
-[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="14_dx7hq"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
+[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/goblin.tscn" id="2_1bil5"]
+[ext_resource type="AudioStream" uid="uid://brrgbhxmfi3mr" path="res://assets/music/Grassland.mp3" id="3_sxloq"]
+[ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="4_t7qrl"]
+[ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_1v6m5"]
+[ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/grass/bg/2.png" id="6_lalho"]
+[ext_resource type="Texture2D" uid="uid://dfcwsowvc7emt" path="res://assets/grass/bg/3.png" id="7_sl7vb"]
+[ext_resource type="Texture2D" uid="uid://c0lr3m2mn0tlq" path="res://assets/grass/bg/4.png" id="8_7pri4"]
+[ext_resource type="Texture2D" uid="uid://dyvbucb24iaw3" path="res://assets/grass/bg/5.png" id="9_d53dr"]
+[ext_resource type="Texture2D" uid="uid://xdha11gj4bn3" path="res://assets/grass/bg/6.png" id="10_swcg5"]
+[ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/grass/bg/7.png" id="11_jksp8"]
+[ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="12_en60n"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="13_ntw3c"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -75,7 +75,7 @@ func _on_Exitbtn_pressed() -> void:
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rhwu4"]
-texture = ExtResource("3_6yele")
+texture = ExtResource("1_o03m4")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -853,10 +853,10 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_rhwu4")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_thhto"]
-texture = ExtResource("13_rho03")
+texture = ExtResource("12_en60n")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7vnx"]
-texture = ExtResource("13_rho03")
+texture = ExtResource("12_en60n")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ix27y"]
 load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
@@ -871,14 +871,14 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 
 [node name="Enemy" type="Node" parent="."]
 
-[node name="Goblin" parent="Enemy" instance=ExtResource("13_b7bae")]
+[node name="Goblin" parent="Enemy" instance=ExtResource("2_1bil5")]
 position = Vector2(408, 255)
 
-[node name="Goblin2" parent="Enemy" instance=ExtResource("13_b7bae")]
+[node name="Goblin2" parent="Enemy" instance=ExtResource("2_1bil5")]
 position = Vector2(605, 255)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_mms8s")
+stream = ExtResource("3_sxloq")
 volume_db = -10.0
 autoplay = true
 parameters/looping = true
@@ -891,53 +891,53 @@ motion_mirroring = Vector2(576, 324)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(288, 162)
-texture = ExtResource("5_fbwcd")
+texture = ExtResource("4_t7qrl")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(576, 0)
-script = ExtResource("6_mli3u")
+script = ExtResource("5_1v6m5")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(288, 162)
-texture = ExtResource("6_ee8dt")
+texture = ExtResource("6_lalho")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0, 0)
 motion_mirroring = Vector2(576, 0)
-script = ExtResource("6_mli3u")
+script = ExtResource("5_1v6m5")
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(288, 162)
-texture = ExtResource("7_ani2l")
+texture = ExtResource("7_sl7vb")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(288, 162)
-texture = ExtResource("8_5m27l")
+texture = ExtResource("8_7pri4")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(288, 162)
-texture = ExtResource("9_gioy0")
+texture = ExtResource("9_d53dr")
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
 position = Vector2(288, 162)
-texture = ExtResource("10_nvdlj")
+texture = ExtResource("10_swcg5")
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
 position = Vector2(288, 162)
-texture = ExtResource("11_bfio0")
+texture = ExtResource("11_jksp8")
 
 [node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
 layer = 1
@@ -949,7 +949,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
 position = Vector2(288, 273)
-texture = ExtResource("11_bfio0")
+texture = ExtResource("11_jksp8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -977,7 +977,7 @@ offset_top = 27.0
 offset_right = 228.0
 offset_bottom = 72.0
 scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Pause
 
@@ -991,7 +991,7 @@ offset_top = 57.0
 offset_right = 182.0
 offset_bottom = 105.0
 scale = Vector2(0.4, 0.4)
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Buff List"
 horizontal_alignment = 1
@@ -1003,7 +1003,7 @@ offset_top = 111.0
 offset_right = 170.0
 offset_bottom = 159.0
 scale = Vector2(0.4, 0.4)
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Items"
 horizontal_alignment = 1
@@ -1048,7 +1048,7 @@ offset_left = -1.507
 offset_top = -8.416
 offset_right = 2.33299
 offset_bottom = 10.024
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Resume"
 horizontal_alignment = 1
@@ -1065,7 +1065,7 @@ offset_left = 21.0
 offset_top = 14.0
 offset_right = 179.0
 offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Restard"
 horizontal_alignment = 1
@@ -1082,7 +1082,7 @@ offset_left = 13.0
 offset_top = 11.0
 offset_right = 187.0
 offset_bottom = 56.0
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Option
 "
@@ -1100,7 +1100,7 @@ offset_left = 16.0
 offset_top = 14.0
 offset_right = 182.0
 offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("14_dx7hq")
+theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Exit
 "
