@@ -408,21 +408,20 @@ size = Vector2(15, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88e0o"]
 size = Vector2(16, 10)
 
-[node name="player" type="CharacterBody2D"]
-position = Vector2(-8, 0)
+[node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
 script = ExtResource("1_enxr5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(9, -15)
+position = Vector2(0, -3)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.506855
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, -11)
 shape = SubResource("CapsuleShape2D_b8yrv")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -436,35 +435,36 @@ collision_mask = 0
 script = ExtResource("5_b4k1q")
 
 [node name="Attack12" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(24, -16)
+position = Vector2(16, -3)
 shape = SubResource("RectangleShape2D_i77eq")
 disabled = true
 
 [node name="Attack3" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(24, -10)
+position = Vector2(16, 3)
 shape = SubResource("RectangleShape2D_88e0o")
 disabled = true
 
 [node name="WallRayCast" type="Node2D" parent="."]
+position = Vector2(0, 1)
 
 [node name="CheckFloorAboveRight" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -22)
+position = Vector2(0, -11)
 target_position = Vector2(10, -3)
 
 [node name="LedgeCheckLeft" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -20)
+position = Vector2(0, -9)
 target_position = Vector2(-6, 1)
 
 [node name="LedgeCheckRight" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -20)
+position = Vector2(0, -9)
 target_position = Vector2(6, 1)
 
 [node name="CheckFloor" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, 0)
+position = Vector2(0, 11)
 target_position = Vector2(0, 10)
 
 [node name="CheckFloorAboveLeft" type="RayCast2D" parent="WallRayCast"]
-position = Vector2(8, -22)
+position = Vector2(0, -11)
 target_position = Vector2(-10, -3)
 
 [node name="Camera2D" type="Camera2D" parent="."]

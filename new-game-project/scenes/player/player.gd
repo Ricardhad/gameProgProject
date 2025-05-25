@@ -168,8 +168,8 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 		animated_sprite_2d.flip_h = direction < 0
-		attack_area_1.position.x = -original_attack_offset_x + 17.5 if animated_sprite_2d.flip_h else original_attack_offset_x
-		attack_area_2.position.x = -original_attack2_offset_x + 17.5 if animated_sprite_2d.flip_h else original_attack2_offset_x
+		attack_area_1.position.x = -original_attack_offset_x if animated_sprite_2d.flip_h else original_attack_offset_x
+		attack_area_2.position.x = -original_attack2_offset_x if animated_sprite_2d.flip_h else original_attack2_offset_x
 
 	else:
 		velocity.x = move_toward(velocity.x, 0, 30)

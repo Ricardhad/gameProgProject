@@ -24,6 +24,10 @@ var collision_shape_2_original_x = 0.0
 
 var hitbox_shift = 7.5
 var current_animation: String = ""
+#knockback var
+var knockback_velocity = Vector2.ZERO
+const KNOCKBACK_FORCE = 200.0
+
 
 func _ready() -> void:
 	randomize()
@@ -33,8 +37,8 @@ func _ready() -> void:
 	collision_shape_1_original_x = abs(collision_shape1.position.x)
 	collision_shape_2_original_x = abs(collision_shape2.position.x)
 	health.health_changed.connect(_on_health_changed)
-	health.set_max_health(1)
-	health.set_health(1)
+	health.set_max_health(5)
+	health.set_health(5)
 
 func _on_health_changed(diff: int) -> void:
 	if is_dead:
@@ -43,6 +47,14 @@ func _on_health_changed(diff: int) -> void:
 	if diff < 0 and current_animation != "attack":
 		play_animation("hurt", true)
 
+		# Knockback direction logic (assuming player is assigned)
+		var player = get_tree().get_first_node_in_group("player")
+		if player:
+			var dir = sign(global_position.x - player.global_position.x)  # push away from player
+			knockback_velocity.x = KNOCKBACK_FORCE * dir
+
+
+
 func play_animation(anim: String, force: bool = false):
 	if current_animation == "dead":
 		return
@@ -50,19 +62,25 @@ func play_animation(anim: String, force: bool = false):
 		return
 	current_animation = anim
 	animated_sprite_2d.play(anim)
-
 func _physics_process(delta: float) -> void:
-	if is_dead or current_animation == "attack" or current_animation == "hurt":
+	if is_dead:
 		return
 
 	velocity.y += GRAVITY * delta
 
-	# Don't move while attacking
-	if current_animation == "attack" or current_animation == "hurt":
+	# Stop movement during attack or hurt animations
+	if current_animation in ["attack", "hurt"]:
 		velocity.x = 0.0
+
+		# Apply knockback only during hurt
+		if current_animation == "hurt":
+			velocity.x = knockback_velocity.x
+			knockback_velocity.x = move_toward(knockback_velocity.x, 0, 800 * delta)
+
 		move_and_slide()
 		return
 
+	# Walking state logic
 	state_timer += delta
 	if state_timer >= next_state_time:
 		is_walking = !is_walking
@@ -138,3 +156,4 @@ func drop_coins() -> void:
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			coin.player = player
+			print("finding player")
