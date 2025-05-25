@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var collision_shape1: CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var collision_shape2: CollisionShape2D = $PlayerDetect/CollisionShape2D
 @onready var health: Health = $HurtBox/Health
+@export var coin_scene: PackedScene
 
 var is_dead = false
 const GRAVITY = 800.0
@@ -108,6 +109,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite_2d.animation in ["attack", "hurt"]:
 		current_animation = ""
 	elif animated_sprite_2d.animation == "dead":
+#		drop coins todo
+		drop_coins()
 		queue_free()
 
 func _set_next_state_time() -> void:
@@ -119,3 +122,14 @@ func _on_player_detect_body_entered(body: Node2D) -> void:
 
 	if current_animation != "attack":
 		play_animation("attack")
+		
+func drop_coins() -> void:
+	if coin_scene == null:
+		print("Coin scene not assigned!")
+		return
+
+	var coin_count = randi_range(1, 3)  # Drop 1 to 3 coins
+	for i in coin_count:
+		var coin = coin_scene.instantiate()
+		get_parent().add_child(coin)
+		coin.global_position = global_position + Vector2(randf_range(-8, 8), -8)
