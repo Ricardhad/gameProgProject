@@ -29,7 +29,6 @@ func _ready() -> void:
 	for child in $CanvasLayer/PanelPause.get_children():
 		child.process_mode = Node.PROCESS_MODE_ALWAYS
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -55,9 +54,8 @@ func remove_existing_players():
 			child.queue_free()
 
 func spawn_character(character_scene: PackedScene):
-	
 	var player = character_scene.instantiate()
-	player.global_position = Vector2(100, 100)
+	player.global_position = Vector2(100, 200)
 	player.scale = Vector2(2, 2)
 	add_child(player)
 	
@@ -67,8 +65,6 @@ func spawn_character(character_scene: PackedScene):
 	#current_player = character_scene.instantiate()
 	#current_player.global_position = Vector2(100, 100)
 	#add_child(current_player)
-
-
 
 func _on_Exitbtn_pressed() -> void:
 	get_tree().paused = false

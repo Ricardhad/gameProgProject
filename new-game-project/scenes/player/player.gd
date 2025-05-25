@@ -9,8 +9,6 @@ var is_hanging = false
 var hang_grace_timer = 0.0
 const HANG_GRACE_TIME = 0.2
 
-
-
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 var respawn_position = Vector2(100, 100)

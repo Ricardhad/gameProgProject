@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var collision_shape1: CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var collision_shape2: CollisionShape2D = $PlayerDetect/CollisionShape2D
+@onready var health: Health = $HurtBox/Health
 
 var is_dead = false
 const GRAVITY = 800.0
@@ -30,15 +31,33 @@ func _ready() -> void:
 	collision_shape_original_x = abs(collision_shape.position.x)
 	collision_shape_1_original_x = abs(collision_shape1.position.x)
 	collision_shape_2_original_x = abs(collision_shape2.position.x)
+	health.health_changed.connect(_on_health_changed)
+	health.set_max_health(5)
+	health.set_health(5)
+
+func _on_health_changed(diff: int) -> void:
+	if is_dead:
+		return
+
+	if diff < 0 and current_animation != "attack":
+		play_animation("hurt", true)
+
+func play_animation(anim: String, force: bool = false):
+	if current_animation == "dead":
+		return
+	if not force and current_animation in ["attack", "hurt"]:
+		return
+	current_animation = anim
+	animated_sprite_2d.play(anim)
 
 func _physics_process(delta: float) -> void:
-	if is_dead:
+	if is_dead or current_animation == "attack" or current_animation == "hurt":
 		return
 
 	velocity.y += GRAVITY * delta
 
 	# Don't move while attacking
-	if current_animation == "attack":
+	if current_animation == "attack" or current_animation == "hurt":
 		velocity.x = 0.0
 		move_and_slide()
 		return
@@ -73,25 +92,23 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(delta: float) -> void:
-	if is_dead or current_animation == "attack":
+	if is_dead or current_animation in ["attack", "hurt", "dead"]:
 		return
-
 	var new_anim = "walk" if is_walking else "idle"
 	if animated_sprite_2d.animation != new_anim:
-		animated_sprite_2d.play(new_anim)
+		play_animation(new_anim)
 
 func _on_health_health_depleted() -> void:
-	print("Health depleted")
 	is_dead = true
 	current_animation = "dead"
 	animated_sprite_2d.play("dead")
 	velocity = Vector2.ZERO
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	if animated_sprite_2d.animation == "dead":
-		queue_free()
-	elif animated_sprite_2d.animation == "attack":
+	if animated_sprite_2d.animation in ["attack", "hurt"]:
 		current_animation = ""
+	elif animated_sprite_2d.animation == "dead":
+		queue_free()
 
 func _set_next_state_time() -> void:
 	next_state_time = randf_range(1.0, 3.0)
@@ -101,6 +118,4 @@ func _on_player_detect_body_entered(body: Node2D) -> void:
 		return  # prevent self-detection
 
 	if current_animation != "attack":
-		current_animation = "attack"
-		animated_sprite_2d.play("attack")
-		print("Attack triggered")
+		play_animation("attack")

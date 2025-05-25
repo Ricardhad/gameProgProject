@@ -1,10 +1,11 @@
-[gd_scene load_steps=34 format=3 uid="uid://23ms5040y0wy"]
+[gd_scene load_steps=38 format=3 uid="uid://23ms5040y0wy"]
 
 [ext_resource type="Script" path="res://scenes/enemies/grasslands/goblin.gd" id="1_hfgq4"]
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/goblin/Idle.png" id="2_5kwfu"]
 [ext_resource type="Texture2D" uid="uid://bj1uuikd0t5s2" path="res://assets/enemies/goblin/Attack.png" id="2_pmn55"]
 [ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/goblin/Dead.png" id="3_p40gs"]
 [ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="3_q1ndm"]
+[ext_resource type="Texture2D" uid="uid://c1a2ys12d8yoa" path="res://assets/enemies/goblin/Hurt.png" id="4_kp4tm"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="4_mkdvr"]
 [ext_resource type="Texture2D" uid="uid://ufo2gltdgoqy" path="res://assets/enemies/goblin/Walk.png" id="5_xhwri"]
 
@@ -47,6 +48,18 @@ region = Rect2(384, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pylag"]
 atlas = ExtResource("3_p40gs")
 region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obrun"]
+atlas = ExtResource("4_kp4tm")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eg311"]
+atlas = ExtResource("4_kp4tm")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i84q"]
+atlas = ExtResource("4_kp4tm")
+region = Rect2(256, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wypt8"]
 atlas = ExtResource("2_5kwfu")
@@ -144,6 +157,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_obrun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eg311")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i84q")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_wypt8")
 }, {
 "duration": 1.0,
@@ -199,14 +226,17 @@ size = Vector2(20.75, 32)
 size = Vector2(21, 16)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_hfgq4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
+frame = 2
+frame_progress = 1.0
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -232,7 +262,7 @@ shape = SubResource("RectangleShape2D_n8ffi")
 
 [node name="PlayerDetect" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 5
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
 position = Vector2(-20.5, -23)
