@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
-[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/goblin.tscn" id="2_1bil5"]
+[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/enemies/grasslands/goblin.tscn" id="2_1bil5"]
 [ext_resource type="AudioStream" uid="uid://brrgbhxmfi3mr" path="res://assets/music/Grassland.mp3" id="3_sxloq"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="4_t7qrl"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_1v6m5"]

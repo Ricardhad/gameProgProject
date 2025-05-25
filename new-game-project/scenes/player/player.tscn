@@ -410,6 +410,7 @@ size = Vector2(15, 20)
 size = Vector2(16, 10)
 
 [node name="player" type="CharacterBody2D"]
+position = Vector2(-8, 0)
 collision_layer = 5
 script = ExtResource("1_enxr5")
 
@@ -417,8 +418,9 @@ script = ExtResource("1_enxr5")
 position = Vector2(9, -15)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"hang"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.506855
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -11)

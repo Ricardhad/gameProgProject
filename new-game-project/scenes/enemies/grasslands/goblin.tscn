@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://23ms5040y0wy"]
 
-[ext_resource type="Script" path="res://scenes/goblin.gd" id="1_hfgq4"]
+[ext_resource type="Script" path="res://scenes/enemies/grasslands/goblin.gd" id="1_hfgq4"]
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/goblin/Idle.png" id="2_5kwfu"]
 [ext_resource type="Texture2D" uid="uid://bj1uuikd0t5s2" path="res://assets/enemies/goblin/Attack.png" id="2_pmn55"]
 [ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/goblin/Dead.png" id="3_p40gs"]
