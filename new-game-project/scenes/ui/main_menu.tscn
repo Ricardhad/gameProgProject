@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dew713h72nevn"]
+[gd_scene load_steps=12 format=3 uid="uid://dew713h72nevn"]
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_p8y0w"]
 [ext_resource type="Texture2D" uid="uid://c3wh1vocs21bh" path="res://assets/main_menu/background.jpg" id="2_4sq2b"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cdvs6qogfpnf7" path="res://assets/main_menu/Chat_Cloud.png" id="4_ltrlh"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="5_wdnyg"]
 [ext_resource type="FontFile" uid="uid://koihkxmi6b18" path="res://assets/font_style/Tektur-ExtraBold.ttf" id="6_fql37"]
-[ext_resource type="AudioStream" uid="uid://brrgbhxmfi3mr" path="res://assets/music/Grassland.mp3" id="7_cmgp7"]
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="8_cmik1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilmwd"]
@@ -176,11 +175,6 @@ theme_override_font_sizes/font_size = 100
 text = "Guardian Pixel"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_cmgp7")
-volume_db = -7.5
-autoplay = true
 
 [node name="OptionsPopup" type="PopupMenu" parent="."]
 auto_translate_mode = 1
