@@ -1,10 +1,12 @@
-[gd_scene load_steps=58 format=3 uid="uid://cws2mh1ko3mg8"]
+[gd_scene load_steps=60 format=3 uid="uid://cws2mh1ko3mg8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_enxr5"]
 [ext_resource type="Texture2D" uid="uid://b18q26imgxm3" path="res://assets/class/knight/player_sprites.png" id="2_8dkoq"]
 [ext_resource type="Texture2D" uid="uid://dxhgtold6fgsw" path="res://assets/class/knight/Hang.png" id="3_g4x7a"]
 [ext_resource type="Texture2D" uid="uid://vn3cm3cj8u27" path="res://assets/class/knight/Pull_up.png" id="4_am03k"]
 [ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="5_b4k1q"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="6_hf2xt"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="7_v7flo"]
 [ext_resource type="AudioStream" uid="uid://cd0x3but87egp" path="res://assets/music/Keugh.ogg" id="9_snrmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3alx"]
@@ -413,10 +415,10 @@ collision_layer = 4
 script = ExtResource("1_enxr5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"hang"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -426,6 +428,16 @@ shape = SubResource("CapsuleShape2D_b8yrv")
 stream = ExtResource("9_snrmh")
 volume_db = -5.0
 mix_target = 2
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("6_hf2xt")
+health = NodePath("Health")
+
+[node name="Health" type="Node" parent="HurtBox"]
+script = ExtResource("7_v7flo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_b8yrv")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2

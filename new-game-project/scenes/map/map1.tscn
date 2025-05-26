@@ -800,10 +800,10 @@ layer_0/tile_data = PackedInt32Array(1245184, 0, 1, 1179649, 65536, 0, 1245185, 
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)
-motion_mirroring = Vector2(576, 324)
+motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(288, 162)
+position = Vector2(297, 177)
 texture = ExtResource("2_xraoo")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -849,5 +849,5 @@ texture = ExtResource("8_w13pk")
 motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
-position = Vector2(288, 162)
+position = Vector2(290, 173)
 texture = ExtResource("9_1tkfa")

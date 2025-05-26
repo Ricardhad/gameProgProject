@@ -25,5 +25,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print("Coin collected by player")
+		GlobalVar.add_coin()
+		$AudioStreamPlayer2D.play()
+		$CollisionShape2D.disabled = true
+		self.visible = false
+		await get_tree().create_timer(0.5).timeout
 		queue_free()
