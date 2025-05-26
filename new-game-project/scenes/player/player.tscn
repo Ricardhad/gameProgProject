@@ -478,7 +478,7 @@ position = Vector2(0, -11)
 target_position = Vector2(-10, -3)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -30)
+position = Vector2(0, -12)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.5
