@@ -1,0 +1,25 @@
+Buffs:
+streght up
+double hp
+agi (less cooldown)
+extra coin
+better reward(more reward from npc)
+def up(damage reduc)
+enchant potion(naikin effect heal)
+
+Items:
+pedang = atk
+hati = health 
+def = armor
+agi = sepatu
+larger pouch = potion
+
+naga gamplay:
+-pattern atk naga dimulai 1-1-2 atau 2-1-1
+-naga mengejar player saat berjalan
+-naga terbang Ketika menyentuh di health yang sudah dipastikan
+-selama naga terbang dia menyerang/menyemburkan apinya sepanjang arena sebanyak 2 kali(80% kata chard)
+-di arena ini terdapat platform yang dimana player dapat bersembunyi dibawah untuk menghindari apinya
+
+
+
