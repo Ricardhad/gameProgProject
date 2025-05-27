@@ -4,6 +4,13 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_level()
+	$OptionPanel/CheckButton.button_pressed = Bgm.stream_paused
+	
+	var slider = $OptionPanel/HSlider
+	slider.min_value = 0.0
+	slider.max_value = 1.0
+	slider.step = 0.01
+	slider.value = db_to_linear(Bgm.volume_db)
 	pass # Replace with function body.
 
 
@@ -30,10 +37,12 @@ func _on_ButtonBack_pressed() -> void:
 
 func _on_CheckButton_toggled(button_pressed: bool) -> void:
 	print("CheckButton toggled:", button_pressed)
-	if button_pressed:
-		$AudioStreamPlayer.stream_paused = true
-	else:
-		$AudioStreamPlayer.stream_paused = false
+	Bgm.stream_paused = button_pressed
+
+func _on_HSliderMusic_value_changed(value: float) -> void:
+	var db = linear_to_db(value)
+	Bgm.volume_db = db
+	print("Volume set to:", db, "dB")
 
 func _on_CheckButton2_toggled(button_pressed: bool) -> void:
 	if button_pressed:

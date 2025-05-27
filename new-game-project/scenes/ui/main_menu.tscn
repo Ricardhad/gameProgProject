@@ -266,46 +266,14 @@ text = "FullScreen
 "
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="OptionPanel"]
+[node name="HSlider" type="HSlider" parent="OptionPanel"]
 layout_mode = 0
-offset_left = 169.0
-offset_top = 200.0
-offset_right = 354.0
-offset_bottom = 245.0
-theme_override_fonts/font = ExtResource("5_wdnyg")
-theme_override_font_sizes/font_size = 40
-text = "Cutscenes
-"
-horizontal_alignment = 1
-
-[node name="CheckButton3" type="CheckButton" parent="OptionPanel"]
-top_level = true
-layout_mode = 0
-offset_left = 388.0
-offset_top = 246.0
-offset_right = 432.0
-offset_bottom = 270.0
+offset_left = 86.0
+offset_top = 204.0
+offset_right = 219.0
+offset_bottom = 224.0
 scale = Vector2(2, 2)
-
-[node name="Label5" type="Label" parent="OptionPanel"]
-layout_mode = 0
-offset_left = 158.0
-offset_top = 240.0
-offset_right = 343.0
-offset_bottom = 285.0
-theme_override_fonts/font = ExtResource("5_wdnyg")
-theme_override_font_sizes/font_size = 40
-text = "Subtitles"
-horizontal_alignment = 1
-
-[node name="CheckButton4" type="CheckButton" parent="OptionPanel"]
-top_level = true
-layout_mode = 0
-offset_left = 387.0
-offset_top = 287.0
-offset_right = 431.0
-offset_bottom = 311.0
-scale = Vector2(2, 2)
+value = 100.0
 
 [node name="AreYouSure" type="Panel" parent="."]
 visible = false
@@ -377,7 +345,6 @@ horizontal_alignment = 1
 [connection signal="toggled" from="OptionPanel/CheckButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="toggled" from="OptionPanel/CheckButton2" to="." method="_on_CheckButton2_toggled"]
 [connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_ButtonBack_pressed"]
-[connection signal="toggled" from="OptionPanel/CheckButton3" to="." method="_on_CheckButton2_toggled"]
-[connection signal="toggled" from="OptionPanel/CheckButton4" to="." method="_on_CheckButton2_toggled"]
+[connection signal="value_changed" from="OptionPanel/HSlider" to="." method="_on_HSliderMusic_value_changed"]
 [connection signal="pressed" from="AreYouSure/yes" to="." method="_on_ButtonYes_pressed"]
 [connection signal="pressed" from="AreYouSure/no" to="." method="_on_ButtonNo_pressed"]
