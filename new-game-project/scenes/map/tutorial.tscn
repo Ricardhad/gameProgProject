@@ -25,9 +25,28 @@ var current_player = knight_scene
 func _ready() -> void:
 	Bgm.play_music_grassland()
 	spawn_character(current_player)
+	var slider = $CanvasLayer/PanelPause/PanelPauseOption/HSlider
+	slider.min_value = 0.0
+	slider.max_value = 1.0
+	slider.step = 0.01
+	slider.value = db_to_linear(Bgm.volume_db)
 	$CanvasLayer/PanelPause.process_mode = Node.PROCESS_MODE_ALWAYS
 	for child in $CanvasLayer/PanelPause.get_children():
 		child.process_mode = Node.PROCESS_MODE_ALWAYS
+
+func _on_HSliderMusic_value_changed_tutotrial1(value: float) -> void:
+	var db = linear_to_db(value)
+	Bgm.volume_db = db
+	print(\"Volume set to:\", db, \"dB\")
+
+func _on_CheckButton2_toggled1(button_pressed: bool) -> void:
+	if button_pressed:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+func _on_options_pressed1() -> void:
+	$CanvasLayer/PanelPause/PanelPauseOption.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -962,21 +981,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.5
-offset_top = -95.0
-offset_right = 120.5
-offset_bottom = 95.0
+offset_left = -302.0
+offset_top = -225.0
+offset_right = 464.0
+offset_bottom = 242.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_thhto")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
-offset_left = 75.0
-offset_top = 27.0
-offset_right = 228.0
-offset_bottom = 72.0
-scale = Vector2(0.5, 0.5)
+offset_left = 231.0
+offset_top = 39.0
+offset_right = 384.0
+offset_bottom = 132.0
+scale = Vector2(1.7, 1.7)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Pause
@@ -986,11 +1005,10 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 57.0
-offset_right = 182.0
-offset_bottom = 105.0
-scale = Vector2(0.4, 0.4)
+offset_left = 115.0
+offset_top = 117.0
+offset_right = 268.0
+offset_bottom = 165.0
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Buff List"
@@ -998,113 +1016,194 @@ horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CanvasLayer/PanelPause"]
 layout_mode = 0
-offset_left = 17.0
-offset_top = 111.0
-offset_right = 170.0
-offset_bottom = 159.0
-scale = Vector2(0.4, 0.4)
+offset_left = 88.0
+offset_top = 237.0
+offset_right = 241.0
+offset_bottom = 285.0
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Items"
 horizontal_alignment = 1
 
-[node name="Panel" type="Panel" parent="CanvasLayer/PanelPause"]
+[node name="PanelButton" type="Panel" parent="CanvasLayer/PanelPause"]
 custom_minimum_size = Vector2(130, 130)
 layout_mode = 1
-offset_left = -130.0
-offset_top = 4.0
-offset_bottom = 134.0
+offset_left = -247.0
+offset_top = 33.0
+offset_right = 12.0
+offset_bottom = 383.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_f7vnx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelPause/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelPause/PanelButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -29.5
-offset_top = -37.0
-offset_right = 157.5
-offset_bottom = 243.0
+offset_left = -87.5
+offset_top = -119.0
+offset_right = 482.5
+offset_bottom = 718.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.3, 0.3)
 
-[node name="Resumebtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
+[node name="Resumebtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Resumebtn"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.093
 anchor_top = 0.319
 anchor_right = 0.933
 anchor_bottom = 0.734
-offset_left = -1.507
-offset_top = -8.416
-offset_right = 2.33299
-offset_bottom = 10.024
+offset_left = 40.3233
+offset_top = 0.952667
+offset_right = -234.477
+offset_bottom = -23.5373
+scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Resume"
 horizontal_alignment = 1
 
-[node name="Restartbtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
+[node name="Restartbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Restartbtn"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Restartbtn"]
+top_level = true
 layout_mode = 2
-offset_left = 21.0
-offset_top = 14.0
-offset_right = 179.0
-offset_bottom = 59.0
+offset_left = 111.0
+offset_top = 276.0
+offset_right = 297.0
+offset_bottom = 322.0
+scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
-text = "Restard"
+text = "Restart"
 horizontal_alignment = 1
 
-[node name="Optionbtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
+[node name="Optionbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Optionbtn"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 11.0
-offset_right = 187.0
-offset_bottom = 56.0
+offset_left = 103.333
+offset_top = 60.0
+offset_right = 277.333
+offset_bottom = 105.0
+scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Option
 "
 horizontal_alignment = 1
 
-[node name="Exitbtn" type="TextureButton" parent="CanvasLayer/PanelPause/Panel/VBoxContainer"]
+[node name="Exitbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 texture_normal = SubResource("CompressedTexture2D_ix27y")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Panel/VBoxContainer/Exitbtn"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 182.0
-offset_bottom = 59.0
+offset_left = 116.667
+offset_top = 66.6666
+offset_right = 282.667
+offset_bottom = 111.667
+scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "Exit
 "
 horizontal_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/PanelPause/Panel/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelPause/Panel/VBoxContainer/Exitbtn" to="." method="_on_Exitbtn_pressed"]
+[node name="PanelPauseOption" type="Panel" parent="CanvasLayer/PanelPause"]
+visible = false
+top_level = true
+custom_minimum_size = Vector2(241, 190)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -302.0
+offset_top = -225.0
+offset_right = 464.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_thhto")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 39.0
+offset_right = 384.0
+offset_bottom = 132.0
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("13_ntw3c")
+theme_override_font_sizes/font_size = 40
+text = "Option"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 164.0
+offset_right = 262.0
+offset_bottom = 180.0
+scale = Vector2(2, 2)
+value = 100.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/HSlider"]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -22.0
+offset_right = 146.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("13_ntw3c")
+theme_override_font_sizes/font_size = 40
+text = "Music
+"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 279.0
+offset_right = 153.0
+offset_bottom = 303.0
+scale = Vector2(2, 2)
+
+[node name="Label3" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/CheckButton"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -19.5
+offset_right = 193.0
+offset_bottom = 28.5
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("13_ntw3c")
+theme_override_font_sizes/font_size = 40
+text = "FullScreen
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
+[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn" to="." method="_on_Exitbtn_pressed"]
+[connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider" to="." method="_on_HSliderMusic_value_changed_tutotrial1"]
+[connection signal="toggled" from="CanvasLayer/PanelPause/PanelPauseOption/CheckButton" to="." method="_on_CheckButton2_toggled1"]
