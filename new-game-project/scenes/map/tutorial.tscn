@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=21 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
 [ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/enemies/grasslands/goblin.tscn" id="2_1bil5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/grass/bg/7.png" id="11_jksp8"]
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="12_en60n"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="13_ntw3c"]
+[ext_resource type="Texture2D" uid="uid://8swmugpd1q5d" path="res://assets/option_menu/PlayerBar.png" id="13_oore8"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -48,8 +49,15 @@ func _on_CheckButton2_toggled1(button_pressed: bool) -> void:
 func _on_options_pressed1() -> void:
 	$CanvasLayer/PanelPause/PanelPauseOption.visible = true
 
+func update_coin_label():
+	print(\"Updating coin label:\", GlobalVar.coin_collected)
+	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
+
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	update_coin_label()
 	pass
 
 func _input(event: InputEvent) -> void:
@@ -878,6 +886,9 @@ texture = ExtResource("12_en60n")
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ix27y"]
 load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ftbk"]
+texture = ExtResource("13_oore8")
+
 [node name="game" type="Node2D"]
 script = SubResource("GDScript_xck3o")
 
@@ -1201,6 +1212,26 @@ theme_override_font_sizes/font_size = 40
 text = "FullScreen
 "
 horizontal_alignment = 1
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer2"]
+offset_left = -1.0
+offset_right = 240.0
+offset_bottom = 88.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_2ftbk")
+
+[node name="Label_coin" type="Label" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 48.0
+offset_right = 263.0
+offset_bottom = 98.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("13_ntw3c")
+theme_override_font_sizes/font_size = 40
+text = "1
+"
 
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
