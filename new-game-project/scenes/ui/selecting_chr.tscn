@@ -167,5 +167,11 @@ text = "Start
 "
 horizontal_alignment = 1
 
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 648.0
+
 [connection signal="pressed" from="Backbtn" to="." method="_on_backbtn_pressed"]
 [connection signal="pressed" from="Startbtn" to="." method="_on_start_pressed"]
