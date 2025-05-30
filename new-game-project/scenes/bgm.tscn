@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://scenes/bgm.gd" id="1_mc4rp"]
 
 [node name="Bgm" type="AudioStreamPlayer"]
+bus = &"Music"
 script = ExtResource("1_mc4rp")

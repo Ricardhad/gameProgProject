@@ -200,22 +200,13 @@ offset_right = 883.0
 offset_bottom = 435.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_hmmug")
 
-[node name="CheckButton" type="CheckButton" parent="OptionPanel"]
-top_level = true
-layout_mode = 0
-offset_left = 389.0
-offset_top = 167.0
-offset_right = 433.0
-offset_bottom = 191.0
-scale = Vector2(2, 2)
-
 [node name="CheckButton2" type="CheckButton" parent="OptionPanel"]
 top_level = true
 layout_mode = 0
 offset_left = 388.0
-offset_top = 207.0
+offset_top = 296.0
 offset_right = 432.0
-offset_bottom = 231.0
+offset_bottom = 320.0
 scale = Vector2(2, 2)
 
 [node name="ButtonBack" type="TextureButton" parent="OptionPanel"]
@@ -254,10 +245,10 @@ horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="OptionPanel"]
 layout_mode = 0
-offset_left = 134.0
-offset_top = 120.0
-offset_right = 308.0
-offset_bottom = 165.0
+offset_left = 80.0
+offset_top = 99.0
+offset_right = 254.0
+offset_bottom = 144.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Music
@@ -266,24 +257,47 @@ horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="OptionPanel"]
 layout_mode = 0
-offset_left = 171.0
-offset_top = 159.0
-offset_right = 356.0
-offset_bottom = 204.0
+offset_left = 173.0
+offset_top = 253.0
+offset_right = 358.0
+offset_bottom = 298.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "FullScreen
 "
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="OptionPanel"]
+[node name="Label4" type="Label" parent="OptionPanel"]
+offset_left = 66.0
+offset_top = 171.0
+offset_right = 240.0
+offset_bottom = 216.0
+theme_override_fonts/font = ExtResource("5_wdnyg")
+theme_override_font_sizes/font_size = 40
+text = "SFX
+"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="OptionPanel"]
 layout_mode = 0
-offset_left = 86.0
-offset_top = 204.0
-offset_right = 219.0
-offset_bottom = 224.0
+offset_left = 107.0
+offset_top = 143.0
+offset_right = 240.0
+offset_bottom = 163.0
 scale = Vector2(2, 2)
-value = 100.0
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="SFXSlider" type="HSlider" parent="OptionPanel"]
+offset_left = 107.0
+offset_top = 209.0
+offset_right = 240.0
+offset_bottom = 229.0
+scale = Vector2(2, 2)
+max_value = 1.0
+step = 0.001
+value = 0.5
 
 [node name="AreYouSure" type="Panel" parent="."]
 visible = false
@@ -352,9 +366,11 @@ horizontal_alignment = 1
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_exit_pressed"]
-[connection signal="toggled" from="OptionPanel/CheckButton" to="." method="_on_CheckButton_toggled"]
 [connection signal="toggled" from="OptionPanel/CheckButton2" to="." method="_on_CheckButton2_toggled"]
 [connection signal="pressed" from="OptionPanel/ButtonBack" to="." method="_on_ButtonBack_pressed"]
-[connection signal="value_changed" from="OptionPanel/HSlider" to="." method="_on_HSliderMusic_value_changed"]
+[connection signal="mouse_exited" from="OptionPanel/MusicSlider" to="." method="_on_music_slider_mouse_exited"]
+[connection signal="value_changed" from="OptionPanel/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="mouse_exited" from="OptionPanel/SFXSlider" to="." method="_on_sfx_slider_mouse_exited"]
+[connection signal="value_changed" from="OptionPanel/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="AreYouSure/yes" to="." method="_on_ButtonYes_pressed"]
 [connection signal="pressed" from="AreYouSure/no" to="." method="_on_ButtonNo_pressed"]

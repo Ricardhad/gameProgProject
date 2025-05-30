@@ -4,13 +4,6 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_level()
-	$OptionPanel/CheckButton.button_pressed = Bgm.stream_paused
-	
-	var slider = $OptionPanel/HSlider
-	slider.min_value = 0.0
-	slider.max_value = 1.0
-	slider.step = 0.01
-	slider.value = db_to_linear(Bgm.volume_db)
 	
 	fade_rect.visible = false
 	fade_rect.color = Color.BLACK  # Pastikan warna hitam
@@ -58,20 +51,12 @@ func _on_load_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	$OptionPanel.visible = true
+	AudioServer.set_bus_volume_db(1, linear_to_db($OptionPanel/MusicSlider.value))
+	AudioServer.set_bus_volume_db(2, linear_to_db($OptionPanel/SFXSlider.value))
 
 func _on_ButtonBack_pressed() -> void:
 	print("Back button pressed")
 	$OptionPanel.visible = false
-
-
-func _on_CheckButton_toggled(button_pressed: bool) -> void:
-	print("CheckButton toggled:", button_pressed)
-	Bgm.stream_paused = button_pressed
-
-func _on_HSliderMusic_value_changed(value: float) -> void:
-	var db = linear_to_db(value)
-	Bgm.volume_db = db
-	print("Volume set to:", db, "dB")
 
 func _on_CheckButton2_toggled(button_pressed: bool) -> void:
 	if button_pressed:
@@ -90,3 +75,17 @@ func _on_ButtonYes_pressed() -> void:
 func _on_ButtonNo_pressed() -> void:
 	print("User canceled exit.")
 	$AreYouSure.visible = false  # Sembunyikan popup
+
+
+func _on_music_slider_mouse_exited() -> void:
+	release_focus()
+
+
+func _on_sfx_slider_mouse_exited() -> void:
+	release_focus()
+
+func _on_music_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),linear_to_db(value))
+
+func _on_sfx_slider_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),linear_to_db(value))
