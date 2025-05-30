@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn3k5yuovyg6m"]
+
+[ext_resource type="Script" path="res://scenes/ui/animation_text.gd" id="1_ugm4e"]
+
+[node name="AnimationText" type="Node2D"]
+script = ExtResource("1_ugm4e")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

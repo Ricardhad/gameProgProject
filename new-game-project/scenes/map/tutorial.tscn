@@ -1092,10 +1092,10 @@ stretch_mode = 0
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Restartbtn"]
 top_level = true
 layout_mode = 2
-offset_left = 111.0
-offset_top = 276.0
-offset_right = 297.0
-offset_bottom = 322.0
+offset_left = 99.0
+offset_top = 271.0
+offset_right = 285.0
+offset_bottom = 317.0
 scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
