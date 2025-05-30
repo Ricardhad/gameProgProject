@@ -1,18 +1,18 @@
 Buffs:
-streght up
-double hp
+hp up
+strength up
+def up (damage reduc)
 agi (less cooldown)
 extra coin
-better reward(more reward from npc)
-def up(damage reduc)
-enchant potion(naikin effect heal)
+luck/charisma (more reward from npc)
+enchant potion (naikin effect heal)
 
-Items:
+Items : (asset wes ada)
 pedang = atk
 hati = health 
-def = armor
-agi = sepatu
-larger pouch = potion
+armor = def
+sepatu = agi
+large pouch = potion
 
 naga gamplay:
 -pattern atk naga dimulai 1-1-2 atau 2-1-1
