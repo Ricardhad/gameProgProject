@@ -238,9 +238,5 @@ func can_hang():
 		
 		
 
-
-
-
-
 #func can_climb_up():
 	#return $ClimbUpFloorRayCast2D.is_colliding()

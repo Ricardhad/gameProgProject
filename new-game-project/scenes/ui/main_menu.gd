@@ -38,7 +38,7 @@ func _on_start_pressed() -> void:
 	fade_rect.modulate.a = 0.0
 
 	var fade_out = create_tween()
-	fade_out.tween_property(fade_rect, "modulate:a", 1.0, 1.0)
+	fade_out.tween_property(fade_rect, "modulate:a", 1.0, 1.0) #comment lek gk perlu transisi
 	fade_out.tween_callback(Callable(self, "_change_scene"))
 
 func _change_scene() -> void:
@@ -71,7 +71,6 @@ func _on_ButtonYes_pressed() -> void:
 	print("User confirmed exit.")
 	get_tree().quit()
 
-
 func _on_ButtonNo_pressed() -> void:
 	print("User canceled exit.")
 	$AreYouSure.visible = false  # Sembunyikan popup
@@ -79,7 +78,6 @@ func _on_ButtonNo_pressed() -> void:
 
 func _on_music_slider_mouse_exited() -> void:
 	release_focus()
-
 
 func _on_sfx_slider_mouse_exited() -> void:
 	release_focus()

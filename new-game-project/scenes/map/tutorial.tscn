@@ -1,7 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=23 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
-[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/enemies/grasslands/goblin.tscn" id="2_1bil5"]
+[ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grasslands/goblin.tscn" id="2_1bil5"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="3_wb4uk"]
+[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/enemies/grasslands/werewolf.tscn" id="4_c05xt"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="4_t7qrl"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_1v6m5"]
 [ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/grass/bg/2.png" id="6_lalho"]
@@ -38,7 +40,7 @@ func _ready() -> void:
 func _on_HSliderMusic_value_changed_tutotrial1(value: float) -> void:
 	var db = linear_to_db(value)
 	Bgm.volume_db = db
-	print(\"Volume set to:\", db, \"dB\")
+	#print(\"Volume set to:\", db, \"dB\")
 
 func _on_CheckButton2_toggled1(button_pressed: bool) -> void:
 	if button_pressed:
@@ -50,10 +52,8 @@ func _on_options_pressed1() -> void:
 	$CanvasLayer/PanelPause/PanelPauseOption.visible = true
 
 func update_coin_label():
-	print(\"Updating coin label:\", GlobalVar.coin_collected)
+	#print(\"Updating coin label:\", GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
-
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -899,11 +899,12 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 
 [node name="Enemy" type="Node" parent="."]
 
-[node name="Goblin" parent="Enemy" instance=ExtResource("2_1bil5")]
-position = Vector2(408, 255)
+[node name="G" parent="Enemy" instance=ExtResource("2_1bil5")]
+position = Vector2(401, 253)
+coin_scene = ExtResource("3_wb4uk")
 
-[node name="Goblin2" parent="Enemy" instance=ExtResource("2_1bil5")]
-position = Vector2(605, 255)
+[node name="WW" parent="Enemy" instance=ExtResource("4_c05xt")]
+position = Vector2(584, 249)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -967,18 +968,6 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
 position = Vector2(288, 162)
-texture = ExtResource("11_jksp8")
-
-[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
-layer = 1
-visible = false
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground2"]
-motion_scale = Vector2(2, 2)
-motion_mirroring = Vector2(576, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground2/ParallaxLayer"]
-position = Vector2(288, 273)
 texture = ExtResource("11_jksp8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -1230,8 +1219,7 @@ offset_bottom = 98.0
 scale = Vector2(0.7, 0.7)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
-text = "1
-"
+text = "0"
 
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
