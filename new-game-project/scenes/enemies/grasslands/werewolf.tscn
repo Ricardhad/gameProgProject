@@ -245,12 +245,15 @@ animations = [{
 size = Vector2(42.75, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh74x"]
-size = Vector2(21, 44)
+size = Vector2(9.5, 44)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_62dm7")
 coin_scene = ExtResource("2_610ih")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("9_x80es")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -267,15 +270,16 @@ shape = SubResource("RectangleShape2D_n8ffi")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-35, -42)
 
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(13, -3)
+target_position = Vector2(-52, 0)
+
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 position = Vector2(-0.499969, -15.5)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("8_k7xye")
-health = NodePath("Health")
-
-[node name="Health" type="Node" parent="HurtBox"]
-script = ExtResource("9_x80es")
+health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-10.5, -7.5)
@@ -286,9 +290,9 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
-position = Vector2(-27, -22)
+position = Vector2(-32.75, -22)
 shape = SubResource("RectangleShape2D_sh74x")
 
+[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="health_depleted" from="HurtBox/Health" to="." method="_on_health_health_depleted"]
 [connection signal="body_entered" from="PlayerDetect" to="." method="_on_player_detect_body_entered"]
