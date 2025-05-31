@@ -1,12 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://jwwj5u53hp3c"]
+[gd_scene load_steps=10 format=3 uid="uid://jwwj5u53hp3c"]
 
 [ext_resource type="Script" path="res://scenes/map/map_route.gd" id="1_iof7n"]
+[ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="2_qyx0x"]
+[ext_resource type="Texture2D" uid="uid://b26pde6jyfppi" path="res://assets/option_menu/Background_detail.png" id="3_555wi"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="4_k508b"]
+[ext_resource type="Texture2D" uid="uid://d3jneibdoktxq" path="res://assets/selecting_menu/menubox.png" id="5_pblte"]
+[ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="6_j706e"]
+[ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="7_nj0dc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8pbj"]
+texture = ExtResource("2_qyx0x")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4yq52"]
+texture = ExtResource("5_pblte")
 
 [node name="Map" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 578.0
+offset_bottom = 355.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iof7n")
@@ -16,5 +30,353 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -162.0
+offset_right = -502.0
+offset_bottom = -162.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_a8pbj")
+
+[node name="Tutorial" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 462.0
+offset_right = 284.0
+offset_bottom = 547.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Tutorial"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Tutorial
+"
+horizontal_alignment = 1
+
+[node name="Stage1(1)" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 415.0
+offset_right = 400.0
+offset_bottom = 500.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Stage1(1)"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 1"
+horizontal_alignment = 1
+
+[node name="Stage1(2)" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 515.0
+offset_right = 400.0
+offset_bottom = 600.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Stage1(2)"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 1
+"
+horizontal_alignment = 1
+
+[node name="RestStop1" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 469.0
+offset_right = 516.0
+offset_bottom = 554.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/RestStop1"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 20.0
+offset_right = 162.0
+offset_bottom = 113.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Rest
+Stop"
+horizontal_alignment = 1
+
+[node name="Stage2(1)" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 410.0
+offset_right = 628.0
+offset_bottom = 495.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Stage2(1)"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 2
+"
+horizontal_alignment = 1
+
+[node name="Stage2(2)" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 541.0
+offset_top = 513.0
+offset_right = 629.0
+offset_bottom = 598.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Stage2(2)"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 2
+"
+horizontal_alignment = 1
+
+[node name="RestStop2" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 659.0
+offset_top = 473.0
+offset_right = 747.0
+offset_bottom = 558.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/RestStop2"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 20.0
+offset_right = 162.0
+offset_bottom = 113.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Rest
+Stop"
+horizontal_alignment = 1
+
+[node name="Stage3(1)" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 774.0
+offset_top = 414.0
+offset_right = 862.0
+offset_bottom = 499.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Stage3(1)"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 3
+
+"
+horizontal_alignment = 1
+
+[node name="Stage3(2)" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 777.0
+offset_top = 521.0
+offset_right = 865.0
+offset_bottom = 606.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Stage3(2)"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 3
+
+"
+horizontal_alignment = 1
+
+[node name="RestStop3" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 901.0
+offset_top = 468.0
+offset_right = 989.0
+offset_bottom = 553.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/RestStop3"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 20.0
+offset_right = 162.0
+offset_bottom = 113.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Rest
+Stop"
+horizontal_alignment = 1
+
+[node name="Boss" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 1021.0
+offset_top = 471.0
+offset_right = 1109.0
+offset_bottom = 556.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_555wi")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Boss"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 31.0
+offset_right = 162.0
+offset_bottom = 76.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Boss
+"
+horizontal_alignment = 1
+
+[node name="PopUpDetail" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 828.0
+offset_top = 35.0
+offset_right = 1056.0
+offset_bottom = 254.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_4yq52")
+
+[node name="Label_Stage" type="Label" parent="PopUpDetail"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 22.0
+offset_right = 176.0
+offset_bottom = 67.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 2
+"
+horizontal_alignment = 1
+
+[node name="Label_Difficulty" type="Label" parent="PopUpDetail"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 56.0
+offset_right = 178.0
+offset_bottom = 101.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "diff
+"
+horizontal_alignment = 1
+
+[node name="Label_TotalEnemy" type="Label" parent="PopUpDetail"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 19.0
+offset_top = 87.0
+offset_right = 177.0
+offset_bottom = 132.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 2
+"
+horizontal_alignment = 1
+
+[node name="Label_Encounter" type="Label" parent="PopUpDetail"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 121.0
+offset_right = 178.0
+offset_bottom = 166.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Stage 2
+"
+horizontal_alignment = 1
+
+[node name="Confirm" type="TextureButton" parent="PopUpDetail"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 165.0
+offset_right = 202.0
+offset_bottom = 198.0
+size_flags_vertical = 3
+texture_normal = ExtResource("6_j706e")
+texture_pressed = ExtResource("7_nj0dc")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PopUpDetail/Confirm"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 177.0
+offset_bottom = 49.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("4_k508b")
+theme_override_font_sizes/font_size = 40
+text = "Confirm
+"
+horizontal_alignment = 1

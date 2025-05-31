@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=29 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grasslands/goblin.tscn" id="2_1bil5"]
@@ -15,10 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="12_en60n"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="13_ntw3c"]
 [ext_resource type="Texture2D" uid="uid://8swmugpd1q5d" path="res://assets/option_menu/PlayerBar.png" id="13_oore8"]
+[ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="15_a2yuk"]
+[ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="16_4p4f0"]
 [ext_resource type="Texture2D" uid="uid://dcxq1dnubjqvj" path="res://assets/option_menu/HealthBarOutline.png" id="16_mm4wd"]
 [ext_resource type="Texture2D" uid="uid://53yh3pihwlgy" path="res://assets/option_menu/HealthBar.png" id="17_uipyl"]
 [ext_resource type="Texture2D" uid="uid://dbrr2k8ajc2ik" path="res://assets/option_menu/CDBarOutline.png" id="18_wnljk"]
 [ext_resource type="Texture2D" uid="uid://b004vjw2yc6cr" path="res://assets/option_menu/CDBar.png" id="19_uqupp"]
+[ext_resource type="Texture2D" uid="uid://cwklwo8qusa1h" path="res://assets/option_menu/Richard.png" id="20_46wu3"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -46,6 +49,10 @@ func _on_HSliderMusic_value_changed_tutotrial1(value: float) -> void:
 	Bgm.volume_db = db
 	#print(\"Volume set to:\", db, \"dB\")
 
+func _on_HSliderMusic_value_changed_tutotrial2(value: float) -> void:
+	AudioServer.set_bus_volume_db(2, linear_to_db($CanvasLayer/PanelPause/PanelPauseOption/HSlider2.value))
+	#print(\"Volume set to:\", db, \"dB\")
+
 func _on_CheckButton2_toggled1(button_pressed: bool) -> void:
 	if button_pressed:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -53,7 +60,9 @@ func _on_CheckButton2_toggled1(button_pressed: bool) -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_options_pressed1() -> void:
-	$CanvasLayer/PanelPause/PanelPauseOption.visible = true
+	var option_panel = $CanvasLayer/PanelPause/PanelPauseOption
+	option_panel.visible = not option_panel.visible
+
 
 func update_coin_label():
 	#print(\"Updating coin label:\", GlobalVar.coin_collected)
@@ -889,9 +898,6 @@ texture = ExtResource("12_en60n")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7vnx"]
 texture = ExtResource("12_en60n")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ix27y"]
-load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ftbk"]
 texture = ExtResource("13_oore8")
 
@@ -1059,7 +1065,8 @@ scale = Vector2(0.3, 0.3)
 [node name="Resumebtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_ix27y")
+texture_normal = ExtResource("15_a2yuk")
+texture_pressed = ExtResource("16_4p4f0")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn"]
@@ -1069,10 +1076,10 @@ anchor_left = 0.093
 anchor_top = 0.319
 anchor_right = 0.933
 anchor_bottom = 0.734
-offset_left = 40.3233
-offset_top = 0.952667
-offset_right = -234.477
-offset_bottom = -23.5373
+offset_left = 23.6567
+offset_top = -22.3807
+offset_right = -251.144
+offset_bottom = -46.8706
 scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
@@ -1082,16 +1089,17 @@ horizontal_alignment = 1
 [node name="Restartbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_ix27y")
+texture_normal = ExtResource("15_a2yuk")
+texture_pressed = ExtResource("16_4p4f0")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Restartbtn"]
 top_level = true
 layout_mode = 2
 offset_left = 99.0
-offset_top = 271.0
+offset_top = 263.0
 offset_right = 285.0
-offset_bottom = 317.0
+offset_bottom = 309.0
 scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
@@ -1101,15 +1109,16 @@ horizontal_alignment = 1
 [node name="Optionbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_ix27y")
+texture_normal = ExtResource("15_a2yuk")
+texture_pressed = ExtResource("16_4p4f0")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn"]
 layout_mode = 0
-offset_left = 103.333
-offset_top = 60.0
-offset_right = 277.333
-offset_bottom = 105.0
+offset_left = 116.667
+offset_top = 36.6667
+offset_right = 290.667
+offset_bottom = 81.6667
 scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
@@ -1120,15 +1129,16 @@ horizontal_alignment = 1
 [node name="Exitbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_ix27y")
+texture_normal = ExtResource("15_a2yuk")
+texture_pressed = ExtResource("16_4p4f0")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn"]
 layout_mode = 0
 offset_left = 116.667
-offset_top = 66.6666
+offset_top = 43.3334
 offset_right = 282.667
-offset_bottom = 111.667
+offset_bottom = 88.3338
 scale = Vector2(2, 2)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
@@ -1190,17 +1200,17 @@ horizontal_alignment = 1
 
 [node name="CheckButton" type="CheckButton" parent="CanvasLayer/PanelPause/PanelPauseOption"]
 layout_mode = 0
-offset_left = 109.0
-offset_top = 279.0
-offset_right = 153.0
-offset_bottom = 303.0
+offset_left = 108.0
+offset_top = 319.0
+offset_right = 152.0
+offset_bottom = 343.0
 scale = Vector2(2, 2)
 
 [node name="Label3" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/CheckButton"]
 layout_mode = 0
-offset_left = 8.0
+offset_left = 9.5
 offset_top = -19.5
-offset_right = 193.0
+offset_right = 194.5
 offset_bottom = 28.5
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("13_ntw3c")
@@ -1209,11 +1219,32 @@ text = "FullScreen
 "
 horizontal_alignment = 1
 
+[node name="HSlider2" type="HSlider" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 240.0
+offset_right = 264.0
+offset_bottom = 256.0
+scale = Vector2(2, 2)
+value = 100.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/HSlider2"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -22.0
+offset_right = 135.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("13_ntw3c")
+theme_override_font_sizes/font_size = 40
+text = "SFX
+"
+horizontal_alignment = 1
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="CanvasLayer2"]
-offset_left = -1.0
-offset_right = 240.0
+offset_right = 241.0
 offset_bottom = 88.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_2ftbk")
 
@@ -1228,18 +1259,6 @@ theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "0"
 
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
-layout_mode = 0
-offset_left = 93.0
-offset_top = -1.0
-offset_right = 145.0
-offset_bottom = 39.0
-scale = Vector2(3, 3)
-value = 100.0
-texture_under = ExtResource("16_mm4wd")
-texture_progress = ExtResource("17_uipyl")
-texture_progress_offset = Vector2(1, 2)
-
 [node name="CDBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
 layout_mode = 0
 offset_left = 94.0
@@ -1253,8 +1272,37 @@ texture_under = ExtResource("18_wnljk")
 texture_progress = ExtResource("19_uqupp")
 texture_progress_offset = Vector2(1, 2)
 
+[node name="Richard" type="Sprite2D" parent="CanvasLayer2/Panel"]
+position = Vector2(51, 39)
+scale = Vector2(0.242361, 0.264913)
+texture = ExtResource("20_46wu3")
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = -1.0
+offset_right = 145.0
+offset_bottom = 39.0
+scale = Vector2(3, 3)
+value = 100.0
+texture_under = ExtResource("16_mm4wd")
+texture_progress = ExtResource("17_uipyl")
+texture_progress_offset = Vector2(1, 2)
+
+[node name="Label_Stage-Level" type="Label" parent="CanvasLayer2"]
+offset_left = 934.0
+offset_top = -6.0
+offset_right = 1104.0
+offset_bottom = 40.0
+scale = Vector2(1.3, 1.3)
+theme_override_fonts/font = ExtResource("13_ntw3c")
+theme_override_font_sizes/font_size = 40
+text = "Stage 1-1"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn" to="." method="_on_Exitbtn_pressed"]
 [connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider" to="." method="_on_HSliderMusic_value_changed_tutotrial1"]
 [connection signal="toggled" from="CanvasLayer/PanelPause/PanelPauseOption/CheckButton" to="." method="_on_CheckButton2_toggled1"]
+[connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider2" to="." method="_on_HSliderMusic_value_changed_tutotrial2"]

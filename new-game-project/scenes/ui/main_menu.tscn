@@ -1,19 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://dew713h72nevn"]
+[gd_scene load_steps=15 format=3 uid="uid://dew713h72nevn"]
 
 [ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_p8y0w"]
 [ext_resource type="Texture2D" uid="uid://c3wh1vocs21bh" path="res://assets/main_menu/background.jpg" id="2_4sq2b"]
 [ext_resource type="Texture2D" uid="uid://iuitvc3u81qh" path="res://assets/main_menu/menu_box.png" id="3_q1x2r"]
 [ext_resource type="Texture2D" uid="uid://cdvs6qogfpnf7" path="res://assets/main_menu/Chat_Cloud.png" id="4_ltrlh"]
+[ext_resource type="Texture2D" uid="uid://daw8gbqvteqi5" path="res://assets/option_menu/ButtonUnclicked.png" id="5_bs7nj"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="5_wdnyg"]
+[ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="6_fl2c3"]
 [ext_resource type="FontFile" uid="uid://koihkxmi6b18" path="res://assets/font_style/Tektur-ExtraBold.ttf" id="6_fql37"]
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="8_cmik1"]
+[ext_resource type="Texture2D" uid="uid://bfabpf87xig08" path="res://assets/main_menu/button_clicked_menu.png" id="8_m37wi"]
+[ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="11_3tqkc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ilmwd"]
 texture = ExtResource("2_4sq2b")
 modulate_color = Color(0.77084, 0.770839, 0.770839, 1)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c3ahi"]
-load_path = "res://.godot/imported/button_clicked_menu.png-abc8e3fe1173f830f2efb37a9931c0af.ctex"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmmug"]
 texture = ExtResource("8_cmik1")
@@ -83,7 +84,8 @@ grow_vertical = 2
 [node name="Button" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("5_bs7nj")
+texture_pressed = ExtResource("6_fl2c3")
 stretch_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="VBoxContainer/Button"]
@@ -104,10 +106,10 @@ anchor_left = 0.093
 anchor_top = 0.319
 anchor_right = 0.933
 anchor_bottom = 0.734
-offset_left = -1.507
-offset_top = -8.416
-offset_right = 2.33299
-offset_bottom = 10.024
+offset_left = -3.007
+offset_top = -15.416
+offset_right = 0.832993
+offset_bottom = 3.024
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Start
@@ -117,15 +119,16 @@ horizontal_alignment = 1
 [node name="Button2" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("5_bs7nj")
+texture_pressed = ExtResource("8_m37wi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/Button2"]
 layout_mode = 2
-offset_left = 21.0
-offset_top = 14.0
-offset_right = 179.0
-offset_bottom = 59.0
+offset_left = 17.5
+offset_top = 3.0
+offset_right = 175.5
+offset_bottom = 48.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Load
@@ -135,15 +138,16 @@ horizontal_alignment = 1
 [node name="Button3" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("5_bs7nj")
+texture_pressed = ExtResource("8_m37wi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/Button3"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 11.0
-offset_right = 187.0
-offset_bottom = 56.0
+offset_left = 14.5
+offset_top = 3.0
+offset_right = 188.5
+offset_bottom = 48.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Option
@@ -153,15 +157,16 @@ horizontal_alignment = 1
 [node name="Button4" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("5_bs7nj")
+texture_pressed = ExtResource("8_m37wi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/Button4"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 182.0
-offset_bottom = 59.0
+offset_left = 15.5
+offset_top = 8.0
+offset_right = 181.5
+offset_bottom = 53.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Exit
@@ -217,15 +222,16 @@ offset_top = 294.0
 offset_right = 329.0
 offset_bottom = 345.0
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("5_bs7nj")
+texture_pressed = ExtResource("8_m37wi")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="OptionPanel/ButtonBack"]
 layout_mode = 0
-offset_left = -17.0
-offset_top = 4.0
-offset_right = 157.0
-offset_bottom = 49.0
+offset_left = -18.0
+offset_top = -2.0
+offset_right = 156.0
+offset_bottom = 43.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Back
@@ -318,15 +324,16 @@ offset_top = 257.0
 offset_right = 260.0
 offset_bottom = 328.0
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("11_3tqkc")
+texture_pressed = ExtResource("6_fl2c3")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="AreYouSure/yes"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 11.0
-offset_right = 187.0
-offset_bottom = 56.0
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 184.0
+offset_bottom = 52.0
 theme_override_fonts/font = ExtResource("5_wdnyg")
 theme_override_font_sizes/font_size = 40
 text = "Yes"
@@ -339,7 +346,8 @@ offset_top = 258.0
 offset_right = 463.0
 offset_bottom = 329.0
 size_flags_vertical = 3
-texture_normal = SubResource("CompressedTexture2D_c3ahi")
+texture_normal = ExtResource("11_3tqkc")
+texture_pressed = ExtResource("6_fl2c3")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="AreYouSure/no"]
