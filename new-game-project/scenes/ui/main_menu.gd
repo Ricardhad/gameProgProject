@@ -38,7 +38,7 @@ func _on_start_pressed() -> void:
 	fade_rect.modulate.a = 0.0
 
 	var fade_out = create_tween()
-	fade_out.tween_property(fade_rect, "modulate:a", 1.0, 1.0) #comment lek gk perlu transisi
+	#fade_out.tween_property(fade_rect, "modulate:a", 1.0, 1.0) #comment lek gk perlu transisi
 	fade_out.tween_callback(Callable(self, "_change_scene"))
 
 func _change_scene() -> void:

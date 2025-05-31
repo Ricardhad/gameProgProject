@@ -2,10 +2,11 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
+@onready var ray_cast_2d_2: RayCast2D = $RayCast2D2
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var collision_shape1: CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var collision_shape2: CollisionShape2D = $PlayerDetect/CollisionShape2D
-@onready var health: Health = $HurtBox/Health
+@onready var health: Health = $Health
 @export var coin_scene: PackedScene
 
 var is_dead = false
@@ -18,6 +19,8 @@ var state_timer = 0.0
 var next_state_time = 0.0
 
 var raycast_original_x = 0.0
+var raycast_original_x1 = 0.0
+var raycast2_target_original_x = 0.0
 var collision_shape_original_x = 0.0
 var collision_shape_1_original_x = 0.0
 var collision_shape_2_original_x = 0.0
@@ -33,12 +36,12 @@ func _ready() -> void:
 	randomize()
 	_set_next_state_time()
 	raycast_original_x = abs(ray_cast_2d.position.x)
+	raycast_original_x1 = abs(ray_cast_2d_2.position.x)
+	raycast2_target_original_x = abs(ray_cast_2d_2.target_position.x)
 	collision_shape_original_x = abs(collision_shape.position.x)
 	collision_shape_1_original_x = abs(collision_shape1.position.x)
 	collision_shape_2_original_x = abs(collision_shape2.position.x)
 	health.health_changed.connect(_on_health_changed)
-	health.set_max_health(5)
-	health.set_health(5)
 
 func _on_health_changed(diff: int) -> void:
 	if is_dead:
@@ -52,8 +55,6 @@ func _on_health_changed(diff: int) -> void:
 		if player:
 			var dir = sign(global_position.x - player.global_position.x)  # push away from player
 			knockback_velocity.x = KNOCKBACK_FORCE * dir
-
-
 
 func play_animation(anim: String, force: bool = false):
 	if current_animation == "dead":
@@ -88,18 +89,24 @@ func _physics_process(delta: float) -> void:
 		_set_next_state_time()
 
 	if is_walking:
-		if not ray_cast_2d.is_colliding():
+		if not ray_cast_2d.is_colliding() or ray_cast_2d_2.is_colliding():
 			direction *= -1
 
 		animated_sprite_2d.flip_h = direction < 0
 
 		if direction < 0:
 			ray_cast_2d.position.x = -raycast_original_x
+			ray_cast_2d_2.position.x = raycast_original_x1
+			ray_cast_2d_2.target_position.x = -raycast2_target_original_x
+
 			collision_shape.position.x = -collision_shape_original_x
 			collision_shape1.position.x = -collision_shape_1_original_x
 			collision_shape2.position.x = -collision_shape_2_original_x
 		else:
 			ray_cast_2d.position.x = raycast_original_x - hitbox_shift
+			ray_cast_2d_2.position.x = -raycast_original_x1 - hitbox_shift
+			ray_cast_2d_2.target_position.x = raycast2_target_original_x
+
 			collision_shape.position.x = collision_shape_original_x - hitbox_shift
 			collision_shape1.position.x = collision_shape_1_original_x - hitbox_shift
 			collision_shape2.position.x = collision_shape_2_original_x - hitbox_shift
@@ -146,7 +153,7 @@ func drop_coins() -> void:
 		print("Coin scene not assigned!")
 		return
 
-	var coin_count = randi_range(1, 3)
+	var coin_count = randi_range(1, 5)
 	for i in coin_count:
 		var coin = coin_scene.instantiate()
 		get_parent().add_child(coin)

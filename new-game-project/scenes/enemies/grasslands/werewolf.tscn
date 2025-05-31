@@ -254,6 +254,7 @@ coin_scene = ExtResource("2_610ih")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("9_x80es")
+max_health = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)

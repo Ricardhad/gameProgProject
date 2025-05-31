@@ -59,7 +59,7 @@ func update_coin_label():
 	#print(\"Updating coin label:\", GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/HealthBar.value = GlobalVar.health_player
-	$CanvasLayer2/Panel/CDBar.max_value = GlobalVar.maxhealth_player
+	$CanvasLayer2/Panel/HealthBar.max_value = GlobalVar.maxhealth_player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
