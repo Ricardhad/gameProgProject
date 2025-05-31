@@ -12,19 +12,10 @@ var immortality_timer: Timer = null
 
 @onready var health: int = 3 : set = set_health, get = get_health
 
+@export var sync_with_global: bool = false
+
 func _ready():
 	health = max_health
-
-func set_max_health(value: int):
-	var clamped_value = 1 if value <= 0 else value
-	
-	if not clamped_value == max_health:
-		var difference = clamped_value - max_health
-		max_health = value
-		max_health_changed.emit(difference)
-		
-		if health > max_health:
-			health = max_health
 
 func get_max_health() -> int:
 	return max_health
@@ -49,6 +40,21 @@ func set_temporary_immortality(time: float):
 	immortality = true
 	immortality_timer.start()
 
+func set_max_health(value: int):
+	var clamped_value = 1 if value <= 0 else value
+	
+	if clamped_value != max_health:
+		var difference = clamped_value - max_health
+		max_health = clamped_value
+		max_health_changed.emit(difference)
+		
+		if health > max_health:
+			health = max_health
+	
+	# Only sync with global if enabled
+	if sync_with_global:
+		GlobalVar.maxhealth_player = max_health
+
 func set_health(value: int):
 	if value < health and immortality:
 		return
@@ -62,6 +68,9 @@ func set_health(value: int):
 		
 		if health == 0:
 			health_depleted.emit()
+		
+		if sync_with_global:
+			GlobalVar.health_player = health
 
 func get_health():
 	return health

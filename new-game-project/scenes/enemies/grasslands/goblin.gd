@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var collision_shape1: CollisionShape2D = $HurtBox/CollisionShape2D
 @onready var collision_shape2: CollisionShape2D = $PlayerDetect/CollisionShape2D
+@onready var collision_shape3: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var health: Health = $Health
 @export var coin_scene: PackedScene
 
@@ -102,6 +103,7 @@ func _physics_process(delta: float) -> void:
 			collision_shape.position.x = -collision_shape_original_x
 			collision_shape1.position.x = -collision_shape_1_original_x
 			collision_shape2.position.x = -collision_shape_2_original_x
+			collision_shape3.position.x = -collision_shape_2_original_x
 		else:
 			ray_cast_2d.position.x = raycast_original_x - hitbox_shift
 			ray_cast_2d_2.position.x = -raycast_original_x1 - hitbox_shift
@@ -110,6 +112,8 @@ func _physics_process(delta: float) -> void:
 			collision_shape.position.x = collision_shape_original_x - hitbox_shift
 			collision_shape1.position.x = collision_shape_1_original_x - hitbox_shift
 			collision_shape2.position.x = collision_shape_2_original_x - hitbox_shift
+			collision_shape3.position.x = collision_shape_2_original_x - hitbox_shift
+			
 
 		velocity.x = SPEED * direction
 	else:

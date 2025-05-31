@@ -32,6 +32,8 @@ var jump_count = 0
 var original_attack_offset_x = 0.0
 var original_attack2_offset_x = 0.0
 
+@onready var health: Health = $Health
+
 func _ready():
 	original_attack_offset_x = attack_area_1.position.x
 	original_attack2_offset_x = attack_area_2.position.x
@@ -39,6 +41,9 @@ func _ready():
 	
 	# Set HitBox damage from GlobalVar
 	$HitBox.damage = GlobalVar.damage_player
+	health.sync_with_global = true
+	health.set_max_health(GlobalVar.maxhealth_player)
+	health.set_health(GlobalVar.health_player)
 
 func _physics_process(delta: float) -> void:
 	# Reduce cooldown timers
@@ -228,18 +233,16 @@ func can_hang():
 	# Only check for hanging if touching a wall
 	if not is_on_wall():
 		return false
-	print("Left Ledge: ", $WallRayCast/LedgeCheckLeft.is_colliding())
-	print("Right Ledge: ", $WallRayCast/LedgeCheckRight.is_colliding())
-	print("Left floor: ",$WallRayCast/CheckFloorAboveLeft.is_colliding())
-	print("Right floor: ",  $WallRayCast/CheckFloorAboveRight.is_colliding())
+	#print("Left Ledge: ", $WallRayCast/LedgeCheckLeft.is_colliding())
+	#print("Right Ledge: ", $WallRayCast/LedgeCheckRight.is_colliding())
+	#print("Left floor: ",$WallRayCast/CheckFloorAboveLeft.is_colliding())
+	#print("Right floor: ",  $WallRayCast/CheckFloorAboveRight.is_colliding())
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 
 	#return hanging_left or hanging_right
 	if hang_grace_timer > 0 and (hanging_left or hanging_right):
 		return true
-		
-		
 
 #func can_climb_up():
 	#return $ClimbUpFloorRayCast2D.is_colliding()
