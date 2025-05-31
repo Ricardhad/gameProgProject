@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://pbblnlw0c88m"]
+
+[ext_resource type="Script" path="res://scenes/ui/cut_scene_1.gd" id="1_au36a"]
+[ext_resource type="Texture2D" uid="uid://kyjwd5vdjbqm" path="res://assets/selecting_menu/castle_background_by_blossomblairr_d7s4uas-fullview.jpg" id="2_nawq0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yd2gr"]
+texture = ExtResource("2_nawq0")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_au36a")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_yd2gr")

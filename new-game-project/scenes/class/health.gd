@@ -12,9 +12,6 @@ var immortality_timer: Timer = null
 
 @onready var health: int = 3 : set = set_health, get = get_health
 
-func _ready():
-	health = max_health
-
 func set_max_health(value: int):
 	var clamped_value = 1 if value <= 0 else value
 	
@@ -26,14 +23,18 @@ func set_max_health(value: int):
 		if health > max_health:
 			health = max_health
 
+
 func get_max_health() -> int:
 	return max_health
+
 
 func set_immortality(value: bool):
 	immortality = value
 
+
 func get_immortality() -> bool:
 	return immortality
+
 
 func set_temporary_immortality(time: float):
 	if immortality_timer == null:
@@ -49,6 +50,7 @@ func set_temporary_immortality(time: float):
 	immortality = true
 	immortality_timer.start()
 
+
 func set_health(value: int):
 	if value < health and immortality:
 		return
@@ -62,6 +64,7 @@ func set_health(value: int):
 		
 		if health == 0:
 			health_depleted.emit()
+
 
 func get_health():
 	return health

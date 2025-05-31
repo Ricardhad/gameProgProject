@@ -36,9 +36,6 @@ func _ready():
 	original_attack_offset_x = attack_area_1.position.x
 	original_attack2_offset_x = attack_area_2.position.x
 	randomize()
-	
-	# Set HitBox damage from GlobalVar
-	$HitBox.damage = GlobalVar.damage_player
 
 func _physics_process(delta: float) -> void:
 	# Reduce cooldown timers

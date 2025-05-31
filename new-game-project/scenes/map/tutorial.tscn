@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=25 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grasslands/goblin.tscn" id="2_1bil5"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="12_en60n"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="13_ntw3c"]
 [ext_resource type="Texture2D" uid="uid://8swmugpd1q5d" path="res://assets/option_menu/PlayerBar.png" id="13_oore8"]
+[ext_resource type="Texture2D" uid="uid://dcxq1dnubjqvj" path="res://assets/option_menu/HealthBarOutline.png" id="16_mm4wd"]
+[ext_resource type="Texture2D" uid="uid://53yh3pihwlgy" path="res://assets/option_menu/HealthBar.png" id="17_uipyl"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -54,6 +56,8 @@ func _on_options_pressed1() -> void:
 func update_coin_label():
 	#print(\"Updating coin label:\", GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
+	$CanvasLayer2/Panel/TextureProgressBar.value = GlobalVar.health_player
+	$CanvasLayer2/Panel/TextureProgressBar.max_value = GlobalVar.maxhealth_player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -900,11 +904,11 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 [node name="Enemy" type="Node" parent="."]
 
 [node name="G" parent="Enemy" instance=ExtResource("2_1bil5")]
-position = Vector2(416, 255)
+position = Vector2(401, 253)
 coin_scene = ExtResource("3_wb4uk")
 
 [node name="WW" parent="Enemy" instance=ExtResource("4_c05xt")]
-position = Vector2(611, 254)
+position = Vector2(584, 249)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -1220,6 +1224,18 @@ scale = Vector2(0.7, 0.7)
 theme_override_fonts/font = ExtResource("13_ntw3c")
 theme_override_font_sizes/font_size = 40
 text = "0"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = -1.0
+offset_right = 145.0
+offset_bottom = 39.0
+scale = Vector2(3, 3)
+value = 100.0
+texture_under = ExtResource("16_mm4wd")
+texture_progress = ExtResource("17_uipyl")
+texture_progress_offset = Vector2(1, 2)
 
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
