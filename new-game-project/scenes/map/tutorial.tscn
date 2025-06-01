@@ -912,7 +912,7 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 [node name="Enemy" type="Node" parent="."]
 
 [node name="G" parent="Enemy" instance=ExtResource("2_1bil5")]
-position = Vector2(401, 253)
+position = Vector2(415, 253)
 coin_scene = ExtResource("3_wb4uk")
 
 [node name="WW" parent="Enemy" instance=ExtResource("4_c05xt")]
