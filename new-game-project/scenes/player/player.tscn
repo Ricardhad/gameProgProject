@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="5_b4k1q"]
 [ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="6_hf2xt"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="7_v7flo"]
-[ext_resource type="AudioStream" uid="uid://cd0x3but87egp" path="res://assets/music/Keugh.ogg" id="9_snrmh"]
+[ext_resource type="AudioStream" uid="uid://cd0x3but87egp" path="res://assets/sfx/Keugh.ogg" id="9_snrmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3alx"]
 atlas = ExtResource("2_8dkoq")

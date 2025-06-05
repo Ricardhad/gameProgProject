@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 
 
 func _on_start_pressed() -> void:
-	print("Button start pressed")
+	#print("Button start pressed")
 
 	GlobalVar.transition_fade_in = true  # Aktifkan flag untuk fade-in di scene selanjutnya
 

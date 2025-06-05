@@ -6,8 +6,8 @@ var attracted = false
 var collect_delay = 0.3
 var time_alive = 0.0
 
-func _ready() -> void:
-	connect("body_entered", Callable(self, "_on_body_entered"))
+#func _ready() -> void:
+	#connect("body_entered", Callable(self, "_on_body_entered"))
 
 func _physics_process(delta: float) -> void:
 	if player == null:
