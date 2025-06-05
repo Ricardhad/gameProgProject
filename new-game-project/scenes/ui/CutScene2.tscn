@@ -403,3 +403,5 @@ scale = Vector2(3.52608, 3.52608)
 sprite_frames = SubResource("SpriteFrames_o6wnv")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

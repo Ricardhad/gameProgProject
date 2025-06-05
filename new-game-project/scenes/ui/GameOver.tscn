@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwngut7qvsjp0"]
+[gd_scene load_steps=9 format=3 uid="uid://bwngut7qvsjp0"]
 
 [ext_resource type="Script" path="res://scenes/ui/game_over.gd" id="1_q33wh"]
+[ext_resource type="Texture2D" uid="uid://c3wh1vocs21bh" path="res://assets/main_menu/background.jpg" id="2_6xfv0"]
+[ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="3_s0ot0"]
+[ext_resource type="Texture2D" uid="uid://daw8gbqvteqi5" path="res://assets/option_menu/ButtonUnclicked.png" id="4_5icba"]
+[ext_resource type="Texture2D" uid="uid://bfabpf87xig08" path="res://assets/main_menu/button_clicked_menu.png" id="5_ug6vy"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="6_3kxjb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_22c1x"]
+texture = ExtResource("2_6xfv0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2blsp"]
+texture = ExtResource("3_s0ot0")
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -10,3 +21,156 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q33wh")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_22c1x")
+
+[node name="Panel" type="Panel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -452.5
+offset_right = 452.5
+offset_bottom = 526.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2blsp")
+
+[node name="ButtonReturn" type="TextureButton" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 183.5
+offset_top = 380.0
+offset_right = 373.5
+offset_bottom = 443.0
+size_flags_vertical = 3
+texture_normal = ExtResource("4_5icba")
+texture_pressed = ExtResource("5_ug6vy")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Panel/ButtonReturn"]
+layout_mode = 2
+offset_left = 17.5
+offset_top = 3.0
+offset_right = 175.5
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Return"
+horizontal_alignment = 1
+
+[node name="ButtonRestart" type="TextureButton" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 542.5
+offset_top = 385.0
+offset_right = 732.5
+offset_bottom = 448.0
+size_flags_vertical = 3
+texture_normal = ExtResource("4_5icba")
+texture_pressed = ExtResource("5_ug6vy")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/Panel/ButtonRestart"]
+layout_mode = 2
+offset_left = 17.5
+offset_top = 3.0
+offset_right = 175.5
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Restart
+"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Panel/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -158.0
+offset_top = 91.0
+offset_right = 27.0
+offset_bottom = 136.0
+grow_horizontal = 2
+scale = Vector2(1.6, 1.6)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 138.5
+offset_top = 184.0
+offset_right = 304.5
+offset_bottom = 229.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 151.5
+offset_top = 238.0
+offset_right = 331.5
+offset_bottom = 283.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Stage: 1-3"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 150.5
+offset_top = 288.0
+offset_right = 340.5
+offset_bottom = 333.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Total Kill: 0"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 493.5
+offset_top = 181.0
+offset_right = 659.5
+offset_bottom = 226.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Coin: 0"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 492.5
+offset_top = 230.0
+offset_right = 658.5
+offset_bottom = 275.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Mode: Story"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="Panel/Panel"]
+layout_mode = 0
+offset_left = 490.5
+offset_top = 283.0
+offset_right = 656.5
+offset_bottom = 328.0
+scale = Vector2(1.2, 1.2)
+theme_override_fonts/font = ExtResource("6_3kxjb")
+theme_override_font_sizes/font_size = 40
+text = "Class: Knight"
+horizontal_alignment = 1
