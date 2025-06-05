@@ -44,6 +44,9 @@ func _ready():
 	health.sync_with_global = true
 	health.set_max_health(GlobalVar.maxhealth_player)
 	health.set_health(GlobalVar.health_player)
+	
+	# Connect the health depletion signal
+	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
 
 func _physics_process(delta: float) -> void:
 	# Reduce cooldown timers
@@ -246,3 +249,6 @@ func can_hang():
 
 #func can_climb_up():
 	#return $ClimbUpFloorRayCast2D.is_colliding()
+
+func _on_health_depleted():
+	get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")

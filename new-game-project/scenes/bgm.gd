@@ -7,6 +7,7 @@ func play_music(music: AudioStream, volume = -10.0):
 	if stream == music:
 		return
 	stream = music
+	stream.loop = true
 	volume_db = volume
 	play()
 

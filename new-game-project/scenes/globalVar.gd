@@ -1,7 +1,7 @@
 extends Node
 
-var maxhealth_player = 15
-var health_player = 15
+var maxhealth_player = 5
+var health_player = 5
 var coin_collected = 0
 var damage_player = 1
 
