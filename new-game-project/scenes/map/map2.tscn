@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dnvo1aco6qmdy"]
+[gd_scene load_steps=12 format=3 uid="uid://dnvo1aco6qmdy"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_h6avt"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="2_xrelh"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dyvbucb24iaw3" path="res://assets/grass/bg/5.png" id="7_aqlhq"]
 [ext_resource type="Texture2D" uid="uid://xdha11gj4bn3" path="res://assets/grass/bg/6.png" id="8_ug63p"]
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/grass/bg/7.png" id="9_6ul6w"]
-[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/enemies/grass/werewolf.tscn" id="10_1c4l8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3dtks"]
 texture = ExtResource("1_h6avt")
@@ -852,15 +851,3 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
 position = Vector2(288, 162)
 texture = ExtResource("9_6ul6w")
-
-[node name="Goblin" parent="." instance=ExtResource("10_1c4l8")]
-position = Vector2(427, 394)
-
-[node name="Goblin" parent="Goblin" instance=ExtResource("10_1c4l8")]
-position = Vector2(-76, -272)
-
-[node name="Goblin2" parent="Goblin" instance=ExtResource("10_1c4l8")]
-position = Vector2(121, -280)
-
-[node name="Goblin2" parent="." instance=ExtResource("10_1c4l8")]
-position = Vector2(624, 386)

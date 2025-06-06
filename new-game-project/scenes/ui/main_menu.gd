@@ -42,8 +42,8 @@ func _on_start_pressed() -> void:
 	fade_out.tween_callback(Callable(self, "_change_scene"))
 
 func _change_scene() -> void:
-	get_tree().change_scene_to_file("res://scenes/ui/CutScene1.tscn")
-
+	#get_tree().change_scene_to_file("res://scenes/ui/CutScene1.tscn")
+	get_tree().change_scene_to_file("res://scenes/map/tutorial.tscn")
 
 func _on_load_pressed() -> void:
 	pass # Replace with function body.

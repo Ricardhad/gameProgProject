@@ -1,9 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=28 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/goblin.tscn" id="2_1bil5"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="3_wb4uk"]
-[ext_resource type="PackedScene" uid="uid://23ms5040y0wy" path="res://scenes/enemies/grass/werewolf.tscn" id="4_c05xt"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/grass/bg/1.png" id="4_t7qrl"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_1v6m5"]
 [ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/grass/bg/2.png" id="6_lalho"]
@@ -911,12 +910,9 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 
 [node name="Enemy" type="Node" parent="."]
 
-[node name="G" parent="Enemy" instance=ExtResource("2_1bil5")]
+[node name="Goblin" parent="Enemy" instance=ExtResource("2_1bil5")]
 position = Vector2(415, 253)
 coin_scene = ExtResource("3_wb4uk")
-
-[node name="WW" parent="Enemy" instance=ExtResource("4_c05xt")]
-position = Vector2(584, 249)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
