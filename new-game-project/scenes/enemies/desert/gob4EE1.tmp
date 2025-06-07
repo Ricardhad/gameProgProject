@@ -1,15 +1,14 @@
-[gd_scene load_steps=62 format=3 uid="uid://cdn8ylgkmsnuy"]
+[gd_scene load_steps=49 format=3 uid="uid://cdn8ylgkmsnuy"]
 
-[ext_resource type="Script" path="res://scenes/enemies/grass/goblin.gd" id="1_hfgq4"]
-[ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/grass/goblin/Idle.png" id="2_5kwfu"]
-[ext_resource type="Texture2D" uid="uid://bj1uuikd0t5s2" path="res://assets/enemies/grass/goblin/Attack.png" id="2_pmn55"]
-[ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/grass/goblin/Dead.png" id="3_p40gs"]
+[ext_resource type="Script" path="res://scenes/enemies/grasslands/goblin.gd" id="1_hfgq4"]
+[ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/goblin/Idle.png" id="2_5kwfu"]
+[ext_resource type="Texture2D" uid="uid://bj1uuikd0t5s2" path="res://assets/enemies/goblin/Attack.png" id="2_pmn55"]
+[ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/goblin/Dead.png" id="3_p40gs"]
 [ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="3_q1ndm"]
-[ext_resource type="Texture2D" uid="uid://c1a2ys12d8yoa" path="res://assets/enemies/grass/goblin/Hurt.png" id="4_kp4tm"]
+[ext_resource type="Texture2D" uid="uid://c1a2ys12d8yoa" path="res://assets/enemies/goblin/Hurt.png" id="4_kp4tm"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="4_mkdvr"]
-[ext_resource type="Texture2D" uid="uid://ufo2gltdgoqy" path="res://assets/enemies/grass/goblin/Walk.png" id="5_xhwri"]
-[ext_resource type="Texture2D" uid="uid://13cfhmmrxrvu" path="res://assets/enemies/grass/goblin/Run.png" id="7_pu4ub"]
-[ext_resource type="Texture2D" uid="uid://cp23jcqrv737i" path="res://assets/enemies/grass/goblin/Jump.png" id="7_y5jl5"]
+[ext_resource type="Texture2D" uid="uid://ufo2gltdgoqy" path="res://assets/enemies/goblin/Walk.png" id="5_xhwri"]
+[ext_resource type="Texture2D" uid="uid://13cfhmmrxrvu" path="res://assets/enemies/goblin/Run.png" id="7_pu4ub"]
 [ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="9_v2bo5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52w2e"]
@@ -83,50 +82,6 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_sw64g"]
 atlas = ExtResource("2_5kwfu")
 region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pacat"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_22y84"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tf722"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ggc5c"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nyq33"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_41rns"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rxhie"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7lpvj"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(896, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4x5nx"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(1024, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0dh4v"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(1152, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ntqr2"]
-atlas = ExtResource("7_y5jl5")
-region = Rect2(1280, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6rmc"]
 atlas = ExtResource("7_pu4ub")
@@ -270,44 +225,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pacat")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_22y84")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tf722")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ggc5c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nyq33")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_41rns")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rxhie")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7lpvj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4x5nx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0dh4v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ntqr2")
-}],
-"loop": true,
-"name": &"jump",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_y6rmc")
 }, {
 "duration": 1.0,
@@ -374,10 +291,6 @@ size = Vector2(21, 31)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mf6m"]
 size = Vector2(21, 14)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3s35"]
-radius = 75.0
-height = 270.0
-
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_hfgq4")
@@ -391,7 +304,6 @@ scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.17811
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -439,29 +351,7 @@ script = ExtResource("9_v2bo5")
 position = Vector2(-20.5, -24)
 shape = SubResource("RectangleShape2D_2mf6m")
 
-[node name="RayCast2DJumpCheck" type="RayCast2D" parent="."]
-position = Vector2(-10, 0)
-target_position = Vector2(-48, 32)
-
-[node name="FieldOfView" type="Area2D" parent="."]
-collision_mask = 5
-
-[node name="ShapeCast2D" type="CollisionPolygon2D" parent="FieldOfView"]
-position = Vector2(-9, -28)
-rotation = 3.14159
-polygon = PackedVector2Array(-9, 0, -100, -30, -110, 0, -100, 30)
-
-[node name="ProximitySense" type="Area2D" parent="."]
-collision_mask = 5
-
-[node name="ShapeCast2D" type="CollisionShape2D" parent="ProximitySense"]
-position = Vector2(-1, -25)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_q3s35")
-
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="PlayerDetect" to="." method="_on_player_detect_body_entered"]
 [connection signal="body_exited" from="PlayerDetect" to="." method="_on_player_detect_body_exited"]
-[connection signal="body_entered" from="FieldOfView" to="." method="_on_field_of_view_body_entered"]
-[connection signal="body_shape_entered" from="ProximitySense" to="." method="_on_proximity_sense_body_shape_entered"]

@@ -25,7 +25,7 @@ func _ready() -> void:
 
 	fade_in()
 	show_next_line()
-	
+	Bgm.play_music_cutscene()
 
 func fade_in():
 	fade_panel.visible = true

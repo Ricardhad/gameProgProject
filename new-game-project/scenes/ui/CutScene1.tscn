@@ -59,5 +59,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

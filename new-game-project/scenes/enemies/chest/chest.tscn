@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cidtsj7h1ncmd"]
+
+[ext_resource type="Texture2D" uid="uid://cibxg35cybb6i" path="res://assets/enemies/chest/Idle.png" id="1_xi13n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2j6y"]
+atlas = ExtResource("1_xi13n")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7cfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2j6y")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.49997, -38.5)
+scale = Vector2(0.601563, 0.601563)
+sprite_frames = SubResource("SpriteFrames_o7cfq")
+animation = &"idle"
+autoplay = "idle"
+flip_h = true
