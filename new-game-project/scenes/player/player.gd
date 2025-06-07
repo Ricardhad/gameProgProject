@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
 var dash_cooldown_timer = 0.0
@@ -51,6 +52,7 @@ func _ready():
 	
 	# Connect the health depletion signal
 	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
+	
 
 func _physics_process(delta: float) -> void:
 	# Reduce cooldown timers
@@ -58,6 +60,7 @@ func _physics_process(delta: float) -> void:
 		dash_cooldown_timer -= delta
 	if jump_cooldown_timer > 0:
 		jump_cooldown_timer -= delta
+		
 	# Dash logic
 	if is_dashing:
 		dash_time -= delta
@@ -72,13 +75,7 @@ func _physics_process(delta: float) -> void:
 		is_dashing = false
 		velocity.x = 0  # stop horizontal speed after dash
 
-
-	#ledge logic
-
-
-	#if is_on_wall() and not is_on_floor() and can_climb_ledge():
-		#print("Ledge detected, should climb.")
-		#climb_ledge()
+	# Ledge logic
 	if is_on_wall():
 		hang_grace_timer = HANG_GRACE_TIME
 	else:
@@ -105,14 +102,26 @@ func _physics_process(delta: float) -> void:
 	if is_hanging:
 		return
 
+	# --- Pengecekan Input dari HUD dan Keyboard ---
+	var jump_intent = Input.is_action_just_pressed("jump") or (hud and hud.jump_button_pressed)
+	if hud and hud.jump_button_pressed:
+		hud.jump_button_pressed = false # Reset penanda
 
-	if Input.is_action_just_pressed("dash") and not is_attacking and not is_guarding and dash_cooldown_timer <= 0:
+	var dash_intent = Input.is_action_just_pressed("dash") or (hud and hud.dash_button_pressed)
+	if hud and hud.dash_button_pressed:
+		hud.dash_button_pressed = false # Reset penanda
+	# ----------------------------------------------
+
+	if dash_intent and not is_attacking and not is_guarding and dash_cooldown_timer <= 0:
 		var direction = Input.get_axis("left", "right")
-		if direction != 0:
-			dash(direction)
-			dash_cooldown_timer = dash_cd  # Reset cooldown
-			return
-
+		if direction == 0:
+			direction = -1 if animated_sprite_2d.flip_h else 1
+			
+		dash(direction)
+		dash_cooldown_timer = dash_cd  # Reset cooldown
+		if hud:
+			hud.set_dash_button_pressed() # Efek visual dash
+		return
 
 	if global_position.y > 1000:
 		global_position = respawn_position
@@ -122,7 +131,6 @@ func _physics_process(delta: float) -> void:
 		current_attack_index = 0
 		animated_sprite_2d.animation = "idle"
 		return
-		
 		
 	if Input.is_action_pressed("guard") and not is_attacking:
 		if not is_guarding:
@@ -148,7 +156,6 @@ func _physics_process(delta: float) -> void:
 		var current_anim = animated_sprite_2d.animation
 		var is_last_frame = animated_sprite_2d.frame == animated_sprite_2d.sprite_frames.get_frame_count(current_anim) - 1
 		
-
 		if is_last_frame:
 			is_attacking = false
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
@@ -170,17 +177,20 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump_count = 0
 
-	if Input.is_action_just_pressed("jump") and jump_count < max_jumps:
+	if jump_intent and jump_count < max_jumps:
 		# First jump: no cooldown
 		if jump_count == 0:
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
+			if hud:
+				hud.set_jump_button_pressed() # Efek visual lompat
 		# Second jump: check cooldown
 		elif jump_count == 1 and jump_cooldown_timer <= 0:
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
-			jump_cooldown_timer = jump_cd  # Set cooldown only for the second jump
-
+			jump_cooldown_timer = jump_cd
+			if hud:
+				hud.set_jump_button_pressed() # Efek visual lompat
 
 	var direction := Input.get_axis("left", "right")
 	if direction:
@@ -188,9 +198,9 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = direction < 0
 		attack_area_1.position.x = -original_attack_offset_x if animated_sprite_2d.flip_h else original_attack_offset_x
 		attack_area_2.position.x = -original_attack2_offset_x if animated_sprite_2d.flip_h else original_attack2_offset_x
-
 	else:
 		velocity.x = move_toward(velocity.x, 0, 30)
+		
 	move_and_slide()
 
 	if not is_attacking and not is_guarding:
@@ -235,33 +245,24 @@ func dash(direction: float):
 
 func climb_ledge():
 	is_hanging = false
-	global_position.y -= 10  # move up
-	#global_position.x -= 10  
+	global_position.y -= 10
 	velocity.y = JUMP_VELOCITY
 	animated_sprite_2d.animation = "pull_up"
 	
 func drop_ledge():
 	is_hanging = false
-	global_position.y += 10  # move player down a bit
+	global_position.y += 10
 	velocity.y = 200
 	
 func can_hang():
-	# Only check for hanging if touching a wall
 	if not is_on_wall():
 		return false
-	#print("Left Ledge: ", $WallRayCast/LedgeCheckLeft.is_colliding())
-	#print("Right Ledge: ", $WallRayCast/LedgeCheckRight.is_colliding())
-	#print("Left floor: ",$WallRayCast/CheckFloorAboveLeft.is_colliding())
-	#print("Right floor: ",  $WallRayCast/CheckFloorAboveRight.is_colliding())
+
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 
-	#return hanging_left or hanging_right
 	if hang_grace_timer > 0 and (hanging_left or hanging_right):
 		return true
-
-#func can_climb_up():
-	#return $ClimbUpFloorRayCast2D.is_colliding()
 
 func _on_health_depleted():
 	get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")

@@ -91,6 +91,55 @@ text = "ATK
 "
 horizontal_alignment = 1
 
+[node name="ButtonJump" type="TextureButton" parent="CanvasLayer2/Panel"]
+offset_left = 76.0
+offset_top = 87.0
+offset_right = 138.0
+offset_bottom = 156.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("9_qnfxe")
+texture_pressed = ExtResource("10_i6nuy")
+texture_hover = ExtResource("10_e6ys5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer2/Panel/ButtonJump"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "Jump"
+horizontal_alignment = 1
+
+[node name="ButtonDash" type="TextureButton" parent="CanvasLayer2/Panel"]
+offset_left = 151.0
+offset_top = 87.0
+offset_right = 213.0
+offset_bottom = 156.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("9_qnfxe")
+texture_pressed = ExtResource("10_i6nuy")
+texture_hover = ExtResource("10_e6ys5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer2/Panel/ButtonDash"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "Dash
+"
+horizontal_alignment = 1
+
 [node name="Label_Stage-Level" type="Label" parent="CanvasLayer2"]
 offset_left = 934.0
 offset_top = -6.0
