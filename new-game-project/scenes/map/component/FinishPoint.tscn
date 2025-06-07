@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb1iase55k6j6"]
+
+[ext_resource type="Script" path="res://scenes/map/component/finish_point.gd" id="1_dqpsd"]
+[ext_resource type="Texture2D" uid="uid://g68pj5jdjo0l" path="res://assets/spritelevel/pillar-removebg-preview.png" id="2_ob7ty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ec8s2"]
+size = Vector2(57, 120)
+
+[node name="FinishPoint" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_dqpsd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.52588e-05, 1.00001)
+scale = Vector2(0.286925, 0.252922)
+texture = ExtResource("2_ob7ty")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_ec8s2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
