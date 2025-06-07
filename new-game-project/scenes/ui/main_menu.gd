@@ -1,6 +1,6 @@
 extends Control
 
-@onready var fade_rect = $VBoxContainer/Button/ColorRect
+@onready var fade_rect = $VBoxContainer/ButtonStart/ColorRect
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_level()
@@ -43,7 +43,7 @@ func _on_start_pressed() -> void:
 
 func _change_scene() -> void:
 	#get_tree().change_scene_to_file("res://scenes/ui/CutScene1.tscn")
-	get_tree().change_scene_to_file("res://scenes/map/tutorial.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/CutScene1.tscn")
 
 func _on_load_pressed() -> void:
 	pass # Replace with function body.

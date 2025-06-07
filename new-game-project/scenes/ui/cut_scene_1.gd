@@ -4,12 +4,13 @@ extends Control
 @onready var image_holder = $ImageHolder
 @onready var timer = $Timer
 @onready var fade_panel = $FadePanel
+@onready var sfx_player = $SFXPlayer
 
 var dialogues = [
 	{ "text": "In the beginning, there was only darkness...", "image": "res://assets/selecting_menu/img1.jpg" },
 	{ "text": "Then a light shone through the void.", "image": "res://assets/selecting_menu/img2.jpg" },
 	{ "text": "And thus... your journey begins.", "image": "res://assets/selecting_menu/img1.jpg" },
-	{ "text": "Guardian Pixel", "image": "res://assets/selecting_menu/img2.jpg" }  # Tambahan akhir
+	{ "text": "Guardian Pixel", "image": "res://assets/selecting_menu/img2.jpg" }  # Final slide
 ]
 
 var current_index = 0
@@ -18,6 +19,10 @@ var is_typing = false
 var full_text = ""
 
 func _ready() -> void:
+	# Set stream jika belum diset di editor
+	if sfx_player.stream == null:
+		sfx_player.stream = load("res://assets/sfx/voice_sans.wav")
+
 	fade_in()
 	show_next_line()
 
@@ -54,10 +59,21 @@ func _on_Timer_timeout() -> void:
 	if is_typing:
 		if char_index < full_text.length():
 			text_box.text += full_text[char_index]
+
+			# Play SFX
+			if sfx_player.playing:
+				sfx_player.stop()
+			sfx_player.play()
+
 			char_index += 1
 		else:
 			is_typing = false
 			timer.stop()
+
+			# Auto next line after short delay
+			await get_tree().create_timer(1.5).timeout
+			current_index += 1
+			show_next_line()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -65,6 +81,7 @@ func _input(event: InputEvent) -> void:
 			text_box.text = full_text
 			is_typing = false
 			timer.stop()
+			sfx_player.stop()  # Stop SFX jika skip
 		else:
 			current_index += 1
 			show_next_line()
