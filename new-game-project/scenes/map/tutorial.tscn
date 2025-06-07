@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=17 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/grass/Tileset.png" id="1_o03m4"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/goblin.tscn" id="2_1bil5"]
@@ -11,16 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dyvbucb24iaw3" path="res://assets/grass/bg/5.png" id="9_d53dr"]
 [ext_resource type="Texture2D" uid="uid://xdha11gj4bn3" path="res://assets/grass/bg/6.png" id="10_swcg5"]
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/grass/bg/7.png" id="11_jksp8"]
-[ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="12_en60n"]
-[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="13_ntw3c"]
-[ext_resource type="Texture2D" uid="uid://8swmugpd1q5d" path="res://assets/option_menu/PlayerBar.png" id="13_oore8"]
-[ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="15_a2yuk"]
-[ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="16_4p4f0"]
-[ext_resource type="Texture2D" uid="uid://dcxq1dnubjqvj" path="res://assets/option_menu/HealthBarOutline.png" id="16_mm4wd"]
-[ext_resource type="Texture2D" uid="uid://53yh3pihwlgy" path="res://assets/option_menu/HealthBar.png" id="17_uipyl"]
-[ext_resource type="Texture2D" uid="uid://dbrr2k8ajc2ik" path="res://assets/option_menu/CDBarOutline.png" id="18_wnljk"]
-[ext_resource type="Texture2D" uid="uid://b004vjw2yc6cr" path="res://assets/option_menu/CDBar.png" id="19_uqupp"]
-[ext_resource type="Texture2D" uid="uid://cwklwo8qusa1h" path="res://assets/option_menu/Richard.png" id="20_46wu3"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="12_vkqci"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_vtvul"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -29,64 +21,32 @@ var knight_scene = preload(\"res://scenes/player/player.tscn\")
 #var ninja_scene = preload(\"res://Ninja.tscn\")
 
 var current_player = knight_scene
+# In your Map's script (e.g., map.gd)
+#const pause_menu_scene_path = \"res://scenes/map/GUI/PauseMenu.tscn\"
+#var PauseMenuScene = preload(pause_menu_scene_path) 
+#var pause_menu_instance: Node2D = null 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_grassland()
 	spawn_character(current_player)
-	var slider = $CanvasLayer/PanelPause/PanelPauseOption/HSlider
-	slider.min_value = 0.0
-	slider.max_value = 1.0
-	slider.step = 0.01
-	slider.value = db_to_linear(Bgm.volume_db)
-	$CanvasLayer/PanelPause.process_mode = Node.PROCESS_MODE_ALWAYS
-	for child in $CanvasLayer/PanelPause.get_children():
-		child.process_mode = Node.PROCESS_MODE_ALWAYS
-
-func _on_HSliderMusic_value_changed_tutotrial1(value: float) -> void:
-	var db = linear_to_db(value)
-	Bgm.volume_db = db
-	#print(\"Volume set to:\", db, \"dB\")
-
-func _on_HSliderMusic_value_changed_tutotrial2(value: float) -> void:
-	AudioServer.set_bus_volume_db(2, linear_to_db($CanvasLayer/PanelPause/PanelPauseOption/HSlider2.value))
-	#print(\"Volume set to:\", db, \"dB\")
-
-func _on_CheckButton2_toggled1(button_pressed: bool) -> void:
-	if button_pressed:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-
-func _on_options_pressed1() -> void:
-	var option_panel = $CanvasLayer/PanelPause/PanelPauseOption
-	option_panel.visible = not option_panel.visible
+	#if PauseMenuScene:
+		#pause_menu_instance = PauseMenuScene.instantiate()
+		#Node2D.add_child(pause_menu_instance)
+		# You might need to hide it initially here, if your scene doesn't do it
+		#pause_menu_instance.visible = false
+	# You would also connect signals here if you did it this way,
+	# but connecting in the editor is easier for persistent UI.
+	# E.g., pause_menu_instance.connect(\"resume_game\", self.on_resume_game)
+	#else:
+		#print(\"Error: Pause Menu scene not found at path: \", pause_menu_scene_path)
+	#var slider = $CanvasLayer/PanelPause/PanelPauseOption/HSlider
+	#slider.min_value = 0.0
+	#slider.max_value = 1.0
+	#slider.step = 0.01
+	#slider.value = db_to_linear(Bgm.volume_db)
 
 
-func update_coin_label():
-	#print(\"Updating coin label:\", GlobalVar.coin_collected)
-	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
-	$CanvasLayer2/Panel/HealthBar.value = GlobalVar.health_player
-	$CanvasLayer2/Panel/HealthBar.max_value = GlobalVar.maxhealth_player
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	update_coin_label()
-	pass
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(\"ui_cancel\"):
-		if not get_tree().paused:
-			$CanvasLayer/PanelPause.visible = true
-			get_tree().paused = true
-		else:
-			$CanvasLayer/PanelPause.visible = false
-			get_tree().paused = false
-
-func _on_Resumebtn_pressed() -> void:
-	print(\"Resume pressed\")
-	$CanvasLayer/PanelPause.visible = false
-	get_tree().paused = false
 	
 func remove_existing_players():
 	for child in get_children():
@@ -107,10 +67,6 @@ func spawn_character(character_scene: PackedScene):
 	#current_player = character_scene.instantiate()
 	#current_player.global_position = Vector2(100, 100)
 	#add_child(current_player)
-
-func _on_Exitbtn_pressed() -> void:
-	get_tree().paused = false
-	get_tree().change_scene_to_file(\"res://scenes/ui/main_menu.tscn\")
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_li7lg"]
@@ -891,15 +847,6 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_li7lg")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_thhto"]
-texture = ExtResource("12_en60n")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7vnx"]
-texture = ExtResource("12_en60n")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ftbk"]
-texture = ExtResource("13_oore8")
-
 [node name="game" type="Node2D"]
 script = SubResource("GDScript_xck3o")
 
@@ -979,325 +926,7 @@ motion_mirroring = Vector2(576, 0)
 position = Vector2(288, 162)
 texture = ExtResource("11_jksp8")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Hud" parent="." instance=ExtResource("12_vkqci")]
 
-[node name="PanelPause" type="Panel" parent="CanvasLayer"]
-top_level = true
-custom_minimum_size = Vector2(241, 190)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -302.0
-offset_top = -225.0
-offset_right = 464.0
-offset_bottom = 242.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_thhto")
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause"]
-layout_mode = 0
-offset_left = 231.0
-offset_top = 39.0
-offset_right = 384.0
-offset_bottom = 132.0
-scale = Vector2(1.7, 1.7)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Pause
-
-"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="CanvasLayer/PanelPause"]
-layout_mode = 0
-offset_left = 115.0
-offset_top = 117.0
-offset_right = 268.0
-offset_bottom = 165.0
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Buff List"
-horizontal_alignment = 1
-
-[node name="Label3" type="Label" parent="CanvasLayer/PanelPause"]
-layout_mode = 0
-offset_left = 88.0
-offset_top = 237.0
-offset_right = 241.0
-offset_bottom = 285.0
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Items"
-horizontal_alignment = 1
-
-[node name="PanelButton" type="Panel" parent="CanvasLayer/PanelPause"]
-custom_minimum_size = Vector2(130, 130)
-layout_mode = 1
-offset_left = -247.0
-offset_top = 33.0
-offset_right = 12.0
-offset_bottom = 383.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_f7vnx")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelPause/PanelButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -87.5
-offset_top = -119.0
-offset_right = 482.5
-offset_bottom = 718.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.3, 0.3)
-
-[node name="Resumebtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture_normal = ExtResource("15_a2yuk")
-texture_pressed = ExtResource("16_4p4f0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.093
-anchor_top = 0.319
-anchor_right = 0.933
-anchor_bottom = 0.734
-offset_left = 23.6567
-offset_top = -22.3807
-offset_right = -251.144
-offset_bottom = -46.8706
-scale = Vector2(2, 2)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Resume"
-horizontal_alignment = 1
-
-[node name="Restartbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture_normal = ExtResource("15_a2yuk")
-texture_pressed = ExtResource("16_4p4f0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Restartbtn"]
-top_level = true
-layout_mode = 2
-offset_left = 99.0
-offset_top = 263.0
-offset_right = 285.0
-offset_bottom = 309.0
-scale = Vector2(0.6, 0.6)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Restart"
-horizontal_alignment = 1
-
-[node name="Optionbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture_normal = ExtResource("15_a2yuk")
-texture_pressed = ExtResource("16_4p4f0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn"]
-layout_mode = 0
-offset_left = 116.667
-offset_top = 36.6667
-offset_right = 290.667
-offset_bottom = 81.6667
-scale = Vector2(2, 2)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Option
-"
-horizontal_alignment = 1
-
-[node name="Exitbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture_normal = ExtResource("15_a2yuk")
-texture_pressed = ExtResource("16_4p4f0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn"]
-layout_mode = 0
-offset_left = 116.667
-offset_top = 43.3334
-offset_right = 282.667
-offset_bottom = 88.3338
-scale = Vector2(2, 2)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Exit
-"
-horizontal_alignment = 1
-
-[node name="PanelPauseOption" type="Panel" parent="CanvasLayer/PanelPause"]
+[node name="PauseMenu" parent="." instance=ExtResource("13_vtvul")]
 visible = false
-top_level = true
-custom_minimum_size = Vector2(241, 190)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -302.0
-offset_top = -225.0
-offset_right = 464.0
-offset_bottom = 242.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_thhto")
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption"]
-layout_mode = 0
-offset_left = 231.0
-offset_top = 39.0
-offset_right = 384.0
-offset_bottom = 132.0
-scale = Vector2(1.7, 1.7)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Option"
-horizontal_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelPause/PanelPauseOption"]
-layout_mode = 0
-offset_left = 121.0
-offset_top = 164.0
-offset_right = 262.0
-offset_bottom = 180.0
-scale = Vector2(2, 2)
-value = 100.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/HSlider"]
-layout_mode = 0
-offset_left = -7.0
-offset_top = -22.0
-offset_right = 146.0
-offset_bottom = 26.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Music
-"
-horizontal_alignment = 1
-
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer/PanelPause/PanelPauseOption"]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 319.0
-offset_right = 152.0
-offset_bottom = 343.0
-scale = Vector2(2, 2)
-
-[node name="Label3" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/CheckButton"]
-layout_mode = 0
-offset_left = 9.5
-offset_top = -19.5
-offset_right = 194.5
-offset_bottom = 28.5
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "FullScreen
-"
-horizontal_alignment = 1
-
-[node name="HSlider2" type="HSlider" parent="CanvasLayer/PanelPause/PanelPauseOption"]
-layout_mode = 0
-offset_left = 123.0
-offset_top = 240.0
-offset_right = 264.0
-offset_bottom = 256.0
-scale = Vector2(2, 2)
-value = 100.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/HSlider2"]
-layout_mode = 0
-offset_left = -18.0
-offset_top = -22.0
-offset_right = 135.0
-offset_bottom = 26.0
-scale = Vector2(0.5, 0.5)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "SFX
-"
-horizontal_alignment = 1
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="Panel" type="Panel" parent="CanvasLayer2"]
-offset_right = 241.0
-offset_bottom = 88.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_2ftbk")
-
-[node name="Label_coin" type="Label" parent="CanvasLayer2/Panel"]
-layout_mode = 0
-offset_left = 124.0
-offset_top = 48.0
-offset_right = 263.0
-offset_bottom = 98.0
-scale = Vector2(0.7, 0.7)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "0"
-
-[node name="CDBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
-layout_mode = 0
-offset_left = 94.0
-offset_top = 20.0
-offset_right = 146.0
-offset_bottom = 60.0
-scale = Vector2(3, 3)
-max_value = 120.0
-value = 120.0
-texture_under = ExtResource("18_wnljk")
-texture_progress = ExtResource("19_uqupp")
-texture_progress_offset = Vector2(1, 2)
-
-[node name="Richard" type="Sprite2D" parent="CanvasLayer2/Panel"]
-position = Vector2(51, 39)
-scale = Vector2(0.242361, 0.264913)
-texture = ExtResource("20_46wu3")
-
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
-layout_mode = 0
-offset_left = 93.0
-offset_top = -1.0
-offset_right = 145.0
-offset_bottom = 39.0
-scale = Vector2(3, 3)
-value = 100.0
-texture_under = ExtResource("16_mm4wd")
-texture_progress = ExtResource("17_uipyl")
-texture_progress_offset = Vector2(1, 2)
-
-[node name="Label_Stage-Level" type="Label" parent="CanvasLayer2"]
-offset_left = 934.0
-offset_top = -6.0
-offset_right = 1104.0
-offset_bottom = 40.0
-scale = Vector2(1.3, 1.3)
-theme_override_fonts/font = ExtResource("13_ntw3c")
-theme_override_font_sizes/font_size = 40
-text = "Stage 1-1"
-horizontal_alignment = 1
-
-[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
-[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn" to="." method="_on_Exitbtn_pressed"]
-[connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider" to="." method="_on_HSliderMusic_value_changed_tutotrial1"]
-[connection signal="toggled" from="CanvasLayer/PanelPause/PanelPauseOption/CheckButton" to="." method="_on_CheckButton2_toggled1"]
-[connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider2" to="." method="_on_HSliderMusic_value_changed_tutotrial2"]
