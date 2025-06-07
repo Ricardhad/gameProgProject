@@ -28,7 +28,7 @@ func _on_body_entered(body: Node2D) -> void:
 		GlobalVar.add_coin()
 		$AudioStreamPlayer2D.play()
 		#$CollisionShape2D.disabled = true
-		get_tree().get_current_scene().update_coin_label()
+		#get_tree().get_current_scene().update_coin_label()
 		self.visible = false
 		await get_tree().create_timer(0.5).timeout
 		queue_free()
