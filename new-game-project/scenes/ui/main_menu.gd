@@ -48,7 +48,6 @@ func _change_scene() -> void:
 func _on_load_pressed() -> void:
 	pass # Replace with function body.
 
-
 func _on_options_pressed() -> void:
 	$OptionPanel.visible = true
 	AudioServer.set_bus_volume_db(1, linear_to_db($OptionPanel/MusicSlider.value))

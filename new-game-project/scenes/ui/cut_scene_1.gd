@@ -25,6 +25,7 @@ func _ready() -> void:
 
 	fade_in()
 	show_next_line()
+	
 
 func fade_in():
 	fade_panel.visible = true

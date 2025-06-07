@@ -929,4 +929,3 @@ texture = ExtResource("11_jksp8")
 [node name="Hud" parent="." instance=ExtResource("12_vkqci")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_vtvul")]
-visible = false
