@@ -17,6 +17,12 @@ func update_coin_label():
 	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/HealthBar.value = GlobalVar.health_player
 	$CanvasLayer2/Panel/HealthBar.max_value = GlobalVar.maxhealth_player
+	
+func set_attack_button_pressed(is_pressed: bool):
+	var button = $CanvasLayer2/Panel/ButtonATK
+	button.set_pressed(is_pressed)
+	print("kepencet attack:", button, "pressed =", is_pressed, "actual =", button.button_pressed)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

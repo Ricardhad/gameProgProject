@@ -19,6 +19,7 @@ var current_attack_index = 0
 var attack_animations = ["attack", "attack1", "attack2"]
 var air_attack_animation = "air_attack"
 
+
 const DASH_SPEED = 350.0
 const DASH_DURATION = 0.3
 var is_dashing = false
@@ -33,6 +34,9 @@ var original_attack_offset_x = 0.0
 var original_attack2_offset_x = 0.0
 
 @onready var health: Health = $Health
+
+
+@onready var hud = get_node("/root/game/Hud")
 
 func _ready():
 	original_attack_offset_x = attack_area_1.position.x
@@ -143,12 +147,15 @@ func _physics_process(delta: float) -> void:
 	if is_attacking:
 		var current_anim = animated_sprite_2d.animation
 		var is_last_frame = animated_sprite_2d.frame == animated_sprite_2d.sprite_frames.get_frame_count(current_anim) - 1
+		
 
 		if is_last_frame:
 			is_attacking = false
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
 			attack_area_1.disabled = true
 			attack_area_2.disabled = true
+			if hud:
+				hud.set_attack_button_pressed(false)  # Reset tombol attack setelah selesai
 		else:
 			if not is_on_floor():
 				velocity.x *= 0.95
@@ -205,6 +212,9 @@ func perform_ground_attack():
 	is_attacking = true
 	update_attack_hitboxes(current_attack_animation)
 	attack_sound.play()
+	
+	if hud:
+		hud.set_attack_button_pressed(true)
 
 func perform_air_attack():
 	var current_attack_animation = attack_animations[current_attack_index]
@@ -213,6 +223,9 @@ func perform_air_attack():
 	is_attacking = true
 	update_attack_hitboxes(current_attack_animation)
 	attack_sound.play()
+	
+	if hud:
+		hud.set_attack_button_pressed(true)
 
 func dash(direction: float):
 	is_dashing = true
