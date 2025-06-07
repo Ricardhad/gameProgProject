@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cdn8ylgkmsnuy"]
+[gd_scene load_steps=62 format=3 uid="uid://cdn8ylgkmsnuy"]
 
 [ext_resource type="Script" path="res://scenes/enemies/grass/goblin.gd" id="1_hfgq4"]
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/grass/goblin/Idle.png" id="2_5kwfu"]
@@ -374,6 +374,10 @@ size = Vector2(21, 31)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mf6m"]
 size = Vector2(21, 14)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q3s35"]
+radius = 75.0
+height = 270.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_hfgq4")
@@ -385,9 +389,9 @@ script = ExtResource("4_mkdvr")
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.519413
+frame_progress = 0.157979
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -439,7 +443,25 @@ shape = SubResource("RectangleShape2D_2mf6m")
 position = Vector2(-10, 0)
 target_position = Vector2(-48, 32)
 
+[node name="FieldOfView" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="ShapeCast2D" type="CollisionPolygon2D" parent="FieldOfView"]
+position = Vector2(-9, -28)
+rotation = 3.14159
+polygon = PackedVector2Array(-9, 0, -100, -30, -110, 0, -100, 30)
+
+[node name="ProximitySense" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="ShapeCast2D" type="CollisionShape2D" parent="ProximitySense"]
+position = Vector2(-1, -25)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q3s35")
+
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="PlayerDetect" to="." method="_on_player_detect_body_entered"]
 [connection signal="body_exited" from="PlayerDetect" to="." method="_on_player_detect_body_exited"]
+[connection signal="body_entered" from="FieldOfView" to="." method="_on_field_of_view_body_entered"]
+[connection signal="body_shape_entered" from="ProximitySense" to="." method="_on_proximity_sense_body_shape_entered"]
