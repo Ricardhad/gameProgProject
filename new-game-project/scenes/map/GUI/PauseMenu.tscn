@@ -1,0 +1,280 @@
+[gd_scene load_steps=8 format=3 uid="uid://71cvorklc8yo"]
+
+[ext_resource type="Script" path="res://scenes/map/GUI/pause_menu.gd" id="1_ihtfe"]
+[ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="2_oi75q"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="3_pg4ev"]
+[ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="4_a7e5f"]
+[ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="5_a5c1v"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1j3tb"]
+texture = ExtResource("2_oi75q")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fwj8s"]
+texture = ExtResource("2_oi75q")
+
+[node name="PauseMenu" type="Node2D"]
+script = ExtResource("1_ihtfe")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelPause" type="Panel" parent="CanvasLayer"]
+top_level = true
+custom_minimum_size = Vector2(241, 190)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -302.0
+offset_top = -225.0
+offset_right = 464.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1j3tb")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 39.0
+offset_right = 384.0
+offset_bottom = 132.0
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Pause
+
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelPause"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 117.0
+offset_right = 268.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Buff List"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/PanelPause"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 237.0
+offset_right = 241.0
+offset_bottom = 285.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Items"
+horizontal_alignment = 1
+
+[node name="PanelButton" type="Panel" parent="CanvasLayer/PanelPause"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 1
+offset_left = -247.0
+offset_top = 33.0
+offset_right = 12.0
+offset_bottom = 383.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fwj8s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelPause/PanelButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -119.0
+offset_right = 482.5
+offset_bottom = 718.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+
+[node name="Resumebtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("4_a7e5f")
+texture_pressed = ExtResource("5_a5c1v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.093
+anchor_top = 0.319
+anchor_right = 0.933
+anchor_bottom = 0.734
+offset_left = 23.6567
+offset_top = -22.3807
+offset_right = -251.144
+offset_bottom = -46.8706
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Resume"
+horizontal_alignment = 1
+
+[node name="Restartbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("4_a7e5f")
+texture_pressed = ExtResource("5_a5c1v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Restartbtn"]
+top_level = true
+layout_mode = 2
+offset_left = 99.0
+offset_top = 263.0
+offset_right = 285.0
+offset_bottom = 309.0
+scale = Vector2(0.6, 0.6)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+horizontal_alignment = 1
+
+[node name="Optionbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("4_a7e5f")
+texture_pressed = ExtResource("5_a5c1v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn"]
+layout_mode = 0
+offset_left = 116.667
+offset_top = 36.6667
+offset_right = 290.667
+offset_bottom = 81.6667
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Option
+"
+horizontal_alignment = 1
+
+[node name="Exitbtn" type="TextureButton" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("4_a7e5f")
+texture_pressed = ExtResource("5_a5c1v")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn"]
+layout_mode = 0
+offset_left = 116.667
+offset_top = 43.3334
+offset_right = 282.667
+offset_bottom = 88.3338
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"
+horizontal_alignment = 1
+
+[node name="PanelPauseOption" type="Panel" parent="CanvasLayer/PanelPause"]
+visible = false
+top_level = true
+custom_minimum_size = Vector2(241, 190)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -302.0
+offset_top = -225.0
+offset_right = 464.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1j3tb")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 39.0
+offset_right = 384.0
+offset_bottom = 132.0
+scale = Vector2(1.7, 1.7)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Option"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 164.0
+offset_right = 262.0
+offset_bottom = 180.0
+scale = Vector2(2, 2)
+value = 100.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/HSlider"]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -22.0
+offset_right = 146.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Music
+"
+horizontal_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 319.0
+offset_right = 152.0
+offset_bottom = 343.0
+scale = Vector2(2, 2)
+
+[node name="Label3" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/CheckButton"]
+layout_mode = 0
+offset_left = 9.5
+offset_top = -19.5
+offset_right = 194.5
+offset_bottom = 28.5
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "FullScreen
+"
+horizontal_alignment = 1
+
+[node name="HSlider2" type="HSlider" parent="CanvasLayer/PanelPause/PanelPauseOption"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 240.0
+offset_right = 264.0
+offset_bottom = 256.0
+scale = Vector2(2, 2)
+value = 100.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/PanelPause/PanelPauseOption/HSlider2"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -22.0
+offset_right = 135.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "SFX
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]
+[connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Exitbtn" to="." method="_on_Exitbtn_pressed"]
+[connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider" to="." method="_on_HSliderMusic_value_changed_tutotrial1"]
+[connection signal="toggled" from="CanvasLayer/PanelPause/PanelPauseOption/CheckButton" to="." method="_on_CheckButton2_toggled1"]
+[connection signal="value_changed" from="CanvasLayer/PanelPause/PanelPauseOption/HSlider2" to="." method="_on_HSliderMusic_value_changed_tutotrial2"]

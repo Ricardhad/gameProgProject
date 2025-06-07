@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://crh1jsb6eg1ig"]
+
+[ext_resource type="Script" path="res://scenes/map/GUI/hud.gd" id="1_8uhuw"]
+[ext_resource type="Texture2D" uid="uid://8swmugpd1q5d" path="res://assets/option_menu/PlayerBar.png" id="2_fu74h"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="3_18l4s"]
+[ext_resource type="Texture2D" uid="uid://dbrr2k8ajc2ik" path="res://assets/option_menu/CDBarOutline.png" id="4_0j1a6"]
+[ext_resource type="Texture2D" uid="uid://b004vjw2yc6cr" path="res://assets/option_menu/CDBar.png" id="5_moxeu"]
+[ext_resource type="Texture2D" uid="uid://cwklwo8qusa1h" path="res://assets/option_menu/Richard.png" id="6_5avhp"]
+[ext_resource type="Texture2D" uid="uid://dcxq1dnubjqvj" path="res://assets/option_menu/HealthBarOutline.png" id="7_n7f8u"]
+[ext_resource type="Texture2D" uid="uid://53yh3pihwlgy" path="res://assets/option_menu/HealthBar.png" id="8_m4hna"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_17x5f"]
+texture = ExtResource("2_fu74h")
+
+[node name="Hud" type="Node2D"]
+script = ExtResource("1_8uhuw")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer2"]
+offset_right = 241.0
+offset_bottom = 88.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_17x5f")
+
+[node name="Label_coin" type="Label" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 48.0
+offset_right = 263.0
+offset_bottom = 98.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="CDBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 20.0
+offset_right = 146.0
+offset_bottom = 60.0
+scale = Vector2(3, 3)
+max_value = 120.0
+value = 120.0
+texture_under = ExtResource("4_0j1a6")
+texture_progress = ExtResource("5_moxeu")
+texture_progress_offset = Vector2(1, 2)
+
+[node name="Richard" type="Sprite2D" parent="CanvasLayer2/Panel"]
+position = Vector2(51, 39)
+scale = Vector2(0.242361, 0.264913)
+texture = ExtResource("6_5avhp")
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = -1.0
+offset_right = 145.0
+offset_bottom = 39.0
+scale = Vector2(3, 3)
+value = 100.0
+texture_under = ExtResource("7_n7f8u")
+texture_progress = ExtResource("8_m4hna")
+texture_progress_offset = Vector2(1, 2)
+
+[node name="Label_Stage-Level" type="Label" parent="CanvasLayer2"]
+offset_left = 934.0
+offset_top = -6.0
+offset_right = 1104.0
+offset_bottom = 40.0
+scale = Vector2(1.3, 1.3)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "Stage 1-1"
+horizontal_alignment = 1
