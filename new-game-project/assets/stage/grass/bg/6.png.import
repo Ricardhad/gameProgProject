@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g68pj5jdjo0l"
-path="res://.godot/imported/pillar-removebg-preview.png-8aaa1e1f3029476c368b05dadb220e67.ctex"
+uid="uid://xdha11gj4bn3"
+path="res://.godot/imported/6.png-35b04b442dc5de2a925aa189a54e3f5b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spritelevel/pillar-removebg-preview.png"
-dest_files=["res://.godot/imported/pillar-removebg-preview.png-8aaa1e1f3029476c368b05dadb220e67.ctex"]
+source_file="res://assets/stage/grass/bg/6.png"
+dest_files=["res://.godot/imported/6.png-35b04b442dc5de2a925aa189a54e3f5b.ctex"]
 
 [params]
 

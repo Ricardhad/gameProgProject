@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b08veebb532a6"
-path="res://.godot/imported/pillar.png-d6023ad2e2bf56374cc54346238471a6.ctex"
+uid="uid://efkggrqvkyha"
+path="res://.godot/imported/portal.png-3c2935827f32c480d180380cb3dbaa28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/spritelevel/pillar.png"
-dest_files=["res://.godot/imported/pillar.png-d6023ad2e2bf56374cc54346238471a6.ctex"]
+source_file="res://assets/stage/spritelevel/portal.png"
+dest_files=["res://.godot/imported/portal.png-3c2935827f32c480d180380cb3dbaa28.ctex"]
 
 [params]
 
