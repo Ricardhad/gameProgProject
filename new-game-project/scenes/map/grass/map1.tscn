@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=19 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_sc4cw"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_sc4cw"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_l1svk"]
+[ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="3_ilt2a"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="4_5ffst"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_mra2u"]
 [ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/stage/grass/bg/2.png" id="6_hpd0i"]
@@ -860,7 +861,11 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 [node name="Enemy" type="Node" parent="."]
 
 [node name="Goblin" parent="Enemy" instance=ExtResource("2_l1svk")]
+process_mode = 4
 position = Vector2(415, 253)
+
+[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("3_ilt2a")]
+position = Vector2(863, 187)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

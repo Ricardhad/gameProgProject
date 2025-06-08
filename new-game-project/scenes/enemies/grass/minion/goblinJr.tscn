@@ -1,8 +1,9 @@
-[gd_scene load_steps=63 format=3 uid="uid://cwlldkvstv10h"]
+[gd_scene load_steps=64 format=3 uid="uid://cwlldkvstv10h"]
 
 [ext_resource type="Script" path="res://scenes/enemies/component/GoblinScript.gd" id="1_ox1be"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="2_2mne4"]
 [ext_resource type="Texture2D" uid="uid://bj1uuikd0t5s2" path="res://assets/enemies/grass/goblin/Attack.png" id="3_rb0ks"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="4_en71i"]
 [ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/grass/goblin/Dead.png" id="4_i0q6e"]
 [ext_resource type="Texture2D" uid="uid://c1a2ys12d8yoa" path="res://assets/enemies/grass/goblin/Hurt.png" id="5_yi6c5"]
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/grass/goblin/Idle.png" id="6_4t0wo"]
@@ -383,6 +384,9 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 script = ExtResource("2_2mne4")
 
+[node name="MovementChecker" parent="." instance=ExtResource("4_en71i")]
+unique_name_in_owner = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
@@ -396,24 +400,10 @@ script = ExtResource("10_u2d3e")
 position = Vector2(0.375015, -16)
 shape = SubResource("RectangleShape2D_n8ffi")
 
-[node name="RayCast2DJumpCheck" type="RayCast2D" parent="."]
-position = Vector2(-10, 0)
-target_position = Vector2(-48, 32)
-
-[node name="RayCast2D3" type="RayCast2D" parent="."]
-position = Vector2(0, -12)
-target_position = Vector2(-150, 0)
-collision_mask = 4
-
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-position = Vector2(13, -3)
-target_position = Vector2(-30, 0)
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-12, -35)
-target_position = Vector2(0, 42)
-
-[node name="HurtBox" parent="." instance=ExtResource("10_55ony")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_55ony")]
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("13_7fuq3")]
 
