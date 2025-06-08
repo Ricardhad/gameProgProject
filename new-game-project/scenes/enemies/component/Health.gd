@@ -1,4 +1,4 @@
-#class_name Health
+class_name Health
 extends Node
 
 signal max_health_changed(diff: int)

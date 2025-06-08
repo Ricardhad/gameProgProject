@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c11e1ja0r7a7q"]
-
-[ext_resource type="Script" path="res://scenes/enemies/component/detection.gd" id="1_r8cc7"]
+[gd_scene load_steps=2 format=3 uid="uid://c11e1ja0r7a7q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmaon"]
 radius = 75.0
 height = 270.0
 
-[node name="Detection" type="Node2D"]
-script = ExtResource("1_r8cc7")
+[node name="Senses" type="Node"]
 
 [node name="FieldOfView" type="Area2D" parent="."]
 collision_mask = 5

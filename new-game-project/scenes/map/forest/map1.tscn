@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b77dkjexiy6mu"]
+[gd_scene load_steps=13 format=3 uid="uid://b77dkjexiy6mu"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_y03tw"]
 [ext_resource type="Texture2D" uid="uid://4d8cqfmyv3oa" path="res://assets/stage/forest/bg/7.png" id="2_cqe8p"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bop7y2jhjn2ok" path="res://assets/stage/forest/bg/3.png" id="6_jwpt4"]
 [ext_resource type="Texture2D" uid="uid://xnnvresu13pl" path="res://assets/stage/forest/bg/2.png" id="7_ewb1y"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="8_ck63r"]
+[ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="9_4dnnq"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -758,3 +759,6 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
 position = Vector2(288, 162)
 texture = ExtResource("2_cqe8p")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("9_4dnnq")]
+position = Vector2(576, 176)
