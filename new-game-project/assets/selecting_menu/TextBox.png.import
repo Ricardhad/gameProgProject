@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drs1j5h0dqhvq"
-path="res://.godot/imported/cutscene1.png-1d9fd16795105b488fa46c509aa29aba.ctex"
+uid="uid://c10iv5slqi1fu"
+path="res://.godot/imported/TextBox.png-faede60021706f204072ea2ff520f451.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/spritelevel/cutscene1.png"
-dest_files=["res://.godot/imported/cutscene1.png-1d9fd16795105b488fa46c509aa29aba.ctex"]
+source_file="res://assets/selecting_menu/TextBox.png"
+dest_files=["res://.godot/imported/TextBox.png-faede60021706f204072ea2ff520f451.ctex"]
 
 [params]
 

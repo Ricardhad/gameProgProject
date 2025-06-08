@@ -1,11 +1,16 @@
-[gd_scene load_steps=74 format=3 uid="uid://c2ggiacjh7bhm"]
+[gd_scene load_steps=96 format=3 uid="uid://c2ggiacjh7bhm"]
 
+[ext_resource type="Script" path="res://scenes/ui/cut_scene_2.gd" id="1_5eov8"]
 [ext_resource type="Texture2D" uid="uid://kyjwd5vdjbqm" path="res://assets/selecting_menu/castle_background_by_blossomblairr_d7s4uas-fullview.jpg" id="1_11mca"]
 [ext_resource type="Texture2D" uid="uid://b18q26imgxm3" path="res://assets/class/knight/player_sprites.png" id="1_ylbuy"]
 [ext_resource type="Texture2D" uid="uid://dxhgtold6fgsw" path="res://assets/class/knight/Hang.png" id="2_7175k"]
 [ext_resource type="Texture2D" uid="uid://vn3cm3cj8u27" path="res://assets/class/knight/Pull_up.png" id="3_xlu1j"]
 [ext_resource type="Texture2D" uid="uid://clgpy5bhq0txc" path="res://assets/npc/king/Dialogue.png" id="5_8w303"]
 [ext_resource type="Texture2D" uid="uid://sw34mgsbxo81" path="res://assets/npc/king/Idle.png" id="6_1fupc"]
+[ext_resource type="Texture2D" uid="uid://c10iv5slqi1fu" path="res://assets/selecting_menu/TextBox.png" id="6_o66p6"]
+[ext_resource type="Texture2D" uid="uid://ewcj87lvt1e0" path="res://assets/npc/queen/Idle.png" id="7_05rpr"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="7_axr2a"]
+[ext_resource type="Texture2D" uid="uid://dtchvykgqnnjw" path="res://assets/npc/queen/Dialogue.png" id="10_0netc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8a87g"]
 texture = ExtResource("1_11mca")
@@ -401,6 +406,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ws23"]
+texture = ExtResource("6_o66p6")
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_54lyn"]
 atlas = ExtResource("5_8w303")
 region = Rect2(0, 0, 128, 128)
@@ -533,27 +541,215 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnnud"]
+atlas = ExtResource("10_0netc")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1jdl"]
+atlas = ExtResource("10_0netc")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cncpw"]
+atlas = ExtResource("10_0netc")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvoh4"]
+atlas = ExtResource("10_0netc")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcohm"]
+atlas = ExtResource("10_0netc")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r862y"]
+atlas = ExtResource("10_0netc")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dvmv"]
+atlas = ExtResource("10_0netc")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuec1"]
+atlas = ExtResource("10_0netc")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj6sg"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5alwm"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lt0p2"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ymrs"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjley"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6ye3"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmw1u"]
+atlas = ExtResource("7_05rpr")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46dpv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnnud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1jdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cncpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvoh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcohm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r862y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dvmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuec1")
+}],
+"loop": true,
+"name": &"dialog",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj6sg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5alwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lt0p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ymrs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjley")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6ye3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmw1u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="CutScene2" type="Node2D"]
+script = ExtResource("1_5eov8")
 
 [node name="Panel" type="Panel" parent="."]
 offset_right = 1146.0
 offset_bottom = 640.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_8a87g")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1014, 311)
-scale = Vector2(3.52608, 3.52608)
+[node name="HeroAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(1055, 297)
+scale = Vector2(3.92971, 3.92583)
 sprite_frames = SubResource("SpriteFrames_o6wnv")
 animation = &"idle"
 autoplay = "idle"
 flip_h = true
 
+[node name="PanelTextBoxHero" type="Panel" parent="HeroAnimation"]
+offset_left = -149.884
+offset_top = -63.9355
+offset_right = -8.88396
+offset_bottom = -13.9355
+theme_override_styles/panel = SubResource("StyleBoxTexture_1ws23")
+
+[node name="LabelTextBoxHero" type="Label" parent="HeroAnimation/PanelTextBoxHero"]
+modulate = Color(0.17, 0.17, 0.17, 1)
+offset_left = 4.57988
+offset_top = 8.61992
+offset_right = 439.58
+offset_bottom = 54.6199
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("7_axr2a")
+theme_override_font_sizes/font_size = 40
+text = "Passive: Immune to Bleed"
+horizontal_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(129, 250)
+[node name="KingAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(80, 250)
 scale = Vector2(3.42188, 3.29883)
 sprite_frames = SubResource("SpriteFrames_eb2n6")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.781747
+
+[node name="PanelTextBoxKing" type="Panel" parent="KingAnimation"]
+visible = false
+offset_left = 15.0
+offset_top = -55.0
+offset_right = 156.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1ws23")
+
+[node name="LabelTextBoxKing" type="Label" parent="KingAnimation/PanelTextBoxKing"]
+modulate = Color(0.17, 0.17, 0.17, 1)
+offset_left = 4.57988
+offset_top = 8.61992
+offset_right = 439.58
+offset_bottom = 54.6199
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("7_axr2a")
+theme_override_font_sizes/font_size = 40
+text = "Passive: Immune to Bleed"
+horizontal_alignment = 1
+
+[node name="QueenAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(221, 312)
+scale = Vector2(3.6875, 3.41406)
+sprite_frames = SubResource("SpriteFrames_46dpv")
+animation = &"dialog"
+autoplay = "idle"
+frame_progress = 0.119338
+
+[node name="PanelTextBoxQueen" type="Panel" parent="QueenAnimation"]
+visible = false
+offset_left = 15.0
+offset_top = -55.0
+offset_right = 156.0
+offset_bottom = -5.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_1ws23")
+
+[node name="LabelTextBoxQueen" type="Label" parent="QueenAnimation/PanelTextBoxQueen"]
+modulate = Color(0.17, 0.17, 0.17, 1)
+offset_left = 4.57988
+offset_top = 8.61992
+offset_right = 439.58
+offset_bottom = 54.6199
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("7_axr2a")
+theme_override_font_sizes/font_size = 40
+text = "Passive: Immune to Bleed"
+horizontal_alignment = 1
+
+[node name="DialogueTimer" type="Timer" parent="."]
