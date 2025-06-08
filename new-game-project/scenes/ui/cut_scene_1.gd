@@ -21,7 +21,7 @@ var full_text = ""
 func _ready() -> void:
 	# Set stream jika belum diset di editor
 	if sfx_player.stream == null:
-		sfx_player.stream = load("res://assets/sfx/voice_sans.wav")
+		sfx_player.stream = load("res://assets/sfx/RichardEdit.mp3")
 
 	fade_in()
 	show_next_line()
