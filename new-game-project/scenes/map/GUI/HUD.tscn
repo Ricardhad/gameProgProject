@@ -67,6 +67,7 @@ texture_progress = ExtResource("8_m4hna")
 texture_progress_offset = Vector2(1, 2)
 
 [node name="ButtonATK" type="TextureButton" parent="CanvasLayer2/Panel"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 88.0
 offset_right = 67.0
@@ -92,6 +93,7 @@ text = "ATK
 horizontal_alignment = 1
 
 [node name="ButtonJump" type="TextureButton" parent="CanvasLayer2/Panel"]
+layout_mode = 0
 offset_left = 76.0
 offset_top = 87.0
 offset_right = 138.0
@@ -116,6 +118,7 @@ text = "Jump"
 horizontal_alignment = 1
 
 [node name="ButtonDash" type="TextureButton" parent="CanvasLayer2/Panel"]
+layout_mode = 0
 offset_left = 151.0
 offset_top = 87.0
 offset_right = 213.0
