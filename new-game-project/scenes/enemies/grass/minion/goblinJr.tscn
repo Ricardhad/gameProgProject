@@ -376,6 +376,8 @@ size = Vector2(20.75, 32)
 collision_layer = 0
 script = ExtResource("1_ox1be")
 
+[node name="AttackController" parent="." instance=ExtResource("14_hcdyr")]
+
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_2mne4")
@@ -412,15 +414,13 @@ target_position = Vector2(0, 42)
 
 [node name="HurtBox" parent="." instance=ExtResource("10_55ony")]
 
-[node name="AttackController" parent="." instance=ExtResource("14_hcdyr")]
-
-[node name="Senses" parent="." instance=ExtResource("12_a6k4y")]
-unique_name_in_owner = true
-
 [node name="LootDropper" parent="." instance=ExtResource("13_7fuq3")]
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("15_ebrf0")
+
+[node name="Senses" parent="." instance=ExtResource("12_a6k4y")]
+unique_name_in_owner = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
