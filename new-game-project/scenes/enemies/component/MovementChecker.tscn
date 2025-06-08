@@ -9,10 +9,10 @@ script = ExtResource("1_7tnkg")
 position = Vector2(21, 0)
 target_position = Vector2(52, 76)
 
-[node name="WallCheck" type="RayCast2D" parent="."]
-position = Vector2(-14, -4)
-target_position = Vector2(41, 0)
-
 [node name="CliffCheck" type="RayCast2D" parent="."]
 position = Vector2(12, -36)
 target_position = Vector2(0, 42)
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+position = Vector2(-11, 0)
+target_position = Vector2(40, 0)

@@ -32,6 +32,7 @@ func _ready() -> void:
 	senses.get_node("FieldOfView").body_exited.connect(_on_fov_exited)
 	health_component.health_depleted.connect(func(): change_state(State.DEAD))
 	attack_controller.attack_finished.connect(_on_attack_finished)
+	
 	change_state(State.PATROL)
 
 func _process(delta: float) -> void:
@@ -84,10 +85,21 @@ func _on_fov_exited(body: Node2D):
 	if body == player_target:
 		losing_sight_timer = CHASE_LOSE_COOLDOWN
 		
+# Inside StateMachine.gd
+
 func _on_attack_finished():
-	if player_target and player_detect.overlaps_body(player_target):
-		change_state(State.ATTACK)
-	elif player_target:
-		change_state(State.CHASE)
+	print("DEBUG: StateMachine received the 'attack_finished' signal.")
+	
+	if player_target != null:
+		print("DEBUG: Player target still exists. Checking distance...")
+		# The 'player_detect' Area2D is used to check if player is in melee range
+		if player_detect.overlaps_body(player_target):
+			print("DEBUG: Player is still in melee range. Attacking again.")
+			change_state(State.ATTACK)
+		else:
+			print("DEBUG: Player is out of melee range. Returning to CHASE.")
+			change_state(State.CHASE)
 	else:
+		# This would happen if the player was defeated or disappeared
+		print("DEBUG: Player target has been lost. Returning to PATROL.")
 		change_state(State.PATROL)
