@@ -1,7 +1,7 @@
 # AnimationController.gd
 extends AnimatedSprite2D
 
-@onready var state_machine: Node = get_parent().get_node("Statemachine")
+@onready var state_machine: Node = get_parent().get_node("StateMachine")
 @onready var goblin: CharacterBody2D = get_parent()
 @onready var health_component: Node = get_parent().get_node("Health")
 

@@ -18,16 +18,19 @@ var turn_timer = 0.0
 const TURN_COOLDOWN_PATROL = 0.5
 
 # Node references
-@onready var senses: Node = get_parent().get_node("Detection")
+@onready var senses: Node = get_parent().get_node("Senses")
 @onready var player_detect: Area2D = get_parent().get_node("AttackController/PlayerDetect")
 @onready var attack_controller: AttackController = get_parent().get_node("AttackController")
-@onready var health_component: Health = get_parent().get_node("Health") as Health
+#@onready var health_component: Health = get_parent().get_node("Health") as Health
+@onready var health_component: Health = %Health
 @onready var parent_goblin = get_parent()
 
 func _ready() -> void:
+	print("Attempting to connect signals. The Health node is: ", %Health) # <-- ADD THIS LINE
+
 	senses.get_node("FieldOfView").body_entered.connect(_on_fov_entered)
 	senses.get_node("FieldOfView").body_exited.connect(_on_fov_exited)
-	health_component.health_depleted.connect(func(): change_state(State.DEAD))
+	#health_component.health_depleted.connect(func(): change_state(State.DEAD))
 	attack_controller.attack_finished.connect(_on_attack_finished)
 	change_state(State.PATROL)
 

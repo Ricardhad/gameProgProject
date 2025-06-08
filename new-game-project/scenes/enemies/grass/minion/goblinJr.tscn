@@ -11,10 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://ufo2gltdgoqy" path="res://assets/enemies/grass/goblin/Walk.png" id="9_2rm27"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="10_55ony"]
 [ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="10_u2d3e"]
-[ext_resource type="PackedScene" uid="uid://d0i6c55qeub14" path="res://scenes/enemies/component/Statemachine.tscn" id="11_mhjjj"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="12_a6k4y"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="13_7fuq3"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="14_hcdyr"]
+[ext_resource type="Script" path="res://scenes/enemies/component/statemachine.gd" id="15_ebrf0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52w2e"]
 atlas = ExtResource("3_rb0ks")
@@ -377,6 +377,7 @@ collision_layer = 0
 script = ExtResource("1_ox1be")
 
 [node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_2mne4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -410,15 +411,15 @@ position = Vector2(-12, -35)
 target_position = Vector2(0, 42)
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_55ony")]
-health = NodePath("../Health")
+health = NodePath("")
 
 [node name="AttackController" parent="." instance=ExtResource("14_hcdyr")]
 
-[node name="Statemachine" parent="." instance=ExtResource("11_mhjjj")]
-
-[node name="Detection" parent="." instance=ExtResource("12_a6k4y")]
+[node name="Senses" parent="." instance=ExtResource("12_a6k4y")]
 
 [node name="LootDropper" parent="." instance=ExtResource("13_7fuq3")]
 
-[connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("15_ebrf0")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
