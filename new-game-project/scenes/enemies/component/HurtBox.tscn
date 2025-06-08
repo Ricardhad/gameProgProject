@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5hyfrfxa0q5d"]
+
+[sub_resource type="GDScript" id="GDScript_13rc0"]
+script/source = "class_name Hurtbox
+extends Area2D
+
+signal received_damage(damage: int)
+
+@export var health: Health
+
+func _ready():
+	connect(\"area_entered\", _on_area_entered)
+
+func _on_area_entered(hitbox: HitBox) -> void:
+	if hitbox != null:
+		print(\"HP before : \", health.health)
+		health.health -= hitbox.damage
+		print(\"HP after : \", health.health)
+		received_damage.emit(hitbox.damage)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbcud"]
+size = Vector2(20.75, 32)
+
+[node name="HurtBox" type="Area2D"]
+script = SubResource("GDScript_13rc0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_lbcud")

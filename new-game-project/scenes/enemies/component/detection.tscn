@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c11e1ja0r7a7q"]
+
+[ext_resource type="Script" path="res://scenes/enemies/component/detection.gd" id="1_r8cc7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mmaon"]
+radius = 75.0
+height = 270.0
+
+[node name="Detection" type="Node2D"]
+script = ExtResource("1_r8cc7")
+
+[node name="FieldOfView" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="ShapeCast2D" type="CollisionPolygon2D" parent="FieldOfView"]
+position = Vector2(-9, -28)
+rotation = 3.14159
+polygon = PackedVector2Array(-9, 0, -100, -30, -110, 0, -100, 30)
+
+[node name="ProximitySense" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="ShapeCast2D" type="CollisionShape2D" parent="ProximitySense"]
+position = Vector2(-1, -25)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mmaon")

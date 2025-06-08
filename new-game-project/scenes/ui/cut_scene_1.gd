@@ -41,7 +41,7 @@ func fade_out_and_change_scene():
 	fade.tween_callback(Callable(self, "_go_to_next_scene"))
 
 func _go_to_next_scene():
-	get_tree().change_scene_to_file("res://scenes/map/tutorial.tscn")
+	get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
 
 func show_next_line():
 	if current_index >= dialogues.size():
