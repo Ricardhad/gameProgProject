@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn2m3gndp50e4"
-path="res://.godot/imported/Tileset.png-15e6c919bb0b5044e2794a84d416de9d.ctex"
+uid="uid://dtsvmata73dwp"
+path="res://.godot/imported/knight.png-b0e84ca43ae3b7ac238e18315e385cf1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/grass/Tileset.png"
-dest_files=["res://.godot/imported/Tileset.png-15e6c919bb0b5044e2794a84d416de9d.ctex"]
+source_file="res://assets/selecting_menu/knight.png"
+dest_files=["res://.godot/imported/knight.png-b0e84ca43ae3b7ac238e18315e385cf1.ctex"]
 
 [params]
 
