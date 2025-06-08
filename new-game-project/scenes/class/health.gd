@@ -15,8 +15,9 @@ var immortality_timer: Timer = null
 @export var sync_with_global: bool = false
 
 func _ready():
+	print(get_parent().name, " has a Health component with ID: ", self.get_instance_id())
 	health = max_health
-
+	
 func get_max_health() -> int:
 	return max_health
 

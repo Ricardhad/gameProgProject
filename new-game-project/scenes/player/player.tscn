@@ -416,6 +416,7 @@ script = ExtResource("1_enxr5")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("7_v7flo")
+sync_with_global = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)

@@ -377,6 +377,7 @@ collision_layer = 0
 script = ExtResource("1_ox1be")
 
 [node name="AttackController" parent="." instance=ExtResource("14_hcdyr")]
+unique_name_in_owner = true
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true

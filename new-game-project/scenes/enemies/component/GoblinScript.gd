@@ -13,6 +13,7 @@ var knockback_velocity = Vector2.ZERO
 
 @onready var senses = %Senses
 @onready var state_machine = %StateMachine
+@onready var atk_controller = %AttackController
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: Health = $Health
@@ -57,10 +58,18 @@ func is_patrol_obstacle_detected() -> bool:
 	return (not cliff_check.is_colliding() or wall_check.is_colliding()) and is_on_floor()
 
 func update_visuals():
-	if movement_direction != 0:
-		animated_sprite.flip_h = movement_direction < 0
-		# You can add logic here to flip other nodes if needed
+	# Use sign() to ensure the value is always 1, -1, or 0
+	var direction_sign = sign(movement_direction)
 	
+	if direction_sign != 0:
+		# This line flips the sprite texture
+		animated_sprite.flip_h = (direction_sign < 0)
+		
+		# ADD THIS LINE: This flips the entire Senses component node
+		senses.scale.x = direction_sign
+		atk_controller.scale.x = direction_sign
+		
+		
 func _on_health_changed(diff: int):
 	if diff < 0: # Took damage
 		var player = get_tree().get_first_node_in_group("player")

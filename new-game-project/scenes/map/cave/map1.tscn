@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ca4wpu6wh6upv"]
+[gd_scene load_steps=15 format=3 uid="uid://ca4wpu6wh6upv"]
 
 [ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_t7xv4"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_swt5r"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cmag306b3hupv" path="res://assets/stage/cave/bg/7.png" id="8_kn1xp"]
 [ext_resource type="Texture2D" uid="uid://cetptf6cbe02y" path="res://assets/stage/cave/bg/8.png" id="9_mhio8"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="10_nxw4v"]
+[ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="11_4e835"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -763,3 +764,6 @@ texture = ExtResource("9_mhio8")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("10_nxw4v")]
 position = Vector2(233.334, 239.019)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("11_4e835")]
+position = Vector2(670, 259)
