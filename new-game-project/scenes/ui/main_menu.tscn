@@ -274,9 +274,8 @@ offset_top = 194.0
 offset_right = 247.0
 offset_bottom = 214.0
 scale = Vector2(2, 2)
-max_value = 1.0
+max_value = 2.0
 step = 0.001
-value = 1.0
 
 [node name="Label2" type="Label" parent="OptionPanel/MusicSlider"]
 layout_mode = 0
@@ -298,9 +297,8 @@ offset_top = 271.0
 offset_right = 249.0
 offset_bottom = 291.0
 scale = Vector2(2, 2)
-max_value = 1.0
+max_value = 2.0
 step = 0.001
-value = 1.0
 
 [node name="Label4" type="Label" parent="OptionPanel/SFXSlider"]
 layout_mode = 0

@@ -1,5 +1,8 @@
 extends Control
 
+@onready var music_slider: HSlider = $OptionPanel/MusicSlider
+@onready var sfx_slider: HSlider = $OptionPanel/SFXSlider
+
 @onready var fade_rect = $VBoxContainer/ButtonStart/ColorRect
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +25,12 @@ func _ready() -> void:
 	else:
 		fade_rect.visible = false  # Jika bukan transisi
 	pass # Replace with function body.
+	
+	var music_db = AudioServer.get_bus_volume_db(1)
+	music_slider.value = db_to_linear(music_db)
 
+	var sfx_db = AudioServer.get_bus_volume_db(2)
+	sfx_slider.value = db_to_linear(sfx_db)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -42,7 +50,7 @@ func _on_start_pressed() -> void:
 	fade_out.tween_callback(Callable(self, "_change_scene"))
 
 func _change_scene() -> void:
-	get_tree().change_scene_to_file("res://scenes/map/cave/map1.tscn")
+	get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
 	#get_tree().change_scene_to_file("res://scenes/ui/CutScene2.tscn")
 
 func _on_load_pressed() -> void:
@@ -50,8 +58,6 @@ func _on_load_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	$OptionPanel.visible = true
-	AudioServer.set_bus_volume_db(1, linear_to_db($OptionPanel/MusicSlider.value))
-	AudioServer.set_bus_volume_db(2, linear_to_db($OptionPanel/SFXSlider.value))
 
 func _on_ButtonBack_pressed() -> void:
 	print("Back button pressed")
@@ -74,7 +80,6 @@ func _on_ButtonNo_pressed() -> void:
 	print("User canceled exit.")
 	$AreYouSure.visible = false  # Sembunyikan popup
 
-
 func _on_music_slider_mouse_exited() -> void:
 	release_focus()
 
@@ -82,7 +87,7 @@ func _on_sfx_slider_mouse_exited() -> void:
 	release_focus()
 
 func _on_music_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),linear_to_db(value))
+	AudioServer.set_bus_volume_db(1,linear_to_db(value))
 
 func _on_sfx_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),linear_to_db(value))
+	AudioServer.set_bus_volume_db(2,linear_to_db(value))
