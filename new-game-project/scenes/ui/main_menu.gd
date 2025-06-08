@@ -42,7 +42,7 @@ func _on_start_pressed() -> void:
 	fade_out.tween_callback(Callable(self, "_change_scene"))
 
 func _change_scene() -> void:
-	get_tree().change_scene_to_file("res://scenes/map/forest/map1.tscn")
+	get_tree().change_scene_to_file("res://scenes/map/cave/map1.tscn")
 	#get_tree().change_scene_to_file("res://scenes/ui/CutScene2.tscn")
 
 func _on_load_pressed() -> void:
