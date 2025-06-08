@@ -1,7 +1,8 @@
-[gd_scene load_steps=62 format=3 uid="uid://cdn8ylgkmsnuy"]
+[gd_scene load_steps=63 format=3 uid="uid://cdn8ylgkmsnuy"]
 
 [ext_resource type="Script" path="res://scenes/enemies/grass/minion/goblin.gd" id="1_hfgq4"]
 [ext_resource type="Texture2D" uid="uid://ujjvu3fm5k3t" path="res://assets/enemies/grass/goblin/Idle.png" id="2_5kwfu"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="2_fmh0d"]
 [ext_resource type="Texture2D" uid="uid://bj1uuikd0t5s2" path="res://assets/enemies/grass/goblin/Attack.png" id="2_pmn55"]
 [ext_resource type="Texture2D" uid="uid://c1xwrirjqeiu5" path="res://assets/enemies/grass/goblin/Dead.png" id="3_p40gs"]
 [ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="3_q1ndm"]
@@ -381,6 +382,7 @@ height = 270.0
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_hfgq4")
+coin_scene = ExtResource("2_fmh0d")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_mkdvr")

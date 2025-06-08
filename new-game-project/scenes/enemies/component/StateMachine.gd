@@ -28,9 +28,9 @@ const TURN_COOLDOWN_PATROL = 0.5
 func _ready() -> void:
 	print("Attempting to connect signals. The Health node is: ", %Health) # <-- ADD THIS LINE
 
-	senses.get_node("FieldOfView").body_entered.connect(_on_fov_entered)
+	#senses.get_node("FieldOfView").body_entered.connect(_on_fov_entered)
 	senses.get_node("FieldOfView").body_exited.connect(_on_fov_exited)
-	#health_component.health_depleted.connect(func(): change_state(State.DEAD))
+	health_component.health_depleted.connect(func(): change_state(State.DEAD))
 	attack_controller.attack_finished.connect(_on_attack_finished)
 	change_state(State.PATROL)
 
@@ -57,15 +57,24 @@ func _process(delta: float) -> void:
 		State.ATTACK:
 			parent_goblin.stop_movement()
 
+# Inside StateMachine.gd
+
 func change_state(new_state: State):
 	if new_state == current_state: return
+	
+	# Store the old state before we change it
+	var previous_state = current_state 
 	current_state = new_state
-	emit_signal("state_changed", new_state)
+	
+	# This is the line to fix. Make sure you are sending BOTH arguments.
+	emit_signal("state_changed", new_state, previous_state)
 
+	# The rest of the function...
 	if new_state == State.ATTACK:
 		attack_controller.initiate_attack()
 
 func _on_fov_entered(body: Node2D):
+	print("DEBUG MESSAGE 2: StateMachine has received the fov_entered signal.") # <-- ADD THIS LINE
 	if body.is_in_group("player"):
 		player_target = body
 		chase_timer = CHASE_DURATION

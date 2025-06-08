@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="12_a6k4y"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="13_7fuq3"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="14_hcdyr"]
-[ext_resource type="Script" path="res://scenes/enemies/component/statemachine.gd" id="15_ebrf0"]
+[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="15_ebrf0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52w2e"]
 atlas = ExtResource("3_rb0ks")
@@ -410,16 +410,17 @@ target_position = Vector2(-30, 0)
 position = Vector2(-12, -35)
 target_position = Vector2(0, 42)
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_55ony")]
-health = NodePath("")
+[node name="HurtBox" parent="." instance=ExtResource("10_55ony")]
 
 [node name="AttackController" parent="." instance=ExtResource("14_hcdyr")]
 
 [node name="Senses" parent="." instance=ExtResource("12_a6k4y")]
+unique_name_in_owner = true
 
 [node name="LootDropper" parent="." instance=ExtResource("13_7fuq3")]
 
 [node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("15_ebrf0")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

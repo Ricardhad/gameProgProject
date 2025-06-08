@@ -11,6 +11,9 @@ var movement_direction = 1 # -1 for left, 1 for right
 var movement_speed = SPEED
 var knockback_velocity = Vector2.ZERO
 
+@onready var senses = %Senses
+@onready var state_machine = %StateMachine
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: Health = $Health
 @onready var cliff_check: RayCast2D = $RayCast2D
@@ -18,6 +21,7 @@ var knockback_velocity = Vector2.ZERO
 
 func _ready():
 	health_component.health_changed.connect(_on_health_changed)
+	senses.get_node("FieldOfView").body_entered.connect(state_machine._on_fov_entered)
 
 func _physics_process(delta: float):
 	# Gravity

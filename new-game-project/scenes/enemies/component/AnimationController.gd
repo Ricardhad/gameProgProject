@@ -1,10 +1,11 @@
-# AnimationController.gd
+# AnimationController.gd (Corrected Version)
 extends AnimatedSprite2D
 
-@onready var state_machine: Node = get_parent().get_node("StateMachine")
-@onready var goblin: CharacterBody2D = get_parent()
-@onready var health_component: Node = get_parent().get_node("Health")
+# PRO-TIP: Using % is safer than get_node() once you have them set up as unique.
+@onready var state_machine: StateMachine = %StateMachine
+@onready var health_component: Health = %Health
 
+# This variable will store the state the goblin was in before being hurt.
 var last_state = StateMachine.State.IDLE
 
 func _ready() -> void:
@@ -12,8 +13,14 @@ func _ready() -> void:
 	health_component.health_depleted.connect(_on_death)
 	self.animation_finished.connect(_on_animation_finished)
 
+
+# This function now correctly accepts BOTH arguments from the signal.
 func _on_state_changed(new_state: StateMachine.State, previous_state: StateMachine.State) -> void:
-	last_state = previous_state
+	# If the new state isn't HURT, we can update our "last_state" memory.
+	# This ensures we don't forget we were chasing if we get hurt.
+	if new_state != StateMachine.State.HURT:
+		last_state = new_state
+	
 	match new_state:
 		StateMachine.State.IDLE:
 			play("idle")
@@ -29,12 +36,17 @@ func _on_state_changed(new_state: StateMachine.State, previous_state: StateMachi
 			play("dead")
 
 func _on_death() -> void:
-	play("dead")
+	# We can just call our state change function directly.
+	# The StateMachine is the source of truth, so we command IT to change state.
+	state_machine.change_state(StateMachine.State.DEAD)
 
 func _on_animation_finished() -> void:
-	# After hurt animation, return to previous state
+	# If the "hurt" animation has just finished...
 	if animation == "hurt":
-		_on_state_changed(last_state, StateMachine.State.HURT)
+		# ...tell the StateMachine to go back to whatever it was doing before.
+		# This is much cleaner. The AnimationController requests a change,
+		# and the StateMachine handles the logic.
+		state_machine.change_state(last_state)
 	
 	if animation == "dead":
-		get_parent().queue_free() # The goblin can free itself after the animation
+		get_parent().queue_free()
