@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn2m3gndp50e4"
-path="res://.godot/imported/tileset.png-80ff62bc08acb9d365664c61d85e2a57.ctex"
+uid="uid://coahbqd7bra12"
+path="res://.godot/imported/volcano.png-c98de302a76602e0d097b3682457dff8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/grass/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-80ff62bc08acb9d365664c61d85e2a57.ctex"]
+source_file="res://assets/stage/cave/bg/volcano.png"
+dest_files=["res://.godot/imported/volcano.png-c98de302a76602e0d097b3682457dff8.ctex"]
 
 [params]
 
