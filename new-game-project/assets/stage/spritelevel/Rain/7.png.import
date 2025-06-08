@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxufyyadomye1"
-path="res://.godot/imported/Planet4.png-34795ab99223e44131e7a2d20693ee63.ctex"
+uid="uid://c6hxlm1m0yt73"
+path="res://.godot/imported/7.png-82edb7c3bff978541fd36ecc7fdbea71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/bg/Planet4.png"
-dest_files=["res://.godot/imported/Planet4.png-34795ab99223e44131e7a2d20693ee63.ctex"]
+source_file="res://assets/stage/spritelevel/Rain/7.png"
+dest_files=["res://.godot/imported/7.png-82edb7c3bff978541fd36ecc7fdbea71.ctex"]
 
 [params]
 

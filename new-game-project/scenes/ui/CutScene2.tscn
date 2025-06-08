@@ -676,23 +676,31 @@ autoplay = "idle"
 flip_h = true
 
 [node name="PanelTextBoxHero" type="Panel" parent="HeroAnimation"]
-offset_left = -149.884
-offset_top = -63.9355
-offset_right = -8.88396
-offset_bottom = -13.9355
+anchors_preset = -1
+anchor_left = -0.781
+anchor_top = -0.485
+anchor_right = -0.781
+anchor_bottom = -0.485
+offset_left = 93.1676
+offset_top = -23.4991
+offset_right = 234.168
+offset_bottom = 26.5009
+scale = Vector2(-1, 1)
 theme_override_styles/panel = SubResource("StyleBoxTexture_1ws23")
 
 [node name="LabelTextBoxHero" type="Label" parent="HeroAnimation/PanelTextBoxHero"]
 modulate = Color(0.17, 0.17, 0.17, 1)
-offset_left = 4.57988
-offset_top = 8.61992
-offset_right = 439.58
-offset_bottom = 54.6199
-scale = Vector2(0.3, 0.3)
+layout_mode = 0
+offset_left = 134.87
+offset_top = 9.17003
+offset_right = 569.87
+offset_bottom = 55.17
+scale = Vector2(-0.3, 0.3)
 theme_override_fonts/font = ExtResource("7_axr2a")
 theme_override_font_sizes/font_size = 40
 text = "Passive: Immune to Bleed"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -714,6 +722,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_1ws23")
 
 [node name="LabelTextBoxKing" type="Label" parent="KingAnimation/PanelTextBoxKing"]
 modulate = Color(0.17, 0.17, 0.17, 1)
+layout_mode = 0
 offset_left = 4.57988
 offset_top = 8.61992
 offset_right = 439.58
@@ -723,6 +732,7 @@ theme_override_fonts/font = ExtResource("7_axr2a")
 theme_override_font_sizes/font_size = 40
 text = "Passive: Immune to Bleed"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="QueenAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(221, 312)
@@ -742,6 +752,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_1ws23")
 
 [node name="LabelTextBoxQueen" type="Label" parent="QueenAnimation/PanelTextBoxQueen"]
 modulate = Color(0.17, 0.17, 0.17, 1)
+layout_mode = 0
 offset_left = 4.57988
 offset_top = 8.61992
 offset_right = 439.58
@@ -751,5 +762,6 @@ theme_override_fonts/font = ExtResource("7_axr2a")
 theme_override_font_sizes/font_size = 40
 text = "Passive: Immune to Bleed"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="DialogueTimer" type="Timer" parent="."]

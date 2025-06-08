@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ite2v747qn17"
-path="res://.godot/imported/sky.png-f5e872ba799aed3df44c38d38d89f4fe.ctex"
+uid="uid://beycw0bofjqv0"
+path="res://.godot/imported/9.png-b38eba08407ce56a946b042208db0e9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/bg/sky.png"
-dest_files=["res://.godot/imported/sky.png-f5e872ba799aed3df44c38d38d89f4fe.ctex"]
+source_file="res://assets/stage/spritelevel/Rain/9.png"
+dest_files=["res://.godot/imported/9.png-b38eba08407ce56a946b042208db0e9f.ctex"]
 
 [params]
 

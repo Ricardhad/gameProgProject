@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o54i360bbj8h"
-path="res://.godot/imported/lava_lake.png-21bd208fd6c74add13bce5c87b36f9c9.ctex"
+uid="uid://c4dtqgcuf1wku"
+path="res://.godot/imported/5.png-6e292286e42d53dc3e6b6c3cff67fd8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/bg/lava_lake.png"
-dest_files=["res://.godot/imported/lava_lake.png-21bd208fd6c74add13bce5c87b36f9c9.ctex"]
+source_file="res://assets/stage/spritelevel/Rain/5.png"
+dest_files=["res://.godot/imported/5.png-6e292286e42d53dc3e6b6c3cff67fd8c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvun4lgu4qpn8"
-path="res://.godot/imported/lava_lake_rock.png-2e95688d3698407e5f4fa89671a34002.ctex"
+uid="uid://c1q21cdushp0e"
+path="res://.godot/imported/2.png-4a66fbcb62e07b59483d0ade74ebe129.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/bg/lava_lake_rock.png"
-dest_files=["res://.godot/imported/lava_lake_rock.png-2e95688d3698407e5f4fa89671a34002.ctex"]
+source_file="res://assets/stage/cave/bg/2.png"
+dest_files=["res://.godot/imported/2.png-4a66fbcb62e07b59483d0ade74ebe129.ctex"]
 
 [params]
 

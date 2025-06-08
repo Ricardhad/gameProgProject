@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjrmf2vjbsbis"
-path="res://.godot/imported/rocks.png-dc6f89ad02be7178fd0c18d29c594f54.ctex"
+uid="uid://bdt7llgoccret"
+path="res://.godot/imported/4.png-fbd8f58b3353868841b25e038adf68d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/bg/rocks.png"
-dest_files=["res://.godot/imported/rocks.png-dc6f89ad02be7178fd0c18d29c594f54.ctex"]
+source_file="res://assets/stage/cave/bg/4.png"
+dest_files=["res://.godot/imported/4.png-fbd8f58b3353868841b25e038adf68d9.ctex"]
 
 [params]
 

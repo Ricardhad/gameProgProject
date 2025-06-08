@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coahbqd7bra12"
-path="res://.godot/imported/volcano.png-c98de302a76602e0d097b3682457dff8.ctex"
+uid="uid://vdma6t37hgj6"
+path="res://.godot/imported/6.png-707c58a117bb58789516d9ad8e120d44.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/bg/volcano.png"
-dest_files=["res://.godot/imported/volcano.png-c98de302a76602e0d097b3682457dff8.ctex"]
+source_file="res://assets/stage/spritelevel/Rain/6.png"
+dest_files=["res://.godot/imported/6.png-707c58a117bb58789516d9ad8e120d44.ctex"]
 
 [params]
 
