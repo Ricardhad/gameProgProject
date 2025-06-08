@@ -1,16 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://cidtsj7h1ncmd"]
+[gd_scene load_steps=7 format=3 uid="uid://cidtsj7h1ncmd"]
 
-[ext_resource type="Texture2D" uid="uid://cibxg35cybb6i" path="res://assets/enemies/chest/Idle.png" id="1_xi13n"]
+[ext_resource type="Texture2D" uid="uid://bjs2kudulalit" path="res://assets/enemies/chest/Chest.png" id="1_4gxvs"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o2j6y"]
-atlas = ExtResource("1_xi13n")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws0c6"]
+atlas = ExtResource("1_4gxvs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuxhl"]
+atlas = ExtResource("1_4gxvs")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7oql"]
+atlas = ExtResource("1_4gxvs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpp6l"]
+atlas = ExtResource("1_4gxvs")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7cfq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o2j6y")
+"texture": SubResource("AtlasTexture_ws0c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuxhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7oql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpp6l")
 }],
 "loop": true,
 "name": &"idle",
@@ -21,9 +42,9 @@ animations = [{
 collision_layer = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.49997, -38.5)
+position = Vector2(0, -10)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
-flip_h = true
+frame_progress = 0.862847
