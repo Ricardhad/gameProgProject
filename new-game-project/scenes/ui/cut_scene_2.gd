@@ -1,92 +1,87 @@
 extends Node2D
 
-# Referensi ke node-node dengan jalur yang benar
-@onready var hero_animation: AnimatedSprite2D = $HeroAnimation
-@onready var panel_text_box_hero: Panel = $HeroAnimation/PanelTextBoxHero
-@onready var label_text_box_hero: Label = $HeroAnimation/PanelTextBoxHero/LabelTextBoxHero
+@onready var label_text_box = $PanelTextBoxHero/LabelTextBoxHero
+@onready var panel_face      = $PanelTextBoxHero/PanelFace
+@onready var dialogue_timer  = $DialogueTimer     # timer huruf-per-huruf
+@onready var auto_next_timer = $AutoNextTimer     # timer jeda antar-dialog
 
-@onready var king_animation: AnimatedSprite2D = $KingAnimation
-@onready var panel_text_box_king: Panel = $KingAnimation/PanelTextBoxKing
-@onready var label_text_box_king: Label = $KingAnimation/PanelTextBoxKing/LabelTextBoxKing
+# texture wajah
+var face_hero  : Texture
+var face_king  : Texture
+var face_queen : Texture
 
-@onready var queen_animation: AnimatedSprite2D = $QueenAnimation
-@onready var panel_text_box_queen: Panel = $QueenAnimation/PanelTextBoxQueen
-@onready var label_text_box_queen: Label = $QueenAnimation/PanelTextBoxQueen/LabelTextBoxQueen
-
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var dialogue_timer: Timer = $DialogueTimer
+# dialog list
+var dialogues        = []
+var dialogue_index   = 0
+var char_index       = 0
+var current_text     = ""
 
 func _ready() -> void:
-	# Sembunyikan semua panel dialog pada awalnya
-	panel_text_box_hero.hide()
-	panel_text_box_king.hide()
-	panel_text_box_queen.hide()
+	# load wajah
+	face_hero  = load("res://assets/selecting_menu/knight.png")
+	face_king  = load("res://assets/selecting_menu/king.png")
+	face_queen = load("res://assets/selecting_menu/queen.png")
 
-	# Mulai cutscene
-	start_cutscene()
+	# daftar dialog
+	dialogues = [
+		{ "text":"Hello, I am the hero.",            "face": face_hero  },
+		{ "text":"Welcome to the castle!",            "face": face_king  },
+		{ "text":"Please help us, brave warrior!",    "face": face_queen }
+	]
 
-func start_cutscene():
-	# --- BAGIAN BARU: HERO BERLARI DARI LUAR LAYAR ---
-	
-	# 1. Tentukan posisi awal dan akhir
-	# Posisi target adalah posisi Hero saat ini di editor
-	var target_position = hero_animation.global_position
-	# Posisi awal adalah di luar layar sebelah kanan
-	var start_position = Vector2(get_viewport_rect().size.x + 100, target_position.y)
+	# timer ketik
+	dialogue_timer.wait_time = 0.05
+	dialogue_timer.timeout.connect(_on_dialogue_timer_timeout)
 
-	# Pindahkan Hero ke posisi awal sebelum scene dimulai
-	hero_animation.global_position = start_position
+	# timer auto-next (satu-shot, 1 detik)
+	auto_next_timer.one_shot  = true
+	auto_next_timer.wait_time = 1.0
+	auto_next_timer.timeout.connect(_next_dialogue)
 
-	# 2. Mainkan animasi lari
-	hero_animation.play("run")
-
-	# 3. Buat dan jalankan Tween untuk pergerakan
-	var tween = create_tween()
-	# Animasikan properti 'global_position' dari posisi awal ke posisi target selama 2 detik
-	tween.tween_property(hero_animation, "global_position", target_position, 2.0)
-	
-	# Tunggu sampai pergerakan (tween) selesai
-	await tween.finished
-
-	# 4. Ganti animasi ke "idle" setelah sampai
-	hero_animation.play("idle")
-
-	# --- PERCAKAPAN DIMULAI SETELAH HERO TIBA ---
-
-	# 5. Hero berbicara terlebih dahulu
-	show_dialogue(label_text_box_hero, panel_text_box_hero, "Hosh... Hosh... Akhirnya aku sampai!")
-	# Mainkan animasi dialog jika ada
-	hero_animation.play("dialog")
-	
-	dialogue_timer.start(3)
-	await dialogue_timer.timeout
-	hide_dialogue(panel_text_box_hero)
-	hero_animation.play("idle")
-
-	# 6. Raja merespon
-	king_animation.play("dialog")
-	show_dialogue(label_text_box_king, panel_text_box_king, "Kerja bagus, pahlawan! Kami menunggumu.")
-
-	dialogue_timer.start(3)
-	await dialogue_timer.timeout
-	hide_dialogue(panel_text_box_king)
-	king_animation.play("idle")
-
-	# 7. Ratu melanjutkan
-	queen_animation.play("dialog")
-	show_dialogue(label_text_box_queen, panel_text_box_queen, "Semoga perjalananmu menyenangkan.")
-
-	dialogue_timer.start(3)
-	await dialogue_timer.timeout
-	hide_dialogue(panel_text_box_queen)
-	queen_animation.play("idle")
+	start_dialogue()   # mulai dialog pertama
 
 
-func show_dialogue(label: Label, panel: Panel, text: String):
-	"""Fungsi untuk menampilkan dialog."""
-	label.text = text
-	panel.show()
+# ────────────────────────────────────────────────────────────────
+func start_dialogue() -> void:
+	if dialogue_index >= dialogues.size():
+		_end_cutscene()
+		return
 
-func hide_dialogue(panel: Panel):
-	"""Fungsi untuk menyembunyikan dialog."""
-	panel.hide()
+	current_text = dialogues[dialogue_index]["text"]
+	panel_face.texture = dialogues[dialogue_index]["face"]
+
+	label_text_box.text = ""
+	char_index = 0
+	dialogue_timer.start()
+
+
+func _on_dialogue_timer_timeout() -> void:
+	if char_index < current_text.length():
+		label_text_box.text += current_text[char_index]
+		char_index += 1
+	else:
+		dialogue_timer.stop()
+		auto_next_timer.start()        # jeda 1 detik lalu lanjut otomatis
+
+
+func _next_dialogue() -> void:
+	dialogue_index += 1
+	start_dialogue()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		if dialogue_timer.is_stopped():
+			# sudah selesai → skip jeda & lanjut
+			auto_next_timer.stop()
+			_next_dialogue()
+		else:
+			# sedang mengetik → tampilkan cepat
+			dialogue_timer.stop()
+			label_text_box.text = current_text
+			auto_next_timer.start()
+
+
+func _end_cutscene() -> void:
+	print("Semua dialog selesai – ganti scene di sini jika perlu")
+	# get_tree().change_scene_to_file("res://next_scene.tscn")

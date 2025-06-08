@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de3qn7x528pr8"
-path="res://.godot/imported/Tileset.png-2f383045de3e2ec65a9b49559c3c9e05.ctex"
+uid="uid://c1wb6doxusd6c"
+path="res://.godot/imported/king.png-20e5c83f446294e2974f46be942638b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/Tileset.png"
-dest_files=["res://.godot/imported/Tileset.png-2f383045de3e2ec65a9b49559c3c9e05.ctex"]
+source_file="res://assets/selecting_menu/king.png"
+dest_files=["res://.godot/imported/king.png-20e5c83f446294e2974f46be942638b6.ctex"]
 
 [params]
 
