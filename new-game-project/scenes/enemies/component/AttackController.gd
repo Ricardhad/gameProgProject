@@ -1,43 +1,42 @@
 # AttackController.gd
+class_name AttackController
 extends Node
 
-# Emitted when the attack animation is finished
 signal attack_finished
 
 const ATTACK_COOLDOWN = 1.0
 var attack_timer = 0.0
-var is_attacking = false
-var has_attacked_this_animation = false
 
-@onready var hitbox: Area2D = get_parent().get_node("HitBox")
-@onready var animated_sprite: AnimatedSprite2D = get_parent().get_node("AnimatedSprite2D")
+# These nodes are now children of this AttackController
+@onready var player_detect: Area2D = $PlayerDetect
+@onready var hitbox: Area2D = $HitBox
 
 func _ready() -> void:
-	hitbox.body_entered.connect(_on_hitbox_body_entered)
-	animated_sprite.animation_finished.connect(_on_animation_finished)
-
+	player_detect.body_entered.connect(_on_player_detect_body_entered)
+	# The hitbox dealing damage is handled by its own script, which is great!
+	# We just need to enable/disable its collision shape.
+	
 func _process(delta: float) -> void:
 	if attack_timer > 0:
 		attack_timer -= delta
 
 func initiate_attack() -> void:
-	if attack_timer > 0: # Still on cooldown
-		return
-	
-	is_attacking = true
-	has_attacked_this_animation = false
-	attack_timer = ATTACK_COOLDOWN
-	# The animation controller will handle playing the animation
+	if attack_timer <= 0:
+		# Tell the animation controller to play the attack
+		# For now, we'll just enable the hitbox. The animation controller will handle the visuals.
+		$HitBox/CollisionShape2D.disabled = false
+		attack_timer = ATTACK_COOLDOWN
+		# After a short time, disable the hitbox and finish the attack
+		var tween = create_tween()
+		tween.tween_interval(0.5) # How long the hitbox is active
+		tween.tween_callback(finish_attack)
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") and is_attacking and not has_attacked_this_animation:
-		print("AttackController: Hit player!")
-		# Here you would call the player's take_damage method
-		# if body.has_method("take_damage"):
-		#     body.take_damage(10)
-		has_attacked_this_animation = true
+func finish_attack():
+	$HitBox/CollisionShape2D.disabled = true
+	emit_signal("attack_finished")
 
-func _on_animation_finished() -> void:
-	if animated_sprite.animation == "attack":
-		is_attacking = false
-		emit_signal("attack_finished")
+# This is NO LONGER needed here, because the StateMachine will tell us when to attack.
+# We'll call initiate_attack() from the StateMachine instead.
+func _on_player_detect_body_entered(body: Node2D) -> void:
+	# This function is now just for information, the StateMachine handles the logic.
+	pass

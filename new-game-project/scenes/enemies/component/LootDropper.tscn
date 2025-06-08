@@ -5,5 +5,6 @@
 
 [node name="LootDropper" type="Node2D"]
 script = ExtResource("1_ta0si")
+coin_scene = ExtResource("2_2cmr5")
 
 [node name="Coin" parent="." instance=ExtResource("2_2cmr5")]
