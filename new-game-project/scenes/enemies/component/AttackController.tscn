@@ -9,7 +9,7 @@ size = Vector2(21, 31)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ueomk"]
 size = Vector2(21, 14)
 
-[node name="AttackController" type="Node"]
+[node name="AttackController" type="Node2D"]
 script = ExtResource("1_sm4n6")
 
 [node name="PlayerDetect" type="Area2D" parent="."]

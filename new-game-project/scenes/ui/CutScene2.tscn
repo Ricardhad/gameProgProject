@@ -721,6 +721,7 @@ text = "Passive: Immune to Bleed"
 autowrap_mode = 2
 
 [node name="PanelFace" type="TextureRect" parent="PanelTextBoxHero"]
+layout_mode = 0
 offset_left = 611.0
 offset_top = 44.0
 offset_right = 706.0
