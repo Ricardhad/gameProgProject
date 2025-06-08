@@ -42,10 +42,7 @@ func _on_death() -> void:
 
 func _on_animation_finished() -> void:
 	# If the "hurt" animation has just finished...
-	if animation == "attack":
-		print("DEBUG: AttackController says attack animation finished. Emitting 'attack_finished' signal.") # <-- ADD THIS
-		#is_attacking = false
-		emit_signal("attack_finished")
+	
 	if animation == "hurt":
 		# ...tell the StateMachine to go back to whatever it was doing before.
 		# This is much cleaner. The AnimationController requests a change,

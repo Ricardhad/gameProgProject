@@ -88,18 +88,14 @@ func _on_fov_exited(body: Node2D):
 # Inside StateMachine.gd
 
 func _on_attack_finished():
-	print("DEBUG: StateMachine received the 'attack_finished' signal.")
+	print("DEBUG: StateMachine received 'attack_finished' signal.")
 	
+	# After an attack, ALWAYS go back to chasing if the target still exists.
+	# The logic in the CHASE state will then decide if it should attack again.
 	if player_target != null:
-		print("DEBUG: Player target still exists. Checking distance...")
-		# The 'player_detect' Area2D is used to check if player is in melee range
-		if player_detect.overlaps_body(player_target):
-			print("DEBUG: Player is still in melee range. Attacking again.")
-			change_state(State.ATTACK)
-		else:
-			print("DEBUG: Player is out of melee range. Returning to CHASE.")
-			change_state(State.CHASE)
+		print("DEBUG: Attack has finished. Returning to CHASE state.")
+		change_state(State.CHASE)
 	else:
-		# This would happen if the player was defeated or disappeared
-		print("DEBUG: Player target has been lost. Returning to PATROL.")
+		# This happens if the player was defeated or disappeared during the attack
+		print("DEBUG: Attack has finished, but player target was lost. Returning to PATROL.")
 		change_state(State.PATROL)

@@ -34,6 +34,7 @@ func initiate_attack() -> void:
 func finish_attack():
 	$HitBox/CollisionShape2D.disabled = true
 	emit_signal("attack_finished")
+	print("DEBUG: AttackController says attack animation finished. Emitting 'attack_finished' signal.") # <-- ADD THIS
 
 # This is NO LONGER needed here, because the StateMachine will tell us when to attack.
 # We'll call initiate_attack() from the StateMachine instead.
