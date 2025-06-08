@@ -13,6 +13,7 @@ extends Node2D
 @onready var panel_text_box_queen: Panel = $QueenAnimation/PanelTextBoxQueen
 @onready var label_text_box_queen: Label = $QueenAnimation/PanelTextBoxQueen/LabelTextBoxQueen
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var dialogue_timer: Timer = $DialogueTimer
 
 func _ready() -> void:
