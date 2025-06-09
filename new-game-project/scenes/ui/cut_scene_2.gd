@@ -2,8 +2,8 @@ extends Node2D
 
 @onready var label_text_box = $PanelTextBoxHero/LabelTextBoxHero
 @onready var panel_face      = $PanelTextBoxHero/PanelFace
-@onready var dialogue_timer  = $DialogueTimer
-@onready var auto_next_timer = $AutoNextTimer
+@onready var dialogue_timer  = $DialogueTimer     # timer huruf-per-huruf
+@onready var auto_next_timer = $AutoNextTimer     # timer jeda antar-dialog
 @onready var fade_rect: ColorRect = $ColorRect
 # texture wajah
 var face_hero  : Texture
@@ -61,11 +61,13 @@ func _on_dialogue_timer_timeout() -> void:
 		char_index += 1
 	else:
 		dialogue_timer.stop()
-		auto_next_timer.start()
+		auto_next_timer.start()        # jeda 1 detik lalu lanjut otomatis
+
 
 func _next_dialogue() -> void:
 	dialogue_index += 1
 	start_dialogue()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -82,10 +84,4 @@ func _unhandled_input(event: InputEvent) -> void:
 func _end_cutscene() -> void:
 	#print("Semua dialog selesai – ganti scene di sini jika perlu")
 	# Ganti dengan path scene yang dituju
-	Transition1.change_scene("res://scenes/map/grass/map1.tscn")
-	
-# Fungsi untuk dihubungkan ke sinyal 'pressed' dari ButtonSkip
-
-func _on_button_skip_pressed() -> void:
-	_end_cutscene()
-	pass # Replace with function body.
+	Transition1.change_scene("res://scenes/map/forest/map1.tscn")
