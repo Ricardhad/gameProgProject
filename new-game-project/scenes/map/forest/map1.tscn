@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bop7y2jhjn2ok" path="res://assets/stage/forest/bg/3.png" id="6_jwpt4"]
 [ext_resource type="Texture2D" uid="uid://xnnvresu13pl" path="res://assets/stage/forest/bg/2.png" id="7_ewb1y"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="8_ck63r"]
-[ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="9_4dnnq"]
+[ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="9_4dnnq"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_rsbji"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
