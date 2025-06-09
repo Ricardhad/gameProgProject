@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://cww188wcwa1rw"]
+[gd_scene load_steps=82 format=3 uid="uid://cww188wcwa1rw"]
 
 [ext_resource type="Script" path="res://scenes/enemies/desert/boss/hellhound_1.gd" id="1_6ryfv"]
 [ext_resource type="Texture2D" uid="uid://ce1e7ueaahka6" path="res://assets/enemies/desert/hellhound/Hellhound_1/Attack_1.png" id="1_ts12v"]
@@ -11,15 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://wso5vve8r7sh" path="res://assets/enemies/desert/hellhound/Hellhound_1/Run.png" id="8_o0xmy"]
 [ext_resource type="Texture2D" uid="uid://b6s32vdcylk5r" path="res://assets/enemies/desert/hellhound/Hellhound_1/Walk.png" id="9_7mn78"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="11_7mxdq"]
-[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_8se86"]
+[ext_resource type="Script" path="res://scenes/enemies/desert/boss/hellhound_animation_controller.gd" id="11_8v4fb"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="12_iht3v"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="13_3bp2h"]
+[ext_resource type="Script" path="res://scenes/enemies/component/hell_hound_attack_controller.gd" id="13_en2v8"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="14_yb7vm"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="15_y7eko"]
 [ext_resource type="PackedScene" uid="uid://ld07734qlysd" path="res://scenes/enemies/desert/boss/hellhound2.tscn" id="16_ik4sp"]
-[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="16_rdsm8"]
 [ext_resource type="Script" path="res://scenes/enemies/component/next_phase.gd" id="16_u3p2c"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="17_hse3o"]
+[ext_resource type="Script" path="res://scenes/enemies/desert/boss/hellhound_state_machine.gd" id="20_3d4yn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3mgyt"]
 atlas = ExtResource("1_ts12v")
@@ -483,12 +484,10 @@ script = ExtResource("1_6ryfv")
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"attack2"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 flip_h = true
-script = ExtResource("11_8se86")
+script = ExtResource("11_8v4fb")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(2, -10)
@@ -497,6 +496,7 @@ shape = SubResource("CapsuleShape2D_5m2s1")
 
 [node name="AttackController" parent="." instance=ExtResource("11_7mxdq")]
 unique_name_in_owner = true
+script = ExtResource("13_en2v8")
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(31, -15)
@@ -532,7 +532,10 @@ next_phase_trigger_scene = ExtResource("16_ik4sp")
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("16_rdsm8")
+script = ExtResource("20_3d4yn")
+
+[node name="CooldownTimer" type="Timer" parent="StateMachine"]
+one_shot = true
 
 [node name="Senses" parent="." instance=ExtResource("17_hse3o")]
 unique_name_in_owner = true
