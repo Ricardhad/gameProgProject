@@ -422,17 +422,20 @@ max_health = 10
 
 [node name="AttackController" parent="." instance=ExtResource("10_ugej7")]
 unique_name_in_owner = true
+visible = false
+position = Vector2(-8, -1)
 
 [node name="MovementChecker" parent="." instance=ExtResource("11_jikfs")]
 unique_name_in_owner = true
-position = Vector2(0, -3)
+position = Vector2(-18, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-10.625, -18)
+position = Vector2(-11, -18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_wvgha")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_dhdf8")]
+position = Vector2(-10, 0)
 collision_layer = 0
 collision_mask = 2
 health = NodePath("../Health")
@@ -447,3 +450,4 @@ script = ExtResource("14_7wflt")
 
 [node name="Senses" parent="." instance=ExtResource("15_js3u0")]
 unique_name_in_owner = true
+visible = false
