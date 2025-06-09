@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=20 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_sc4cw"]
-[ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_l1svk"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="3_ilt2a"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="4_5ffst"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_mra2u"]
@@ -974,10 +973,6 @@ layer_0/tile_data = PackedInt32Array(1179648, 0, 0, 1245184, 0, 1, 1179649, 6553
 
 [node name="Enemy" type="Node" parent="."]
 
-[node name="Goblin" parent="Enemy" instance=ExtResource("2_l1svk")]
-process_mode = 4
-position = Vector2(415, 253)
-
 [node name="CharacterBody2D" parent="Enemy" instance=ExtResource("3_ilt2a")]
 position = Vector2(795, 171)
 
@@ -1049,7 +1044,7 @@ texture = ExtResource("11_t62m7")
 [node name="Hud" parent="." instance=ExtResource("12_t8ayl")]
 
 [node name="FinishPoint" parent="." instance=ExtResource("13_65mii")]
-position = Vector2(1634, 15)
+position = Vector2(1742, 224)
 target_scene = ExtResource("14_16pk1")
 next_scene = "1-2"
 

@@ -49,6 +49,6 @@ func _on_Resumebtn_pressed() -> void:
 	$CanvasLayer/PanelPause/PanelPauseOption.visible = false
 	
 func _on_Exitbtn_pressed() -> void:
-	
+	GlobalVar.reset_game()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")

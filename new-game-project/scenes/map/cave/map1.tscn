@@ -686,7 +686,7 @@ sources/1 = SubResource("TileSetAtlasSource_hmpr6")
 [node name="game" type="Node2D"]
 script = SubResource("GDScript_lgw5x")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="Stage" type="TileMap" parent="."]
 modulate = Color(0.791966, 0.363543, 1.92523e-07, 1)
 tile_set = SubResource("TileSet_781w1")
 format = 2
