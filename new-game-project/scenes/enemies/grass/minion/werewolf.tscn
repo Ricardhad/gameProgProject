@@ -422,8 +422,10 @@ max_health = 10
 
 [node name="AttackController" parent="." instance=ExtResource("10_ugej7")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-8, -1)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 3
 
 [node name="MovementChecker" parent="." instance=ExtResource("11_jikfs")]
 unique_name_in_owner = true
@@ -451,3 +453,5 @@ script = ExtResource("14_7wflt")
 [node name="Senses" parent="." instance=ExtResource("15_js3u0")]
 unique_name_in_owner = true
 visible = false
+
+[editable path="AttackController"]

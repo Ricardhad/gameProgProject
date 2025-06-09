@@ -377,16 +377,6 @@ size = Vector2(20.75, 32)
 collision_layer = 0
 script = ExtResource("1_701y2")
 
-[node name="AttackController" parent="." instance=ExtResource("2_gn05o")]
-unique_name_in_owner = true
-
-[node name="Health" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_v2gpr")
-
-[node name="MovementChecker" parent="." instance=ExtResource("4_4pr4l")]
-unique_name_in_owner = true
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
@@ -399,6 +389,16 @@ script = ExtResource("12_2srjl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.375015, -16)
 shape = SubResource("RectangleShape2D_n8ffi")
+
+[node name="AttackController" parent="." instance=ExtResource("2_gn05o")]
+unique_name_in_owner = true
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_v2gpr")
+
+[node name="MovementChecker" parent="." instance=ExtResource("4_4pr4l")]
+unique_name_in_owner = true
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_0kbtq")]
 collision_layer = 0
@@ -415,3 +415,5 @@ script = ExtResource("15_i044i")
 unique_name_in_owner = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+
+[editable path="AttackController"]

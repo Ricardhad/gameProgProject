@@ -1,5 +1,6 @@
-[gd_scene load_steps=68 format=3 uid="uid://cww188wcwa1rw"]
+[gd_scene load_steps=78 format=3 uid="uid://cww188wcwa1rw"]
 
+[ext_resource type="Script" path="res://scenes/enemies/desert/boss/hellhound_1.gd" id="1_6ryfv"]
 [ext_resource type="Texture2D" uid="uid://ce1e7ueaahka6" path="res://assets/enemies/desert/hellhound/Hellhound_1/Attack_1.png" id="1_ts12v"]
 [ext_resource type="Texture2D" uid="uid://brtgi7c4ewio" path="res://assets/enemies/desert/hellhound/Hellhound_1/Attack_2.png" id="2_m3c45"]
 [ext_resource type="Texture2D" uid="uid://b4qflpjv28khh" path="res://assets/enemies/desert/hellhound/Hellhound_1/Attack_3.png" id="3_v1iai"]
@@ -9,6 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://dcmdnm2nclnff" path="res://assets/enemies/desert/hellhound/Hellhound_1/Jump.png" id="7_3d854"]
 [ext_resource type="Texture2D" uid="uid://wso5vve8r7sh" path="res://assets/enemies/desert/hellhound/Hellhound_1/Run.png" id="8_o0xmy"]
 [ext_resource type="Texture2D" uid="uid://b6s32vdcylk5r" path="res://assets/enemies/desert/hellhound/Hellhound_1/Walk.png" id="9_7mn78"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="11_7mxdq"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="12_iht3v"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="13_3bp2h"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="14_yb7vm"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="15_y7eko"]
+[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="16_rdsm8"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="17_hse3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3mgyt"]
 atlas = ExtResource("1_ts12v")
@@ -457,13 +465,70 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5m2s1"]
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qqkrx"]
+radius = 8.0
+height = 16.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_6ryfv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"attack2"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 flip_h = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(2, -10)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5m2s1")
+
+[node name="AttackController" parent="." instance=ExtResource("11_7mxdq")]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("12_iht3v")
+
+[node name="MovementChecker" parent="." instance=ExtResource("13_3bp2h")]
+unique_name_in_owner = true
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("14_yb7vm")]
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-20, -15)
+shape = SubResource("CapsuleShape2D_qqkrx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(2, -10)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_5m2s1")
+
+[node name="LootDropper" parent="." instance=ExtResource("15_y7eko")]
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("16_rdsm8")
+
+[node name="Senses" parent="." instance=ExtResource("17_hse3o")]
+unique_name_in_owner = true
+
+[node name="ShapeCast2D" parent="Senses/FieldOfView" index="0"]
+position = Vector2(8, -18)
+
+[editable path="AttackController"]
+[editable path="MovementChecker"]
+[editable path="HurtBox"]
+[editable path="Senses"]

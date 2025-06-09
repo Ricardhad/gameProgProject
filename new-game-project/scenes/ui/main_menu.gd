@@ -22,6 +22,15 @@ func _ready() -> void:
 	var sfx_db = AudioServer.get_bus_volume_db(2)
 	sfx_slider.value = db_to_linear(sfx_db)
 
+func _unhandled_input(event: InputEvent) -> void:
+	# Check if the input is a key press event
+	if event is InputEventKey:
+		# Check if the pressed key is 'T' and it's not a repeat event (echo)
+		if event.is_pressed() and not event.is_echo() and event.keycode == KEY_T:
+			# Change this path to your actual testing area scene file
+			get_tree().change_scene_to_file("res://scenes/map/testing/testingArea.tscn")
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
