@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dy8j3k28sxqer"]
+[gd_scene load_steps=15 format=3 uid="uid://dy8j3k28sxqer"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_jqwck"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="3_r8ys0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4d8cqfmyv3oa" path="res://assets/stage/forest/bg/7.png" id="9_1byby"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_6fbeu"]
 [ext_resource type="PackedScene" uid="uid://cww188wcwa1rw" path="res://scenes/enemies/desert/boss/hellhound1.tscn" id="10_7okmm"]
+[ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="11_q3ky4"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -861,3 +862,7 @@ texture = ExtResource("9_1byby")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("10_7okmm")]
 position = Vector2(299, 236)
+
+[node name="BossHealthbar" parent="." instance=ExtResource("11_q3ky4")]
+
+[editable path="BossHealthbar"]

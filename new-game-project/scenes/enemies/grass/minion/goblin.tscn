@@ -408,8 +408,6 @@ health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("14_6mmjq")]
 coin_scene = ExtResource("15_ri7ge")
-coin_min_amount = 6
-coin_max_amount = 10
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
