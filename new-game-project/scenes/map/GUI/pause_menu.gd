@@ -13,7 +13,6 @@ func _ready() -> void:
 	
 	var music_db = AudioServer.get_bus_volume_db(1)
 	music_slider.value = db_to_linear(music_db)
-
 	var sfx_db = AudioServer.get_bus_volume_db(2)
 	sfx_slider.value = db_to_linear(sfx_db)
 
@@ -38,6 +37,7 @@ func _input(event: InputEvent) -> void:
 		if not get_tree().paused:
 			$CanvasLayer/PanelPause.visible = true
 			get_tree().paused = true
+			_refresh_stats_labels()
 		else:
 			$CanvasLayer/PanelPause.visible = false
 			get_tree().paused = false
@@ -52,3 +52,10 @@ func _on_Exitbtn_pressed() -> void:
 	GlobalVar.reset_game()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+
+func _refresh_stats_labels() -> void:
+	$CanvasLayer/PanelPause/Label3/TextureRect/Label.text = str(GlobalVar.hp)
+	$CanvasLayer/PanelPause/Label3/TextureRect2/Label.text = str(GlobalVar.atk)
+	$CanvasLayer/PanelPause/Label3/TextureRect3/Label.text = str(GlobalVar.agi)
+	$CanvasLayer/PanelPause/Label3/TextureRect4/Label.text = str(GlobalVar.def)
+	$CanvasLayer/PanelPause/Label3/TextureRect5/Label.text = str(GlobalVar.maxPot)

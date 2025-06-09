@@ -1,10 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://71cvorklc8yo"]
+[gd_scene load_steps=13 format=3 uid="uid://71cvorklc8yo"]
 
 [ext_resource type="Script" path="res://scenes/map/GUI/pause_menu.gd" id="1_ihtfe"]
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="2_oi75q"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="3_pg4ev"]
 [ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="4_a7e5f"]
+[ext_resource type="Texture2D" uid="uid://cefhxut37ahm4" path="res://assets/item&buff/item/hp.png" id="4_q60hd"]
+[ext_resource type="Texture2D" uid="uid://bjkom2edda8hl" path="res://assets/item&buff/item/atk.png" id="5_82c80"]
 [ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="5_a5c1v"]
+[ext_resource type="Texture2D" uid="uid://b7kcqpbdt4i1d" path="res://assets/item&buff/item/agi.png" id="6_rbxta"]
+[ext_resource type="Texture2D" uid="uid://bp3rludmhyuo6" path="res://assets/item&buff/item/def.png" id="7_8f5yj"]
+[ext_resource type="Texture2D" uid="uid://c4ckhuvatub1n" path="res://assets/item&buff/item/maxPot.png" id="8_se5ds"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1j3tb"]
 texture = ExtResource("2_oi75q")
@@ -18,7 +23,6 @@ script = ExtResource("1_ihtfe")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PanelPause" type="Panel" parent="CanvasLayer"]
-visible = false
 top_level = true
 custom_minimum_size = Vector2(241, 190)
 anchors_preset = 8
@@ -68,6 +72,106 @@ offset_bottom = 285.0
 theme_override_fonts/font = ExtResource("3_pg4ev")
 theme_override_font_sizes/font_size = 40
 text = "Items"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelPause/Label3"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 49.0
+offset_right = 111.0
+offset_bottom = 128.0
+texture = ExtResource("4_q60hd")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Label3/TextureRect"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 81.0
+offset_right = 46.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/PanelPause/Label3"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 49.0
+offset_right = 210.0
+offset_bottom = 128.0
+texture = ExtResource("5_82c80")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Label3/TextureRect2"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 81.0
+offset_right = 46.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/PanelPause/Label3"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 49.0
+offset_right = 310.0
+offset_bottom = 128.0
+texture = ExtResource("6_rbxta")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Label3/TextureRect3"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 81.0
+offset_right = 46.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/PanelPause/Label3"]
+layout_mode = 0
+offset_left = 331.0
+offset_top = 49.0
+offset_right = 410.0
+offset_bottom = 128.0
+texture = ExtResource("7_8f5yj")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Label3/TextureRect4"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 81.0
+offset_right = 46.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer/PanelPause/Label3"]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 49.0
+offset_right = 510.0
+offset_bottom = 128.0
+texture = ExtResource("8_se5ds")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/Label3/TextureRect5"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 81.0
+offset_right = 46.0
+offset_bottom = 126.0
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "0
+"
 horizontal_alignment = 1
 
 [node name="PanelButton" type="Panel" parent="CanvasLayer/PanelPause"]

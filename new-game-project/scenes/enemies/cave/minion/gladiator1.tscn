@@ -16,8 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="13_3vl3y"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="14_xflp3"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="15_1klqb"]
-[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="16_cghgn"]
 [ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="17_41kfx"]
+[ext_resource type="PackedScene" uid="uid://bxq23tiialua0" path="res://scenes/player/consumables/hp.tscn" id="17_ssjjs"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="18_rvmuo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs8i3"]
@@ -520,7 +520,9 @@ position = Vector2(2, -12)
 
 [node name="LootDropper" parent="." instance=ExtResource("15_1klqb")]
 position = Vector2(5, 3.05176e-05)
-coin_scene = ExtResource("16_cghgn")
+coin_scene = ExtResource("17_ssjjs")
+coin_min_amount = 0
+coin_max_amount = 1
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
