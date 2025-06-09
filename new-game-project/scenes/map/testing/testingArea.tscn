@@ -19,9 +19,36 @@ var knight_scene = preload(\"res://scenes/player/player.tscn\")
 
 var current_player = knight_scene
 
+@export var hell_hound_boss: Node
+@export var boss_health_bar: Control # Remember to drag/drop the nodes in the Inspector
+
 func _ready() -> void:
 	Bgm.play_music_forest()
 	spawn_character(current_player)
+	if not hell_hound_boss or not boss_health_bar:
+		printerr(\"Boss or Health Bar not assigned in the Inspector!\")
+		return
+	
+	# Get the Health component from the boss
+	var health_component = hell_hound_boss.get_node(\"Health\")
+	if not health_component:
+		printerr(\"Health component not found on boss!\")
+		return
+
+	# --- NEW CONNECTION LOGIC ---
+
+	# 1. INITIALIZE THE BAR
+	# Give the health bar the starting values from the boss.
+	boss_health_bar.initialize(health_component.max_health, health_component.health)
+
+	# 2. CONNECT THE SIGNALS
+	# Connect the signal that fires when health changes.
+	health_component.health_changed.connect(boss_health_bar.on_health_changed)
+	
+	# (Bonus) Connect the signal that fires when MAX health changes.
+	# This way, the bar will update correctly if the boss enters a new phase
+	# with more or less maximum health.
+	health_component.max_health_changed.connect(boss_health_bar.on_max_health_changed)
 
 func remove_existing_players():
 	for child in get_children():
@@ -784,8 +811,10 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(1, 0, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_waqkv")
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" node_paths=PackedStringArray("hell_hound_boss", "boss_health_bar")]
 script = SubResource("GDScript_lgw5x")
+hell_hound_boss = NodePath("CharacterBody2D")
+boss_health_bar = NodePath("BossHealthbar/MarginContainer")
 
 [node name="Stage" type="TileMap" parent="."]
 modulate = Color(0.666667, 1, 1, 1)
