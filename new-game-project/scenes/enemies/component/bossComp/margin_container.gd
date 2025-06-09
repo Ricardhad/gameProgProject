@@ -1,27 +1,36 @@
 # BossHealthBar.gd
 extends MarginContainer
 
-# Get references to the nodes we need to change.
 @onready var progress_bar: TextureProgressBar = $VBoxContainer/HealthBar
-@onready var label: Label = $VBoxContainer/Label
 
-# This function will be called by the boss to update the health bar.
-# It takes the boss's current health and max health as arguments.
-func update_health(current_health: float, max_health: float):
-	# Calculate the health percentage.
-	# We use max() to prevent division by zero if max_health is somehow 0.
-	var health_percent = 100.0 * (current_health / max(1.0, max_health))
-	
-	# Set the progress bar's value. The bar automatically handles the visuals.
-	progress_bar.value = health_percent
+# The health bar will now store its own copy of the health values.
+var current_health: int
+var max_health: int
 
-# A function to set the boss's name on the label.
-func set_boss_name(boss_name: String):
-	label.text = boss_name
+# A new function to set up the bar with the boss's starting health.
+func initialize(start_max_health: int, start_current_health: int):
+	max_health = start_max_health
+	current_health = start_current_health
+	_update_bar() # Update the visuals immediately
 
-# We can also add simple show/hide functions for convenience.
-func show_bar():
-	show()
+# This function will be connected to the boss's health_changed signal.
+# It receives the *difference* and applies it.
+func on_health_changed(difference: int):
+	current_health += difference
+	_update_bar()
 
-func hide_bar():
-	hide()
+# This function will be connected to the boss's max_health_changed signal.
+func on_max_health_changed(difference: int):
+	max_health += difference
+	# If current health is now higher than the new max, clamp it.
+	if current_health > max_health:
+		current_health = max_health
+	_update_bar()
+
+# A private helper function to handle the visual update.
+func _update_bar():
+	# Calculate the percentage and update the progress bar's value.
+	if max_health > 0:
+		progress_bar.value = (float(current_health) / float(max_health)) * 100.0
+	else:
+		progress_bar.value = 0
