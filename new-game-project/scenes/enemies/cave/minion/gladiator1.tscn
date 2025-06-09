@@ -522,7 +522,7 @@ position = Vector2(2, -12)
 position = Vector2(5, 3.05176e-05)
 coin_scene = ExtResource("17_ssjjs")
 coin_min_amount = 0
-coin_max_amount = 0
+coin_max_amount = 2
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true

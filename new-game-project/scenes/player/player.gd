@@ -176,8 +176,13 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	else:
 		jump_count = 0
-
-	if jump_intent and jump_count < max_jumps:
+	if is_on_floor() and Input.is_action_pressed("down") and jump_intent:
+		print("going down")
+		# Setting a small positive y velocity is enough to pass through one-way platforms.
+		global_position.y += 10
+		velocity.y = 150.0
+		
+	elif jump_intent and jump_count < max_jumps:
 		# First jump: no cooldown
 		if jump_count == 0:
 			velocity.y = JUMP_VELOCITY
