@@ -1,6 +1,7 @@
-[gd_scene load_steps=68 format=3 uid="uid://m4arjnke8gme"]
+[gd_scene load_steps=79 format=3 uid="uid://m4arjnke8gme"]
 
 [ext_resource type="Texture2D" uid="uid://b2p5goy6hsr52" path="res://assets/enemies/cave/gladiator/Gladiator_1/Attack_1.png" id="1_jb46l"]
+[ext_resource type="Script" path="res://scenes/enemies/cave/minion/gladiator_1.gd" id="1_mje3y"]
 [ext_resource type="Texture2D" uid="uid://1yhjc21r7yb1" path="res://assets/enemies/cave/gladiator/Gladiator_1/Attack_2.png" id="2_kwe10"]
 [ext_resource type="Texture2D" uid="uid://dyyiq47clmdnr" path="res://assets/enemies/cave/gladiator/Gladiator_1/Dead.png" id="3_55le7"]
 [ext_resource type="Texture2D" uid="uid://bg833t7dmbi73" path="res://assets/enemies/cave/gladiator/Gladiator_1/Hurt.png" id="4_fql4q"]
@@ -9,6 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://31g6rx6v6emq" path="res://assets/enemies/cave/gladiator/Gladiator_1/Run.png" id="7_2fgpp"]
 [ext_resource type="Texture2D" uid="uid://tucmxidkjr1x" path="res://assets/enemies/cave/gladiator/Gladiator_1/Special.png" id="8_7gny2"]
 [ext_resource type="Texture2D" uid="uid://bcl4nx4ulr3xh" path="res://assets/enemies/cave/gladiator/Gladiator_1/Walk.png" id="9_g6p6y"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="10_iyakg"]
+[ext_resource type="PackedScene" uid="uid://bftm30u88xwyc" path="res://scenes/enemies/component/Health.tscn" id="11_60u4u"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_25hu2"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="13_3vl3y"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="14_xflp3"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="15_1klqb"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="16_cghgn"]
+[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="17_41kfx"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="18_rvmuo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs8i3"]
 atlas = ExtResource("1_jb46l")
@@ -257,7 +267,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_l3ycu")
 }],
 "loop": false,
-"name": &"attack1",
+"name": &"attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -457,13 +467,71 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2te07"]
+radius = 8.99977
+height = 41.999
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_mje3y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.49997, -38.5)
+position = Vector2(1.50003, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("10_iyakg")
+
+[node name="Health" parent="." instance=ExtResource("11_60u4u")]
+unique_name_in_owner = true
+max_health = 10
+
+[node name="AttackController" parent="." instance=ExtResource("12_25hu2")]
+unique_name_in_owner = true
+position = Vector2(-3, -0.999969)
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(25, -14.75)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 3
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(26, -20)
+
+[node name="MovementChecker" parent="." instance=ExtResource("13_3vl3y")]
+unique_name_in_owner = true
+position = Vector2(-13, -2.99997)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -21)
+rotation = 3.13453
+shape = SubResource("CapsuleShape2D_2te07")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("14_xflp3")]
+position = Vector2(-2, -8.99997)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(2, -12)
+
+[node name="LootDropper" parent="." instance=ExtResource("15_1klqb")]
+position = Vector2(5, 3.05176e-05)
+coin_scene = ExtResource("16_cghgn")
+coin_min_amount = 6
+coin_max_amount = 10
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("17_41kfx")
+
+[node name="Senses" parent="." instance=ExtResource("18_rvmuo")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]
+[editable path="HurtBox"]
