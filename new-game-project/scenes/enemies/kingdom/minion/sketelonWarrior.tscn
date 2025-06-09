@@ -1,5 +1,6 @@
-[gd_scene load_steps=50 format=3 uid="uid://xvgkein03fuj"]
+[gd_scene load_steps=52 format=3 uid="uid://xvgkein03fuj"]
 
+[ext_resource type="Script" path="res://scenes/enemies/kingdom/minion/sketelon_warrior.gd" id="1_g53kg"]
 [ext_resource type="Texture2D" uid="uid://bgtx7hsomf62i" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Attack_1.png" id="1_oswva"]
 [ext_resource type="Texture2D" uid="uid://8fk7tfpbf73b" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Dead.png" id="2_4iqio"]
 [ext_resource type="Texture2D" uid="uid://c5uuhoj74fqo4" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Hurt.png" id="3_amdlt"]
@@ -7,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dg31ya62gxmyn" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Run.png" id="5_qcpcn"]
 [ext_resource type="Texture2D" uid="uid://cfxxsn76pcauy" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Walk.png" id="6_uu281"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="7_8qd3u"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="8_ab4ro"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="8_k2h4o"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="9_0rn4j"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="10_wnu8r"]
@@ -284,6 +286,7 @@ size = Vector2(20.75, 32)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_g53kg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -292,6 +295,7 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"run"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("8_ab4ro")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.375015, -16)
@@ -307,9 +311,10 @@ script = ExtResource("8_k2h4o")
 [node name="MovementChecker" parent="." instance=ExtResource("9_0rn4j")]
 unique_name_in_owner = true
 
-[node name="HurtBox" parent="." instance=ExtResource("10_wnu8r")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_wnu8r")]
 collision_layer = 0
 collision_mask = 2
+health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("11_22wny")]
 coin_scene = ExtResource("12_261f2")

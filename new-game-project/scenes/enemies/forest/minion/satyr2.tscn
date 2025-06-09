@@ -1,10 +1,20 @@
-[gd_scene load_steps=42 format=3 uid="uid://cfxmu00q14nxk"]
+[gd_scene load_steps=53 format=3 uid="uid://cfxmu00q14nxk"]
 
+[ext_resource type="Script" path="res://scenes/enemies/forest/minion/satyr_2.gd" id="1_6308q"]
 [ext_resource type="Texture2D" uid="uid://by55sq23kpw86" path="res://assets/enemies/forest/satyr/Satyr_2/Attack.png" id="1_f6h3y"]
 [ext_resource type="Texture2D" uid="uid://cs3tr3ctegsau" path="res://assets/enemies/forest/satyr/Satyr_2/Dead.png" id="2_3kfma"]
 [ext_resource type="Texture2D" uid="uid://ekxni48hdbtd" path="res://assets/enemies/forest/satyr/Satyr_2/Hurt.png" id="3_xgags"]
 [ext_resource type="Texture2D" uid="uid://c1l8vnk1xsare" path="res://assets/enemies/forest/satyr/Satyr_2/Idle.png" id="4_xpsp8"]
 [ext_resource type="Texture2D" uid="uid://b3em6rij1tgbg" path="res://assets/enemies/forest/satyr/Satyr_2/Walk.png" id="5_61gat"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="7_6vp8r"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_o6ghr"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="9_ukiom"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_oihqk"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="11_h3hfa"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="12_dhvch"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="13_o8keg"]
+[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="14_0uvi8"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_7njmd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wy8oq"]
 atlas = ExtResource("1_f6h3y")
@@ -279,8 +289,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b464"]
+size = Vector2(19, 39)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_6308q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -289,3 +303,40 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("7_6vp8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.499993, -19.5)
+shape = SubResource("RectangleShape2D_2b464")
+
+[node name="AttackController" parent="." instance=ExtResource("8_o6ghr")]
+unique_name_in_owner = true
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_ukiom")
+
+[node name="MovementChecker" parent="." instance=ExtResource("10_oihqk")]
+unique_name_in_owner = true
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("11_h3hfa")]
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-0.5, -19)
+
+[node name="LootDropper" parent="." instance=ExtResource("12_dhvch")]
+coin_scene = ExtResource("13_o8keg")
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("14_0uvi8")
+
+[node name="Senses" parent="." instance=ExtResource("15_7njmd")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]
+[editable path="HurtBox"]

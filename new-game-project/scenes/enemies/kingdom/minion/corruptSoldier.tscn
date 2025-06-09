@@ -1,11 +1,21 @@
-[gd_scene load_steps=35 format=3 uid="uid://duqyk1bcrjkms"]
+[gd_scene load_steps=46 format=3 uid="uid://duqyk1bcrjkms"]
 
+[ext_resource type="Script" path="res://scenes/enemies/kingdom/minion/corrupt_soldier.gd" id="1_lgpvm"]
 [ext_resource type="Texture2D" uid="uid://luxh4yexn8tc" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Attack.png" id="1_xveia"]
 [ext_resource type="Texture2D" uid="uid://cs1jabs5f1gg5" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Dead.png" id="2_afx4t"]
 [ext_resource type="Texture2D" uid="uid://dbwkun04nbifd" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Hurt.png" id="3_28803"]
 [ext_resource type="Texture2D" uid="uid://djesrkfhtlb7u" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Idle.png" id="4_pevna"]
 [ext_resource type="Texture2D" uid="uid://cr81c4cf6hhep" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Special.png" id="5_uxdu5"]
 [ext_resource type="Texture2D" uid="uid://boylckcvx4ciy" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Walk.png" id="6_5nojq"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="8_yn02v"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="9_f7ccc"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="10_4a0fv"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="11_qgtq5"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="12_8t40q"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="13_ikrh2"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="14_elir0"]
+[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="15_eseim"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="16_vihre"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_006ds"]
 atlas = ExtResource("1_xveia")
@@ -229,8 +239,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oamnm"]
+size = Vector2(20.75, 32)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_lgpvm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -239,3 +253,36 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"dead"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("8_yn02v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.375015, -16)
+shape = SubResource("RectangleShape2D_oamnm")
+
+[node name="AttackController" parent="." instance=ExtResource("9_f7ccc")]
+unique_name_in_owner = true
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_4a0fv")
+
+[node name="MovementChecker" parent="." instance=ExtResource("11_qgtq5")]
+unique_name_in_owner = true
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_8t40q")]
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="LootDropper" parent="." instance=ExtResource("13_ikrh2")]
+coin_scene = ExtResource("14_elir0")
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_eseim")
+
+[node name="Senses" parent="." instance=ExtResource("16_vihre")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]
