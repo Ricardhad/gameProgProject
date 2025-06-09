@@ -1,10 +1,20 @@
-[gd_scene load_steps=38 format=3 uid="uid://utm575cxacob"]
+[gd_scene load_steps=49 format=3 uid="uid://utm575cxacob"]
 
+[ext_resource type="Script" path="res://scenes/enemies/cave/minion/demon_3.gd" id="1_ah704"]
 [ext_resource type="Texture2D" uid="uid://baqvsgdjtsqxu" path="res://assets/enemies/cave/demon/Demon_3/Attack.png" id="1_x4p1i"]
 [ext_resource type="Texture2D" uid="uid://1mrvnfr5deh" path="res://assets/enemies/cave/demon/Demon_3/Dead.png" id="2_5ewxj"]
 [ext_resource type="Texture2D" uid="uid://iyt8l2472l7q" path="res://assets/enemies/cave/demon/Demon_3/Hurt.png" id="3_f3drq"]
 [ext_resource type="Texture2D" uid="uid://c8u5efp27bq0y" path="res://assets/enemies/cave/demon/Demon_3/Idle.png" id="4_b51j6"]
 [ext_resource type="Texture2D" uid="uid://dv5ahwc6vu1eq" path="res://assets/enemies/cave/demon/Demon_3/Walk.png" id="5_5eyjw"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="7_7q6a4"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_iefg5"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="9_h3w2l"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_campi"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="11_7dbav"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="12_5skiq"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="13_koo5x"]
+[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="14_m5rcd"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_xxw0j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8lgi0"]
 atlas = ExtResource("1_x4p1i")
@@ -251,13 +261,66 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t0ad"]
+size = Vector2(25, 34)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_ah704")
+SPEED = 300.0
+JUMP_VELOCITY = -400.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.49997, -38.5)
+position = Vector2(3, -39)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("7_7q6a4")
+
+[node name="AttackController" parent="." instance=ExtResource("8_iefg5")]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(23, -15)
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(23, -24)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("9_h3w2l")
+max_health = 20
+
+[node name="MovementChecker" parent="." instance=ExtResource("10_campi")]
+unique_name_in_owner = true
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("11_7dbav")]
+collision_layer = 0
+collision_mask = 2
+health = NodePath("")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-1.5, -17)
+shape = SubResource("RectangleShape2D_0t0ad")
+
+[node name="LootDropper" parent="." instance=ExtResource("12_5skiq")]
+coin_scene = ExtResource("13_koo5x")
+coin_min_amount = 10
+coin_max_amount = 20
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("14_m5rcd")
+
+[node name="Senses" parent="." instance=ExtResource("15_xxw0j")]
+unique_name_in_owner = true
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -17)
+shape = SubResource("RectangleShape2D_0t0ad")
+
+[editable path="AttackController"]
+[editable path="HurtBox"]

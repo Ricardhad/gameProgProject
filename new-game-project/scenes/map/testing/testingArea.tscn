@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dy8j3k28sxqer"]
+[gd_scene load_steps=18 format=3 uid="uid://dy8j3k28sxqer"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_jqwck"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="3_r8ys0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="11_q3ky4"]
 [ext_resource type="PackedScene" uid="uid://m4arjnke8gme" path="res://scenes/enemies/cave/minion/gladiator1.tscn" id="12_a3gsb"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_7fri4"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="14_1chk0"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -900,5 +901,8 @@ texture = ExtResource("9_1byby")
 position = Vector2(810.536, 244.613)
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_7fri4")]
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("14_1chk0")]
+position = Vector2(554.93, 234.308)
 
 [editable path="BossHealthbar"]
