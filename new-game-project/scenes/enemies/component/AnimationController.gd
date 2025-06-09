@@ -43,11 +43,12 @@ func _on_death() -> void:
 func _on_animation_finished() -> void:
 	# If the "hurt" animation has just finished...
 	
+	# Inside AnimationController.gd -> _on_animation_finished()
+
 	if animation == "hurt":
-		# ...tell the StateMachine to go back to whatever it was doing before.
-		# This is much cleaner. The AnimationController requests a change,
-		# and the StateMachine handles the logic.
-		state_machine.change_state(last_state)
+		# This is the new, more aggressive logic
+		state_machine.change_state(StateMachine.State.CHASE)
 	
 	if animation == "dead":
-		get_parent().queue_free()
+		# This tells Godot to wait until it's safe before deleting the goblin.
+		get_parent().call_deferred("queue_free")

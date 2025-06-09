@@ -64,6 +64,7 @@ grow_vertical = 2
 bus = &"SFX"
 
 [node name="ButtonSkip" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 1039.0
 offset_top = 575.0
 offset_right = 1147.0
