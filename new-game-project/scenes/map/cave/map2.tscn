@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dwgdqkxthac43"]
+[gd_scene load_steps=19 format=3 uid="uid://dwgdqkxthac43"]
 
 [ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_a178l"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_mtw8c"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cetptf6cbe02y" path="res://assets/stage/cave/bg/8.png" id="9_ykunq"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_axi1h"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_o8cjj"]
+[ext_resource type="PackedScene" uid="uid://21ywvluhem1r" path="res://scenes/map/cave/map3.tscn" id="12_7y4dl"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_gkuho"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
@@ -1206,7 +1207,8 @@ position = Vector2(288, 448)
 [node name="FinishPoint" parent="." instance=ExtResource("11_o8cjj")]
 modulate = Color(3, 0, 0, 1)
 position = Vector2(1935, 223)
-next_scene = "2-"
+target_scene = ExtResource("12_7y4dl")
+next_scene = "2-3"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_gkuho")]
 position = Vector2(304, 421)
