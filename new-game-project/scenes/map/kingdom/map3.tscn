@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://c01jvjc2axuh1"]
+[gd_scene load_steps=16 format=3 uid="uid://c01jvjc2axuh1"]
 
 [ext_resource type="Texture2D" uid="uid://duh3c0ktwekal" path="res://assets/stage/kingdom/tileset.png" id="1_jg654"]
 [ext_resource type="Texture2D" uid="uid://bx603gulf31ny" path="res://assets/stage/kingdom/bg/1.png" id="2_73rsk"]
 [ext_resource type="Texture2D" uid="uid://cmvfbuj53wfpf" path="res://assets/stage/kingdom/bg/2.png" id="3_rni1t"]
 [ext_resource type="Texture2D" uid="uid://blp6dqgv3374f" path="res://assets/stage/kingdom/bg/3.png" id="4_30x18"]
 [ext_resource type="Texture2D" uid="uid://cmgmwr8058yyj" path="res://assets/stage/kingdom/bg/4.png" id="5_mcp0t"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="6_607lm"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="7_i88ha"]
+[ext_resource type="PackedScene" uid="uid://bwngut7qvsjp0" path="res://scenes/ui/GameOver.tscn" id="8_ckvyq"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="9_aslv4"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -14,7 +18,7 @@ var knight_scene = preload(\"res://scenes/player/player.tscn\")
 var current_player = knight_scene
 
 func _ready() -> void:
-	Bgm.play_music_forest()
+	Bgm.play_music_kingdom()
 	spawn_character(current_player)
 
 func remove_existing_players():
@@ -151,3 +155,13 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(288, 162)
 texture = ExtResource("5_mcp0t")
+
+[node name="Hud" parent="." instance=ExtResource("6_607lm")]
+
+[node name="FinishPoint" parent="." instance=ExtResource("7_i88ha")]
+modulate = Color(0.16, 0.064, 0.016, 1)
+position = Vector2(1042, 227)
+target_scene = ExtResource("8_ckvyq")
+next_scene = "1-1"
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_aslv4")]

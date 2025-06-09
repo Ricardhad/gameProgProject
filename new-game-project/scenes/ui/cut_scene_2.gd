@@ -55,7 +55,7 @@ func _ready() -> void:
 	auto_next_timer.timeout.connect(_next_dialogue)
 
 	start_dialogue()    # mulai dialog pertama
-
+	Bgm.play_music_cutscene2()
 
 # ────────────────────────────────────────────────────────────────
 func start_dialogue() -> void:

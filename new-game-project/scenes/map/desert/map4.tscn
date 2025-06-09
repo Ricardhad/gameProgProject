@@ -19,7 +19,7 @@ var knight_scene = preload(\"res://scenes/player/player.tscn\")
 var current_player = knight_scene
 
 func _ready() -> void:
-	Bgm.play_music_forest()
+	Bgm.play_music_desert()
 	spawn_character(current_player)
 
 func remove_existing_players():

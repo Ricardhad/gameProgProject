@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://o6xunn7mtgj6"]
+[gd_scene load_steps=16 format=3 uid="uid://o6xunn7mtgj6"]
 
 [ext_resource type="Texture2D" uid="uid://duh3c0ktwekal" path="res://assets/stage/kingdom/tileset.png" id="1_r32k7"]
 [ext_resource type="Texture2D" uid="uid://bx603gulf31ny" path="res://assets/stage/kingdom/bg/1.png" id="2_rj1vm"]
 [ext_resource type="Texture2D" uid="uid://cmvfbuj53wfpf" path="res://assets/stage/kingdom/bg/2.png" id="3_pe5gt"]
 [ext_resource type="Texture2D" uid="uid://blp6dqgv3374f" path="res://assets/stage/kingdom/bg/3.png" id="4_kraex"]
 [ext_resource type="Texture2D" uid="uid://cmgmwr8058yyj" path="res://assets/stage/kingdom/bg/4.png" id="5_rlap8"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="6_32avh"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="7_87fho"]
+[ext_resource type="PackedScene" uid="uid://br7nswx6l4jc" path="res://scenes/map/kingdom/map2.tscn" id="8_gh21x"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="9_itvbx"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -14,7 +18,7 @@ var knight_scene = preload(\"res://scenes/player/player.tscn\")
 var current_player = knight_scene
 
 func _ready() -> void:
-	Bgm.play_music_forest()
+	Bgm.play_music_kingdom()
 	spawn_character(current_player)
 
 func remove_existing_players():
@@ -151,3 +155,13 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(288, 162)
 texture = ExtResource("5_rlap8")
+
+[node name="Hud" parent="." instance=ExtResource("6_32avh")]
+
+[node name="FinishPoint" parent="." instance=ExtResource("7_87fho")]
+modulate = Color(0.16, 0.064, 0.016, 1)
+position = Vector2(1042, 227)
+target_scene = ExtResource("8_gh21x")
+next_scene = "4-2"
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_itvbx")]
