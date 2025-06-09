@@ -48,8 +48,10 @@ func _on_stage_pressed(stage_id: String, data: Dictionary) -> void:
 func _on_confirm_pressed() -> void:
 	match selected_stage_id:
 		"Stage1(1)":
-			get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
 		"Stage1(2)":
-			get_tree().change_scene_to_file("res://scenes/ui/selecting_chr.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/forest/map1.tscn")
+		"Stage2(1)":
+			get_tree().change_scene_to_file("res://scenes/map/cave/map1.tscn")
 		_:
 			print("Stage '%s' belum memiliki scene untuk dipindahkan." % selected_stage_id)

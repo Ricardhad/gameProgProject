@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://d0w7ypj1q0u1i"]
 
 [ext_resource type="Texture2D" uid="uid://d1ssdgiypve7m" path="res://assets/npc/peasants/Peasants_3/Dialogue.png" id="1_f5huh"]
-[ext_resource type="Script" path="res://scenes/npc/peasant/npc.gd" id="1_gturo"]
+[ext_resource type="Script" path="res://scenes/npc/peasant/npc3.gd" id="1_gturo"]
 [ext_resource type="Texture2D" uid="uid://cbv61u44ohwci" path="res://assets/npc/peasants/Peasants_3/Idle.png" id="2_8vxqg"]
 [ext_resource type="Texture2D" uid="uid://cso62sy561uog" path="res://assets/npc/peasants/Peasants_3/Walk.png" id="3_jx5nu"]
 
@@ -228,7 +228,6 @@ position = Vector2(1, -16)
 shape = SubResource("RectangleShape2D_cljqm")
 
 [node name="InteractionPrompt" type="Label" parent="."]
-visible = false
 offset_left = 10.0
 offset_top = -45.0
 offset_right = 50.0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de3qn7x528pr8"
-path="res://.godot/imported/tileset.png-506bf360df702b97df7c532ab1613c4a.ctex"
+uid="uid://w1vur3yjo0vh"
+path="res://.godot/imported/Potion.png-656c5e735af11a59b41bb83cd2677b87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/cave/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-506bf360df702b97df7c532ab1613c4a.ctex"]
+source_file="res://assets/item&buff/buff/Potion.png"
+dest_files=["res://.godot/imported/Potion.png-656c5e735af11a59b41bb83cd2677b87.ctex"]
 
 [params]
 

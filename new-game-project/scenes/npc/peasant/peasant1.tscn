@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://cjciwglh1tqoo"]
+[gd_scene load_steps=33 format=3 uid="uid://cjciwglh1tqoo"]
 
+[ext_resource type="Script" path="res://scenes/npc/peasant/npc2.gd" id="1_vmpg2"]
 [ext_resource type="Texture2D" uid="uid://b0ruh0e1hyibu" path="res://assets/npc/peasants/Peasants_1/Dialogue.png" id="1_xyox3"]
 [ext_resource type="Texture2D" uid="uid://djj8a6t3nqeon" path="res://assets/npc/peasants/Peasants_1/Idle.png" id="2_qkl1d"]
 [ext_resource type="Texture2D" uid="uid://c5xrwhiwd60d1" path="res://assets/npc/peasants/Peasants_1/Walk.png" id="3_qdfnc"]
@@ -213,6 +214,7 @@ animations = [{
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_vmpg2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
