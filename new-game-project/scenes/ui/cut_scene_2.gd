@@ -4,7 +4,7 @@ extends Node2D
 @onready var panel_face      = $PanelTextBoxHero/PanelFace
 @onready var dialogue_timer  = $DialogueTimer     # timer huruf-per-huruf
 @onready var auto_next_timer = $AutoNextTimer     # timer jeda antar-dialog
-
+@onready var fade_rect: ColorRect = $ColorRect
 # texture wajah
 var face_hero  : Texture
 var face_king  : Texture
@@ -81,7 +81,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			label_text_box.text = current_text
 			auto_next_timer.start()
 
-
 func _end_cutscene() -> void:
-	print("Semua dialog selesai – ganti scene di sini jika perlu")
-	# get_tree().change_scene_to_file("res://next_scene.tscn")
+	#print("Semua dialog selesai – ganti scene di sini jika perlu")
+	# Ganti dengan path scene yang dituju
+	Transition1.change_scene("res://scenes/map/grass/map1.tscn")

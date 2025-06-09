@@ -421,7 +421,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r6al4")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="PanelBackGround" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -430,7 +430,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_rigya")
 
-[node name="Panel" type="Panel" parent="Panel"]
+[node name="PanelBackGroundChr" type="Panel" parent="PanelBackGround"]
 layout_mode = 0
 offset_left = 440.0
 offset_top = 10.0
@@ -438,7 +438,7 @@ offset_right = 766.0
 offset_bottom = 318.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_unh1v")
 
-[node name="leftbtn" type="TextureButton" parent="Panel"]
+[node name="leftbtn" type="TextureButton" parent="PanelBackGround"]
 layout_mode = 0
 offset_left = 251.0
 offset_top = 97.0
@@ -448,7 +448,7 @@ size_flags_vertical = 3
 texture_normal = ExtResource("4_1hsav")
 stretch_mode = 0
 
-[node name="rightbtn" type="TextureButton" parent="Panel"]
+[node name="rightbtn" type="TextureButton" parent="PanelBackGround"]
 layout_mode = 0
 offset_left = 800.0
 offset_top = 109.0
@@ -459,7 +459,7 @@ texture_normal = ExtResource("4_1hsav")
 stretch_mode = 0
 flip_h = true
 
-[node name="Panel2" type="Panel" parent="Panel"]
+[node name="PanelDetail" type="Panel" parent="PanelBackGround"]
 layout_mode = 0
 offset_left = 265.0
 offset_top = 320.0
@@ -467,7 +467,7 @@ offset_right = 912.0
 offset_bottom = 584.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_klq6g")
 
-[node name="Label" type="Label" parent="Panel/Panel2"]
+[node name="LabelName" type="Label" parent="PanelBackGround/PanelDetail"]
 layout_mode = 0
 offset_left = 233.0
 offset_top = 41.0
@@ -479,7 +479,7 @@ theme_override_font_sizes/font_size = 40
 text = "Knight"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="Panel/Panel2"]
+[node name="LabelHP" type="Label" parent="PanelBackGround/PanelDetail"]
 layout_mode = 0
 offset_left = 129.0
 offset_top = 94.0
@@ -491,7 +491,7 @@ theme_override_font_sizes/font_size = 40
 text = "HP: 150"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="Panel/Panel2"]
+[node name="LabelStamina" type="Label" parent="PanelBackGround/PanelDetail"]
 layout_mode = 0
 offset_left = 136.0
 offset_top = 123.0
@@ -504,7 +504,7 @@ text = "Mana: 70
 "
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="Panel/Panel2"]
+[node name="LabelPassive" type="Label" parent="PanelBackGround/PanelDetail"]
 layout_mode = 0
 offset_left = 139.0
 offset_top = 156.0
@@ -565,12 +565,13 @@ horizontal_alignment = 1
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
 modulate = Color(0, 0, 0, 1)
+top_level = true
 layout_mode = 0
 offset_right = 1151.0
 offset_bottom = 648.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(596, 134)
+position = Vector2(597, 125)
 scale = Vector2(3.52608, 3.52608)
 sprite_frames = SubResource("SpriteFrames_ehqmw")
 animation = &"idle"

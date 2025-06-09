@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvtewt1n53wa2"]
+[gd_scene load_steps=5 format=3 uid="uid://cvtewt1n53wa2"]
 
 [ext_resource type="Script" path="res://scenes/ui/cut_scene_1.gd" id="1_i1qep"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="2_hdpsb"]
+[ext_resource type="Texture2D" uid="uid://daw8gbqvteqi5" path="res://assets/option_menu/ButtonUnclicked.png" id="3_5vorc"]
+[ext_resource type="Texture2D" uid="uid://bfabpf87xig08" path="res://assets/main_menu/button_clicked_menu.png" id="4_cdh4b"]
 
 [node name="CutScene1" type="Control"]
 layout_mode = 3
@@ -61,4 +63,27 @@ grow_vertical = 2
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
 
+[node name="ButtonSkip" type="TextureButton" parent="."]
+offset_left = 1039.0
+offset_top = 575.0
+offset_right = 1147.0
+offset_bottom = 645.0
+size_flags_vertical = 3
+texture_normal = ExtResource("3_5vorc")
+texture_pressed = ExtResource("4_cdh4b")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ButtonSkip"]
+layout_mode = 2
+offset_left = -21.0
+offset_top = 7.0
+offset_right = 137.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("2_hdpsb")
+theme_override_font_sizes/font_size = 40
+text = "Skip
+"
+horizontal_alignment = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="ButtonSkip" to="." method="_on_button_skip_pressed"]

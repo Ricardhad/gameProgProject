@@ -692,7 +692,7 @@ autoplay = "idle"
 frame_progress = 0.119338
 
 [node name="DialogueTimer" type="Timer" parent="."]
-wait_time = 0.006
+wait_time = 0.353
 
 [node name="PanelTextBoxHero" type="Panel" parent="."]
 anchors_preset = -1
@@ -729,3 +729,10 @@ offset_bottom = 133.0
 scale = Vector2(0.8, 0.8)
 
 [node name="AutoNextTimer" type="Timer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+top_level = true
+offset_right = 1151.0
+offset_bottom = 648.0

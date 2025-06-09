@@ -85,13 +85,13 @@ func _ready() -> void:
 
 	health.health_changed.connect(_on_health_changed)
 
-	field_of_view.body_entered.connect(_on_field_of_view_body_entered)
+	#field_of_view.body_entered.connect(_on_field_of_view_body_entered)
 	field_of_view.body_exited.connect(_on_field_of_view_body_exited)
 	proximity_sense.body_entered.connect(_on_proximity_sense_body_entered)
 	proximity_sense.body_exited.connect(_on_proximity_sense_body_exited)
 	
-	player_detect_area.body_entered.connect(_on_player_detect_body_entered)
-	player_detect_area.body_exited.connect(_on_player_detect_body_exited)
+	#player_detect_area.body_entered.connect(_on_player_detect_body_entered)
+	#player_detect_area.body_exited.connect(_on_player_detect_body_exited)
 	hit_box_area.body_entered.connect(_on_hit_box_area_body_entered)
 
 func _on_health_changed(diff: int) -> void:

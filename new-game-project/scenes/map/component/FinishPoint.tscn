@@ -21,4 +21,11 @@ texture = ExtResource("2_ob7ty")
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_ec8s2")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 1)
+top_level = true
+offset_right = 1151.0
+offset_bottom = 648.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

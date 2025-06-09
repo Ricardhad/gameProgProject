@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cn2m3gndp50e4"
-path="res://.godot/imported/tileset.png-80ff62bc08acb9d365664c61d85e2a57.ctex"
+uid="uid://dy4qpm27hmn0a"
+path="res://.godot/imported/coin_spin-Sheet.png-7a971b5f93d3fd30ab10f9368949337e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/stage/grass/tileset.png"
-dest_files=["res://.godot/imported/tileset.png-80ff62bc08acb9d365664c61d85e2a57.ctex"]
+source_file="res://assets/selecting_menu/coin_spin-Sheet.png"
+dest_files=["res://.godot/imported/coin_spin-Sheet.png-7a971b5f93d3fd30ab10f9368949337e.ctex"]
 
 [params]
 
