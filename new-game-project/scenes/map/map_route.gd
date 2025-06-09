@@ -23,14 +23,15 @@ func _ready() -> void:
 		"RestStop2": {"stage": "Rest Stop", "difficulty": "-", "total_enemy": "0", "encounter": []},
 		"RestStop3": {"stage": "Rest Stop", "difficulty": "-", "total_enemy": "0", "encounter": []},
 	}
-
+	
 	for name in stage_data.keys():
 		var button = $Panel.get_node_or_null(name)
 		if button:
 			button.connect("pressed", Callable(self, "_on_stage_pressed").bind(name, stage_data[name]))
-
 	# Hubungkan tombol Confirm
 	confirm_button.connect("pressed", Callable(self, "_on_confirm_pressed"))
+	
+	Bgm.play_music_maproute()
 
 func _on_stage_pressed(stage_id: String, data: Dictionary) -> void:
 	selected_stage_id = stage_id
@@ -49,16 +50,22 @@ func _on_confirm_pressed() -> void:
 	match selected_stage_id:
 		"Stage1(1)":
 			get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
+			GlobalVar.current_stage = "1-1"
 		"Stage1(2)":
 			get_tree().change_scene_to_file("res://scenes/map/forest/map1.tscn")
+			GlobalVar.current_stage = "1-1"
 		"Stage2(1)":
 			get_tree().change_scene_to_file("res://scenes/map/cave/map1.tscn")
+			GlobalVar.current_stage = "2-1"
 		"Stage2(2)":
 			get_tree().change_scene_to_file("res://scenes/map/snow/map1.tscn")
+			GlobalVar.current_stage = "2-1"
 		"Stage3(1)":
 			get_tree().change_scene_to_file("res://scenes/map/desert/map1.tscn")
+			GlobalVar.current_stage = "3-1"
 		"Boss":
 			get_tree().change_scene_to_file("res://scenes/map/kingdom/map1.tscn")
+			GlobalVar.current_stage = "4-1"
 		"RestStop1":
 			get_tree().change_scene_to_file("res://scenes/map/tavern/map.tscn")
 		"RestStop2":

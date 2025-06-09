@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bftas0gkjj1yu"]
+[gd_scene load_steps=16 format=3 uid="uid://bftas0gkjj1yu"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_1lhn0"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="2_ekcpp"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://kk8f6pqst6h4" path="res://assets/stage/forest/bg/6.png" id="7_uktro"]
 [ext_resource type="Texture2D" uid="uid://4d8cqfmyv3oa" path="res://assets/stage/forest/bg/7.png" id="8_gy5d2"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="9_l2puv"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="10_gy8tt"]
+[ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="11_t1u02"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="12_yklxj"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -857,3 +860,11 @@ position = Vector2(288, 162)
 texture = ExtResource("8_gy5d2")
 
 [node name="Hud" parent="." instance=ExtResource("9_l2puv")]
+
+[node name="FinishPoint" parent="." instance=ExtResource("10_gy8tt")]
+modulate = Color(0.101961, 0.52549, 0, 1)
+position = Vector2(1381, -272)
+target_scene = ExtResource("11_t1u02")
+next_scene = "2-1"
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_yklxj")]

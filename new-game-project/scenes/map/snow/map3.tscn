@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://oyxre84bcnyv"]
+[gd_scene load_steps=14 format=3 uid="uid://oyxre84bcnyv"]
 
 [ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_3l2t1"]
 [ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_nl31p"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cln7ww53nfya2" path="res://assets/stage/snow/bg/3.png" id="4_tsnkn"]
 [ext_resource type="Texture2D" uid="uid://bv2r31lk2im64" path="res://assets/stage/snow/bg/4.png" id="5_ny2p2"]
 [ext_resource type="Texture2D" uid="uid://cedp2kjkhossi" path="res://assets/stage/snow/bg/5.png" id="6_jnwd0"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="7_csawp"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_h10u7"]
+[ext_resource type="PackedScene" uid="uid://rhp7ds1qgeqd" path="res://scenes/map/snow/map4.tscn" id="9_sjcym"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_ippny"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -15,7 +19,7 @@ var knight_scene = preload(\"res://scenes/player/player.tscn\")
 var current_player = knight_scene
 
 func _ready() -> void:
-	Bgm.play_music_forest()
+	Bgm.play_music_snow()
 	spawn_character(current_player)
 
 func remove_existing_players():
@@ -845,3 +849,14 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(288, 162)
 texture = ExtResource("6_jnwd0")
+
+[node name="Hud" parent="." instance=ExtResource("7_csawp")]
+position = Vector2(-268, -80)
+
+[node name="FinishPoint" parent="." instance=ExtResource("8_h10u7")]
+position = Vector2(1200, 80)
+target_scene = ExtResource("9_sjcym")
+next_scene = "2-4"
+
+[node name="PauseMenu" parent="." instance=ExtResource("10_ippny")]
+position = Vector2(-268, -80)

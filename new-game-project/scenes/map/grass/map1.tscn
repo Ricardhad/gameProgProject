@@ -1310,4 +1310,4 @@ next_scene = "1-2"
 [node name="PauseMenu" parent="." instance=ExtResource("14_krs4u")]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("16_85ppo")]
-position = Vector2(113, 275)
+position = Vector2(261, 288)
