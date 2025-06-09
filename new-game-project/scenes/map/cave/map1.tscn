@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://ca4wpu6wh6upv"]
+[gd_scene load_steps=18 format=3 uid="uid://ca4wpu6wh6upv"]
 
-[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_t7xv4"]
+[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_t7xv4"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_swt5r"]
 [ext_resource type="Texture2D" uid="uid://c1q21cdushp0e" path="res://assets/stage/cave/bg/2.png" id="3_ap6q1"]
 [ext_resource type="Texture2D" uid="uid://caqjjb07gax18" path="res://assets/stage/cave/bg/3.png" id="4_r87hu"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cmag306b3hupv" path="res://assets/stage/cave/bg/7.png" id="8_kn1xp"]
 [ext_resource type="Texture2D" uid="uid://cetptf6cbe02y" path="res://assets/stage/cave/bg/8.png" id="9_mhio8"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="10_nxw4v"]
-[ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="11_4e835"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="12_ldnrk"]
 [ext_resource type="PackedScene" uid="uid://cfqd8suh8o6om" path="res://scenes/map/grass/map2.tscn" id="13_3vi6m"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="13_5mgl2"]
@@ -813,9 +812,6 @@ layer_0/tile_data = PackedInt32Array(1245189, 131073, 1, 1245188, 262145, 2, 124
 
 [node name="CharacterBody2D" parent="Enemy" instance=ExtResource("10_nxw4v")]
 position = Vector2(233.334, 239.019)
-
-[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("11_4e835")]
-position = Vector2(670, 259)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

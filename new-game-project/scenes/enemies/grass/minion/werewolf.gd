@@ -1,4 +1,3 @@
-# The final, clean Goblin.gd
 extends CharacterBody2D
 
 signal jumped
