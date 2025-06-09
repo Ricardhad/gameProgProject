@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_sc4cw"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_sc4cw"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="3_ilt2a"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="4_5ffst"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_mra2u"]
@@ -1214,11 +1214,26 @@ layer_0/tile_data = PackedInt32Array(1179648, 458752, 4, 1245184, 720896, 1, 117
 
 [node name="Enemy" type="Node" parent="."]
 
-[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("3_ilt2a")]
-position = Vector2(795, 171)
+[node name="Goblin" parent="Enemy" instance=ExtResource("3_ilt2a")]
+position = Vector2(465, 249)
 
-[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("15_4rb80")]
-position = Vector2(443.422, 215.791)
+[node name="Goblin2" parent="Enemy" instance=ExtResource("3_ilt2a")]
+position = Vector2(823, 170)
+
+[node name="Goblin3" parent="Enemy" instance=ExtResource("3_ilt2a")]
+position = Vector2(1096, 106)
+
+[node name="Goblin4" parent="Enemy" instance=ExtResource("3_ilt2a")]
+position = Vector2(1866, 74)
+
+[node name="Werewolf" parent="Enemy" instance=ExtResource("15_4rb80")]
+position = Vector2(994, 282)
+
+[node name="Werewolf2" parent="Enemy" instance=ExtResource("15_4rb80")]
+position = Vector2(1407, 281)
+
+[node name="Werewolf3" parent="Enemy" instance=ExtResource("15_4rb80")]
+position = Vector2(1919, 282)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

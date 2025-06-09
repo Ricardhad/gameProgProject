@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/stage/grass/bg/7.png" id="9_dcm1g"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_chec7"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_1qohb"]
-[ext_resource type="PackedScene" uid="uid://ca4wpu6wh6upv" path="res://scenes/map/cave/map1.tscn" id="12_03rwk"]
+[ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_eba0g"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_vnijb"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
@@ -1248,7 +1248,7 @@ texture = ExtResource("9_dcm1g")
 
 [node name="FinishPoint" parent="." instance=ExtResource("11_1qohb")]
 position = Vector2(1282, 224)
-target_scene = ExtResource("12_03rwk")
+target_scene = ExtResource("12_eba0g")
 next_scene = "2-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_vnijb")]

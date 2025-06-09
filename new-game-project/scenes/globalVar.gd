@@ -3,7 +3,7 @@ extends Node
 var maxhealth_player = 10
 var health_player = 10
 var coin_collected = 0
-var damage_player = 100
+var damage_player = 1
 var score = 0
 var kill_count = 0
 var current_stage = "1-1"

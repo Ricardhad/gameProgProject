@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfjo8sopc03n8"]
+[gd_scene load_steps=14 format=3 uid="uid://duycesiqv2k2l"]
 
 [ext_resource type="Texture2D" uid="uid://b8e1jpocge4yb" path="res://assets/stage/desert/Tileset.png" id="1_mr1hi"]
 [ext_resource type="Texture2D" uid="uid://dtk2leu7s8vtl" path="res://assets/stage/desert/bg/1.png" id="2_c3p13"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://db47to7whdf3c" path="res://assets/stage/desert/bg/3.png" id="4_lqekd"]
 [ext_resource type="Texture2D" uid="uid://co24k2vqai7bp" path="res://assets/stage/desert/bg/4.png" id="5_2rh7s"]
 [ext_resource type="Texture2D" uid="uid://bdewowxwjhvs7" path="res://assets/stage/desert/bg/5.png" id="6_f2yqc"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="7_86hnr"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_fg4mn"]
+[ext_resource type="PackedScene" uid="uid://cays46x64ddhm" path="res://scenes/map/desert/map3.tscn" id="9_se8c5"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_l24st"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -845,3 +849,13 @@ motion_mirroring = Vector2(576, 0)
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(288, 162)
 texture = ExtResource("6_f2yqc")
+
+[node name="Hud" parent="." instance=ExtResource("7_86hnr")]
+
+[node name="FinishPoint" parent="." instance=ExtResource("8_fg4mn")]
+modulate = Color(3, 5, 0, 1)
+position = Vector2(2497, 144)
+target_scene = ExtResource("9_se8c5")
+next_scene = "2-3"
+
+[node name="PauseMenu" parent="." instance=ExtResource("10_l24st")]
