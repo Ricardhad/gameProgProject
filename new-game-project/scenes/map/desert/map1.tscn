@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://buyuoy52y5j7n"]
+[gd_scene load_steps=18 format=3 uid="uid://buyuoy52y5j7n"]
 
 [ext_resource type="Texture2D" uid="uid://b8e1jpocge4yb" path="res://assets/stage/desert/Tileset.png" id="1_7wyc0"]
 [ext_resource type="Texture2D" uid="uid://dtk2leu7s8vtl" path="res://assets/stage/desert/bg/1.png" id="2_j7qt2"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_momjs"]
 [ext_resource type="PackedScene" uid="uid://duycesiqv2k2l" path="res://scenes/map/desert/map2.tscn" id="9_lounw"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_5v02r"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="11_1yy11"]
+[ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="12_3xlnm"]
+[ext_resource type="PackedScene" uid="uid://cfxmu00q14nxk" path="res://scenes/enemies/forest/minion/satyr2.tscn" id="13_rbe3u"]
+[ext_resource type="PackedScene" uid="uid://br6ahdbxuxlvr" path="res://scenes/enemies/forest/minion/satyr3.tscn" id="14_ob37r"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -859,3 +863,29 @@ target_scene = ExtResource("9_lounw")
 next_scene = "3-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_5v02r")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D7" parent="Node" instance=ExtResource("11_1yy11")]
+position = Vector2(760, -131)
+
+[node name="CharacterBody2D6" parent="Node" instance=ExtResource("12_3xlnm")]
+position = Vector2(418, -165)
+
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("12_3xlnm")]
+position = Vector2(897, 98)
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("12_3xlnm")]
+position = Vector2(702, 289)
+
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("13_rbe3u")]
+position = Vector2(826, 284)
+
+[node name="CharacterBody2D4" parent="Node" instance=ExtResource("11_1yy11")]
+position = Vector2(1477, 288)
+
+[node name="CharacterBody2D5" parent="Node" instance=ExtResource("14_ob37r")]
+position = Vector2(973, -96)
+
+[node name="CharacterBody2D8" parent="Node" instance=ExtResource("11_1yy11")]
+position = Vector2(1176, -99)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://duycesiqv2k2l"]
+[gd_scene load_steps=17 format=3 uid="uid://duycesiqv2k2l"]
 
 [ext_resource type="Texture2D" uid="uid://b8e1jpocge4yb" path="res://assets/stage/desert/Tileset.png" id="1_mr1hi"]
 [ext_resource type="Texture2D" uid="uid://dtk2leu7s8vtl" path="res://assets/stage/desert/bg/1.png" id="2_c3p13"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_fg4mn"]
 [ext_resource type="PackedScene" uid="uid://cays46x64ddhm" path="res://scenes/map/desert/map3.tscn" id="9_se8c5"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_l24st"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="11_p22jb"]
+[ext_resource type="PackedScene" uid="uid://br6ahdbxuxlvr" path="res://scenes/enemies/forest/minion/satyr3.tscn" id="12_0vmr0"]
+[ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="13_o1ujf"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -859,3 +862,26 @@ target_scene = ExtResource("9_se8c5")
 next_scene = "3-3"
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_l24st")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D5" parent="Node" instance=ExtResource("11_p22jb")]
+position = Vector2(1701, 215)
+
+[node name="CharacterBody2D4" parent="Node" instance=ExtResource("12_0vmr0")]
+position = Vector2(880, 110)
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("11_p22jb")]
+position = Vector2(410, 204)
+
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("11_p22jb")]
+position = Vector2(679, 206)
+
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("13_o1ujf")]
+position = Vector2(1173, 283)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("11_p22jb")]
+position = Vector2(1377, 234)
+
+[node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("12_0vmr0")]
+position = Vector2(621, 50)

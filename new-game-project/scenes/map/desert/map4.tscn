@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cr32djtwmx2n7"]
+[gd_scene load_steps=18 format=3 uid="uid://cr32djtwmx2n7"]
 
 [ext_resource type="Texture2D" uid="uid://b8e1jpocge4yb" path="res://assets/stage/desert/Tileset.png" id="1_uyl2d"]
 [ext_resource type="Texture2D" uid="uid://dtk2leu7s8vtl" path="res://assets/stage/desert/bg/1.png" id="2_dt780"]
@@ -10,6 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_g6qfu"]
 [ext_resource type="PackedScene" uid="uid://3d6nlrnsrt30" path="res://scenes/map/desert/map5.tscn" id="9_2bpp6"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_atm5p"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="11_03ksg"]
+[ext_resource type="PackedScene" uid="uid://utm575cxacob" path="res://scenes/enemies/cave/minion/demon3.tscn" id="12_1ye4v"]
+[ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="13_aw22j"]
+[ext_resource type="PackedScene" uid="uid://br6ahdbxuxlvr" path="res://scenes/enemies/forest/minion/satyr3.tscn" id="14_xry4k"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -859,3 +863,26 @@ target_scene = ExtResource("9_2bpp6")
 next_scene = "3-5"
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_atm5p")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D7" parent="Node" instance=ExtResource("11_03ksg")]
+position = Vector2(1204, -709)
+
+[node name="CharacterBody2D6" parent="Node" instance=ExtResource("12_1ye4v")]
+position = Vector2(1022, -435)
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_aw22j")]
+position = Vector2(1095, 205)
+
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("14_xry4k")]
+position = Vector2(1404, 204)
+
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("14_xry4k")]
+position = Vector2(1258, 44)
+
+[node name="CharacterBody2D4" parent="Node" instance=ExtResource("12_1ye4v")]
+position = Vector2(1849, 45)
+
+[node name="CharacterBody2D5" parent="Node" instance=ExtResource("11_03ksg")]
+position = Vector2(2071, -131)

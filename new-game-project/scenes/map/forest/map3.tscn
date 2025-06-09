@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://v0067naaf7q6"]
+[gd_scene load_steps=19 format=3 uid="uid://v0067naaf7q6"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_ias2o"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="2_khmcn"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="10_nos5v"]
 [ext_resource type="PackedScene" uid="uid://bji83m10xvsax" path="res://scenes/map/forest/map4.tscn" id="11_qp0g4"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="12_3rc7a"]
+[ext_resource type="PackedScene" uid="uid://xvgkein03fuj" path="res://scenes/enemies/kingdom/minion/sketelonWarrior.tscn" id="13_r4n4w"]
+[ext_resource type="PackedScene" uid="uid://br6ahdbxuxlvr" path="res://scenes/enemies/forest/minion/satyr3.tscn" id="14_08e4c"]
+[ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="15_4ogxq"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -868,3 +871,20 @@ target_scene = ExtResource("11_qp0g4")
 next_scene = "1-4"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_3rc7a")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_r4n4w")]
+position = Vector2(366, 280)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D" instance=ExtResource("13_r4n4w")]
+position = Vector2(-22, -157)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D" instance=ExtResource("14_08e4c")]
+position = Vector2(69, -356)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("15_4ogxq")]
+position = Vector2(764, 145)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("13_r4n4w")]
+position = Vector2(-168, 369)

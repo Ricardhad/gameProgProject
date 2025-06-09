@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bji83m10xvsax"]
+[gd_scene load_steps=20 format=3 uid="uid://bji83m10xvsax"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_1yf0e"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="2_3i5qq"]
@@ -12,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="10_u3qw2"]
 [ext_resource type="PackedScene" uid="uid://bftas0gkjj1yu" path="res://scenes/map/forest/map5.tscn" id="11_g7n44"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="12_g3btj"]
+[ext_resource type="PackedScene" uid="uid://cfxmu00q14nxk" path="res://scenes/enemies/forest/minion/satyr2.tscn" id="13_s6hb2"]
+[ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="14_2w5ui"]
+[ext_resource type="PackedScene" uid="uid://xvgkein03fuj" path="res://scenes/enemies/kingdom/minion/sketelonWarrior.tscn" id="15_p0fdh"]
+[ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="16_4ri6i"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -868,3 +872,20 @@ target_scene = ExtResource("11_g7n44")
 next_scene = "1-5"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_g3btj")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_s6hb2")]
+position = Vector2(510, 127)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D" instance=ExtResource("14_2w5ui")]
+position = Vector2(100, 160)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D" instance=ExtResource("15_p0fdh")]
+position = Vector2(175, -51)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_4ri6i")]
+position = Vector2(268, -49)
+
+[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_4ri6i")]
+position = Vector2(-161, -77)

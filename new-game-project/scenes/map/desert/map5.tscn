@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://3d6nlrnsrt30"]
+[gd_scene load_steps=15 format=3 uid="uid://3d6nlrnsrt30"]
 
 [ext_resource type="Texture2D" uid="uid://b8e1jpocge4yb" path="res://assets/stage/desert/Tileset.png" id="1_jjcdq"]
 [ext_resource type="Texture2D" uid="uid://dtk2leu7s8vtl" path="res://assets/stage/desert/bg/1.png" id="2_js5d0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_ve60s"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="9_jymj3"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_ccyvo"]
+[ext_resource type="PackedScene" uid="uid://cww188wcwa1rw" path="res://scenes/enemies/desert/boss/hellhound1.tscn" id="11_a3ytg"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -859,3 +860,7 @@ target_scene = ExtResource("9_jymj3")
 next_scene = "4-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_ccyvo")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("11_a3ytg")]
+position = Vector2(600, 289)
+scale = Vector2(2, 2)
