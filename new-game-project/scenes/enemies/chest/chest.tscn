@@ -23,6 +23,14 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ws0c6")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws0c6")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vuxhl")
@@ -33,8 +41,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wpp6l")
 }],
-"loop": true,
-"name": &"idle",
+"loop": false,
+"name": &"open",
 "speed": 10.0
 }]
 
@@ -47,4 +55,3 @@ scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.862847
