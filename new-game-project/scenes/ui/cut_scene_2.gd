@@ -87,4 +87,4 @@ func _unhandled_input(event: InputEvent) -> void:
 func _end_cutscene() -> void:
 	print("Semua dialog selesai – ganti scene di sini jika perlu")
 	# Ganti dengan path scene yang dituju
-	Transition.fade_out_and_change_scene(fade_rect, "res://scenes/map/grass/map2.tscn")
+	Transition.fade_out_and_change_scene(fade_rect, "res://scenes/map/grass/map1.tscn")

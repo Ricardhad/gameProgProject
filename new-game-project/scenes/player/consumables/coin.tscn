@@ -78,6 +78,7 @@ collision_mask = 4
 script = ExtResource("1_q66w6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_6ib5d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -88,10 +89,9 @@ stream = ExtResource("3_ry1o6")
 bus = &"SFX"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(5, 17)
 scale = Vector2(0.125, 0.1125)
 sprite_frames = SubResource("SpriteFrames_iwrjk")
+autoplay = "default"
 frame_progress = 0.651669
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
