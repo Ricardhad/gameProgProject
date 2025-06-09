@@ -13,8 +13,15 @@ func _ready() -> void:
 	# Connect to the Health component's signal
 	randomize()
 	health_component.health_depleted.connect(drop_coins, CONNECT_DEFERRED)
+	if health_component:
+		health_component.health_depleted.connect(drop_coins, CONNECT_DEFERRED)
+	else:
+		# Print an error if the Health node is missing to make debugging easier.
+		printerr("LootDropper Error: Health component not found on parent '", get_parent().name, "'!")
 
 func drop_coins() -> void:
+	GlobalVar.kill_count += 1
+	GlobalVar.score += 100 
 	if coin_scene == null:
 		print("LootDropper: Coin scene not assigned!")
 		return
