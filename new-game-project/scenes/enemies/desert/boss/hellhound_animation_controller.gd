@@ -1,8 +1,9 @@
 # AnimationController.gd
 extends AnimatedSprite2D
 
-@onready var state_machine: HellHoundStateMachine = %HellHoundStateMachine
+@onready var state_machine: HellHoundStateMachine = %StateMachine
 @onready var health_component: Health = %Health
+@onready var attack_controller: HellHoundAttackController = %AttackController
 
 # This variable will store the state the goblin was in before being hurt.
 var last_state_before_hurt = HellHoundStateMachine.State.IDLE
@@ -11,7 +12,7 @@ func _ready() -> void:
 	state_machine.state_changed.connect(_on_state_changed)
 	health_component.health_depleted.connect(_on_death)
 	self.animation_finished.connect(_on_animation_finished)
-
+	
 func _on_state_changed(new_state: HellHoundStateMachine.State, previous_state: HellHoundStateMachine.State) -> void:
 	# Keep track of what we were doing before we got hurt.
 	if new_state != HellHoundStateMachine.State.HURT:
@@ -31,17 +32,18 @@ func _on_state_changed(new_state: HellHoundStateMachine.State, previous_state: H
 
 		# ## ACTION NEEDED: Add cases for your specific attack animations
 		HellHoundStateMachine.State.CLAW_SWIPE:
-			play("claw_swipe")
+			play("attack1")
 		HellHoundStateMachine.State.LUNGE:
-			play("lunge")
+			play("attack3")
 		HellHoundStateMachine.State.FIRE_SPIT:
-			play("fire_spit")
+			play("attack2")
 
 
 func _on_death() -> void:
 	state_machine.change_state(HellHoundStateMachine.State.DEAD)
 
 func _on_animation_finished() -> void:
+	var anim_name = self.animation
 	# If the "hurt" animation has just finished, decide what to do next.
 	if animation == "hurt":
 		# Instead of just going back to chase, let the boss decide its next move.
@@ -50,3 +52,6 @@ func _on_animation_finished() -> void:
 	
 	if animation == "dead":
 		get_parent().call_deferred("queue_free")
+	if anim_name == "attack1" or anim_name == "lunge" or anim_name == "fire_spit":
+	# The attack animation is done, so we call the function on the AttackController.
+		attack_controller.on_attack_animation_finished()

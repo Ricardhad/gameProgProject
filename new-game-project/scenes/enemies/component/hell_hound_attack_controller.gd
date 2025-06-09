@@ -3,11 +3,13 @@ class_name HellHoundAttackController
 extends Node2D
 
 signal attack_finished
-
+var can_attack: bool = true
 # Set the cooldown to exactly 1 second
 const ATTACK_COOLDOWN = 1.0
 var attack_timer = 0.0
 var is_attacking = false
+#var can_attack: bool = true
+
 
 @onready var hitbox: Area2D = $HitBox
 @onready var animated_sprite: AnimatedSprite2D = get_parent().get_node("AnimatedSprite2D")
@@ -23,22 +25,32 @@ func _process(delta: float):
 # Inside AttackController.gd
 
 # Change this function to accept an attack_name
-#func initiate_attack(attack_name: String):
-	#if not can_attack: return
-		#can_attack = false
-		## Now, you can use the name to decide which hitbox to enable
-		## or which projectile to shoot.
-		#match attack_name:
-			#"claw_swipe":
-			## Enable the claw hitbox
-			## The AnimationPlayer will call a function to emit attack_finished
-				#pass 
-			#"lunge":
-			## Do lunge logic
-				#pass
-			#"fire_spit":
-			## Instantiate and shoot a fireball
-				#pass
+func initiate_attack(attack_name: String):
+	if not can_attack: return
+	can_attack = false
+		# Now, you can use the name to decide which hitbox to enable
+		# or which projectile to shoot.
+	match attack_name:
+			"claw_swipe":
+			# Enable the claw hitbox
+			# The AnimationPlayer will call a function to emit attack_finished
+	
+				is_attacking = true
+				attack_timer = ATTACK_COOLDOWN
+				hitbox.get_node("CollisionShape2D").disabled = false
+				pass 
+			"lunge":
+				is_attacking = true
+				attack_timer = ATTACK_COOLDOWN
+				hitbox.get_node("CollisionShape2D").disabled = false
+			# Do lunge logic
+				pass
+			"fire_spit":
+				is_attacking = true
+				attack_timer = ATTACK_COOLDOWN
+				hitbox.get_node("CollisionShape2D").disabled = false
+			# Instantiate and shoot a fireball
+				pass
 
 func _on_animation_finished():
 
@@ -46,18 +58,24 @@ func _on_animation_finished():
 		hitbox.get_node("CollisionShape2D").disabled = true
 		is_attacking = false
 		emit_signal("attack_finished")
-
-# NEW: A helper function to easily check the cooldown status
-func can_attack() -> bool:
-	return attack_timer <= 0
+		
+func on_attack_animation_finished():
+	# Allow the controller to attack again.
+	can_attack = true
 	
-#func _finish_attack():
-	## In a real game, this function would be called by your AnimationPlayer
-	## using a "Call Method Track" at the end of the attack animation.
+	# Tell the StateMachine that the attack sequence is over.
+	attack_finished.emit()
+# NEW: A helper function to easily check the cooldown status
+#func can_attack() -> bool:
+	#return attack_timer <= 0
 	#
-	## Allow the controller to attack again.
-	#can_attack = true
-	#
-	## Tell the StateMachine that the attack sequence is over, so it can
-	## transition to the COOLDOWN state.
-	#attack_finished.emit()
+func _finish_attack():
+	# In a real game, this function would be called by your AnimationPlayer
+	# using a "Call Method Track" at the end of the attack animation.
+	
+	# Allow the controller to attack again.
+	can_attack = true
+	
+	# Tell the StateMachine that the attack sequence is over, so it can
+	# transition to the COOLDOWN state.
+	attack_finished.emit()

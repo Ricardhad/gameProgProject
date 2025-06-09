@@ -23,7 +23,7 @@ const COOLDOWN_DURATION = 1.5 # Time between attacks
 
 # Node references
 @onready var senses: Node = %Senses
-@onready var attack_controller: AttackController = %AttackController
+@onready var attack_controller: HellHoundAttackController = %AttackController
 @onready var health_component: Health = %Health
 @onready var parent_entity = get_parent()
 @onready var cooldown_timer: Timer = $CooldownTimer # ## ACTION NEEDED: Add a Timer node named "CooldownTimer" as a child of this StateMachine node.
@@ -67,6 +67,13 @@ func change_state(new_state: State):
 	current_state = new_state
 	emit_signal("state_changed", new_state, previous_state)
 	
+	# ✅ THE FIX: Add this new block of code here.
+	# Before committing to an attack, do one last check to face the player.
+	if new_state == State.CLAW_SWIPE or new_state == State.LUNGE or new_state == State.FIRE_SPIT:
+		if is_instance_valid(player_target):
+			# This re-uses your existing function to quickly update the direction.
+			parent_entity.move_towards(player_target.global_position)
+	
 	# If we enter any attack state, tell the AttackController to perform it.
 	match new_state:
 		State.CLAW_SWIPE:
@@ -80,10 +87,19 @@ func change_state(new_state: State):
 
 ## -- BOSS LOGIC FUNCTIONS --
 
+## -- BOSS LOGIC FUNCTIONS --
+
 func _decide_next_action():
+	## ✅ THE FIX: Add this check at the very top of the function.
+	# If the player target doesn't exist (or was defeated), go back to being idle and stop.
+	if not is_instance_valid(player_target):
+		change_state(State.IDLE)
+		return
+
 	if current_state == State.DEAD: return
 
 	# ## This is the BOSS's BRAIN. It decides what to do next.
+	# This line is now safe because of the check we added above.
 	var distance_to_player = parent_entity.global_position.distance_to(player_target.global_position)
 	
 	# Simple logic: If too far, chase. If close enough, attack.
@@ -97,11 +113,10 @@ func _decide_next_action():
 		Phase.PHASE_1:
 			available_attacks = [State.CLAW_SWIPE, State.LUNGE]
 		Phase.PHASE_2:
-			available_attacks = [State.CLAW_SWIPE, State.LUNGE, State.FIRE_SPIT] # Add new attacks here
+			available_attacks = [State.CLAW_SWIPE, State.LUNGE, State.FIRE_SPIT]
 		Phase.PHASE_3:
-			available_attacks = [State.LUNGE, State.FIRE_SPIT] # Maybe remove some basic attacks to be more aggressive
+			available_attacks = [State.LUNGE, State.FIRE_SPIT]
 	
-	# Pick a random attack from the available list and execute it
 	if not available_attacks.is_empty():
 		change_state(available_attacks.pick_random())
 
@@ -122,7 +137,10 @@ func _change_phase(new_phase: Phase):
 func _on_fov_entered(body: Node2D):
 	if body.is_in_group("player") and player_target == null:
 		player_target = body
-		_decide_next_action() # Start the fight!
+		
+		# ✅ THE FIX: Don't decide here. Just start chasing.
+		# The logic inside the CHASING state will handle the rest.
+		change_state(State.CHASING)
 		
 func _on_attack_finished():
 	# When any attack is finished, go into cooldown.

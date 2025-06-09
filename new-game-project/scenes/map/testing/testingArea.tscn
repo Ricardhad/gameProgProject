@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dy8j3k28sxqer"]
+[gd_scene load_steps=16 format=3 uid="uid://dy8j3k28sxqer"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_jqwck"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="3_r8ys0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://kk8f6pqst6h4" path="res://assets/stage/forest/bg/6.png" id="8_vahfk"]
 [ext_resource type="Texture2D" uid="uid://4d8cqfmyv3oa" path="res://assets/stage/forest/bg/7.png" id="9_1byby"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_6fbeu"]
+[ext_resource type="PackedScene" uid="uid://cww188wcwa1rw" path="res://scenes/enemies/desert/boss/hellhound1.tscn" id="10_7okmm"]
 [ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="11_q3ky4"]
 [ext_resource type="PackedScene" uid="uid://m4arjnke8gme" path="res://scenes/enemies/cave/minion/gladiator1.tscn" id="12_a3gsb"]
 
@@ -813,8 +814,11 @@ sources/0 = SubResource("TileSetAtlasSource_waqkv")
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("hell_hound_boss", "boss_health_bar")]
 script = SubResource("GDScript_lgw5x")
-hell_hound_boss = NodePath("")
+hell_hound_boss = NodePath("CharacterBody2D")
 boss_health_bar = NodePath("BossHealthbar/MarginContainer")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("10_7okmm")]
+position = Vector2(330.424, 227.792)
 
 [node name="Stage" type="TileMap" parent="."]
 modulate = Color(0.666667, 1, 1, 1)
