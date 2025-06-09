@@ -399,7 +399,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wvgha"]
-radius = 17.0
+radius = 18.0
 height = 42.75
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
@@ -424,15 +424,17 @@ unique_name_in_owner = true
 
 [node name="MovementChecker" parent="." instance=ExtResource("11_jikfs")]
 unique_name_in_owner = true
+position = Vector2(0, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-10.625, -18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_wvgha")
 
-[node name="HurtBox" parent="." instance=ExtResource("12_dhdf8")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_dhdf8")]
 collision_layer = 0
 collision_mask = 2
+health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("13_qaqly")]
 
