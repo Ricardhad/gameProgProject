@@ -14,9 +14,6 @@ func _ready() -> void:
 	
 	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
-	#untuk fade in versi baru
-	Transition.fade_in(fade_rect)
-	
 	pass # Replace with function body.
 	
 	var music_db = AudioServer.get_bus_volume_db(1)
@@ -29,9 +26,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
 func _on_start_pressed() -> void:
-	Transition.fade_out_and_change_scene(fade_rect, "res://scenes/ui/selecting_chr.tscn")
+	Transition1.change_scene("res://scenes/ui/selecting_chr.tscn")
 
 func _on_load_pressed() -> void:
 	pass # Replace with function body.

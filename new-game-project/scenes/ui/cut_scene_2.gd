@@ -17,8 +17,6 @@ var char_index       = 0
 var current_text     = ""
 
 func _ready() -> void:
-	Transition.fade_in(fade_rect)
-	
 	# load wajah
 	face_hero  = load("res://assets/selecting_menu/knight.png")
 	face_king  = load("res://assets/selecting_menu/king.png")
@@ -83,8 +81,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			label_text_box.text = current_text
 			auto_next_timer.start()
 
-
 func _end_cutscene() -> void:
-	print("Semua dialog selesai – ganti scene di sini jika perlu")
+	#print("Semua dialog selesai – ganti scene di sini jika perlu")
 	# Ganti dengan path scene yang dituju
-	Transition.fade_out_and_change_scene(fade_rect, "res://scenes/map/grass/map1.tscn")
+	Transition1.change_scene("res://scenes/map/grass/map1.tscn")

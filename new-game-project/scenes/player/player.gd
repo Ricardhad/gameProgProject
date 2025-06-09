@@ -265,5 +265,5 @@ func can_hang():
 		return true
 
 func _on_health_depleted():
-	Transition.change_scene("res://scenes/ui/GameOver.tscn")
+	Transition1.change_scene("res://scenes/ui/GameOver.tscn")
 	#get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")

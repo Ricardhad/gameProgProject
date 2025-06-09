@@ -42,8 +42,11 @@ func set_dash_button_pressed():
 
 func _process(delta: float) -> void:
 	update_coin_label()
-	
+
 func update_coin_label():
 	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/HealthBar.value = GlobalVar.health_player
 	$CanvasLayer2/Panel/HealthBar.max_value = GlobalVar.maxhealth_player
+
+func _ready():
+	$"CanvasLayer2/Label_Stage-Level".text = "Stage " + GlobalVar.current_stage

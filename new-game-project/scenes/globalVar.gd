@@ -13,3 +13,11 @@ var transition_fade_in := false
 func add_coin():
 	coin_collected += 1
 	print(coin_collected)
+
+func reset_game():
+	maxhealth_player = 10
+	health_player = 10
+	coin_collected = 0
+	kill_count = 0
+	score = 0
+	current_stage = "1-1"

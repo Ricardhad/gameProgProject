@@ -982,7 +982,6 @@ position = Vector2(415, 253)
 position = Vector2(795, 171)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.1, 0.1)
@@ -1012,7 +1011,7 @@ position = Vector2(288, 162)
 texture = ExtResource("7_d8vae")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.3, 0)
 motion_offset = Vector2(0, -80)
 motion_mirroring = Vector2(576, 0)
 
@@ -1021,7 +1020,7 @@ position = Vector2(288, 162)
 texture = ExtResource("8_h5qbe")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.3, 0)
 motion_offset = Vector2(0, -80)
 motion_mirroring = Vector2(576, 0)
 
@@ -1030,7 +1029,7 @@ position = Vector2(288, 162)
 texture = ExtResource("9_3keg2")
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.3, 0)
 motion_offset = Vector2(0, -80)
 motion_mirroring = Vector2(576, 0)
 
@@ -1039,7 +1038,7 @@ position = Vector2(288, 162)
 texture = ExtResource("10_4ns7x")
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
+motion_scale = Vector2(0.3, 0)
 motion_offset = Vector2(0, -80)
 motion_mirroring = Vector2(576, 0)
 
@@ -1050,7 +1049,8 @@ texture = ExtResource("11_t62m7")
 [node name="Hud" parent="." instance=ExtResource("12_t8ayl")]
 
 [node name="FinishPoint" parent="." instance=ExtResource("13_65mii")]
-position = Vector2(1753, 224)
+position = Vector2(1634, 15)
 target_scene = ExtResource("14_16pk1")
+next_scene = "1-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_krs4u")]
