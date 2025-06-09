@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3rbhl76eiql"
-path="res://.godot/imported/background_tavern.png-e8aeae0e4397d9f165ab2935dc60b34f.ctex"
+uid="uid://c170kqxhpvcb0"
+path="res://.godot/imported/Terrain (32x32).png-a63a6b0fb85285664bbabf76bc387f61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/selecting_menu/background_tavern.png"
-dest_files=["res://.godot/imported/background_tavern.png-e8aeae0e4397d9f165ab2935dc60b34f.ctex"]
+source_file="res://assets/stage/tavern/Terrain (32x32).png"
+dest_files=["res://.godot/imported/Terrain (32x32).png-a63a6b0fb85285664bbabf76bc387f61.ctex"]
 
 [params]
 
