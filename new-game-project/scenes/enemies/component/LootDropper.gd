@@ -2,7 +2,12 @@
 extends Node
 
 @export var coin_scene: PackedScene
+@export var coin_min_amount: int = 1 
+@export var coin_max_amount: int = 6 
+
 @onready var health_component: Node = get_parent().get_node("Health")
+
+
 
 func _ready() -> void:
 	# Connect to the Health component's signal
@@ -13,7 +18,7 @@ func drop_coins() -> void:
 		print("LootDropper: Coin scene not assigned!")
 		return
 
-	var coin_count = randi_range(1, 5)
+	var coin_count = randi_range(coin_min_amount, coin_max_amount)
 	for i in coin_count:
 		var coin = coin_scene.instantiate()
 		# Add the coin to the Goblin's parent (the main level)
