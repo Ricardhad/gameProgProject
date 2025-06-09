@@ -230,6 +230,6 @@ collision_layer = 0
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
 flip_h = true
