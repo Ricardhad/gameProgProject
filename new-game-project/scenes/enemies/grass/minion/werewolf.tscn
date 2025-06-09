@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dnq4ygpd8l4jy"]
+[gd_scene load_steps=69 format=3 uid="uid://dnq4ygpd8l4jy"]
 
 [ext_resource type="Texture2D" uid="uid://p503i8rvlgo" path="res://assets/enemies/grass/werewolf/Attack.png" id="1_5x7xg"]
 [ext_resource type="Script" path="res://scenes/enemies/grass/minion/werewolf.gd" id="1_bu0x6"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="12_dhdf8"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="13_qaqly"]
 [ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="14_7wflt"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_cpb1a"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_js3u0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhd37"]
@@ -443,6 +444,7 @@ collision_mask = 2
 health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("13_qaqly")]
+coin_scene = ExtResource("15_cpb1a")
 coin_min_amount = 6
 coin_max_amount = 10
 

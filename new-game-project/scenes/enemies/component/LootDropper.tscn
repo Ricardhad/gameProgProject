@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcdb7rwwc1nro"]
+[gd_scene load_steps=2 format=3 uid="uid://bcdb7rwwc1nro"]
 
 [ext_resource type="Script" path="res://scenes/enemies/component/LootDropper.gd" id="1_ta0si"]
-[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="2_2cmr5"]
 
 [node name="LootDropper" type="Node2D"]
 script = ExtResource("1_ta0si")
-coin_scene = ExtResource("2_2cmr5")

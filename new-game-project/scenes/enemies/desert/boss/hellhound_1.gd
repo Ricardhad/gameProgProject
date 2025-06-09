@@ -1,4 +1,3 @@
-# The final, clean Goblin.gd
 extends CharacterBody2D
 
 signal jumped
@@ -27,7 +26,7 @@ var knockback_velocity = Vector2.ZERO
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_component: Health = %Health
 @onready var movement_checker: MovementChecker = %MovementChecker
-
+@onready var hurt_box = %HurtBox
 # REMOVED: The initial_..._x variables are no longer needed here.
 
 func _ready():
@@ -100,6 +99,7 @@ func update_visuals():
 		
 		# Tell the movement checker which way we are facing
 		movement_checker.update_direction(direction_sign)
+		hurt_box.scale.x = direction_sign
 		
 func _on_health_changed(diff: int):
 	if diff < 0: # Took damage

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cwlldkvstv10h"]
+[gd_scene load_steps=65 format=3 uid="uid://cwlldkvstv10h"]
 
 [ext_resource type="Script" path="res://scenes/enemies/grass/minion/goblin.gd" id="1_701y2"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="2_gn05o"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="13_0kbtq"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="14_6mmjq"]
 [ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="15_i044i"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_ri7ge"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="16_qma6u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52w2e"]
@@ -406,6 +407,9 @@ collision_mask = 2
 health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("14_6mmjq")]
+coin_scene = ExtResource("15_ri7ge")
+coin_min_amount = 6
+coin_max_amount = 10
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
