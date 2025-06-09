@@ -12,7 +12,7 @@ extends Node
 
 
 func _ready() -> void:
-	if health_component:
+	if health_component:  
 		# Connect to the signal with the CONNECT_ONE_SHOT flag.
 		# This ensures trigger_next_phase() is only ever called once.
 		# We also keep CONNECT_DEFERRED to avoid issues during the physics frame.
