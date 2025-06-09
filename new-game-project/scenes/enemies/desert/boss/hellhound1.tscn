@@ -484,8 +484,10 @@ script = ExtResource("1_6ryfv")
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"attack3"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 flip_h = true
 script = ExtResource("11_8v4fb")
 
@@ -507,6 +509,7 @@ position = Vector2(31, -24)
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("12_iht3v")
+max_health = 20
 
 [node name="MovementChecker" parent="." instance=ExtResource("13_3bp2h")]
 unique_name_in_owner = true
