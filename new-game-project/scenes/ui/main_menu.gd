@@ -33,8 +33,6 @@ func _process(delta: float) -> void:
 func _on_start_pressed() -> void:
 	Transition.fade_out_and_change_scene(fade_rect, "res://scenes/ui/selecting_chr.tscn")
 
-	#get_tree().change_scene_to_file("res://scenes/ui/CutScene2.tscn")
-
 func _on_load_pressed() -> void:
 	pass # Replace with function body.
 

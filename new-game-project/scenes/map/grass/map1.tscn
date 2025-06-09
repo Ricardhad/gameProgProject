@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_sc4cw"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_sc4cw"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_l1svk"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="3_ilt2a"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="4_5ffst"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/stage/grass/bg/7.png" id="11_t62m7"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="12_t8ayl"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="13_65mii"]
-[ext_resource type="PackedScene" uid="uid://b77dkjexiy6mu" path="res://scenes/map/forest/map1.tscn" id="14_03b2w"]
+[ext_resource type="PackedScene" uid="uid://buecgbbcfvi35" path="res://scenes/map/grass/map2.tscn" id="14_16pk1"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_krs4u"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
@@ -935,7 +935,7 @@ texture = ExtResource("11_t62m7")
 [node name="Hud" parent="." instance=ExtResource("12_t8ayl")]
 
 [node name="FinishPoint" parent="." instance=ExtResource("13_65mii")]
-position = Vector2(1123, 224)
-target_scene = ExtResource("14_03b2w")
+position = Vector2(2216, 224)
+target_scene = ExtResource("14_16pk1")
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_krs4u")]
