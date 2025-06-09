@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="10_nxw4v"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="11_4e835"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="12_ldnrk"]
-[ext_resource type="PackedScene" path="res://scenes/map/grass/map2.tscn" id="13_3vi6m"]
+[ext_resource type="PackedScene" uid="uid://buecgbbcfvi35" path="res://scenes/map/grass/map2.tscn" id="13_3vi6m"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="13_5mgl2"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_lck5j"]
 
@@ -89,11 +89,23 @@ texture = ExtResource("1_t7xv4")
 11:0/0 = 0
 11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:0/0 = 0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:0/0/physics_layer_0/polygon_0/one_way = true
 13:0/0 = 0
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+13:0/0/physics_layer_0/polygon_0/one_way = true
 14:0/0 = 0
+14:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+14:0/0/physics_layer_0/polygon_0/one_way = true
 15:0/0 = 0
+15:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+15:0/0/physics_layer_0/polygon_0/one_way = true
 16:0/0 = 0
+16:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+16:0/0/physics_layer_0/polygon_0/one_way = true
 17:0/0 = 0
+17:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+17:0/0/physics_layer_0/polygon_0/one_way = true
 18:0/0 = 0
 19:0/0 = 0
 0:1/0 = 0

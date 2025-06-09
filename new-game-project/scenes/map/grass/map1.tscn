@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bbebsol04r12c" path="res://assets/stage/grass/bg/7.png" id="11_t62m7"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="12_t8ayl"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="13_65mii"]
-[ext_resource type="PackedScene" path="res://scenes/map/grass/map2.tscn" id="14_16pk1"]
+[ext_resource type="PackedScene" uid="uid://buecgbbcfvi35" path="res://scenes/map/grass/map2.tscn" id="14_16pk1"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_krs4u"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
