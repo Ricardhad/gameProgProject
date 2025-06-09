@@ -3,22 +3,16 @@ extends CharacterBody2D
 
 signal jumped
 @export_group("Movement Properties")
-@export var speed: float = 50.0
-@export var chase_speed: float = 100.0
-@export var gravity: float = 800.0
+@export var SPEED: float = 50.0
+@export var CHASE_SPEED: float = 100.0
+@export var GRAVITY: float = 800.0
 
 @export_group("Combat Properties")
-@export var knockback_force: float = 200.0
+@export var KNOCKBACK_FORCE: float = 150.0
 
 @export_group("Jump Properties")
-@export var jump_velocity: float = -300.0
+@export var JUMP_VELOCITY: float = -300.0
 @export var can_jump: bool = true
-# Constants
-var SPEED = speed
-var CHASE_SPEED = chase_speed
-var GRAVITY = gravity
-var KNOCKBACK_FORCE = knockback_force
-var JUMP_VELOCITY = jump_velocity # // NEW: Added this back
 
 # --- Movement variables ---
 var movement_direction = 1 # -1 for left, 1 for right
