@@ -11,6 +11,7 @@ extends Node
 
 func _ready() -> void:
 	# Connect to the Health component's signal
+	randomize()
 	health_component.health_depleted.connect(drop_coins, CONNECT_DEFERRED)
 
 func drop_coins() -> void:
