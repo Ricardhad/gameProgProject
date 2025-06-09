@@ -692,7 +692,7 @@ autoplay = "idle"
 frame_progress = 0.119338
 
 [node name="DialogueTimer" type="Timer" parent="."]
-wait_time = 0.006
+wait_time = 0.353
 
 [node name="PanelTextBoxHero" type="Panel" parent="."]
 anchors_preset = -1
