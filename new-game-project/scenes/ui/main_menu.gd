@@ -36,8 +36,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_start_pressed() -> void:
-	#Transition1.change_scene("res://scenes/ui/selecting_chr.tscn")
-	Transition1.change_scene("res://scenes/map/MapRoute.tscn")
+	Transition1.change_scene("res://scenes/ui/CutScene1.tscn")
+	#Transition1.change_scene("res://scenes/map/MapRoute.tscn")
 
 func _on_load_pressed() -> void:
 	pass # Replace with function body.
