@@ -53,5 +53,17 @@ func _on_confirm_pressed() -> void:
 			get_tree().change_scene_to_file("res://scenes/map/forest/map1.tscn")
 		"Stage2(1)":
 			get_tree().change_scene_to_file("res://scenes/map/cave/map1.tscn")
+		"Stage2(2)":
+			get_tree().change_scene_to_file("res://scenes/map/snow/map1.tscn")
+		"Stage3(1)":
+			get_tree().change_scene_to_file("res://scenes/map/desert/map1.tscn")
+		"Boss":
+			get_tree().change_scene_to_file("res://scenes/map/kingdom/map1.tscn")
+		"RestStop1":
+			get_tree().change_scene_to_file("res://scenes/map/tavern/map.tscn")
+		"RestStop2":
+			get_tree().change_scene_to_file("res://scenes/map/tavern/map.tscn")
+		"RestStop3":
+			get_tree().change_scene_to_file("res://scenes/map/tavern/map.tscn")
 		_:
 			print("Stage '%s' belum memiliki scene untuk dipindahkan." % selected_stage_id)
