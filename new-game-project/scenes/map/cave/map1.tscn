@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="10_nxw4v"]
 [ext_resource type="PackedScene" uid="uid://cdn8ylgkmsnuy" path="res://scenes/enemies/grass/minion/goblin.tscn" id="11_4e835"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="12_ldnrk"]
-[ext_resource type="PackedScene" path="res://scenes/map/grass/map2.tscn" id="13_3vi6m"]
+[ext_resource type="PackedScene" uid="uid://cfqd8suh8o6om" path="res://scenes/map/grass/map2.tscn" id="13_3vi6m"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="13_5mgl2"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_lck5j"]
 
