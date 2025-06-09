@@ -50,4 +50,5 @@ func _on_animation_finished() -> void:
 		state_machine.change_state(last_state)
 	
 	if animation == "dead":
-		get_parent().queue_free()
+		# This tells Godot to wait until it's safe before deleting the goblin.
+		get_parent().call_deferred("queue_free")

@@ -28,6 +28,7 @@ func initiate_attack():
 	hitbox.get_node("CollisionShape2D").disabled = false
 
 func _on_animation_finished():
+
 	if animated_sprite.animation == "attack":
 		hitbox.get_node("CollisionShape2D").disabled = true
 		is_attacking = false

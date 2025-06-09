@@ -29,8 +29,8 @@ var can_jump = true # // NEW: Added this back
 func _ready():
 	health_component.health_changed.connect(_on_health_changed)
 	# NOTE: You may need more connections here, like for the Senses.
-	senses.get_node("FieldOfView").body_entered.connect(state_machine._on_fov_entered)
-	atk_controller.attack_finished.connect(state_machine._on_attack_finished)
+	#senses.get_node("FieldOfView").body_entered.connect(state_machine._on_fov_entered)
+	#atk_controller.attack_finished.connect(state_machine._on_attack_finished)
 
 func _physics_process(delta: float):
 	# Gravity always applies
