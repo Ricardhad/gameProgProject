@@ -40,7 +40,7 @@ func spawn_character(character_scene: PackedScene):
 	player.add_to_group(\"player\")
 "
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gms5a"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mr02a"]
 texture = ExtResource("1_a178l")
 0:0/0 = 0
 1:0/0 = 0
@@ -268,7 +268,7 @@ texture = ExtResource("1_a178l")
 19:11/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_dirxd"]
-sources/1 = SubResource("TileSetAtlasSource_gms5a")
+sources/1 = SubResource("TileSetAtlasSource_mr02a")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hmpr6"]
 texture = ExtResource("1_a178l")

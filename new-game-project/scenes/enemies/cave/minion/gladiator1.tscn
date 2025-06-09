@@ -521,8 +521,6 @@ position = Vector2(2, -12)
 [node name="LootDropper" parent="." instance=ExtResource("15_1klqb")]
 position = Vector2(5, 3.05176e-05)
 coin_scene = ExtResource("16_cghgn")
-coin_min_amount = 6
-coin_max_amount = 10
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
