@@ -13,17 +13,10 @@ func _ready() -> void:
 	fade_rect.modulate.a = 0.0  # Transparan dari awal
 	
 	fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	if GlobalVar.transition_fade_in:
-		GlobalVar.transition_fade_in = false  # Reset flag
-
-		fade_rect.visible = true
-		fade_rect.modulate.a = 1.0  # Mulai dari hitam
-
-		var fade_in = create_tween()
-		fade_in.tween_property(fade_rect, "modulate:a", 0.0, 1.0)  # Fade-out dari hitam
-	else:
-		fade_rect.visible = false  # Jika bukan transisi
+	
+	#untuk fade in versi baru
+	Transition.fade_in(fade_rect)
+	
 	pass # Replace with function body.
 	
 	var music_db = AudioServer.get_bus_volume_db(1)
@@ -38,19 +31,8 @@ func _process(delta: float) -> void:
 
 
 func _on_start_pressed() -> void:
-	#print("Button start pressed")
+	Transition.fade_out_and_change_scene(fade_rect, "res://scenes/ui/selecting_chr.tscn")
 
-	GlobalVar.transition_fade_in = true  # Aktifkan flag untuk fade-in di scene selanjutnya
-
-	fade_rect.visible = true
-	fade_rect.modulate.a = 0.0
-
-	var fade_out = create_tween()
-	#fade_out.tween_property(fade_rect, "modulate:a", 1.0, 1.0) #comment lek gk perlu transisi
-	fade_out.tween_callback(Callable(self, "_change_scene"))
-
-func _change_scene() -> void:
-	get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
 	#get_tree().change_scene_to_file("res://scenes/ui/CutScene2.tscn")
 
 func _on_load_pressed() -> void:

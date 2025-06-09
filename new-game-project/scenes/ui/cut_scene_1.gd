@@ -41,7 +41,7 @@ func fade_out_and_change_scene():
 	fade.tween_callback(Callable(self, "_go_to_next_scene"))
 
 func _go_to_next_scene():
-	get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
+	get_tree().change_scene_to_file("res://scenes/ui/CutScene2.tscn")
 
 func show_next_line():
 	if current_index >= dialogues.size():
@@ -86,3 +86,22 @@ func _input(event: InputEvent) -> void:
 		else:
 			current_index += 1
 			show_next_line()
+
+func _on_button_skip_pressed() -> void:
+	# Hentikan semua proses yang sedang berjalan untuk transisi yang bersih.
+	is_typing = false
+	timer.stop()
+	sfx_player.stop()
+	
+	# Buat tween untuk efek fade out.
+	var fade = create_tween()
+	fade_panel.visible = true
+	fade_panel.modulate.a = 0.0 # Pastikan mulai dari transparan
+	fade.tween_property(fade_panel, "modulate:a", 1.0, 1.5)
+
+	# Tunggu sampai animasi fade out selesai
+	await fade.finished
+	
+	# Pindah ke scene berikutnya setelah layar menjadi hitam
+	get_tree().change_scene_to_file("res://scenes/ui/CutScene2.tscn")
+	pass # Replace with function body.

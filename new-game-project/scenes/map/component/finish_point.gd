@@ -3,6 +3,7 @@ extends Node2D
 # This line creates the "parameter" in the Godot Inspector.
 # It allows you to assign a scene file to it.
 @export var target_scene: PackedScene
+@onready var fade_rect: ColorRect = $ColorRect
 
 
 func _on_body_entered(body: Node2D):
@@ -10,10 +11,11 @@ func _on_body_entered(body: Node2D):
 	if not target_scene:
 		print("ERROR: No target scene assigned to this goal!")
 		return
-
+	
 	# Check if the body that entered is the player.
 	if body.is_in_group("player"):
 		print("Goal reached! Loading scene: ", target_scene.resource_path)
 		
 		# Change to the scene that was assigned in the Inspector.
 		get_tree().change_scene_to_file(target_scene.resource_path)
+		
