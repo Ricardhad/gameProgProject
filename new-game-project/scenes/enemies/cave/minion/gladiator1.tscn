@@ -490,7 +490,6 @@ max_health = 10
 
 [node name="AttackController" parent="." instance=ExtResource("12_25hu2")]
 unique_name_in_owner = true
-position = Vector2(-3, -0.999969)
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(25, -14.75)
@@ -503,7 +502,7 @@ position = Vector2(26, -20)
 
 [node name="MovementChecker" parent="." instance=ExtResource("13_3vl3y")]
 unique_name_in_owner = true
-position = Vector2(-13, -2.99997)
+position = Vector2(0, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -21)
@@ -531,7 +530,7 @@ script = ExtResource("17_41kfx")
 
 [node name="Senses" parent="." instance=ExtResource("18_rvmuo")]
 unique_name_in_owner = true
-visible = false
+position = Vector2(0, -8)
 
 [editable path="AttackController"]
 [editable path="HurtBox"]
