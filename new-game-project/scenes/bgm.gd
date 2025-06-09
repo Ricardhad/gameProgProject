@@ -31,7 +31,7 @@ func play_music_cave():
 	play_music(cave_music)
 
 func play_music_cutscene():
-	play_music(cutscene_music)
+	play_music(cutscene1_music)
 
 func play_music_maproute():
 	play_music(maproute_music)

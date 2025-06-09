@@ -100,7 +100,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _end_cutscene() -> void:
 	#print("Semua dialog selesai – ganti scene di sini jika perlu")
 	# Ganti dengan path scene yang dituju
-	Transition1.change_scene("res://scenes/map/forest/map1.tscn")
+	Transition1.change_scene("res://scenes/map/grass/map1.tscn")
 
 
 func _on_button_skip_pressed() -> void:
