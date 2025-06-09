@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=21 format=3 uid="uid://bvr11bpv3bx5y"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_sc4cw"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblinJr.tscn" id="3_ilt2a"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="13_65mii"]
 [ext_resource type="PackedScene" path="res://scenes/map/grass/map2.tscn" id="14_16pk1"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_krs4u"]
+[ext_resource type="PackedScene" uid="uid://dnq4ygpd8l4jy" path="res://scenes/enemies/grass/minion/werewolf.tscn" id="15_4rb80"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -1049,3 +1050,6 @@ target_scene = ExtResource("14_16pk1")
 next_scene = "1-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_krs4u")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("15_4rb80")]
+position = Vector2(443.422, 215.791)
