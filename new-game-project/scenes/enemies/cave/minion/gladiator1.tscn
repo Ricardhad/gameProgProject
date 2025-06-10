@@ -530,6 +530,7 @@ script = ExtResource("17_41kfx")
 
 [node name="Senses" parent="." instance=ExtResource("18_rvmuo")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(0, -8)
 
 [editable path="AttackController"]

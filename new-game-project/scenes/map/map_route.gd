@@ -11,14 +11,12 @@ var selected_stage_id = ""  # Untuk simpan stage yang sedang dipilih
 
 func _ready() -> void:
 	var stage_data = {
-		"Tutorial": {"stage": "Tutorial", "difficulty": "1", "total_enemy": "10", "encounter": ["Goblin"]},
-		"Stage1(1)": {"stage": "1", "difficulty": "2", "total_enemy": "12", "encounter": ["Goblin", "Orc"]},
-		"Stage1(2)": {"stage": "1-2", "difficulty": "2", "total_enemy": "13", "encounter": ["Goblin", "Orc"]},
-		"Stage2(1)": {"stage": "2-1", "difficulty": "3", "total_enemy": "14", "encounter": ["Goblin", "Skeleton"]},
-		"Stage2(2)": {"stage": "2-2", "difficulty": "3", "total_enemy": "15", "encounter": ["Orc", "Skeleton"]},
-		"Stage3(1)": {"stage": "3-1", "difficulty": "4", "total_enemy": "17", "encounter": ["Orc", "Skeleton"]},
-		"Stage3(2)": {"stage": "3-2", "difficulty": "4", "total_enemy": "18", "encounter": ["Skeleton"]},
-		"Boss": {"stage": "Boss", "difficulty": "4", "total_enemy": "20", "encounter": ["Goblin", "Orc", "Skeleton"]},
+		"Stage1(1)": {"stage": "Grass", "difficulty": "1", "total_enemy": "12", "encounter": ["Goblin", "Orc"]},
+		"Stage1(2)": {"stage": "Forest", "difficulty": "2", "total_enemy": "13", "encounter": ["Goblin", "Orc"]},
+		"Stage2(1)": {"stage": "Cave", "difficulty": "3", "total_enemy": "14", "encounter": ["Goblin", "Skeleton"]},
+		"Stage2(2)": {"stage": "Snow", "difficulty": "4", "total_enemy": "15", "encounter": ["Orc", "Skeleton"]},
+		"Stage3(1)": {"stage": "Desert", "difficulty": "5", "total_enemy": "17", "encounter": ["Orc", "Skeleton"]},
+		"Boss": {"stage": "Obsidian Kingdom", "difficulty": "6", "total_enemy": "20", "encounter": ["Goblin", "Orc", "Skeleton"]},
 		"RestStop1": {"stage": "Rest Stop", "difficulty": "-", "total_enemy": "0", "encounter": []},
 		"RestStop2": {"stage": "Rest Stop", "difficulty": "-", "total_enemy": "0", "encounter": []},
 		"RestStop3": {"stage": "Rest Stop", "difficulty": "-", "total_enemy": "0", "encounter": []},
