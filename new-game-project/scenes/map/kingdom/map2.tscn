@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://br7nswx6l4jc"]
+[gd_scene load_steps=17 format=3 uid="uid://br7nswx6l4jc"]
 
 [ext_resource type="Texture2D" uid="uid://duh3c0ktwekal" path="res://assets/stage/kingdom/tileset.png" id="1_l41tq"]
 [ext_resource type="Texture2D" uid="uid://bx603gulf31ny" path="res://assets/stage/kingdom/bg/1.png" id="2_shhon"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="7_2s72n"]
 [ext_resource type="PackedScene" uid="uid://c01jvjc2axuh1" path="res://scenes/map/kingdom/map3.tscn" id="8_8py8n"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="8_ocxdr"]
+[ext_resource type="PackedScene" uid="uid://duqyk1bcrjkms" path="res://scenes/enemies/kingdom/minion/corruptSoldier.tscn" id="10_dt203"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -165,3 +166,12 @@ target_scene = ExtResource("8_8py8n")
 next_scene = "4-3"
 
 [node name="PauseMenu" parent="." instance=ExtResource("8_ocxdr")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("10_dt203")]
+position = Vector2(454, 280)
+
+[node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("10_dt203")]
+position = Vector2(211, -2)
+
+[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D" instance=ExtResource("10_dt203")]
+position = Vector2(357, 1)

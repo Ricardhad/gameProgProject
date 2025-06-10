@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dwgdqkxthac43"]
+[gd_scene load_steps=21 format=3 uid="uid://dwgdqkxthac43"]
 
 [ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_a178l"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_mtw8c"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_o8cjj"]
 [ext_resource type="PackedScene" uid="uid://21ywvluhem1r" path="res://scenes/map/cave/map3.tscn" id="12_7y4dl"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_gkuho"]
+[ext_resource type="PackedScene" uid="uid://m4arjnke8gme" path="res://scenes/enemies/cave/minion/gladiator1.tscn" id="14_383h4"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="15_xjlqr"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1128,3 +1130,14 @@ next_scene = "2-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_gkuho")]
 position = Vector2(304, 421)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("14_383h4")]
+position = Vector2(1172, 284)
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("14_383h4")]
+position = Vector2(672, 280)
+
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("15_xjlqr")]
+position = Vector2(448, 214)

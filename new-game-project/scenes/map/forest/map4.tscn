@@ -878,14 +878,14 @@ next_scene = "1-5"
 [node name="CharacterBody2D" parent="Node" instance=ExtResource("13_s6hb2")]
 position = Vector2(510, 127)
 
-[node name="CharacterBody2D" parent="Node/CharacterBody2D" instance=ExtResource("14_2w5ui")]
-position = Vector2(100, 160)
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("14_2w5ui")]
+position = Vector2(610, 287)
 
-[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D" instance=ExtResource("15_p0fdh")]
-position = Vector2(175, -51)
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("15_p0fdh")]
+position = Vector2(785, 236)
 
-[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_4ri6i")]
-position = Vector2(268, -49)
+[node name="CharacterBody2D4" parent="Node" instance=ExtResource("16_4ri6i")]
+position = Vector2(1053, 187)
 
-[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_4ri6i")]
-position = Vector2(-161, -77)
+[node name="CharacterBody2D5" parent="Node" instance=ExtResource("16_4ri6i")]
+position = Vector2(892, 110)

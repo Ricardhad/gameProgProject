@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ca4wpu6wh6upv"]
+[gd_scene load_steps=21 format=3 uid="uid://ca4wpu6wh6upv"]
 
 [ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_t7xv4"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_swt5r"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="13_5mgl2"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_lck5j"]
 [ext_resource type="PackedScene" uid="uid://m4arjnke8gme" path="res://scenes/enemies/cave/minion/gladiator1.tscn" id="14_n0dux"]
+[ext_resource type="PackedScene" uid="uid://cutxitiep84jb" path="res://scenes/enemies/cave/minion/gladiator2.tscn" id="15_0sl46"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="16_f0bdo"]
+[ext_resource type="PackedScene" uid="uid://utm575cxacob" path="res://scenes/enemies/cave/minion/demon3.tscn" id="17_mh5p0"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -895,4 +898,19 @@ next_scene = "2-1"
 position = Vector2(304, 421)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("14_n0dux")]
-position = Vector2(371, 265)
+position = Vector2(368, 269)
+
+[node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("15_0sl46")]
+position = Vector2(291, -14)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("15_0sl46")]
+position = Vector2(741, 510)
+
+[node name="CharacterBody2D" parent="CharacterBody2D2" instance=ExtResource("16_f0bdo")]
+position = Vector2(-246, -50)
+
+[node name="CharacterBody2D" parent="CharacterBody2D2/CharacterBody2D" instance=ExtResource("17_mh5p0")]
+position = Vector2(-92, 292)
+
+[node name="CharacterBody2D" parent="CharacterBody2D2/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_f0bdo")]
+position = Vector2(355, -3)
