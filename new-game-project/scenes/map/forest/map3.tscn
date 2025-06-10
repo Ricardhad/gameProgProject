@@ -872,19 +872,19 @@ next_scene = "1-4"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_3rc7a")]
 
-[node name="Node" type="Node" parent="."]
+[node name="Enemy" type="Node" parent="."]
 
-[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_r4n4w")]
+[node name="CharacterBody2D5" parent="Enemy" instance=ExtResource("13_r4n4w")]
+position = Vector2(1009, 281)
+
+[node name="CharacterBody2D4" parent="Enemy" instance=ExtResource("15_4ogxq")]
+position = Vector2(1177, -88)
+
+[node name="CharacterBody2D3" parent="Enemy" instance=ExtResource("14_08e4c")]
+position = Vector2(413, -233)
+
+[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("13_r4n4w")]
+position = Vector2(344, 123)
+
+[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("13_r4n4w")]
 position = Vector2(366, 280)
-
-[node name="CharacterBody2D" parent="Node/CharacterBody2D" instance=ExtResource("13_r4n4w")]
-position = Vector2(-22, -157)
-
-[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D" instance=ExtResource("14_08e4c")]
-position = Vector2(69, -356)
-
-[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("15_4ogxq")]
-position = Vector2(764, 145)
-
-[node name="CharacterBody2D" parent="Node/CharacterBody2D/CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("13_r4n4w")]
-position = Vector2(-168, 369)

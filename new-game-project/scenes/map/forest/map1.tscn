@@ -872,19 +872,19 @@ next_scene = "1-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_pak3y")]
 
-[node name="Node" type="Node" parent="."]
+[node name="Enemy" type="Node" parent="."]
 
-[node name="CharacterBody2D3" parent="Node" instance=ExtResource("13_2ad61")]
+[node name="CharacterBody2D5" parent="Enemy" instance=ExtResource("14_66jam")]
+position = Vector2(1327, 285)
+
+[node name="CharacterBody2D3" parent="Enemy" instance=ExtResource("13_2ad61")]
 position = Vector2(1023, 280)
 
-[node name="CharacterBody2D" parent="Node" instance=ExtResource("14_66jam")]
+[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("14_66jam")]
 position = Vector2(473, 285)
 
-[node name="CharacterBody2D2" parent="Node" instance=ExtResource("15_54c8r")]
+[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("15_54c8r")]
 position = Vector2(478, 128)
 
-[node name="CharacterBody2D4" parent="Node" instance=ExtResource("14_66jam")]
+[node name="CharacterBody2D4" parent="Enemy" instance=ExtResource("14_66jam")]
 position = Vector2(684, 156)
-
-[node name="CharacterBody2D" parent="Node/CharacterBody2D4" instance=ExtResource("14_66jam")]
-position = Vector2(643, 129)

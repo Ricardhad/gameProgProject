@@ -1164,6 +1164,7 @@ next_scene = "???"
 position = Vector2(-268, -80)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("7_6u4ep")]
+visible = false
 position = Vector2(666, 304)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("6_au6i5")]

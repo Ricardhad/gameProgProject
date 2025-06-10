@@ -1,6 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://21ywvluhem1r"]
+[gd_scene load_steps=24 format=3 uid="uid://21ywvluhem1r"]
 
-[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_qvqkt"]
+[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_qvqkt"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_vtlg7"]
 [ext_resource type="Texture2D" uid="uid://c1q21cdushp0e" path="res://assets/stage/cave/bg/2.png" id="3_v4rub"]
 [ext_resource type="Texture2D" uid="uid://caqjjb07gax18" path="res://assets/stage/cave/bg/3.png" id="4_w17ic"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cetptf6cbe02y" path="res://assets/stage/cave/bg/8.png" id="9_k00ac"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_c75xk"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_whb7s"]
+[ext_resource type="PackedScene" uid="uid://cic1b8vump1wj" path="res://scenes/map/cave/map4.tscn" id="12_elwqa"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_s11cj"]
 [ext_resource type="PackedScene" uid="uid://utm575cxacob" path="res://scenes/enemies/cave/minion/demon3.tscn" id="13_sbwt2"]
 [ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="14_bsocv"]
@@ -1130,24 +1131,25 @@ position = Vector2(288, 448)
 [node name="FinishPoint" parent="." instance=ExtResource("11_whb7s")]
 modulate = Color(3, 0, 0, 1)
 position = Vector2(1346, 224)
-next_scene = "2-3"
+target_scene = ExtResource("12_elwqa")
+next_scene = "2-4"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_s11cj")]
 position = Vector2(304, 421)
 
-[node name="Node" type="Node" parent="."]
+[node name="Enemy" type="Node" parent="."]
 
-[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_sbwt2")]
-position = Vector2(254, -129)
+[node name="CharacterBody2D5" parent="Enemy" instance=ExtResource("13_sbwt2")]
+position = Vector2(383, 222)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("14_bsocv")]
+[node name="CharacterBody2D4" parent="Enemy" instance=ExtResource("15_hpnqp")]
+position = Vector2(578, -81)
+
+[node name="CharacterBody2D3" parent="Enemy" instance=ExtResource("16_lifft")]
+position = Vector2(254, 46)
+
+[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("14_bsocv")]
 position = Vector2(455, 76)
 
-[node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("13_sbwt2")]
-position = Vector2(-72, 146)
-
-[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D" instance=ExtResource("15_hpnqp")]
-position = Vector2(195, -303)
-
-[node name="CharacterBody2D" parent="CharacterBody2D/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_lifft")]
-position = Vector2(-324, 127)
+[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("13_sbwt2")]
+position = Vector2(254, -129)

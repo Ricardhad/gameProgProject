@@ -892,25 +892,27 @@ position = Vector2(288, 448)
 modulate = Color(3, 0, 0, 1)
 position = Vector2(1105, 577)
 target_scene = ExtResource("12_a5ujl")
-next_scene = "2-1"
+next_scene = "2-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_lck5j")]
 position = Vector2(304, 421)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("14_n0dux")]
+[node name="Enemy" type="Node" parent="."]
+
+[node name="CharacterBody2D6" parent="Enemy" instance=ExtResource("16_f0bdo")]
+position = Vector2(758, 749)
+
+[node name="CharacterBody2D5" parent="Enemy" instance=ExtResource("17_mh5p0")]
+position = Vector2(403, 752)
+
+[node name="CharacterBody2D4" parent="Enemy" instance=ExtResource("16_f0bdo")]
+position = Vector2(495, 460)
+
+[node name="CharacterBody2D3" parent="Enemy" instance=ExtResource("15_0sl46")]
+position = Vector2(659, 255)
+
+[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("14_n0dux")]
 position = Vector2(368, 269)
 
-[node name="CharacterBody2D" parent="CharacterBody2D" instance=ExtResource("15_0sl46")]
-position = Vector2(291, -14)
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("15_0sl46")]
+[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("15_0sl46")]
 position = Vector2(741, 510)
-
-[node name="CharacterBody2D" parent="CharacterBody2D2" instance=ExtResource("16_f0bdo")]
-position = Vector2(-246, -50)
-
-[node name="CharacterBody2D" parent="CharacterBody2D2/CharacterBody2D" instance=ExtResource("17_mh5p0")]
-position = Vector2(-92, 292)
-
-[node name="CharacterBody2D" parent="CharacterBody2D2/CharacterBody2D/CharacterBody2D" instance=ExtResource("16_f0bdo")]
-position = Vector2(355, -3)
