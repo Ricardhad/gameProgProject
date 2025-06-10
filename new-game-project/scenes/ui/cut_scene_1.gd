@@ -7,8 +7,8 @@ extends Control
 @onready var sfx_player = $SFXPlayer
 
 var dialogues = [
-{ "text": "Dahulu kala, dunia Crystallia terdiri dari empat kerajaan yang hidup damai: Emerald, Ruby, Sapphire, dan Obsidian.", "image": "res://assets/selecting_menu/cut_img1.png" },
-{ "text": "Namun, kedamaian itu terusik ketika wabah melanda Obsidian Kingdom. Dalam keputusasaan, sang pangeran mempelajari sihir hitam, yang justru merasuki dirinya.", "image": "res://assets/selecting_menu/cut_img2.png" },
+{ "text": "Dahulu kala, dunia Crystallia terdiri dari empat kerajaan yang hidup damai: Emerald, Ruby, Sapphire, dan Obsidian.", "image": "res://assets/selecting_menu/castle_green.png" },
+{ "text": "Namun, kedamaian itu terusik ketika wabah melanda Obsidian Kingdom. Dalam keputusasaan, sang pangeran mempelajari sihir hitam, yang justru merasuki dirinya.", "image": "res://assets/selecting_menu/dark_castle_green.png" },
 { "text": "Kembali ke kerajaannya, sang pangeran yang dikuasai roh jahat juga merasuki ayahnya, Raja Obsidian. Roh itu kini berniat menaklukkan seluruh Crystallia dengan pasukan dari dunia lain.", "image": "res://assets/selecting_menu/cut_img3.png" },
 { "text": "Untuk menghentikan kegelapan ini, tiga kerajaan lainnya mengirimkan pahlawan mereka. Bersama, mereka harus belajar bekerja sama untuk menyelamatkan Crystallia.", "image": "res://assets/selecting_menu/img4.jpg" }
 ]
