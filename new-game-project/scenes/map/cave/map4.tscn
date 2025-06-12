@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://cic1b8vump1wj"]
 
-[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_tll7t"]
+[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_tll7t"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_6pjcl"]
 [ext_resource type="Texture2D" uid="uid://c1q21cdushp0e" path="res://assets/stage/cave/bg/2.png" id="3_a4svr"]
 [ext_resource type="Texture2D" uid="uid://caqjjb07gax18" path="res://assets/stage/cave/bg/3.png" id="4_v635u"]
