@@ -1,7 +1,7 @@
 [gd_scene load_steps=49 format=3 uid="uid://br31vv6je1vvw"]
 
-[ext_resource type="Script" path="res://scenes/enemies/forest/minion/satyr_1.gd" id="1_5bgdw"]
 [ext_resource type="Texture2D" uid="uid://d24sfhexgn4ms" path="res://assets/enemies/forest/satyr/Satyr_1/Attack.png" id="1_cbsjk"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_g3hjf"]
 [ext_resource type="Texture2D" uid="uid://ckv3bady04a2d" path="res://assets/enemies/forest/satyr/Satyr_1/Dead.png" id="2_pi6f0"]
 [ext_resource type="Texture2D" uid="uid://cbx8fuo0i6dqv" path="res://assets/enemies/forest/satyr/Satyr_1/Hurt.png" id="3_qecl4"]
 [ext_resource type="Texture2D" uid="uid://dcmuvy4chu5rn" path="res://assets/enemies/forest/satyr/Satyr_1/Idle.png" id="4_qa4sg"]
@@ -266,7 +266,7 @@ size = Vector2(19, 39)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_5bgdw")
+script = ExtResource("1_g3hjf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=52 format=3 uid="uid://xvgkein03fuj"]
 
-[ext_resource type="Script" path="res://scenes/enemies/kingdom/minion/sketelon_warrior.gd" id="1_g53kg"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_b02ti"]
 [ext_resource type="Texture2D" uid="uid://bgtx7hsomf62i" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Attack_1.png" id="1_oswva"]
 [ext_resource type="Texture2D" uid="uid://8fk7tfpbf73b" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Dead.png" id="2_4iqio"]
 [ext_resource type="Texture2D" uid="uid://c5uuhoj74fqo4" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Hurt.png" id="3_amdlt"]
@@ -286,7 +286,7 @@ size = Vector2(20.75, 32)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_g53kg")
+script = ExtResource("1_b02ti")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)

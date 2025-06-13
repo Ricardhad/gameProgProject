@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://duqyk1bcrjkms"]
 
-[ext_resource type="Script" path="res://scenes/enemies/kingdom/minion/corrupt_soldier.gd" id="1_lgpvm"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_05c8v"]
 [ext_resource type="Texture2D" uid="uid://luxh4yexn8tc" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Attack.png" id="1_xveia"]
 [ext_resource type="Texture2D" uid="uid://cs1jabs5f1gg5" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Dead.png" id="2_afx4t"]
 [ext_resource type="Texture2D" uid="uid://dbwkun04nbifd" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Hurt.png" id="3_28803"]
@@ -244,7 +244,7 @@ size = Vector2(20.75, 32)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_lgpvm")
+script = ExtResource("1_05c8v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)

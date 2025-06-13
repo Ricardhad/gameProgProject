@@ -1,6 +1,6 @@
 [gd_scene load_steps=69 format=3 uid="uid://yb7n168vl6i"]
 
-[ext_resource type="Script" path="res://scenes/enemies/desert/minion/orc_1.gd" id="1_3rq0m"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_f3hnu"]
 [ext_resource type="Texture2D" uid="uid://djixpk82721qy" path="res://assets/enemies/desert/orc/Orc_Warrior_Green/Attack_1.png" id="1_vgj0r"]
 [ext_resource type="Texture2D" uid="uid://jvdt4sko7jvv" path="res://assets/enemies/desert/orc/Orc_Warrior_Green/Dead.png" id="2_e7b4t"]
 [ext_resource type="Texture2D" uid="uid://yv2amdm4cic1" path="res://assets/enemies/desert/orc/Orc_Warrior_Green/Hurt.png" id="3_f45kd"]
@@ -404,7 +404,7 @@ size = Vector2(17, 45)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_3rq0m")
+script = ExtResource("1_f3hnu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)

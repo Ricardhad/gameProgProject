@@ -1,7 +1,7 @@
 [gd_scene load_steps=67 format=3 uid="uid://c0cq52hhdmibh"]
 
 [ext_resource type="Texture2D" uid="uid://coig4k3hw5drl" path="res://assets/enemies/desert/orc/Orc_Woman/Attack_1.png" id="1_7jjeh"]
-[ext_resource type="Script" path="res://scenes/enemies/desert/minion/orc_2.gd" id="1_hs024"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_r7ger"]
 [ext_resource type="Texture2D" uid="uid://b8bkhm2w6it0g" path="res://assets/enemies/desert/orc/Orc_Woman/Dead.png" id="2_r55wo"]
 [ext_resource type="Texture2D" uid="uid://dn3pp6vieawu" path="res://assets/enemies/desert/orc/Orc_Woman/Hurt.png" id="3_80x7m"]
 [ext_resource type="Texture2D" uid="uid://bqu55xxj4ktha" path="res://assets/enemies/desert/orc/Orc_Woman/Idle.png" id="4_bs43j"]
@@ -390,7 +390,7 @@ size = Vector2(17, 45)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_hs024")
+script = ExtResource("1_r7ger")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
