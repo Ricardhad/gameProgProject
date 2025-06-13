@@ -1,19 +1,17 @@
-extends "res://scenes/enemies/component/AnimationController.gd"
+# In your AnimationController.gd script
 
+extends "res://scenes/enemies/component/AnimationController.gd" # Assuming this is your base class
+
+# ✅ 1. DELETE THE OLD VARIABLE
+# animation_play =  randi_range(1,3) # DELETE THIS LINE
 
 func _ready() -> void:
-	state_machine.state_changed.connect(_on_state_changed)
-	health_component.health_depleted.connect(_on_death)
-	self.animation_finished.connect(_on_animation_finished)
+	# ... (this function is fine as is)
 
-
-# This function now correctly accepts BOTH arguments from the signal.
 func _on_state_changed(new_state: StateMachine.State, previous_state: StateMachine.State) -> void:
-	# If the new state isn't HURT, we can update our "last_state" memory.
-	# This ensures we don't forget we were chasing if we get hurt.
-	if new_state != StateMachine.State.HURT:
-		last_state = new_state
+	# ... (last_state logic is fine)
 	
+	# ✅ 2. UPDATE THE MATCH STATEMENT
 	match new_state:
 		StateMachine.State.IDLE:
 			play("idle")
@@ -21,27 +19,18 @@ func _on_state_changed(new_state: StateMachine.State, previous_state: StateMachi
 			play("walk")
 		StateMachine.State.CHASE:
 			play("run")
-		StateMachine.State.ATTACK:
+		
+		# Replace the old ATTACK case with these new, specific cases
+		StateMachine.State.ATTACK1:
 			play("attack1")
+		StateMachine.State.ATTACK2:
+			play("attack2")
+		StateMachine.State.ATTACK3:
+			play("attack3")
+
 		StateMachine.State.HURT:
 			play("hurt")
 		StateMachine.State.DEAD:
 			play("dead")
 
-func _on_death() -> void:
-	# We can just call our state change function directly.
-	# The StateMachine is the source of truth, so we command IT to change state.
-	state_machine.change_state(StateMachine.State.DEAD)
-
-func _on_animation_finished() -> void:
-	# If the "hurt" animation has just finished...
-	
-	# Inside AnimationController.gd -> _on_animation_finished()
-
-	if animation == "hurt":
-		# This is the new, more aggressive logic
-		state_machine.change_state(StateMachine.State.CHASE)
-	
-	if animation == "dead":
-		# This tells Godot to wait until it's safe before deleting the goblin.
-		get_parent().call_deferred("queue_free")
+# ... (the rest of your script is fine)
