@@ -15,5 +15,6 @@ func _on_body_entered(body: Node2D):
 	# Check if the body that entered is the player.
 	if body.is_in_group("player"):
 		GlobalVar.current_stage = next_scene
-		get_tree().change_scene_to_file(target_scene.resource_path)
+		Transition1.change_scene(target_scene.resource_path)
+		#get_tree().change_scene_to_file(target_scene.resource_path)
 		
