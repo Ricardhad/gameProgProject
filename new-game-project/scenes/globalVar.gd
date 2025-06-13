@@ -13,6 +13,7 @@ var atk = 0
 var def = 0
 var agi = 0
 var maxPot = 0
+var buff = [0,0,0,0,0,0,0]
 
 func add_coin():
 	coin_collected += 1
@@ -32,6 +33,7 @@ func reset_game():
 	def = 0
 	agi = 0
 	maxPot = 0
+	buff = [0,0,0,0,0,0,0]
 
 func add_item(itemName: String):
 	if(itemName == "hp"):

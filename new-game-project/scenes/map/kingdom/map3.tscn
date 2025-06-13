@@ -162,6 +162,6 @@ texture = ExtResource("5_mcp0t")
 modulate = Color(0.16, 0.064, 0.016, 1)
 position = Vector2(1042, 227)
 target_scene = ExtResource("8_ckvyq")
-next_scene = "1-1"
+next_scene = "4-3"
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_aslv4")]
