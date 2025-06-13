@@ -51,7 +51,10 @@ func set_max_health(value: int):
 		
 		if health > max_health:
 			health = max_health
-	
+		#if health == 0:
+			#print(get_parent().name, " health is zero! Emitting health_depleted signal now.")
+			#health_depleted.emit()
+	#
 	# Only sync with global if enabled
 	if sync_with_global:
 		GlobalVar.maxhealth_player = max_health

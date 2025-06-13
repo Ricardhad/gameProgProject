@@ -12,7 +12,9 @@ extends Node
 func _ready() -> void:
 	# Connect to the Health component's signal
 	randomize()
-	health_component.health_depleted.connect(drop_coins, CONNECT_DEFERRED)
+	
+	#health_component.health_depleted.connect(drop_coins, CONNECT_DEFERRED)
+	print("LootDropper ready for: ", get_parent().name, " with unique ID: ", self.get_instance_id())
 	if health_component:
 		health_component.health_depleted.connect(drop_coins, CONNECT_DEFERRED)
 	else:
