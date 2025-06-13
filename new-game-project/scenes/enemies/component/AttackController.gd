@@ -1,63 +1,68 @@
+# AttackController.gd (Updated for projectiles)
 class_name AttackController
 extends Node2D
 
 signal attack_finished
 
-@export var available_attacks: Array[String] = ["attack"]
-## The frame of the attack animation on which to enable the hitbox.
-## For example, if your swing connects on the 3rd frame, set this to 2 (since frames are 0-indexed).
+@export var available_attacks: Array[String] = ["attack", "shoot"] # Added "shoot"
 @export var damage_frame: int = 1
+
+# ✅ CHANGE #1: Add new properties for shooting
+@export_group("Shooting Properties")
+@export var shoot_frame: int = 1 # The frame of the "shoot" animation to fire on
+@export var projectile_scene: PackedScene
+@export var projectile_spawn_point: Marker2D
 
 var can_attack: bool = true
 
 @onready var animated_sprite: AnimatedSprite2D = get_parent().get_node("AnimatedSprite2D")
 @onready var hitbox_shape: CollisionShape2D = $HitBox/CollisionShape2D
 
-
 func _ready():
-	# Connect to the signals from the sprite.
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	animated_sprite.frame_changed.connect(_on_frame_changed)
-	
 	hitbox_shape.disabled = true
-
 
 func initiate_attack(attack_name: String):
 	if not can_attack:
 		return
-
 	can_attack = false
 	animated_sprite.play(attack_name)
-	
-	# IMPORTANT: We no longer enable the hitbox here.
-	# It will be enabled on the specific damage_frame instead.
 
-
-# This function runs every time the animation frame changes.
 func _on_frame_changed():
 	var current_animation = animated_sprite.animation
-	
-	# Check if we're in an attack animation and on the correct frame.
-	if current_animation in available_attacks and animated_sprite.frame == damage_frame:
-		# Enable the hitbox only on the specific frame for damage.
+
+	# --- Melee Logic ---
+	if current_animation == "attack" and animated_sprite.frame == damage_frame:
 		hitbox_shape.disabled = false
 
+	# ✅ CHANGE #2: Add logic for spawning a projectile on a specific frame
+	if current_animation == "shoot" and animated_sprite.frame == shoot_frame:
+		_spawn_projectile()
 
 func _on_animation_finished():
 	var finished_animation_name = animated_sprite.animation
-
 	if finished_animation_name in available_attacks:
-		# Always disable the hitbox when the animation is done.
 		hitbox_shape.disabled = true
-		
-		# Tell the StateMachine to start its cooldown.
 		emit_signal("attack_finished")
 
+# ✅ CHANGE #3: Add the function to do the spawning
+func _spawn_projectile():
+	if not projectile_scene or not projectile_spawn_point:
+		print("ERROR: Projectile Scene or Spawn Point not set in AttackController.")
+		return
 
-# The StateMachine calls this function AFTER its cooldown timer finishes.
+	# Create an instance of the projectile
+	var new_projectile = projectile_scene.instantiate()
+
+	# Add it to the main scene tree (not as a child of the goblin)
+	get_tree().get_root().add_child(new_projectile)
+
+	# Call its start function to set its position, rotation, and direction
+	new_projectile.start(projectile_spawn_point.global_transform)
+
 func reset_attack_cooldown():
 	can_attack = true
-
 
 func is_ready_to_attack() -> bool:
 	return can_attack
