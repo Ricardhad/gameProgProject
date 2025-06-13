@@ -28,7 +28,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Check if the pressed key is 'T' and it's not a repeat event (echo)
 		if event.is_pressed() and not event.is_echo() and event.keycode == KEY_T:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/testing/testingArea.tscn")
+			#get_tree().change_scene_to_file("res://scenes/map/testing/testingArea.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
