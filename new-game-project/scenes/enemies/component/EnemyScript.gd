@@ -111,3 +111,15 @@ func _on_health_changed(diff: int):
 		if player:
 			var dir = sign(global_position.x - player.global_position.x)
 			knockback_velocity = Vector2(KNOCKBACK_FORCE * dir, -100)
+# Add this function to your main enemy script (satyr1.gd)
+
+func retreat_from(target_position: Vector2):
+	# Set the movement speed to the normal patrol speed for the retreat
+	movement_speed = SPEED
+	
+	# Calculate the direction AWAY from the target
+	# This ensures the goblin faces away from the player while retreating
+	var direction_away = sign(global_position.x - target_position.x)
+	
+	# Set the goblin's main movement direction variable
+	movement_direction = direction_away

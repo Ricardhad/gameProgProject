@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://br31vv6je1vvw"]
+[gd_scene load_steps=50 format=3 uid="uid://br31vv6je1vvw"]
 
 [ext_resource type="Texture2D" uid="uid://d24sfhexgn4ms" path="res://assets/enemies/forest/satyr/Satyr_1/Attack.png" id="1_cbsjk"]
 [ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_g3hjf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="7_5ssos"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_sp2jt"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="9_7eib6"]
+[ext_resource type="PackedScene" uid="uid://ci0v35gnlqbcw" path="res://scenes/enemies/component/projectile.tscn" id="9_j17b5"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_omcis"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="11_t85v2"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="12_j50tp"]
@@ -155,7 +156,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qawhi")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -221,6 +222,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_5olrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip2us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fykxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qawhi")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2mbio")
 }, {
 "duration": 1.0,
@@ -274,8 +292,6 @@ scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"attack"
 autoplay = "idle"
-frame = 3
-frame_progress = 1.0
 flip_h = true
 script = ExtResource("7_5ssos")
 
@@ -283,8 +299,19 @@ script = ExtResource("7_5ssos")
 position = Vector2(-0.499993, -19.5)
 shape = SubResource("RectangleShape2D_qcy7w")
 
-[node name="AttackController" parent="." instance=ExtResource("8_sp2jt")]
+[node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("8_sp2jt")]
 unique_name_in_owner = true
+projectile_scene = ExtResource("9_j17b5")
+projectile_spawn_point = NodePath("ProjectileSpawn")
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(30, -15)
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(30, -24)
+
+[node name="ProjectileSpawn" type="Marker2D" parent="AttackController"]
+position = Vector2(42, -29)
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true

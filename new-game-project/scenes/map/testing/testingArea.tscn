@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="11_q3ky4"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_7fri4"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="13_led54"]
-[ext_resource type="PackedScene" uid="uid://m4arjnke8gme" path="res://scenes/enemies/cave/minion/gladiator1.tscn" id="14_rj4b1"]
+[ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="15_0on3l"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -901,10 +901,10 @@ texture = ExtResource("9_1byby")
 
 [node name="Node" type="Node" parent="."]
 
-[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_led54")]
-position = Vector2(684, 238)
+[node name="satyr1" parent="Node" instance=ExtResource("15_0on3l")]
+position = Vector2(800.786, 244.117)
 
-[node name="CharacterBody2D2" parent="Node" instance=ExtResource("14_rj4b1")]
-position = Vector2(540.014, 238.581)
+[node name="goblin" parent="Node" instance=ExtResource("13_led54")]
+position = Vector2(568, 274)
 
 [editable path="BossHealthbar"]

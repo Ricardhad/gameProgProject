@@ -1,43 +1,51 @@
-# StateMachine.gd (Corrected and Final Version)
+# StateMachine.gd (Definitive Final Version)
 class_name StateMachine
 extends Node
 
-enum State { IDLE, PATROL, CHASE, PREPARE_ATTACK, ATTACK, COOLDOWN, HURT, DEAD }
+enum State { IDLE, PATROL, CHASE, PREPARE_ATTACK, ATTACK, COOLDOWN, RETREAT, HURT, DEAD }
 signal state_changed(new_state: State, previous_state: State)
 
+# --- State Variables ---
 var current_state: State = State.IDLE
 var player_target: Node2D = null
+var last_attack_type: String = ""
+var can_make_attack_decision: bool = true
 
-# ✅ FIX #1: This variable will store our chosen attack type.
-var next_attack_type: String = ""
-
-# Timers and constants
+# --- Constants & Timers ---
 const PREPARE_DURATION = 0.5
 const ATTACK_COOLDOWN_DURATION = 0.4
+const RETREAT_DURATION = 0.8 # Increased duration for more effective retreat
+const DECISION_DELAY_DURATION = 0.2
 const CHASE_DURATION = 5.0
 const CHASE_LOSE_COOLDOWN = 5.0
 const TURN_COOLDOWN_PATROL = 0.5
-const SHOOTING_RANGE = 300.0
+const SHOOTING_RANGE = 60.0
 
 var prepare_attack_timer = 0.0
 var chase_timer = 0.0
 var losing_sight_timer = 0.0
 var turn_timer = 0.0
 
-# Node references
+# --- Node References ---
 @onready var senses: Node = %Senses
 @onready var player_detect: Area2D = %AttackController.get_node("PlayerDetect")
 @onready var attack_controller: AttackController = %AttackController
 @onready var health_component: Health = %Health
-@onready var parent_goblin = get_parent()
+@onready var parent_character = get_parent() # Renamed for clarity
 @onready var cooldown_timer: Timer = $CooldownTimer
+@onready var retreat_timer: Timer = $RetreatTimer
+@onready var decision_delay_timer: Timer = $DecisionDelayTimer
 
 func _ready() -> void:
 	health_component.health_depleted.connect(func(): change_state(State.DEAD))
 	attack_controller.attack_finished.connect(_on_attack_finished)
 	senses.get_node("FieldOfView").body_entered.connect(_on_fov_entered)
 	health_component.health_changed.connect(_on_health_changed)
+	
 	cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
+	retreat_timer.timeout.connect(_on_retreat_timer_timeout)
+	decision_delay_timer.timeout.connect(_on_decision_delay_timer_timeout)
+	
 	change_state(State.PATROL)
 
 func _process(delta: float) -> void:
@@ -45,109 +53,76 @@ func _process(delta: float) -> void:
 
 	match current_state:
 		State.IDLE:
-			parent_goblin.stop_movement()
+			parent_character.stop_movement()
 
 		State.PATROL:
-			parent_goblin.set_movement_speed(parent_goblin.SPEED)
-			if turn_timer <= 0 and parent_goblin.is_patrol_obstacle_detected():
-				parent_goblin.turn_around()
+			parent_character.set_movement_speed(parent_character.SPEED)
+			if turn_timer <= 0 and parent_character.is_patrol_obstacle_detected():
+				parent_character.turn_around()
 				turn_timer = TURN_COOLDOWN_PATROL
-
+				
 		State.CHASE:
 			if not is_instance_valid(player_target):
-				change_state(State.PATROL)
-				return
+				change_state(State.PATROL); return
 			
-			var fov_area = senses.get_node("FieldOfView")
-			var proximity_area = senses.get_node("ProximitySense")
-			var can_see_player = fov_area.overlaps_body(player_target) or proximity_area.overlaps_body(player_target)
-
-			if can_see_player:
-				losing_sight_timer = CHASE_LOSE_COOLDOWN
-				chase_timer = CHASE_DURATION
-				parent_goblin.set_movement_speed(parent_goblin.CHASE_SPEED)
-				parent_goblin.move_towards(player_target.global_position)
+			parent_character.set_movement_speed(parent_character.CHASE_SPEED)
+			parent_character.move_towards(player_target.global_position)
+			
+			if attack_controller.is_ready_to_attack() and can_make_attack_decision:
+				var distance_to_player = player_target.global_position.distance_to(parent_character.global_position)
 				
-				# ✅ FIX #2: ALL attack logic is now in one unified block.
-				# This replaces the old logic completely.
-				if attack_controller.is_ready_to_attack():
-					# ✅ FIX #3: Calculate distance to player HERE, every frame.
-					var distance_to_player = player_target.global_position.distance_to(parent_goblin.global_position)
-					
-					# If player is far away, decide to shoot
-					if distance_to_player > SHOOTING_RANGE:
-						next_attack_type = "shoot"
-						change_state(State.PREPARE_ATTACK) # Go to PREPARE, not ATTACK
-					# If player is close, decide to do a melee attack
-					elif player_detect.overlaps_body(player_target):
-						next_attack_type = "attack"
-						change_state(State.PREPARE_ATTACK) # Go to PREPARE, not ATTACK
-			else:
-				losing_sight_timer -= delta
-				parent_goblin.move_towards(player_target.global_position)
-				if losing_sight_timer <= 0:
-					player_target = null
-					change_state(State.PATROL)
-			
-			if chase_timer > 0:
-				chase_timer -= delta
-				if chase_timer <= 0:
-					player_target = null
-					change_state(State.PATROL)
-	
+				if distance_to_player > SHOOTING_RANGE:
+					_prepare_to_attack("shoot")
+				elif player_detect.overlaps_body(player_target):
+					_prepare_to_attack("attack")
+
 		State.PREPARE_ATTACK:
-			parent_goblin.stop_movement()
+			parent_character.stop_movement()
 			prepare_attack_timer -= delta
 			
-			if not player_detect.overlaps_body(player_target) and next_attack_type == "attack":
+			if not player_detect.overlaps_body(player_target) and last_attack_type == "attack":
 				change_state(State.CHASE)
 			elif prepare_attack_timer <= 0:
 				change_state(State.ATTACK)
 
 		State.ATTACK:
-			parent_goblin.stop_movement()
+			parent_character.stop_movement()
 		
 		State.COOLDOWN:
-			# ✅ FIX #4: Removed the logic that allowed the cooldown to be cancelled.
-			# The goblin MUST wait for its cooldown to finish.
-			parent_goblin.stop_movement()
+			parent_character.stop_movement()
+
+		State.RETREAT:
+			if not is_instance_valid(player_target):
+				change_state(State.PATROL); return
+			parent_character.retreat_from(player_target.global_position)
 
 func change_state(new_state: State):
 	if new_state == current_state: return
-	
-	var previous_state = current_state
 	current_state = new_state
-	
-	emit_signal("state_changed", new_state, previous_state)
+	emit_signal("state_changed", new_state, current_state)
 
 	match new_state:
 		State.PREPARE_ATTACK:
 			prepare_attack_timer = PREPARE_DURATION
-		
 		State.ATTACK:
-			# ✅ FIX #5: Call our new, non-random attack function.
-			_perform_chosen_attack()
-			
+			attack_controller.initiate_attack(last_attack_type)
 		State.COOLDOWN:
 			cooldown_timer.wait_time = ATTACK_COOLDOWN_DURATION
 			cooldown_timer.start()
+		State.RETREAT:
+			retreat_timer.wait_time = RETREAT_DURATION
+			retreat_timer.start()
 
-# ✅ FIX #7: This function is now deterministic, not random.
-func _perform_chosen_attack():
-	# Perform the attack that was decided on in the CHASE state.
-	if next_attack_type != "":
-		attack_controller.initiate_attack(next_attack_type)
-	else:
-		# Failsafe in case something went wrong
-		change_state(State.CHASE)
+# This new helper function makes the logic cleaner
+func _prepare_to_attack(type: String):
+	last_attack_type = type
+	change_state(State.PREPARE_ATTACK)
 
-# --- Signal Handlers ---
+# --- Signal Handler Functions ---
 
 func _on_fov_entered(body: Node2D):
 	if body.is_in_group("player") and (current_state == State.PATROL or current_state == State.IDLE):
 		player_target = body
-		chase_timer = CHASE_DURATION
-		losing_sight_timer = CHASE_LOSE_COOLDOWN
 		change_state(State.CHASE)
 
 func _on_attack_finished():
@@ -155,13 +130,33 @@ func _on_attack_finished():
 		change_state(State.COOLDOWN)
 
 func _on_cooldown_timer_timeout():
+	# This print statement is the ultimate test.
+	print("COOLDOWN FINISHED. The last attack was: '", last_attack_type, "'. Making decision...")
+	
 	attack_controller.reset_attack_cooldown()
+	
+	can_make_attack_decision = false
+	decision_delay_timer.start(DECISION_DELAY_DURATION)
+	
+	if last_attack_type == "attack":
+		change_state(State.RETREAT)
+	else: # Assumes "shoot" or other ranged attacks
+		if is_instance_valid(player_target):
+			change_state(State.CHASE)
+		else:
+			change_state(State.PATROL)
+
+func _on_retreat_timer_timeout():
+	can_make_attack_decision = false
+	decision_delay_timer.start(DECISION_DELAY_DURATION)
 	if is_instance_valid(player_target):
 		change_state(State.CHASE)
 	else:
 		change_state(State.PATROL)
 
+func _on_decision_delay_timer_timeout():
+	can_make_attack_decision = true
+
 func _on_health_changed(diff: int):
-	if diff < 0:
-		if current_state != State.DEAD and current_state != State.ATTACK:
-			change_state(State.HURT)
+	if diff < 0 and current_state != State.DEAD and current_state != State.ATTACK:
+		change_state(State.HURT)

@@ -7,3 +7,9 @@ script = ExtResource("1_frif6")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="RetreatTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DecisionDelayTimer" type="Timer" parent="."]
+one_shot = true
