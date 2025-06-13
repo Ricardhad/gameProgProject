@@ -16,9 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="13_3vl3y"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="14_xflp3"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="15_1klqb"]
-[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="17_41kfx"]
 [ext_resource type="PackedScene" uid="uid://bxq23tiialua0" path="res://scenes/player/consumables/hp.tscn" id="17_ssjjs"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="18_rvmuo"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="19_v1qfe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs8i3"]
 atlas = ExtResource("1_jb46l")
@@ -524,14 +524,13 @@ coin_scene = ExtResource("17_ssjjs")
 coin_min_amount = 0
 coin_max_amount = 2
 
-[node name="StateMachine" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("17_41kfx")
-
 [node name="Senses" parent="." instance=ExtResource("18_rvmuo")]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, -8)
+
+[node name="StateMachine" parent="." instance=ExtResource("19_v1qfe")]
+unique_name_in_owner = true
 
 [editable path="AttackController"]
 [editable path="HurtBox"]

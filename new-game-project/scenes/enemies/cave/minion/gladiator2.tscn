@@ -17,8 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_6eys5"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_c8oaq"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="17_a2g4d"]
-[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="18_r08v3"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_aduqk"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="19_mewve"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_myk26"]
 atlas = ExtResource("1_bpr4v")
@@ -510,6 +510,7 @@ shape = SubResource("RectangleShape2D_4aje5")
 
 [node name="AttackController" parent="." instance=ExtResource("12_1jvo8")]
 unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2"])
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
@@ -529,13 +530,12 @@ position = Vector2(-0.5, -22)
 [node name="LootDropper" parent="." instance=ExtResource("16_c8oaq")]
 coin_scene = ExtResource("17_a2g4d")
 
-[node name="StateMachine" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("18_r08v3")
-
 [node name="Senses" parent="." instance=ExtResource("19_aduqk")]
 unique_name_in_owner = true
 visible = false
+
+[node name="StateMachine" parent="." instance=ExtResource("19_mewve")]
+unique_name_in_owner = true
 
 [editable path="AttackController"]
 [editable path="HurtBox"]

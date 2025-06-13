@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="11_7dbav"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="12_5skiq"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="13_koo5x"]
-[ext_resource type="Script" path="res://scenes/enemies/component/StateMachine.gd" id="14_m5rcd"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="15_wtbrc"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_xxw0j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8lgi0"]
@@ -308,10 +308,6 @@ coin_scene = ExtResource("13_koo5x")
 coin_min_amount = 10
 coin_max_amount = 20
 
-[node name="StateMachine" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("14_m5rcd")
-
 [node name="Senses" parent="." instance=ExtResource("15_xxw0j")]
 unique_name_in_owner = true
 visible = false
@@ -319,6 +315,9 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -17)
 shape = SubResource("RectangleShape2D_0t0ad")
+
+[node name="StateMachine" parent="." instance=ExtResource("15_wtbrc")]
+unique_name_in_owner = true
 
 [editable path="AttackController"]
 [editable path="HurtBox"]
