@@ -479,8 +479,10 @@ script = ExtResource("1_o5y0n")
 position = Vector2(1.50003, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"special"
 autoplay = "idle"
+frame = 4
+frame_progress = 1.0
 flip_h = true
 script = ExtResource("10_iyakg")
 
@@ -490,12 +492,10 @@ max_health = 10
 
 [node name="AttackController" parent="." instance=ExtResource("12_25hu2")]
 unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2", "special"])
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(25, -14.75)
-
-[node name="HitBox" parent="AttackController" index="1"]
-damage = 3
 
 [node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
 position = Vector2(26, -20)

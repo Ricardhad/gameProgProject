@@ -904,7 +904,7 @@ texture = ExtResource("9_1byby")
 [node name="CharacterBody2D" parent="Node" instance=ExtResource("13_led54")]
 position = Vector2(684, 238)
 
-[node name="CharacterBody2D2" parent="." instance=ExtResource("14_rj4b1")]
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("14_rj4b1")]
 position = Vector2(540.014, 238.581)
 
 [editable path="BossHealthbar"]
