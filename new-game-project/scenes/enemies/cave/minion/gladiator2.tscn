@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c6wa4if4kf8oj" path="res://assets/enemies/cave/gladiator/Gladiator_2/Run.png" id="7_wl6pv"]
 [ext_resource type="Texture2D" uid="uid://bgkiy4i05axxc" path="res://assets/enemies/cave/gladiator/Gladiator_2/Special.png" id="8_7a3pd"]
 [ext_resource type="Texture2D" uid="uid://bl1h6cjnkcpei" path="res://assets/enemies/cave/gladiator/Gladiator_2/Walk.png" id="9_2udcq"]
-[ext_resource type="Script" path="res://scenes/enemies/component/multiple_attack_enemy_animation.gd" id="11_nv67a"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_m3yql"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_1jvo8"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="13_tskhe"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_0wtlb"]
@@ -502,7 +502,7 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
 flip_h = true
-script = ExtResource("11_nv67a")
+script = ExtResource("11_m3yql")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -22.5)

@@ -10,7 +10,7 @@ var current_state: State = State.IDLE
 var player_target: Node2D = null
 
 # Timers and constants
-const PREPARE_DURATION = 0.3
+const PREPARE_DURATION = 0.5
 const ATTACK_COOLDOWN_DURATION = 0.4 # How long to wait after an attack
 const CHASE_DURATION = 5.0
 const CHASE_LOSE_COOLDOWN = 5.0
