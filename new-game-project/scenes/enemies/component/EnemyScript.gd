@@ -1,4 +1,4 @@
-# The final, clean Goblin.gd
+#to be used on normal ground enemy
 extends CharacterBody2D
 
 signal jumped
@@ -18,6 +18,7 @@ signal jumped
 var movement_direction = 1 # -1 for left, 1 for right
 var movement_speed = SPEED
 var knockback_velocity = Vector2.ZERO
+const TURN_DEAD_ZONE = 10.0
 #var can_jump = true # // NEW: Added this back
 
 # --- Component and Node References ---
@@ -54,7 +55,7 @@ func _physics_process(delta: float):
 		if state_machine.current_state == StateMachine.State.CHASE and can_jump and is_on_floor():
 			var is_obstacle = movement_checker.is_obstacle_ahead()
 			# This debug print will run constantly while chasing on the ground
-			print("Checking for obstacles... Is there an obstacle? ", is_obstacle)
+			#print("Checking for obstacles... Is there an obstacle? ", is_obstacle)
 
 			if is_obstacle:
 				var is_safe = movement_checker.is_safe_to_jump()
@@ -86,7 +87,10 @@ func turn_around():
 	movement_direction *= -1
 
 func move_towards(target_position: Vector2):
-	movement_direction = sign(target_position.x - global_position.x)
+	var horizontal_distance = target_position.x - global_position.x
+	
+	if abs(horizontal_distance) > TURN_DEAD_ZONE:
+		movement_direction = sign(horizontal_distance)
 
 func is_patrol_obstacle_detected() -> bool:
 	return movement_checker.is_obstacle_ahead() and is_on_floor()

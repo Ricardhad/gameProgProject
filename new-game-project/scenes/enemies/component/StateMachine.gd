@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 			if can_see_player:
 				# If we see the player, always reset the "losing sight" timer
 				losing_sight_timer = CHASE_LOSE_COOLDOWN
-				
+				chase_timer = CHASE_DURATION
 				parent_goblin.set_movement_speed(parent_goblin.CHASE_SPEED)
 				parent_goblin.move_towards(player_target.global_position)
 				
