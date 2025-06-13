@@ -1,12 +1,12 @@
 [gd_scene load_steps=47 format=3 uid="uid://ivi0v3vwfrfi"]
 
-[ext_resource type="Script" path="res://scenes/enemies/cave/minion/demon_2.gd" id="1_e86mq"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_3errt"]
 [ext_resource type="Texture2D" uid="uid://36kh6p2qjmlo" path="res://assets/enemies/cave/demon/Demon_2/Attack.png" id="1_kisdn"]
 [ext_resource type="Texture2D" uid="uid://o52k0jnmtjat" path="res://assets/enemies/cave/demon/Demon_2/Dead.png" id="2_ffj1b"]
 [ext_resource type="Texture2D" uid="uid://df3ox1a6gsnsg" path="res://assets/enemies/cave/demon/Demon_2/Hurt.png" id="3_n1d15"]
 [ext_resource type="Texture2D" uid="uid://c3aodao0p503h" path="res://assets/enemies/cave/demon/Demon_2/Idle.png" id="4_53q6s"]
 [ext_resource type="Texture2D" uid="uid://b67t113tye3ql" path="res://assets/enemies/cave/demon/Demon_2/Walk.png" id="5_jg07s"]
-[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="7_v54hi"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="7_v54hi"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_ititf"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="9_ikbtc"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_6u0rh"]
@@ -252,7 +252,7 @@ size = Vector2(15, 40)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_e86mq")
+script = ExtResource("1_3errt")
 CHASE_SPEED = 50.0
 KNOCKBACK_FORCE = 50.0
 JUMP_VELOCITY = -200.0

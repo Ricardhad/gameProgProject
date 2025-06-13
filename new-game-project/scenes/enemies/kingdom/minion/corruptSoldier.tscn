@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://djesrkfhtlb7u" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Idle.png" id="4_pevna"]
 [ext_resource type="Texture2D" uid="uid://cr81c4cf6hhep" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Special.png" id="5_uxdu5"]
 [ext_resource type="Texture2D" uid="uid://boylckcvx4ciy" path="res://assets/enemies/kingdom/corrupt/Mimic_2/Walk.png" id="6_5nojq"]
-[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="8_yn02v"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="8_yn02v"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="9_f7ccc"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="10_4a0fv"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="11_qgtq5"]

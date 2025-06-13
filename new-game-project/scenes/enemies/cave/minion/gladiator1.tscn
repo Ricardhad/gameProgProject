@@ -1,7 +1,7 @@
 [gd_scene load_steps=79 format=3 uid="uid://m4arjnke8gme"]
 
 [ext_resource type="Texture2D" uid="uid://b2p5goy6hsr52" path="res://assets/enemies/cave/gladiator/Gladiator_1/Attack_1.png" id="1_jb46l"]
-[ext_resource type="Script" path="res://scenes/enemies/cave/minion/gladiator_1.gd" id="1_mje3y"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_o5y0n"]
 [ext_resource type="Texture2D" uid="uid://1yhjc21r7yb1" path="res://assets/enemies/cave/gladiator/Gladiator_1/Attack_2.png" id="2_kwe10"]
 [ext_resource type="Texture2D" uid="uid://dyyiq47clmdnr" path="res://assets/enemies/cave/gladiator/Gladiator_1/Dead.png" id="3_55le7"]
 [ext_resource type="Texture2D" uid="uid://bg833t7dmbi73" path="res://assets/enemies/cave/gladiator/Gladiator_1/Hurt.png" id="4_fql4q"]
@@ -473,7 +473,7 @@ height = 41.999
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_mje3y")
+script = ExtResource("1_o5y0n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.50003, -38.5)

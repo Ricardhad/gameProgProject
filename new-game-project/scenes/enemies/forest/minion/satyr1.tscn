@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cbx8fuo0i6dqv" path="res://assets/enemies/forest/satyr/Satyr_1/Hurt.png" id="3_qecl4"]
 [ext_resource type="Texture2D" uid="uid://dcmuvy4chu5rn" path="res://assets/enemies/forest/satyr/Satyr_1/Idle.png" id="4_qa4sg"]
 [ext_resource type="Texture2D" uid="uid://dygnbembph1aj" path="res://assets/enemies/forest/satyr/Satyr_1/Walk.png" id="5_cdgqa"]
-[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="7_5ssos"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="7_5ssos"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_sp2jt"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="9_7eib6"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_omcis"]

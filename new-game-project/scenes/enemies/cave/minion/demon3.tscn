@@ -1,12 +1,12 @@
 [gd_scene load_steps=49 format=3 uid="uid://utm575cxacob"]
 
-[ext_resource type="Script" path="res://scenes/enemies/cave/minion/demon_3.gd" id="1_ah704"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_05frg"]
 [ext_resource type="Texture2D" uid="uid://baqvsgdjtsqxu" path="res://assets/enemies/cave/demon/Demon_3/Attack.png" id="1_x4p1i"]
 [ext_resource type="Texture2D" uid="uid://1mrvnfr5deh" path="res://assets/enemies/cave/demon/Demon_3/Dead.png" id="2_5ewxj"]
 [ext_resource type="Texture2D" uid="uid://iyt8l2472l7q" path="res://assets/enemies/cave/demon/Demon_3/Hurt.png" id="3_f3drq"]
 [ext_resource type="Texture2D" uid="uid://c8u5efp27bq0y" path="res://assets/enemies/cave/demon/Demon_3/Idle.png" id="4_b51j6"]
 [ext_resource type="Texture2D" uid="uid://dv5ahwc6vu1eq" path="res://assets/enemies/cave/demon/Demon_3/Walk.png" id="5_5eyjw"]
-[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy.gd" id="7_7q6a4"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="7_7q6a4"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_iefg5"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="9_h3w2l"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_campi"]
@@ -266,7 +266,7 @@ size = Vector2(25, 34)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_ah704")
+script = ExtResource("1_05frg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -39)
