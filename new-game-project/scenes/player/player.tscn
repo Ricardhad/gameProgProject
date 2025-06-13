@@ -435,15 +435,15 @@ mix_target = 2
 bus = &"SFX"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 2
+collision_mask = 20
 script = ExtResource("6_hf2xt")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_b8yrv")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." groups=["damage_sources"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_b4k1q")

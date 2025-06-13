@@ -394,6 +394,8 @@ shape = SubResource("RectangleShape2D_n8ffi")
 [node name="AttackController" parent="." instance=ExtResource("2_gn05o")]
 unique_name_in_owner = true
 
+[node name="HitBox" parent="AttackController" index="1" groups=["damage_sources"]]
+
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_v2gpr")
@@ -412,7 +414,7 @@ coin_scene = ExtResource("15_ri7ge")
 [node name="StateMachine" parent="." instance=ExtResource("16_udf07")]
 unique_name_in_owner = true
 
-[node name="Senses" parent="." instance=ExtResource("16_qma6u")]
+[node name="Senses" parent="." groups=["damage_sources"] instance=ExtResource("16_qma6u")]
 unique_name_in_owner = true
 visible = false
 

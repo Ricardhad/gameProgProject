@@ -1,3 +1,4 @@
+# HurtBox.gd (TEMPORARY DEBUGGING VERSION)
 class_name HurtBox
 extends Area2D
 
@@ -6,24 +7,33 @@ signal received_damage(damage: int)
 @export var health: Health
 
 func _ready():
-	# This connection is correct.
 	connect("area_entered", _on_area_entered)
 
-# ✅ FIX #1: Change the parameter type to the generic Area2D.
 func _on_area_entered(area: Area2D) -> void:
-	
-	# ✅ FIX #2: Check if the area that entered IS a HitBox before using it.
-	if area is HitBox:
-		# We can now safely treat 'area' as a HitBox.
-		# For convenience, you can assign it to a new variable.
-		var hitbox: HitBox = area
+	# --- Step 1: Do we detect the collision at all? ---
+	print("HURTBOX: An area entered me! Its name is '", area.name, "' and its class is '", area.get_class(), "'")
 
-		# The rest of your logic is perfect.
-		# Make sure the health component has been assigned in the editor.
+	# --- Step 2: Is the area in the correct group? ---
+	if area.is_in_group("damage_sources"):
+		print("HURTBOX: SUCCESS! The area is in the 'damage_sources' group.")
+
+		# --- Step 3: Is the Health component connected? ---
 		if health != null:
-			print("HP before : ", health.health)
-			health.health -= hitbox.damage
-			print("HP after : ", health.health)
-			received_damage.emit(hitbox.damage)
+			print("HURTBOX: SUCCESS! The Health component is assigned.")
+
+			# --- Step 4: Does the area have a damage variable? ---
+			if area.has_method("get") and area.get("damage") != null:
+				var damage_amount = area.get("damage")
+				print("HURTBOX: SUCCESS! Found damage value: ", damage_amount)
+				
+				# --- Step 5: Apply the damage ---
+				health.health -= damage_amount
+				print("HURTBOX: DAMAGE APPLIED! New health: ", health.health)
+				received_damage.emit(damage_amount)
+
+			else:
+				printerr("HURTBOX FAILED at Step 4: The object '", area.name, "' is in the damage group but has no 'damage' variable!")
 		else:
-			printerr("HurtBox Error: Health component not assigned!")
+			printerr("HURTBOX FAILED at Step 3: Health component not assigned! Please drag the Health node into this HurtBox's inspector slot.")
+	else:
+		printerr("HURTBOX FAILED at Step 2: The area '", area.name, "' is NOT in the 'damage_sources' group. Check for typos or if you added it to the group panel.")
