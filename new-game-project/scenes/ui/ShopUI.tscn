@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bes2ec7hj225t"]
+
+[ext_resource type="Script" path="res://scenes/ui/shop_ui.gd" id="1_t7t82"]
+[ext_resource type="PackedScene" uid="uid://cagpwgvk5d0j1" path="res://scenes/ui/ItemCard.tscn" id="2_slxbs"]
+
+[node name="ShopUi" type="PanelContainer"]
+script = ExtResource("1_t7t82")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(130, 70)
+layout_mode = 2
+
+[node name="ItemCard" parent="HBoxContainer" instance=ExtResource("2_slxbs")]
+
+[node name="ItemCard2" parent="HBoxContainer" instance=ExtResource("2_slxbs")]
+
+[node name="ItemCard3" parent="HBoxContainer" instance=ExtResource("2_slxbs")]

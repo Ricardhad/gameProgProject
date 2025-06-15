@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bxl5n7q2288s6"]
+[gd_scene load_steps=46 format=3 uid="uid://bxl5n7q2288s6"]
 
 [ext_resource type="Script" path="res://scenes/npc/peasant/villager_2.gd" id="1_a14um"]
 [ext_resource type="Texture2D" uid="uid://kvdn0s8njiwl" path="res://assets/npc/villagers/Peasants_2/Dialogue.png" id="2_cqfh3"]
@@ -8,6 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://cpr8fh38ctns5" path="res://assets/selecting_menu/buttonClicked.png" id="7_ce4ce"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="8_1vm6r"]
 [ext_resource type="Texture2D" uid="uid://c10iv5slqi1fu" path="res://assets/selecting_menu/TextBox.png" id="9_hw7fw"]
+[ext_resource type="Texture2D" uid="uid://d3jneibdoktxq" path="res://assets/selecting_menu/menubox.png" id="10_8jq2r"]
+[ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="10_52uqk"]
+[ext_resource type="Texture2D" uid="uid://bfabpf87xig08" path="res://assets/main_menu/button_clicked_menu.png" id="11_loiub"]
+[ext_resource type="Texture2D" uid="uid://bmc5wgdxqwokk" path="res://assets/item&buff/buff/HP.png" id="12_dhaxp"]
+[ext_resource type="Texture2D" uid="uid://cxqc00nr1jkj" path="res://assets/main_menu/Icon_Coin.png" id="13_6jn15"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_01rfo"]
 atlas = ExtResource("2_cqfh3")
@@ -225,6 +230,9 @@ size = Vector2(63, 43)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1osah"]
 texture = ExtResource("9_hw7fw")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hkwlv"]
+texture = ExtResource("10_52uqk")
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_a14um")
@@ -233,8 +241,9 @@ script = ExtResource("1_a14um")
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"dialogue"
-autoplay = "idle"
+animation = &"idle2"
+autoplay = "idle2"
+frame_progress = 0.777889
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
@@ -247,7 +256,7 @@ collision_mask = 5
 position = Vector2(0.5, -22)
 shape = SubResource("RectangleShape2D_cljqm")
 
-[node name="ButtonATK" type="TextureButton" parent="."]
+[node name="ButtonChat" type="TextureButton" parent="."]
 offset_left = 15.0
 offset_top = -40.0
 offset_right = 32.0
@@ -259,7 +268,7 @@ texture_pressed = ExtResource("6_gepnq")
 texture_hover = ExtResource("7_ce4ce")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ButtonATK"]
+[node name="Label" type="Label" parent="ButtonChat"]
 layout_mode = 2
 offset_left = -1.0
 offset_top = 1.0
@@ -296,3 +305,273 @@ theme_override_fonts/font = ExtResource("8_1vm6r")
 theme_override_font_sizes/font_size = 80
 text = "Passive: Immune to Bleed"
 autowrap_mode = 2
+
+[node name="ButtonBuy" type="TextureButton" parent="PanelChatNPC"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 18.0
+offset_right = 19.0
+offset_bottom = 32.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_ntvrm")
+texture_pressed = ExtResource("6_gepnq")
+texture_hover = ExtResource("7_ce4ce")
+stretch_mode = 0
+
+[node name="LabelBuy" type="Label" parent="PanelChatNPC/ButtonBuy"]
+layout_mode = 2
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 68.0
+offset_bottom = 44.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "B
+"
+horizontal_alignment = 1
+
+[node name="PanelShop" type="Panel" parent="."]
+offset_left = -160.0
+offset_top = -165.0
+offset_right = 138.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_hkwlv")
+
+[node name="ButtonCard1" type="TextureButton" parent="PanelShop"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 62.0
+offset_right = 101.0
+offset_bottom = 147.0
+size_flags_vertical = 3
+texture_normal = ExtResource("10_8jq2r")
+texture_pressed = ExtResource("11_loiub")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="PanelShop/ButtonCard1"]
+layout_mode = 2
+offset_left = 11.0
+offset_top = 58.0
+offset_right = 131.0
+offset_bottom = 103.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelShop/ButtonCard1"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 20.0
+offset_right = 45.0
+offset_bottom = 52.0
+texture = ExtResource("12_dhaxp")
+
+[node name="Coin" type="Sprite2D" parent="PanelShop/ButtonCard1"]
+position = Vector2(37, 13)
+scale = Vector2(1.64509, 1.625)
+texture = ExtResource("13_6jn15")
+
+[node name="LabelCoin" type="Label" parent="PanelShop/ButtonCard1"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 84.0
+offset_bottom = 51.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "25"
+
+[node name="ButtonCard2" type="TextureButton" parent="PanelShop"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 62.0
+offset_right = 180.0
+offset_bottom = 147.0
+size_flags_vertical = 3
+texture_normal = ExtResource("10_8jq2r")
+texture_pressed = ExtResource("11_loiub")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="PanelShop/ButtonCard2"]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 59.0
+offset_right = 134.0
+offset_bottom = 104.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelShop/ButtonCard2"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 22.0
+offset_right = 48.0
+offset_bottom = 54.0
+texture = ExtResource("12_dhaxp")
+
+[node name="Coin" type="Sprite2D" parent="PanelShop/ButtonCard2"]
+position = Vector2(38, 12)
+scale = Vector2(1.64509, 1.625)
+texture = ExtResource("13_6jn15")
+
+[node name="LabelCoin" type="Label" parent="PanelShop/ButtonCard2"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 6.0
+offset_right = 85.0
+offset_bottom = 51.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "25"
+
+[node name="ButtonCard3" type="TextureButton" parent="PanelShop"]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 63.0
+offset_right = 254.0
+offset_bottom = 148.0
+size_flags_vertical = 3
+texture_normal = ExtResource("10_8jq2r")
+texture_pressed = ExtResource("11_loiub")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="PanelShop/ButtonCard3"]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 57.0
+offset_right = 134.0
+offset_bottom = 102.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelShop/ButtonCard3"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 21.0
+offset_right = 46.0
+offset_bottom = 53.0
+texture = ExtResource("12_dhaxp")
+
+[node name="Coin" type="Sprite2D" parent="PanelShop/ButtonCard3"]
+position = Vector2(37, 13)
+scale = Vector2(1.64509, 1.625)
+texture = ExtResource("13_6jn15")
+
+[node name="LabelCoin" type="Label" parent="PanelShop/ButtonCard3"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 6.0
+offset_right = 84.0
+offset_bottom = 51.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "25"
+
+[node name="ButtonBuy" type="TextureButton" parent="PanelShop"]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 164.0
+offset_right = 259.0
+offset_bottom = 184.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_ntvrm")
+texture_pressed = ExtResource("6_gepnq")
+texture_hover = ExtResource("7_ce4ce")
+stretch_mode = 0
+
+[node name="LabelBuy" type="Label" parent="PanelShop/ButtonBuy"]
+layout_mode = 2
+offset_left = 27.0
+offset_top = 2.0
+offset_right = 97.0
+offset_bottom = 47.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "Buy
+"
+horizontal_alignment = 1
+
+[node name="LabelShop" type="Label" parent="PanelShop"]
+offset_left = 137.0
+offset_top = 42.0
+offset_right = 222.0
+offset_bottom = 87.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="LabelMessage" type="Label" parent="PanelShop"]
+offset_left = 40.0
+offset_top = 148.0
+offset_right = 770.0
+offset_bottom = 193.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "message"
+horizontal_alignment = 1
+
+[node name="ButtonBack" type="TextureButton" parent="PanelShop"]
+offset_left = 232.0
+offset_top = 39.0
+offset_right = 255.0
+offset_bottom = 61.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_ntvrm")
+texture_pressed = ExtResource("6_gepnq")
+texture_hover = ExtResource("7_ce4ce")
+stretch_mode = 0
+
+[node name="LabelBack" type="Label" parent="PanelShop/ButtonBack"]
+layout_mode = 2
+offset_top = 3.0
+offset_right = 85.0
+offset_bottom = 48.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "25"
+horizontal_alignment = 1
+
+[node name="ButtonRefresh" type="TextureButton" parent="PanelShop"]
+offset_left = 36.0
+offset_top = 165.0
+offset_right = 113.0
+offset_bottom = 185.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_ntvrm")
+texture_pressed = ExtResource("6_gepnq")
+texture_hover = ExtResource("7_ce4ce")
+stretch_mode = 0
+
+[node name="LabelRefresh" type="Label" parent="PanelShop/ButtonRefresh"]
+layout_mode = 2
+offset_left = 27.0
+offset_top = 2.0
+offset_right = 97.0
+offset_bottom = 47.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_1vm6r")
+theme_override_font_sizes/font_size = 40
+text = "Back
+"
+horizontal_alignment = 1

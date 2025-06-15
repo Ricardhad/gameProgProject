@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cagpwgvk5d0j1"]
+
+[ext_resource type="Script" path="res://scenes/ui/item_card.gd" id="1_hmc4l"]
+[ext_resource type="Texture2D" uid="uid://d3jneibdoktxq" path="res://assets/selecting_menu/menubox.png" id="2_2p85i"]
+[ext_resource type="Texture2D" uid="uid://bfabpf87xig08" path="res://assets/main_menu/button_clicked_menu.png" id="3_kblvv"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="4_cqqbf"]
+[ext_resource type="Texture2D" uid="uid://bmc5wgdxqwokk" path="res://assets/item&buff/buff/HP.png" id="5_mhgdg"]
+[ext_resource type="Texture2D" uid="uid://cxqc00nr1jkj" path="res://assets/main_menu/Icon_Coin.png" id="6_ugjcs"]
+
+[node name="ItemCard" type="Node2D"]
+script = ExtResource("1_hmc4l")
+
+[node name="ButtonLoad" type="TextureButton" parent="."]
+offset_top = -2.0
+offset_right = 30.0
+offset_bottom = 35.0
+size_flags_vertical = 3
+texture_normal = ExtResource("2_2p85i")
+texture_pressed = ExtResource("3_kblvv")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="ButtonLoad"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 28.0
+offset_right = 124.0
+offset_bottom = 73.0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/font = ExtResource("4_cqqbf")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ButtonLoad"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 7.0
+offset_right = 36.0
+offset_bottom = 39.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_mhgdg")
+
+[node name="Coin" type="Sprite2D" parent="ButtonLoad"]
+position = Vector2(21, 5)
+scale = Vector2(0.433035, 0.583334)
+texture = ExtResource("6_ugjcs")
+
+[node name="LabelCoin" type="Label" parent="ButtonLoad"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 3.0
+offset_right = 63.0
+offset_bottom = 48.0
+scale = Vector2(0.1, 0.1)
+theme_override_fonts/font = ExtResource("4_cqqbf")
+theme_override_font_sizes/font_size = 40
+text = "25"
