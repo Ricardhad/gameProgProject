@@ -83,14 +83,14 @@ func _process(delta: float) -> void:
 
 				# Use a match statement for clean, readable behavior control
 				match enemy_behavior:
-					"brawler":
+					Behavior.BRAWLER:
 						# Brawlers want to melee. They only shoot if they can't melee yet.
 						if can_melee and player_detect.overlaps_body(player_target):
 							_prepare_to_attack("attack")
 						elif can_shoot and distance_to_player < SHOOTING_RANGE:
 							_prepare_to_attack("shoot")
 					
-					"kiter":
+					Behavior.KITER:
 						# Kiters want to shoot. They only melee if cornered and it's their only option.
 						# They will retreat if they can to get back into shooting range.
 						if can_shoot and distance_to_player < MINIMUM_SHOOTING_RANGE:
@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
 
 					# The "hybrid" behavior can be an alias for "kiter", or you can give it unique logic.
 					# Using a comma lets both strings use the same logic block.
-					"hybrid":
+					Behavior.HYBRID:
 						# We'll make the default Hybrid act like a Kiter.
 						if can_shoot and distance_to_player < MINIMUM_SHOOTING_RANGE:
 							change_state(State.RETREAT)
@@ -162,6 +162,9 @@ func change_state(new_state: State):
 		State.RETREAT:
 			retreat_timer.wait_time = RETREAT_DURATION
 			retreat_timer.start()
+		State.DEAD:
+			_enter_dead_state()
+
 
 # This new helper function makes the logic cleaner
 func _prepare_to_attack(type: String):
@@ -210,3 +213,30 @@ func _on_decision_delay_timer_timeout():
 func _on_health_changed(diff: int):
 	if diff < 0 and current_state != State.DEAD and current_state != State.ATTACK:
 		change_state(State.HURT)
+		
+func _enter_dead_state():
+	print("Entering DEAD state. Stopping all activity.")
+	
+	# Stop all timers immediately to prevent them from firing after death.
+	cooldown_timer.stop()
+	retreat_timer.stop()
+	decision_delay_timer.stop()
+	
+	# Stop any movement.
+	parent_character.stop_movement()
+	
+	# Disable the main collision shape so the dead body doesn't block other actors.
+	# Make sure you have a CollisionShape2D node named "CollisionShape2D"
+	#var collision_shape = parent_character.get_node("CollisionShape2D")
+	#collision_shape.set_deferred("disabled", true)
+	
+	# The StateMachine now waits for the AnimationController to finish its animation.
+	# This assumes your AnimationController is on a node named "AnimatedSprite2D".
+	var anim_sprite = parent_character.get_node("AnimatedSprite2D")
+	
+	# The 'await' keyword pauses this function here until the signal is received.
+	await anim_sprite.animation_finished 
+	
+	# Once the animation_finished signal is received, this line runs.
+	print("Death animation finished. Removing character from game.")
+	parent_character.queue_free()

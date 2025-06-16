@@ -296,6 +296,7 @@ flip_h = true
 script = ExtResource("7_5ssos")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-0.499993, -19.5)
 shape = SubResource("RectangleShape2D_qcy7w")
 

@@ -305,7 +305,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbcud"]
-size = Vector2(17, 46)
+size = Vector2(17, 42)
 
 [node name="skeleton_archer" type="CharacterBody2D"]
 collision_layer = 0
@@ -323,7 +323,8 @@ flip_h = true
 script = ExtResource("7_5vawc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -19)
+unique_name_in_owner = true
+position = Vector2(-0.5, -21)
 shape = SubResource("RectangleShape2D_lbcud")
 
 [node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("6_mt45q")]

@@ -51,6 +51,6 @@ func _on_animation_finished() -> void:
 		# This is the new, more aggressive logic
 		state_machine.change_state(StateMachine.State.CHASE)
 	
-	if animation == "dead":
-		# This tells Godot to wait until it's safe before deleting the goblin.
-		get_parent().call_deferred("queue_free")
+	#if animation == "dead":
+		## This tells Godot to wait until it's safe before deleting the goblin.
+		#get_parent().call_deferred("queue_free")

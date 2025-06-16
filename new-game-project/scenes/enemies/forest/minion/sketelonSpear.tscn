@@ -310,7 +310,7 @@ collision_mask = 2
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-0.5, -19)
+position = Vector2(-0.5, -20.5)
 
 [node name="LootDropper" parent="." instance=ExtResource("13_dd6m2")]
 coin_scene = ExtResource("14_gu7mx")
