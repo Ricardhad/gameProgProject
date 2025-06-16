@@ -393,6 +393,7 @@ shape = SubResource("RectangleShape2D_n8ffi")
 
 [node name="AttackController" parent="." instance=ExtResource("2_gn05o")]
 unique_name_in_owner = true
+available_attacks = Array[String](["attack"])
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true

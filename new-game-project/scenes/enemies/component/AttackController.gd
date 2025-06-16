@@ -22,12 +22,21 @@ func _ready():
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 	animated_sprite.frame_changed.connect(_on_frame_changed)
 	hitbox_shape.disabled = true
-
+	
 func initiate_attack(attack_name: String):
+	# ✅ THE FIX: First, check if the requested attack is in our list of available attacks.
+	if attack_name not in available_attacks:
+		# This attack is not allowed for this enemy, so do nothing.
+		# The print statement is great for debugging to see if your AI is trying to call an invalid attack.
+		print("Attempted to use unavailable attack: '", attack_name, "' on ", get_parent().name)
+		return
+
 	if not can_attack:
 		return
+		
 	can_attack = false
 	animated_sprite.play(attack_name)
+
 
 func _on_frame_changed():
 	var current_animation = animated_sprite.animation
@@ -66,3 +75,6 @@ func reset_attack_cooldown():
 
 func is_ready_to_attack() -> bool:
 	return can_attack
+	
+func can_perform_attack(attack_name: String) -> bool:
+	return attack_name in available_attacks

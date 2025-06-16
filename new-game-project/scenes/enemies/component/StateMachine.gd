@@ -71,9 +71,11 @@ func _process(delta: float) -> void:
 			if attack_controller.is_ready_to_attack() and can_make_attack_decision:
 				var distance_to_player = player_target.global_position.distance_to(parent_character.global_position)
 				
-				if distance_to_player > SHOOTING_RANGE:
+				if attack_controller.can_perform_attack("shoot") and distance_to_player > SHOOTING_RANGE:
 					_prepare_to_attack("shoot")
-				elif player_detect.overlaps_body(player_target):
+				
+			# 2. Check for melee capability AND if the player is in melee range
+				elif attack_controller.can_perform_attack("attack") and player_detect.overlaps_body(player_target):
 					_prepare_to_attack("attack")
 
 		State.PREPARE_ATTACK:
