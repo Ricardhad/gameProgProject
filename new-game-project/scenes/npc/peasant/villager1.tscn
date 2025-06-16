@@ -329,6 +329,7 @@ text = "Passive: Immune to Bleed"
 autowrap_mode = 2
 
 [node name="ButtonUpgrade" type="TextureButton" parent="PanelChatNPC"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 18.0
 offset_right = 19.0
@@ -361,6 +362,7 @@ offset_bottom = 558.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_i2vpa")
 
 [node name="LabelShopCoin" type="Label" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 145.0
 offset_top = 89.0
 offset_right = 230.0
@@ -381,6 +383,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="ButtonCard1" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 157.0
 offset_top = 160.0
 offset_right = 336.0
@@ -425,6 +428,7 @@ theme_override_font_sizes/font_size = 40
 text = "25"
 
 [node name="ButtonCard2" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 357.0
 offset_top = 160.0
 offset_right = 536.0
@@ -469,6 +473,7 @@ theme_override_font_sizes/font_size = 40
 text = "25"
 
 [node name="ButtonCard3" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 553.0
 offset_top = 160.0
 offset_right = 732.0
@@ -513,10 +518,11 @@ theme_override_font_sizes/font_size = 40
 text = "25"
 
 [node name="ButtonRight" type="TextureButton" parent="CanvasLayer/PanelSmith"]
-offset_left = 467.0
-offset_top = 94.0
-offset_right = 521.0
-offset_bottom = 152.0
+layout_mode = 0
+offset_left = 466.0
+offset_top = 97.0
+offset_right = 520.0
+offset_bottom = 155.0
 size_flags_vertical = 3
 toggle_mode = true
 texture_normal = ExtResource("5_7jiwd")
@@ -538,6 +544,7 @@ text = "Right
 horizontal_alignment = 1
 
 [node name="ButtonLeft" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 381.0
 offset_top = 98.0
 offset_right = 435.0
@@ -563,6 +570,7 @@ text = "Left
 horizontal_alignment = 1
 
 [node name="ButtonBack" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 722.0
 offset_top = 100.0
 offset_right = 772.0
@@ -587,6 +595,7 @@ text = "X"
 horizontal_alignment = 1
 
 [node name="ButtonUpgrade" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 587.0
 offset_top = 374.0
 offset_right = 762.0

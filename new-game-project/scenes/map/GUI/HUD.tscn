@@ -97,6 +97,7 @@ texture_progress_offset = Vector2(1, 2)
 
 [node name="Label" type="Label" parent="CanvasLayer2/Panel/HealthBar"]
 top_level = true
+layout_mode = 0
 offset_left = 90.0
 offset_top = 3.0
 offset_right = 215.0
@@ -183,6 +184,7 @@ text = "Dash
 horizontal_alignment = 1
 
 [node name="ButtonPotion" type="TextureButton" parent="CanvasLayer2/Panel"]
+layout_mode = 0
 offset_left = 225.0
 offset_top = 86.0
 offset_right = 288.0

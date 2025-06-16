@@ -1,12 +1,13 @@
 extends Node2D
 
 #================================#
-#     VARIABEL UNTUK MINIMAP     #
+#     VARIABEL UNTUK MINIMAP     #
 #================================#
-# Path ke node-node penting di dalam scene HUD ini
 @onready var sub_viewport: SubViewport = $CanvasLayer2/SubViewportContainer/SubViewport
 @onready var minimap_camera: Camera2D = $CanvasLayer2/SubViewportContainer/SubViewport/Camera2D
 @onready var player_icon: ColorRect = $CanvasLayer2/SubViewportContainer/SubViewport/PlayerIcon
+# Variabel baru untuk label HP
+@onready var health_bar_label: Label = $CanvasLayer2/Panel/HealthBar/Label
 
 
 # Variabel lain
@@ -17,10 +18,8 @@ var dash_button_pressed = false
 
 
 #================================#
-#       FUNGSI INTI MINIMAP      #
+#       FUNGSI INTI MINIMAP      #
 #================================#
-
-# Fungsi ini hanya bertugas menduplikasi peta ke dalam viewport
 func setup_minimap(tilemap_from_world: TileMap):
 	if is_instance_valid(current_minimap_tilemap):
 		current_minimap_tilemap.queue_free()
@@ -28,12 +27,9 @@ func setup_minimap(tilemap_from_world: TileMap):
 	current_minimap_tilemap = tilemap_from_world.duplicate()
 	sub_viewport.add_child(current_minimap_tilemap)
 	
-	# Atur Z Index agar ikon selalu di atas peta
 	if is_instance_valid(player_icon):
 		player_icon.z_index = 1
 
-
-# Fungsi untuk menerima node player dari scene peta
 func set_player_node(p_node):
 	player_node = p_node
 
@@ -44,33 +40,36 @@ func set_player_node(p_node):
 
 func _ready():
 	$"CanvasLayer2/Label_Stage-Level".text = "Stage " + GlobalVar.current_stage
+	_update_hud() # Panggil sekali saat mulai untuk inisialisasi
 
 func _process(delta: float):
-	# Update UI Anda seperti biasa
-	update_coin_label()
+	# Update seluruh HUD setiap frame
+	_update_hud()
 	
-	# --- INI LOGIKA KUNCI NYA ---
-	# Pastikan player sudah terhubung
 	if is_instance_valid(player_node):
-		# Atur posisi kamera minimap agar SELALU sama dengan posisi global player
 		minimap_camera.position = player_node.global_position
 
 #================================#
-# FUNGSI UI LAINNYA              #
+# FUNGSI UI LAINNYA              #
 #================================#
 
-func update_coin_label():
+# Nama fungsi diubah agar lebih jelas
+func _update_hud():
 	$CanvasLayer2/Panel/Label_coin.text = str(GlobalVar.coin_collected)
 	$CanvasLayer2/Panel/HealthBar.value = GlobalVar.health_player
 	$CanvasLayer2/Panel/HealthBar.max_value = GlobalVar.maxhealth_player
+	
+	# Perbarui teks label HP
+	health_bar_label.text = "%d / %d" % [GlobalVar.health_player, GlobalVar.maxhealth_player]
 
+
+# ... (sisa kode Anda tidak perlu diubah) ...
 func _on_ButtonJump_pressed():
 	jump_button_pressed = true
 
 func _on_ButtonDash_pressed():
 	dash_button_pressed = true
 
-# ... sisa fungsi tombol Anda tidak perlu diubah ...
 func set_attack_button_pressed(is_pressed: bool):
 	var button = $CanvasLayer2/Panel/ButtonATK
 	if button:

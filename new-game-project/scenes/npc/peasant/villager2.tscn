@@ -577,6 +577,7 @@ text = "Refresh 5G"
 horizontal_alignment = 1
 
 [node name="LabelShopCoin" type="Label" parent="CanvasLayer/PanelShop"]
+layout_mode = 0
 offset_left = 144.0
 offset_top = 87.0
 offset_right = 229.0

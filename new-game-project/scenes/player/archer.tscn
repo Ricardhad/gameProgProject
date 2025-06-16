@@ -391,5 +391,6 @@ animations = [{
 [node name="archer" instance=ExtResource("1_fjnjo")]
 
 [node name="AnimatedSprite2D" parent="." index="1"]
+position = Vector2(4, -11)
 sprite_frames = SubResource("SpriteFrames_m04qe")
 frame_progress = 0.346022
