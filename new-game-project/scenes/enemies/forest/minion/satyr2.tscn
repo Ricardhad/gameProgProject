@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cfxmu00q14nxk"]
+[gd_scene load_steps=54 format=3 uid="uid://cfxmu00q14nxk"]
 
 [ext_resource type="Texture2D" uid="uid://by55sq23kpw86" path="res://assets/enemies/forest/satyr/Satyr_2/Attack.png" id="1_f6h3y"]
 [ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_x4uuu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b3em6rij1tgbg" path="res://assets/enemies/forest/satyr/Satyr_2/Walk.png" id="5_61gat"]
 [ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="7_6vp8r"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="8_o6ghr"]
+[ext_resource type="PackedScene" uid="uid://dlbhwemlyd15j" path="res://scenes/enemies/component/enemy_projectile/satyr2_projectile.tscn" id="9_b1qvo"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="9_ukiom"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_oihqk"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="11_h3hfa"]
@@ -15,38 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="13_o8keg"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_7njmd"]
 [ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="15_vm0l6"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wy8oq"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_us7sv"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lsvsb"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fl7hi"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y5rf2"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_knfkj"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6vvyu"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_55le8"]
-atlas = ExtResource("1_f6h3y")
-region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmynd"]
 atlas = ExtResource("2_3kfma")
@@ -108,6 +77,38 @@ region = Rect2(640, 0, 128, 128)
 atlas = ExtResource("4_xpsp8")
 region = Rect2(768, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy8oq"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us7sv"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsvsb"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl7hi"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5rf2"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knfkj"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vvyu"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55le8"]
+atlas = ExtResource("1_f6h3y")
+region = Rect2(896, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1y04h"]
 atlas = ExtResource("5_61gat")
 region = Rect2(0, 0, 128, 128)
@@ -158,35 +159,6 @@ region = Rect2(1408, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7cfq"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wy8oq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_us7sv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lsvsb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fl7hi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y5rf2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_knfkj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6vvyu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_55le8")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nmynd")
@@ -249,6 +221,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_wy8oq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us7sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsvsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl7hi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5rf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knfkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vvyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55le8")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_1y04h")
 }, {
 "duration": 1.0,
@@ -300,7 +301,7 @@ script = ExtResource("1_x4uuu")
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"shoot"
 autoplay = "idle"
 flip_h = true
 script = ExtResource("7_6vp8r")
@@ -311,6 +312,11 @@ shape = SubResource("RectangleShape2D_2b464")
 
 [node name="AttackController" parent="." instance=ExtResource("8_o6ghr")]
 unique_name_in_owner = true
+available_attacks = Array[String](["shoot"])
+projectile_scene = ExtResource("9_b1qvo")
+
+[node name="ProjectileSpawn" type="Marker2D" parent="AttackController"]
+position = Vector2(0, -32)
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
@@ -336,6 +342,7 @@ visible = false
 
 [node name="StateMachine" parent="." instance=ExtResource("15_vm0l6")]
 unique_name_in_owner = true
+enemy_behavior = 0
 
 [editable path="AttackController"]
 [editable path="HurtBox"]

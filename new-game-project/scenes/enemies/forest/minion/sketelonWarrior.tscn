@@ -1,11 +1,21 @@
-[gd_scene load_steps=41 format=3 uid="uid://b52w480asts86"]
+[gd_scene load_steps=52 format=3 uid="uid://b52w480asts86"]
 
 [ext_resource type="Texture2D" uid="uid://bgtx7hsomf62i" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Attack_1.png" id="1_010iy"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_t0eq6"]
 [ext_resource type="Texture2D" uid="uid://8fk7tfpbf73b" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Dead.png" id="2_fld2e"]
 [ext_resource type="Texture2D" uid="uid://c5uuhoj74fqo4" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Hurt.png" id="3_amb63"]
 [ext_resource type="Texture2D" uid="uid://jm8cv6qxoing" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Idle.png" id="4_7qf1f"]
 [ext_resource type="Texture2D" uid="uid://dg31ya62gxmyn" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Run.png" id="5_xuco0"]
 [ext_resource type="Texture2D" uid="uid://cfxxsn76pcauy" path="res://assets/enemies/forest/skeleton/Skeleton_Warrior/Walk.png" id="6_wivkv"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="8_184e2"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="9_n142h"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="10_bs4u1"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="11_8xtw8"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="12_vjwp2"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="13_x37ll"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="14_8fq0n"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_lke0y"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="16_3smgf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6y7ur"]
 atlas = ExtResource("1_010iy")
@@ -271,13 +281,58 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxbb7"]
+size = Vector2(19, 39)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_t0eq6")
+SPEED = 100.0
+CHASE_SPEED = 180.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("8_184e2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.499993, -19.5)
+shape = SubResource("RectangleShape2D_bxbb7")
+
+[node name="AttackController" parent="." instance=ExtResource("9_n142h")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack"])
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_bs4u1")
+
+[node name="MovementChecker" parent="." instance=ExtResource("11_8xtw8")]
+unique_name_in_owner = true
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_vjwp2")]
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-0.5, -19)
+
+[node name="LootDropper" parent="." instance=ExtResource("13_x37ll")]
+coin_scene = ExtResource("14_8fq0n")
+
+[node name="Senses" parent="." instance=ExtResource("15_lke0y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="StateMachine" parent="." instance=ExtResource("16_3smgf")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.0
+
+[editable path="AttackController"]
+[editable path="HurtBox"]
