@@ -86,10 +86,12 @@ func can_perform_attack(attack_name: String) -> bool:
 	
 func _get_random_melee_attack() -> String:
 	var possible_melee_attacks = available_attacks
+	
 	var available_melee_attacks = []
 
 	# Check which melee attacks this enemy can actually perform
 	for attack_name in possible_melee_attacks:
+		print("is available = " ,attack_name)
 		if can_perform_attack(attack_name):
 			available_melee_attacks.append(attack_name)
 

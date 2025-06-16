@@ -86,7 +86,7 @@ func _process(delta: float) -> void:
 					Behavior.BRAWLER:
 						# Brawlers want to melee. They only shoot if they can't melee yet.
 						if can_melee and player_detect.overlaps_body(player_target):
-							var chosen_attack = attack_controller.get_random_melee_attack()
+							var chosen_attack = attack_controller._get_random_melee_attack()
 							_prepare_to_attack(chosen_attack)
 						elif can_shoot and distance_to_player < SHOOTING_RANGE:
 							_prepare_to_attack("shoot")
