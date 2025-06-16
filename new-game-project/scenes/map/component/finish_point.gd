@@ -7,14 +7,20 @@ extends Node2D
 @onready var fade_rect: ColorRect = $ColorRect
 
 func _on_body_entered(body: Node2D):
-	# First, check if a scene has even been assigned in the editor.
+	# Cek jika scene target sudah diatur
 	if not target_scene:
-		#print("ERROR: No target scene assigned to this goal!")
 		return
 	
-	# Check if the body that entered is the player.
+	# Cek jika yang masuk adalah pemain
 	if body.is_in_group("player"):
+		
+		# ▼▼▼ TAMBAHKAN KONDISI INI ▼▼▼
+		# Hanya proses akhir stage jika scene berikutnya BUKAN "OutOfTavern"
+		if next_scene != "OutOfTavern":
+			GlobalVar.process_end_of_stage()
+		else:
+			print("Keluar dari Tavern, buff tidak dihilangkan.")
+		
+		# Sisa kode untuk pindah scene tetap berjalan
 		GlobalVar.current_stage = next_scene
 		Transition1.change_scene(target_scene.resource_path)
-		#get_tree().change_scene_to_file(target_scene.resource_path)
-		

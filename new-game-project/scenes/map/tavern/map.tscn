@@ -1158,7 +1158,7 @@ position = Vector2(-268, -80)
 [node name="FinishPoint" parent="." instance=ExtResource("3_cbkg6")]
 position = Vector2(1012, 238)
 target_scene = ExtResource("4_hqbgf")
-next_scene = "???"
+next_scene = "OutOFTavern"
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_wjocj")]
 position = Vector2(-268, -80)

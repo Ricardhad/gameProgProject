@@ -1,17 +1,41 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmksmcogrk0o3"]
 
 [sub_resource type="GDScript" id="GDScript_dpic4"]
-script/source = "#class_name HitBox
+script/source = "##class_name HitBox
+#extends Area2D
+#
+#@export var damage: int = 1 : set = set_damage, get = get_damage
+#
+#func set_damage(value: int):
+	#damage = value
+#
+#func get_damage() -> int:
+	#return damage
+#===========================================Rey===========================
+
+
+# Di dalam Hitbox.gd
+
+#class_name HitBox
 extends Area2D
 
 @export var damage: int = 1 : set = set_damage, get = get_damage
 
+# Kita tidak lagi butuh setter dan getter kustom yang simpel.
+# Kita akan buat getter baru dengan logika.
 func set_damage(value: int):
 	damage = value
-
+	
 func get_damage() -> int:
-	return damage
- 
+	var final_damage = damage
+	
+	# Cek status buff pemain dari GlobalVar
+	if GlobalVar.def_buff_duration > 0:
+		# Jika buff aktif, kurangi damage. max(0, ...) untuk mencegah damage minus.
+		final_damage = max(0, damage - 5)
+		print(\"Buff DEF pemain aktif! Damage musuh dikurangi dari %d menjadi %d\" % [damage, final_damage])
+		
+	return final_damage
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f4led"]

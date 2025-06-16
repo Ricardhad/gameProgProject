@@ -195,7 +195,7 @@ func _on_confirm_purchase_pressed():
 
 	if GlobalVar.coin_collected >= cost:
 		GlobalVar.coin_collected -= cost
-		GlobalVar.add_buff(buff_name)
+		GlobalVar.acquire_temporary_buff(buff_name)
 		show_message("Pembelian %s berhasil!" % item_to_buy.desc)
 		
 		var selected_button = get_node("PanelShop/ButtonCard" + str(selected_card_id))

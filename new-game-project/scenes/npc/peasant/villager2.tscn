@@ -257,6 +257,7 @@ position = Vector2(0.5, -22)
 shape = SubResource("RectangleShape2D_cljqm")
 
 [node name="ButtonChat" type="TextureButton" parent="."]
+visible = false
 offset_left = 15.0
 offset_top = -40.0
 offset_right = 32.0
@@ -333,6 +334,7 @@ text = "B
 horizontal_alignment = 1
 
 [node name="PanelShop" type="Panel" parent="."]
+z_as_relative = false
 offset_left = -160.0
 offset_top = -165.0
 offset_right = 138.0
@@ -352,15 +354,14 @@ stretch_mode = 0
 
 [node name="LabelDetail" type="Label" parent="PanelShop/ButtonCard1"]
 layout_mode = 2
-offset_left = 11.0
+offset_left = 5.0
 offset_top = 58.0
-offset_right = 131.0
+offset_right = 145.0
 offset_bottom = 103.0
 scale = Vector2(0.3, 0.3)
 theme_override_fonts/font = ExtResource("8_1vm6r")
 theme_override_font_sizes/font_size = 40
 text = "HP +10"
-horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelShop/ButtonCard1"]
 layout_mode = 0
@@ -399,15 +400,14 @@ stretch_mode = 0
 
 [node name="LabelDetail" type="Label" parent="PanelShop/ButtonCard2"]
 layout_mode = 2
-offset_left = 14.0
-offset_top = 59.0
-offset_right = 134.0
-offset_bottom = 104.0
+offset_left = 5.0
+offset_top = 60.0
+offset_right = 125.0
+offset_bottom = 105.0
 scale = Vector2(0.3, 0.3)
 theme_override_fonts/font = ExtResource("8_1vm6r")
 theme_override_font_sizes/font_size = 40
 text = "HP +10"
-horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelShop/ButtonCard2"]
 layout_mode = 0
@@ -446,15 +446,14 @@ stretch_mode = 0
 
 [node name="LabelDetail" type="Label" parent="PanelShop/ButtonCard3"]
 layout_mode = 2
-offset_left = 14.0
-offset_top = 57.0
-offset_right = 134.0
-offset_bottom = 102.0
+offset_left = 5.0
+offset_top = 59.0
+offset_right = 125.0
+offset_bottom = 104.0
 scale = Vector2(0.3, 0.3)
 theme_override_fonts/font = ExtResource("8_1vm6r")
 theme_override_font_sizes/font_size = 40
 text = "HP +10"
-horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelShop/ButtonCard3"]
 layout_mode = 0
@@ -507,6 +506,7 @@ text = "Buy
 horizontal_alignment = 1
 
 [node name="LabelShop" type="Label" parent="PanelShop"]
+layout_mode = 0
 offset_left = 137.0
 offset_top = 42.0
 offset_right = 222.0
@@ -518,6 +518,7 @@ text = "Shop"
 horizontal_alignment = 1
 
 [node name="LabelMessage" type="Label" parent="PanelShop"]
+layout_mode = 0
 offset_left = 40.0
 offset_top = 148.0
 offset_right = 770.0
@@ -529,6 +530,7 @@ text = "message"
 horizontal_alignment = 1
 
 [node name="ButtonBack" type="TextureButton" parent="PanelShop"]
+layout_mode = 0
 offset_left = 232.0
 offset_top = 39.0
 offset_right = 255.0
@@ -548,10 +550,11 @@ offset_bottom = 48.0
 scale = Vector2(0.3, 0.3)
 theme_override_fonts/font = ExtResource("8_1vm6r")
 theme_override_font_sizes/font_size = 40
-text = "25"
+text = "X"
 horizontal_alignment = 1
 
 [node name="ButtonRefresh" type="TextureButton" parent="PanelShop"]
+layout_mode = 0
 offset_left = 36.0
 offset_top = 165.0
 offset_right = 113.0
@@ -565,13 +568,12 @@ stretch_mode = 0
 
 [node name="LabelRefresh" type="Label" parent="PanelShop/ButtonRefresh"]
 layout_mode = 2
-offset_left = 27.0
-offset_top = 2.0
-offset_right = 97.0
-offset_bottom = 47.0
+offset_left = 10.0
+offset_top = 1.0
+offset_right = 200.0
+offset_bottom = 46.0
 scale = Vector2(0.3, 0.3)
 theme_override_fonts/font = ExtResource("8_1vm6r")
 theme_override_font_sizes/font_size = 40
-text = "Back
-"
+text = "Refresh 5G"
 horizontal_alignment = 1
