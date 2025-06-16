@@ -80,6 +80,7 @@ offset_bottom = 98.0
 texture = ExtResource("4_vkmtb")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0
@@ -100,6 +101,7 @@ offset_bottom = 98.0
 texture = ExtResource("5_3s6rn")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect2"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0
@@ -120,6 +122,7 @@ offset_bottom = 98.0
 texture = ExtResource("6_a8htd")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect3"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0
@@ -140,6 +143,7 @@ offset_bottom = 100.0
 texture = ExtResource("7_pnm2t")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect4"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0
@@ -160,6 +164,7 @@ offset_bottom = 100.0
 texture = ExtResource("8_xdm0v")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect5"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0
@@ -180,6 +185,7 @@ offset_bottom = 98.0
 texture = ExtResource("9_7pqov")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect6"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0
@@ -200,6 +206,7 @@ offset_bottom = 98.0
 texture = ExtResource("10_kg5th")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/LabelBuffList/TextureRect7"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 35.0
 offset_right = 33.0

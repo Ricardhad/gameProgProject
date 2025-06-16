@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://crh1jsb6eg1ig"]
+[gd_scene load_steps=12 format=3 uid="uid://crh1jsb6eg1ig"]
 
 [ext_resource type="Script" path="res://scenes/map/GUI/hud.gd" id="1_8uhuw"]
 [ext_resource type="Texture2D" uid="uid://8swmugpd1q5d" path="res://assets/option_menu/PlayerBar.png" id="2_fu74h"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dcxq1dnubjqvj" path="res://assets/option_menu/HealthBarOutline.png" id="7_n7f8u"]
 [ext_resource type="Texture2D" uid="uid://53yh3pihwlgy" path="res://assets/option_menu/HealthBar.png" id="8_m4hna"]
 [ext_resource type="Texture2D" uid="uid://iplr4g3nnb3f" path="res://assets/selecting_menu/butonUnclicked.png" id="9_qnfxe"]
-[ext_resource type="Texture2D" uid="uid://cpr8fh38ctns5" path="res://assets/selecting_menu/buttonClicked.png" id="10_e6ys5"]
 [ext_resource type="Texture2D" uid="uid://rsyaadoyfsor" path="res://assets/selecting_menu/cooldownbutton.png" id="10_i6nuy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_17x5f"]
@@ -96,6 +95,18 @@ texture_under = ExtResource("7_n7f8u")
 texture_progress = ExtResource("8_m4hna")
 texture_progress_offset = Vector2(1, 2)
 
+[node name="Label" type="Label" parent="CanvasLayer2/Panel/HealthBar"]
+offset_left = -0.333333
+offset_top = 1.33333
+offset_right = 119.667
+offset_bottom = 46.3333
+scale = Vector2(0.09, 0.09)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "100
+"
+horizontal_alignment = 1
+
 [node name="ButtonATK" type="TextureButton" parent="CanvasLayer2/Panel"]
 layout_mode = 0
 offset_left = 5.0
@@ -106,7 +117,6 @@ size_flags_vertical = 3
 toggle_mode = true
 texture_normal = ExtResource("9_qnfxe")
 texture_pressed = ExtResource("10_i6nuy")
-texture_hover = ExtResource("10_e6ys5")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer2/Panel/ButtonATK"]
@@ -132,7 +142,6 @@ size_flags_vertical = 3
 toggle_mode = true
 texture_normal = ExtResource("9_qnfxe")
 texture_pressed = ExtResource("10_i6nuy")
-texture_hover = ExtResource("10_e6ys5")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer2/Panel/ButtonJump"]
@@ -157,7 +166,6 @@ size_flags_vertical = 3
 toggle_mode = true
 texture_normal = ExtResource("9_qnfxe")
 texture_pressed = ExtResource("10_i6nuy")
-texture_hover = ExtResource("10_e6ys5")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="CanvasLayer2/Panel/ButtonDash"]
@@ -170,6 +178,30 @@ scale = Vector2(0.7, 0.7)
 theme_override_fonts/font = ExtResource("3_18l4s")
 theme_override_font_sizes/font_size = 40
 text = "Dash
+"
+horizontal_alignment = 1
+
+[node name="ButtonPotion" type="TextureButton" parent="CanvasLayer2/Panel"]
+offset_left = 225.0
+offset_top = 86.0
+offset_right = 288.0
+offset_bottom = 155.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("9_qnfxe")
+texture_pressed = ExtResource("10_i6nuy")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer2/Panel/ButtonPotion"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "Heal
 "
 horizontal_alignment = 1
 
