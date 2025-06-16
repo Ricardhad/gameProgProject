@@ -1,43 +1,57 @@
 extends CharacterBody2D
 
+# --- Player Movement Constants ---
 const SPEED = 200.0
 const JUMP_VELOCITY = -400.0
-var dash_cooldown_timer = 0.0
-var jump_cooldown_timer = 0.0
-var jump_cd = 2
-var dash_cd = 2
-var is_hanging = false
-var hang_grace_timer = 0.0
-const HANG_GRACE_TIME = 0.2
-
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
-var respawn_position = Vector2(150, 150)
-
-var is_attacking = false
-var current_attack_index = 0
-var attack_animations = ["attack", "attack1"]
-var air_attack_animation = "air_attack"
-
-
 const DASH_SPEED = 350.0
 const DASH_DURATION = 0.3
-var is_dashing = false
+const HANG_GRACE_TIME = 0.2
+
+# --- Cooldowns ---
+var dash_cooldown_timer = 0.0
+var jump_cooldown_timer = 0.0
+var jump_cd = 2.0 # Use float for consistency with delta
+var dash_cd = 2.0 # Use float for consistency with delta
+
+# --- Player State Variables ---
+# Define all possible states for the player
+enum PlayerState {
+	IDLE,
+	RUN,
+	JUMP,
+	FALL,
+	DASH,
+	ATTACK,
+	HEAVY_ATTACK,
+	HEAL,
+	HANG,
+	CLIMB_UP, # When performing the pull_up animation
+	DROP_DOWN # When actively dropping through a platform
+}
+var current_state: PlayerState = PlayerState.IDLE # Initialize starting state
+
+var is_hanging = false # Keep for convenience with can_hang() helper function
+var hang_grace_timer = 0.0
 var dash_time = 0.0
-
-var max_jumps = 2
 var jump_count = 0
+var max_jumps = 2
 
+var current_attack_index = 0
+var attack_animations = ["attack", "attack1"] # Ground attacks sequence
+var air_attack_animation = "air_attack" # If you have a unique air attack animation (not currently used by your code, but kept for potential)
+
+
+# --- Node References ---
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 @onready var attack_area_1: CollisionShape2D = $HitBox/Attack
 @onready var attack_area_2: CollisionShape2D = $HitBox2/Attack
+@onready var health: Health = $Health
+@onready var hud = get_node("/root/game/Hud") # Make sure your HUD node path is correct
+
+var respawn_position = Vector2(150, 150)
 var original_attack_offset_x = 0.0
 var original_attack2_offset_x = 0.0
-
-@onready var health: Health = $Health
-@onready var hud = get_node("/root/game/Hud")
-
-var is_heavy_attacking = false
-var is_healing = false
 
 func _ready():
 	original_attack_offset_x = attack_area_1.position.x
@@ -54,248 +68,408 @@ func _ready():
 	# Connect the health depletion signal
 	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
 
+	# Connect animation finished signal once for all states that need it
+	animated_sprite_2d.animation_finished.connect(Callable(self, "_on_animated_sprite_2d_animation_finished"))
+	
+	# Set initial state
+	set_state(PlayerState.IDLE)
+
 func _physics_process(delta: float) -> void:
-	# Reduce cooldown timers
+	# --- 1. Handle Cooldown Timers (Always run) ---
 	if dash_cooldown_timer > 0:
 		dash_cooldown_timer -= delta
 	if jump_cooldown_timer > 0:
 		jump_cooldown_timer -= delta
-		
-	# Dash logic
-	if is_dashing:
-		dash_time -= delta
-		if dash_time <= 0:
-			is_dashing = false
-		else:
-			# apply gravity while dashing
-			velocity.y += get_gravity().y * delta
-			move_and_slide()
-			return
-	if dash_time <= 0:
-		is_dashing = false
-		velocity.x = 0  # stop horizontal speed after dash
 
-	# Ledge logic
-	if is_on_wall():
-		hang_grace_timer = HANG_GRACE_TIME
-	else:
-		hang_grace_timer -= delta
-
-	if not is_on_floor() and not is_attacking and not is_dashing:
-		if not is_hanging:
-			if can_hang():
-				is_hanging = true
-				velocity = Vector2.ZERO
-				animated_sprite_2d.animation = "hang"
-				return
-		else:
-			# While hanging, listen for climb/drop input
-			if Input.is_action_just_pressed("jump"):
-				print("climbing")
-				climb_ledge()
-				return
-			elif Input.is_action_just_pressed("down"):
-				print("drop")
-				drop_ledge()
-				return
-				
-	if is_hanging:
-		return
-
-	# --- Pengecekan Input dari HUD dan Keyboard ---
-	var jump_intent = Input.is_action_just_pressed("jump") or (hud and hud.jump_button_pressed)
-	if hud and hud.jump_button_pressed:
-		hud.jump_button_pressed = false # Reset penanda
-
-	var dash_intent = Input.is_action_just_pressed("dash") or (hud and hud.dash_button_pressed)
-	if hud and hud.dash_button_pressed:
-		hud.dash_button_pressed = false # Reset penanda
-	# ----------------------------------------------
-
-	if dash_intent and not is_attacking and dash_cooldown_timer <= 0:
-		var direction = Input.get_axis("left", "right")
-		if direction == 0:
-			direction = -1 if animated_sprite_2d.flip_h else 1
-			
-		dash(direction)
-		dash_cooldown_timer = dash_cd  # Reset cooldown
-		if hud:
-			hud.set_dash_button_pressed() # Efek visual dash
-		return
-
+	# --- 2. Handle Game State Overrides (e.g., Respawn) ---
 	if global_position.y > 1000:
 		global_position = respawn_position
 		velocity = Vector2.ZERO
-		is_attacking = false
-		current_attack_index = 0
-		animated_sprite_2d.animation = "idle"
-		return
+		set_state(PlayerState.IDLE) # Reset state on respawn
+		return # Exit early after respawn, new frame will process from new state
 
-	if Input.is_action_just_pressed("attack") and not is_attacking and not is_heavy_attacking and not is_healing:
-		if is_on_floor():
-			perform_ground_attack()
-		else:
-			perform_air_attack()
-		return
-	
-	if Input.is_action_just_pressed("heavy_attack") and not is_attacking and not is_heavy_attacking and not is_healing:
-		perform_heavy_attack()
-		return
-	
-	if Input.is_action_just_pressed("heal") and not is_attacking and not is_heavy_attacking:
-		perform_heal()
-		return
-	
-	# Attack state handling
-	if is_attacking or is_heavy_attacking:
-		var current_anim = animated_sprite_2d.animation
-		var is_last_frame = animated_sprite_2d.frame == animated_sprite_2d.sprite_frames.get_frame_count(current_anim) - 1
-		
-		if is_last_frame:
-			is_attacking = false
-			is_heavy_attacking = false
-			current_attack_index = (current_attack_index + 1) % attack_animations.size()
+	# --- 3. Process Player State Machine ---
+	# The 'match' statement ensures only one state's logic runs per frame.
+	match current_state:
+		PlayerState.IDLE, PlayerState.RUN, PlayerState.JUMP, PlayerState.FALL:
+			handle_normal_movement(delta)
+			handle_normal_animations() # Update animations based on normal movement
+		PlayerState.DASH:
+			handle_dash_state(delta)
+		PlayerState.ATTACK, PlayerState.HEAVY_ATTACK:
+			handle_attack_state(delta)
+		PlayerState.HEAL:
+			handle_heal_state(delta)
+		PlayerState.HANG:
+			handle_hang_state()
+		PlayerState.CLIMB_UP:
+			handle_climb_up_state(delta)
+		PlayerState.DROP_DOWN:
+			handle_drop_down_state(delta)
+
+	# --- 4. Final Movement Execution (Always run once per frame) ---
+	# This ensures move_and_slide is called regardless of the current state.
+	# The velocity will have been set by the active state handler.
+	move_and_slide()
+
+
+# --- State Transition Function ---
+# This is the ONLY function that should change the player's 'current_state'.
+func set_state(new_state: PlayerState):
+	if current_state == new_state:
+		return # No state change needed
+
+	# --- Exit Logic for Previous State ---
+	# Perform any cleanup when leaving a state.
+	match current_state:
+		PlayerState.ATTACK, PlayerState.HEAVY_ATTACK:
 			attack_area_1.disabled = true
 			attack_area_2.disabled = true
 			if hud:
 				hud.set_attack_button_pressed(false)
-		else:
-			if not is_on_floor():
-				velocity.x *= 0.95
-				velocity.y += get_gravity().y * delta
-			else:
-				velocity.x = 0
-			move_and_slide()
-			return
+		PlayerState.DASH:
+			pass # No specific exit actions needed besides velocity.x = 0 which is in handle_dash_state
+		PlayerState.HEAL:
+			pass # Await in perform_heal handles cleanup
+		# Add any other states that require cleanup when exiting (e.g., stopping a continuous sound)
 
+	current_state = new_state # Update the state
+
+	# --- Entry Logic for New State ---
+	# Set up animations, initial velocities, enable/disable collision, etc.
+	match current_state:
+		PlayerState.IDLE:
+			animated_sprite_2d.animation = "idle"
+			animated_sprite_2d.play() # Ensure animation starts playing
+			velocity.x = 0 # Ensure stops on idle
+
+		PlayerState.RUN:
+			animated_sprite_2d.animation = "run"
+			animated_sprite_2d.play()
+
+		PlayerState.JUMP:
+			animated_sprite_2d.animation = "jump"
+			animated_sprite_2d.play()
+
+		PlayerState.FALL:
+			animated_sprite_2d.animation = "jump" # Re-use jump animation for fall, or create a "fall" one
+			animated_sprite_2d.play()
+
+		PlayerState.DASH:
+			# Direction for dash is set in handle_normal_movement before calling set_state
+			animated_sprite_2d.animation = "run" # Or "dash" if you have a unique one
+			animated_sprite_2d.play()
+
+		PlayerState.ATTACK:
+			animated_sprite_2d.animation = attack_animations[current_attack_index]
+			animated_sprite_2d.frame = 0 # Start animation from beginning
+			animated_sprite_2d.play()
+			attack_sound.play()
+			update_attack_hitboxes(animated_sprite_2d.animation)
+			if hud:
+				hud.set_attack_button_pressed(true)
+
+		PlayerState.HEAVY_ATTACK:
+			animated_sprite_2d.animation = "attack2"
+			animated_sprite_2d.frame = 0
+			animated_sprite_2d.play()
+			attack_sound.play()
+			attack_area_2.disabled = false
+			attack_area_1.disabled = true # Ensure other attack hitbox is disabled
+			if hud:
+				hud.set_attack_button_pressed(true)
+
+		PlayerState.HEAL:
+			# Check heal condition here before starting animation
+			if health.health < health.max_health:
+				animated_sprite_2d.animation = "heal"
+				animated_sprite_2d.frame = 0
+				animated_sprite_2d.play()
+				velocity = Vector2.ZERO # Stop all movement
+				
+				# Apply healing effect here, or at a specific animation frame via AnimationPlayer's call method.
+				health.heal(10) 
+				
+				# Start an asynchronous operation to wait for animation and then transition
+				_await_heal_animation_completion()
+			else:
+				# If no healing is needed, immediately revert to idle
+				set_state(PlayerState.IDLE)
+
+		PlayerState.HANG:
+			animated_sprite_2d.animation = "hang"
+			animated_sprite_2d.play()
+			velocity = Vector2.ZERO # Stop all movement when hanging
+
+		PlayerState.CLIMB_UP:
+			animated_sprite_2d.animation = "pull_up"
+			animated_sprite_2d.play()
+			velocity.y = JUMP_VELOCITY # Give a vertical push for climbing up
+
+		PlayerState.DROP_DOWN:
+			# Can reuse fall animation or have a dedicated drop one
+			animated_sprite_2d.animation = "jump" # or "fall"
+			animated_sprite_2d.play()
+			global_position.y += 10 # Move down slightly to pass through one-way platform
+			velocity.y = 150.0 # Initial downward velocity
+
+
+# --- State Handler Functions ---
+
+func handle_normal_movement(delta: float):
+	# Input from HUD and Keyboard
+	var jump_intent = Input.is_action_just_pressed("jump") or (hud and hud.jump_button_pressed)
+	if hud and hud.jump_button_pressed:
+		hud.jump_button_pressed = false # Reset marker
+
+	var dash_intent = Input.is_action_just_pressed("dash") or (hud and hud.dash_button_pressed)
+	if hud and hud.dash_button_pressed:
+		hud.dash_button_pressed = false # Reset marker
+
+	# --- Prioritized Input Checks for State Transitions ---
+
+	if dash_intent and dash_cooldown_timer <= 0:
+		var direction = Input.get_axis("left", "right")
+		if direction == 0:
+			direction = -1 if animated_sprite_2d.flip_h else 1 # Default direction if no horizontal input
+		velocity.x = direction * DASH_SPEED # Set initial dash velocity
+		dash_time = DASH_DURATION # Set dash duration
+		dash_cooldown_timer = dash_cd # Start cooldown
+		if hud:
+			hud.set_dash_button_pressed() # Visual effect
+		set_state(PlayerState.DASH) # Transition to Dash state
+		return # Exit early, as state changed
+
+	if Input.is_action_just_pressed("attack"):
+		set_state(PlayerState.ATTACK) # Transition to Attack state
+		return # Exit early
+
+	if Input.is_action_just_pressed("heavy_attack"):
+		set_state(PlayerState.HEAVY_ATTACK) # Transition to Heavy Attack state
+		return # Exit early
+
+	if Input.is_action_just_pressed("heal"):
+		set_state(PlayerState.HEAL) # Transition to Heal state
+		return # Exit early
+
+	# --- Ledge Hanging Detection (only if not already hanging) ---
+	if not is_on_floor(): # Only check for hanging if in the air
+		# Updated hang_grace_timer logic
+		if is_on_wall():
+			hang_grace_timer = HANG_GRACE_TIME # Reset timer while on wall
+		else:
+			hang_grace_timer -= delta # Decrement if not on wall
+
+		if can_hang():
+			is_hanging = true # Update convenience flag
+			set_state(PlayerState.HANG) # Transition to Hang state
+			return # Exit early
+
+	# --- Apply Gravity ---
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	else:
-		jump_count = 0
+		# If currently in a normal movement state and falling, set to FALL state
+		if current_state == PlayerState.JUMP && velocity.y > 0:
+			set_state(PlayerState.FALL)
+		elif current_state == PlayerState.IDLE || current_state == PlayerState.RUN: # If player walks off a ledge
+			set_state(PlayerState.FALL)
+	else: # On floor
+		jump_count = 0 # Reset jump count
+		# If currently in air states (JUMP/FALL) and lands, transition to IDLE/RUN
+		if current_state == PlayerState.JUMP || current_state == PlayerState.FALL:
+			if abs(velocity.x) > 1:
+				set_state(PlayerState.RUN)
+			else:
+				set_state(PlayerState.IDLE)
+
+
+	# --- Handle Jumping / Double Jumping ---
 	if is_on_floor() and Input.is_action_pressed("down") and jump_intent:
 		print("going down")
-		# Setting a small positive y velocity is enough to pass through one-way platforms.
-		global_position.y += 10
-		velocity.y = 150.0
+		# set_state(PlayerState.DROP_DOWN) handles actual position/velocity
+		set_state(PlayerState.DROP_DOWN) # Transition to explicit drop state
 		
 	elif jump_intent and jump_count < max_jumps:
-		# First jump: no cooldown
 		if jump_count == 0:
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
 			if hud:
-				hud.set_jump_button_pressed() # Efek visual lompat
-		# Second jump: check cooldown
+				hud.set_jump_button_pressed()
+			set_state(PlayerState.JUMP) # Transition to Jump state
 		elif jump_count == 1 and jump_cooldown_timer <= 0:
 			velocity.y = JUMP_VELOCITY
 			jump_count += 1
 			jump_cooldown_timer = jump_cd
 			if hud:
-				hud.set_jump_button_pressed() # Efek visual lompat
+				hud.set_jump_button_pressed()
+			set_state(PlayerState.JUMP) # Or a specific PlayerState.DOUBLE_JUMP
 
+
+	# --- Handle Horizontal Movement ---
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		velocity.x = direction * SPEED
 		animated_sprite_2d.flip_h = direction < 0
+		# Update attack area offsets based on flip
 		attack_area_1.position.x = -original_attack_offset_x if animated_sprite_2d.flip_h else original_attack_offset_x
 		attack_area_2.position.x = -original_attack2_offset_x if animated_sprite_2d.flip_h else original_attack2_offset_x
+		if is_on_floor() and current_state != PlayerState.RUN: # Only switch to run if on floor and not already running
+			set_state(PlayerState.RUN)
 	else:
-		velocity.x = move_toward(velocity.x, 0, 30)
-		
-	move_and_slide()
+		velocity.x = move_toward(velocity.x, 0, 30) # Apply friction/deceleration
+		if is_on_floor() and current_state != PlayerState.IDLE && abs(velocity.x) < 1: # Only switch to idle if on floor and not already idle
+			set_state(PlayerState.IDLE)
 
-	if not is_attacking and not is_healing:
-		if not is_on_floor():
-			animated_sprite_2d.animation = "jump"
-		elif abs(velocity.x) > 1:
-			animated_sprite_2d.animation = "run"
+
+func handle_normal_animations():
+	# This function is now mostly handled by set_state
+	# and the if/else if/else block for `if not is_attacking and not is_healing:`
+	# in the original code is no longer needed here as set_state manages animation setting.
+	# You can leave this empty or remove it if you are confident set_state handles all animation changes.
+	# The general animation logic is now integrated directly into set_state.
+	pass
+
+
+func handle_dash_state(delta: float):
+	dash_time -= delta
+	if dash_time <= 0:
+		velocity.x = 0 # Stop horizontal speed after dash
+		# Determine next state after dash based on if on floor or in air
+		if is_on_floor():
+			set_state(PlayerState.IDLE)
 		else:
-			animated_sprite_2d.animation = "idle"
+			set_state(PlayerState.FALL) # Go to fall after dash ends in air
+	else:
+		velocity.y += get_gravity().y * delta # Apply gravity during dash
 
-func update_attack_hitboxes(current_anim: String):
-	attack_area_1.disabled = not (current_anim == "attack" or current_anim == "attack1")
-	attack_area_2.disabled = current_anim != "attack2"
 
-func perform_heal():
-	# Only heal if we actually need healing
-	if health.health < health.max_health:
-		is_healing = true
-		velocity = Vector2.ZERO  # Stop all movement
-		animated_sprite_2d.animation = "heal"
-		#animated_sprite_2d.frame = 0
-		
-		# Play heal sound if you have one
-		# $HealSound.play()
-		
-		# Apply healing effect (adjust amount as needed)
-		health.heal(10)
+func handle_attack_state(delta: float):
+	# Attack animations are set in set_state and play to finish (non-looping).
+	# During attack, apply gravity and possibly slow horizontal movement.
+	if not is_on_floor():
+		velocity.x *= 0.95 # Slow down horizontal movement in air
+		velocity.y += get_gravity().y * delta
+	else:
+		velocity.x = 0 # Stop horizontal movement on ground during attack
+	# State transition out of attack happens via _on_animated_sprite_2d_animation_finished
 
+
+func handle_heal_state(delta: float):
+	# Healing animation is set in set_state.
+	# Apply gravity if in air, stop horizontal movement if on ground.
+	if not is_on_floor():
+		velocity.y += get_gravity().y * delta
+	else:
+		velocity.x = 0
+	# State transition out of heal happens via _await_heal_animation_completion (which calls set_state)
+
+
+func handle_hang_state():
+	is_hanging = true # Maintain this flag for helper can_hang()
+	# Hanging has no physics movement, velocity is ZERO set in set_state.
+	# Listen for climb/drop input to transition out.
+	if Input.is_action_just_pressed("jump"):
+		is_hanging = false # Reset flag when leaving hang state
+		set_state(PlayerState.CLIMB_UP)
+	elif Input.is_action_just_pressed("down"):
+		is_hanging = false # Reset flag when leaving hang state
+		set_state(PlayerState.DROP_DOWN)
+
+
+func handle_climb_up_state(delta: float):
+	# This state is for the "pull_up" animation.
+	# Gravity is still applied. After animation, it transitions to IDLE/FALL.
+	velocity.y += get_gravity().y * delta # Still apply gravity
+
+
+func handle_drop_down_state(delta: float):
+	# This state applies the initial push down. Gravity will take over.
+	# It will naturally transition to FALL once off the one-way platform.
+	velocity.y += get_gravity().y * delta # Gravity ensures continuous fall
+
+
+# --- Animation Signal Handler ---
+# This function is ONLY for handling animations that complete and cause a state change.
 func _on_animated_sprite_2d_animation_finished():
-	# Check if healing animation just finished
-	if animated_sprite_2d.animation == "heal":
-		is_healing = false
-		animated_sprite_2d.animation = "idle"
+	# Print statements for debugging which animation finished
+	print("Animation finished: {animated_sprite_2d.animation}")
 
-func perform_heavy_attack():
-	animated_sprite_2d.animation = "attack2"
-	animated_sprite_2d.frame = 0
-	is_heavy_attacking = true
-	attack_area_2.disabled = false  # Enable the attack3 collision shape
-	attack_area_1.disabled = true   # Disable other attack shapes
-	attack_sound.play()
-	
-	if hud:
-		hud.set_attack_button_pressed(true)
+	match animated_sprite_2d.animation:
+		"heal":
+			# This is now handled by the await in _await_heal_animation_completion,
+			# but leaving it here for explicit clarity in the match statement
+			# in case heal is interrupted or cancelled, though the await is safer.
+			# set_state(PlayerState.IDLE) # Handled by _await_heal_animation_completion
+			pass # No action needed here as _await_heal_animation_completion will handle it
 
-func perform_ground_attack():
-	var current_attack_animation = attack_animations[current_attack_index]
-	animated_sprite_2d.animation = current_attack_animation
-	animated_sprite_2d.frame = 0
-	is_attacking = true
-	update_attack_hitboxes(current_attack_animation)
-	attack_sound.play()
-	
-	if hud:
-		hud.set_attack_button_pressed(true)
+		"pull_up": # Animation for climbing up a ledge
+			if is_on_floor():
+				set_state(PlayerState.IDLE)
+			else:
+				set_state(PlayerState.FALL) # Go to fall if still in air after climb
 
-func perform_air_attack():
-	var current_attack_animation = attack_animations[current_attack_index]
-	animated_sprite_2d.animation = current_attack_animation
-	animated_sprite_2d.frame = 0
-	is_attacking = true
-	update_attack_hitboxes(current_attack_animation)
-	attack_sound.play()
-	
-	if hud:
-		hud.set_attack_button_pressed(true)
+		"attack", "attack1": # All ground attack animations
+			current_attack_index = (current_attack_index + 1) % attack_animations.size()
+			# After a regular attack, transition based on if on floor or in air
+			if is_on_floor():
+				set_state(PlayerState.IDLE)
+			else:
+				set_state(PlayerState.FALL)
 
-func dash(direction: float):
-	is_dashing = true
-	dash_time = DASH_DURATION
-	velocity.x = direction * DASH_SPEED
-	animated_sprite_2d.animation = "run"
+		"attack2": # Heavy attack animation
+			# After heavy attack, transition based on if on floor or in air
+			if is_on_floor():
+				set_state(PlayerState.IDLE)
+			else:
+				set_state(PlayerState.FALL)
 
-func climb_ledge():
-	is_hanging = false
-	global_position.y -= 10
-	velocity.y = JUMP_VELOCITY
-	animated_sprite_2d.animation = "pull_up"
-	
-func drop_ledge():
-	is_hanging = false
-	global_position.y += 10
-	velocity.y = 200
-	
+		# Add other animations that might need specific state resets here (e.g., death, unique skill animations)
+
+
+# --- Asynchronous Helper for Healing Animation ---
+func _await_heal_animation_completion():
+	# Ensure the animated_sprite_2d is valid before awaiting
+	if animated_sprite_2d:
+		print("Awaiting heal animation completion...")
+		await animated_sprite_2d.animation_finished
+		print("Heal animation finished! Transitioning to IDLE.")
+		set_state(PlayerState.IDLE) # Transition back to IDLE after heal animation finishes
+	else:
+		printerr("AnimatedSprite2D node is not valid for heal await.")
+
+
+# --- Helper Functions ---
+func update_attack_hitboxes(current_anim: String):
+	# Disable both by default, then enable the one needed
+	attack_area_1.disabled = true
+	attack_area_2.disabled = true
+
+	if current_anim == "attack" or current_anim == "attack1":
+		attack_area_1.disabled = false
+	elif current_anim == "attack2":
+		attack_area_2.disabled = false
+
+
 func can_hang():
+	# If not on a wall or hang grace timer has run out, cannot hang.
 	if not is_on_wall():
 		return false
 
+	# Raycasts to check for ledge. Make sure these are properly configured in your scene.
+	# LedgeCheckLeft/Right should be horizontal rays pointing away from the character.
+	# CheckFloorAboveLeft/Right should be vertical rays pointing up from the ledge check point.
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 
+	# Only allow hang if there's a ledge and within the grace period (if applicable)
 	if hang_grace_timer > 0 and (hanging_left or hanging_right):
 		return true
+	
+	return false # Cannot hang
+
 
 func _on_health_depleted():
+	# This function is called when health reaches 0 (from the Health node's signal)
 	Transition1.change_scene("res://scenes/ui/GameOver.tscn")
-	#get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")
+	# If Transition1 is a global singleton, ensure it's properly set up.
+	# If not, you might need get_tree().change_scene_to_file(...) directly.
