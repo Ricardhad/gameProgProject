@@ -1,9 +1,10 @@
-[gd_scene load_steps=55 format=3 uid="uid://cws2mh1ko3mg8"]
+[gd_scene load_steps=60 format=3 uid="uid://cws2mh1ko3mg8"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_enxr5"]
 [ext_resource type="Texture2D" uid="uid://b18q26imgxm3" path="res://assets/class/knight/player_sprites.png" id="2_8dkoq"]
 [ext_resource type="Texture2D" uid="uid://dxhgtold6fgsw" path="res://assets/class/knight/Hang.png" id="3_g4x7a"]
 [ext_resource type="Texture2D" uid="uid://vn3cm3cj8u27" path="res://assets/class/knight/Pull_up.png" id="4_am03k"]
+[ext_resource type="Texture2D" uid="uid://dn0cntngmfvdy" path="res://assets/class/knight/Elixir.png" id="5_a8mkw"]
 [ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="5_b4k1q"]
 [ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="6_hf2xt"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="7_v7flo"]
@@ -84,6 +85,22 @@ region = Rect2(541, 0, 51, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ox8bo"]
 atlas = ExtResource("3_g4x7a")
 region = Rect2(668, 0, 51, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrs2k"]
+atlas = ExtResource("5_a8mkw")
+region = Rect2(0, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r20pr"]
+atlas = ExtResource("5_a8mkw")
+region = Rect2(128, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghqal"]
+atlas = ExtResource("5_a8mkw")
+region = Rect2(256, 40, 128, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukx4n"]
+atlas = ExtResource("5_a8mkw")
+region = Rect2(384, 40, 128, 88)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjim3"]
 atlas = ExtResource("2_8dkoq")
@@ -272,6 +289,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_yrs2k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r20pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghqal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukx4n")
+}],
+"loop": false,
+"name": &"heal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mjim3")
 }, {
 "duration": 1.0,
@@ -382,8 +416,10 @@ sync_with_global = true
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"idle"
+animation = &"heal"
 autoplay = "idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b8yrv")
@@ -452,3 +488,5 @@ position = Vector2(0, -12)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.5
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

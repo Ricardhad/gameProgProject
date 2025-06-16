@@ -37,6 +37,7 @@ var original_attack2_offset_x = 0.0
 @onready var hud = get_node("/root/game/Hud")
 
 var is_heavy_attacking = false
+var is_healing = false
 
 func _ready():
 	original_attack_offset_x = attack_area_1.position.x
@@ -45,13 +46,13 @@ func _ready():
 	
 	# Set HitBox damage from GlobalVar
 	$HitBox.damage = GlobalVar.damage_player
+	$HitBox2.damage = GlobalVar.damage_player * 2
 	health.sync_with_global = true
 	health.set_max_health(GlobalVar.maxhealth_player)
 	health.set_health(GlobalVar.health_player)
 	
 	# Connect the health depletion signal
 	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
-	
 
 func _physics_process(delta: float) -> void:
 	# Reduce cooldown timers
@@ -130,17 +131,21 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.animation = "idle"
 		return
 
-	if Input.is_action_just_pressed("attack") and not is_attacking:
+	if Input.is_action_just_pressed("attack") and not is_attacking and not is_heavy_attacking and not is_healing:
 		if is_on_floor():
 			perform_ground_attack()
 		else:
 			perform_air_attack()
 		return
 	
-	if Input.is_action_just_pressed("heavy_attack") and not is_attacking and not is_heavy_attacking:
+	if Input.is_action_just_pressed("heavy_attack") and not is_attacking and not is_heavy_attacking and not is_healing:
 		perform_heavy_attack()
 		return
-
+	
+	if Input.is_action_just_pressed("heal") and not is_attacking and not is_heavy_attacking:
+		perform_heal()
+		return
+	
 	# Attack state handling
 	if is_attacking or is_heavy_attacking:
 		var current_anim = animated_sprite_2d.animation
@@ -199,7 +204,7 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-	if not is_attacking:
+	if not is_attacking and not is_healing:
 		if not is_on_floor():
 			animated_sprite_2d.animation = "jump"
 		elif abs(velocity.x) > 1:
@@ -210,6 +215,26 @@ func _physics_process(delta: float) -> void:
 func update_attack_hitboxes(current_anim: String):
 	attack_area_1.disabled = not (current_anim == "attack" or current_anim == "attack1")
 	attack_area_2.disabled = current_anim != "attack2"
+
+func perform_heal():
+	# Only heal if we actually need healing
+	if health.health < health.max_health:
+		is_healing = true
+		velocity = Vector2.ZERO  # Stop all movement
+		animated_sprite_2d.animation = "heal"
+		#animated_sprite_2d.frame = 0
+		
+		# Play heal sound if you have one
+		# $HealSound.play()
+		
+		# Apply healing effect (adjust amount as needed)
+		health.heal(10)
+
+func _on_animated_sprite_2d_animation_finished():
+	# Check if healing animation just finished
+	if animated_sprite_2d.animation == "heal":
+		is_healing = false
+		animated_sprite_2d.animation = "idle"
 
 func perform_heavy_attack():
 	animated_sprite_2d.animation = "attack2"

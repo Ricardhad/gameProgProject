@@ -78,3 +78,18 @@ func set_health(value: int):
 
 func get_health():
 	return health
+
+func heal(amount: int) -> void:
+	if amount <= 0:
+		return  # Can't heal with zero or negative amount
+	
+	var old_health = health
+	var new_health = min(health + amount, max_health)
+	var actual_healed = new_health - old_health
+	
+	if actual_healed > 0:
+		health = new_health
+		health_changed.emit(actual_healed)
+		
+		if sync_with_global:
+			GlobalVar.health_player = health

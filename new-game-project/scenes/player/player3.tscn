@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://d32slxhnuugkj"]
+[gd_scene load_steps=83 format=3 uid="uid://d32slxhnuugkj"]
 
 [ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="1_e60qw"]
 [ext_resource type="Texture2D" uid="uid://d4fu23g2jt35y" path="res://assets/class/Wizard/Magic_arrow.png" id="2_qxhxc"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cd5erkqf7e1xm" path="res://assets/class/Wizard/Area_Attack.png" id="3_d3h3w"]
 [ext_resource type="Texture2D" uid="uid://boe5gl7581qhf" path="res://assets/class/Wizard/Hang.png" id="5_tm7ym"]
 [ext_resource type="Texture2D" uid="uid://b6c75i46phsmq" path="res://assets/class/Wizard/Idle.png" id="6_2bryu"]
+[ext_resource type="Texture2D" uid="uid://cimwopp44quol" path="res://assets/class/Wizard/Elixir.png" id="6_p6hw6"]
 [ext_resource type="Texture2D" uid="uid://cbanef7kbibko" path="res://assets/class/Wizard/Jump.png" id="7_3da3h"]
 [ext_resource type="Texture2D" uid="uid://d04e44wp2prgv" path="res://assets/class/Wizard/Pull up.png" id="8_yengf"]
 [ext_resource type="Texture2D" uid="uid://clbbr80djvxx8" path="res://assets/class/Wizard/Run.png" id="9_r0gnd"]
@@ -152,6 +153,30 @@ region = Rect2(512, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfy1t"]
 atlas = ExtResource("5_tm7ym")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apnyn"]
+atlas = ExtResource("6_p6hw6")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iukos"]
+atlas = ExtResource("6_p6hw6")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgpek"]
+atlas = ExtResource("6_p6hw6")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0boi"]
+atlas = ExtResource("6_p6hw6")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2ig6"]
+atlas = ExtResource("6_p6hw6")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srsfv"]
+atlas = ExtResource("6_p6hw6")
 region = Rect2(640, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lukml"]
@@ -407,6 +432,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_apnyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iukos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgpek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0boi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2ig6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srsfv")
+}],
+"loop": false,
+"name": &"heal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lukml")
 }, {
 "duration": 1.0,
@@ -518,3 +566,5 @@ animations = [{
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_m04qe")
+frame = 0
+frame_progress = 0.0

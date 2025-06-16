@@ -1,10 +1,11 @@
-[gd_scene load_steps=72 format=3 uid="uid://bubsyxaycbi13"]
+[gd_scene load_steps=77 format=3 uid="uid://bubsyxaycbi13"]
 
 [ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="1_fjnjo"]
 [ext_resource type="Texture2D" uid="uid://depyanrukua3d" path="res://assets/class/Archer/Special_attack_1.png" id="2_b5lyo"]
 [ext_resource type="Texture2D" uid="uid://b6kaqcxs4x6kd" path="res://assets/class/Archer/Attack_2.png" id="3_sccsi"]
 [ext_resource type="Texture2D" uid="uid://dae05rjy1hv1d" path="res://assets/class/Archer/Shot.png" id="4_bw2cb"]
 [ext_resource type="Texture2D" uid="uid://c7m5o5keka2d0" path="res://assets/class/Archer/Hang.png" id="5_a7cnk"]
+[ext_resource type="Texture2D" uid="uid://xqxx6avobkrd" path="res://assets/class/Archer/Elixir.png" id="6_20hjy"]
 [ext_resource type="Texture2D" uid="uid://bir5unaqwew4l" path="res://assets/class/Archer/Idle.png" id="6_gm5gj"]
 [ext_resource type="Texture2D" uid="uid://b5762lrnlq1w1" path="res://assets/class/Archer/Jump.png" id="7_kgou2"]
 [ext_resource type="Texture2D" uid="uid://b1ty37873jeoo" path="res://assets/class/Archer/Pull_up.png" id="8_lttaw"]
@@ -129,6 +130,22 @@ region = Rect2(512, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayd7c"]
 atlas = ExtResource("5_a7cnk")
 region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16uif"]
+atlas = ExtResource("6_20hjy")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auw07"]
+atlas = ExtResource("6_20hjy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pc7v"]
+atlas = ExtResource("6_20hjy")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcnpd"]
+atlas = ExtResource("6_20hjy")
+region = Rect2(384, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_arq3o"]
 atlas = ExtResource("6_gm5gj")
@@ -373,6 +390,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_16uif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auw07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pc7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcnpd")
+}],
+"loop": false,
+"name": &"heal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_arq3o")
 }, {
 "duration": 1.0,
@@ -490,3 +524,6 @@ animations = [{
 [node name="AnimatedSprite2D" parent="." index="1"]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_m04qe")
+animation = &"idle"
+frame = 0
+frame_progress = 0.0
