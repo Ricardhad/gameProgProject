@@ -44,7 +44,12 @@ func _on_frame_changed():
 	# --- Melee Logic ---
 	if current_animation == "attack" and animated_sprite.frame == damage_frame:
 		hitbox_shape.disabled = false
-
+	if current_animation == "attack1" and animated_sprite.frame == damage_frame:
+		hitbox_shape.disabled = false
+	if current_animation == "attack2" and animated_sprite.frame == damage_frame:
+		hitbox_shape.disabled = false	
+	if current_animation == "special" and animated_sprite.frame == damage_frame:
+		hitbox_shape.disabled = false	
 	# ✅ CHANGE #2: Add logic for spawning a projectile on a specific frame
 	if current_animation == "shoot" and animated_sprite.frame == shoot_frame:
 		_spawn_projectile()
@@ -78,3 +83,19 @@ func is_ready_to_attack() -> bool:
 	
 func can_perform_attack(attack_name: String) -> bool:
 	return attack_name in available_attacks
+	
+func _get_random_melee_attack() -> String:
+	var possible_melee_attacks = available_attacks
+	var available_melee_attacks = []
+
+	# Check which melee attacks this enemy can actually perform
+	for attack_name in possible_melee_attacks:
+		if can_perform_attack(attack_name):
+			available_melee_attacks.append(attack_name)
+
+	# If we found any, pick one at random and return its name
+	if not available_melee_attacks.is_empty():
+		return available_melee_attacks.pick_random()
+
+	# Return an empty string if no melee attacks were available
+	return ""

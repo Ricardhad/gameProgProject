@@ -491,7 +491,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8w37"]
 size = Vector2(17, 45)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="gladiator3" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_0wg8c")
 
@@ -511,6 +511,7 @@ shape = SubResource("RectangleShape2D_m8w37")
 [node name="AttackController" parent="." instance=ExtResource("12_4b4e4")]
 unique_name_in_owner = true
 available_attacks = Array[String](["attack1", "attack2"])
+damage_frame = 3
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
@@ -536,6 +537,7 @@ visible = false
 
 [node name="StateMachine" parent="." instance=ExtResource("19_aohu5")]
 unique_name_in_owner = true
+enemy_behavior = 1
 
 [editable path="AttackController"]
 [editable path="HurtBox"]

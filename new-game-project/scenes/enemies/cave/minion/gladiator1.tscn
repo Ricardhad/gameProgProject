@@ -471,7 +471,7 @@ animations = [{
 radius = 8.99977
 height = 41.999
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="gladiator1" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_o5y0n")
 
