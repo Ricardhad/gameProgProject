@@ -1,15 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://rhp7ds1qgeqd"]
+[gd_scene load_steps=14 format=3 uid="uid://jral8grt1olr"]
 
-[ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_xjixr"]
-[ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_xaibv"]
-[ext_resource type="Texture2D" uid="uid://d1752omggnop6" path="res://assets/stage/snow/bg/2.png" id="3_cdb0y"]
-[ext_resource type="Texture2D" uid="uid://cln7ww53nfya2" path="res://assets/stage/snow/bg/3.png" id="4_itvtm"]
-[ext_resource type="Texture2D" uid="uid://bv2r31lk2im64" path="res://assets/stage/snow/bg/4.png" id="5_7d0ne"]
-[ext_resource type="Texture2D" uid="uid://cedp2kjkhossi" path="res://assets/stage/snow/bg/5.png" id="6_srmai"]
-[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="7_hubx5"]
-[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_joixd"]
-[ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="9_dcsa6"]
-[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_eoy1y"]
+[ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_s5mfd"]
+[ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_osn1p"]
+[ext_resource type="Texture2D" uid="uid://d1752omggnop6" path="res://assets/stage/snow/bg/2.png" id="3_iiovr"]
+[ext_resource type="Texture2D" uid="uid://cln7ww53nfya2" path="res://assets/stage/snow/bg/3.png" id="4_86iyc"]
+[ext_resource type="Texture2D" uid="uid://bv2r31lk2im64" path="res://assets/stage/snow/bg/4.png" id="5_qphiq"]
+[ext_resource type="Texture2D" uid="uid://cedp2kjkhossi" path="res://assets/stage/snow/bg/5.png" id="6_cncqr"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="7_wnc45"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_qgmv7"]
+[ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="9_ottnq"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_4rq62"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -26,7 +26,7 @@ var current_player = knight_scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Bgm.play_music_snow()
+	Bgm.play_music_snowboss()
 	
 	# --- TAMBAHKAN INI UNTUK MENGGAMBAR PETA DI MINIMAP ---
 	# Sebelum spawn player, kita perintahkan HUD untuk menyiapkan peta
@@ -62,7 +62,7 @@ func spawn_character(character_scene: PackedScene):
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7kb6b"]
-texture = ExtResource("1_xjixr")
+texture = ExtResource("1_s5mfd")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -836,7 +836,7 @@ motion_mirroring = Vector2(576, 324)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(288, 162)
-texture = ExtResource("2_xaibv")
+texture = ExtResource("2_osn1p")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -845,7 +845,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(288, 162)
-texture = ExtResource("3_cdb0y")
+texture = ExtResource("3_iiovr")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -854,7 +854,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(288, 162)
-texture = ExtResource("4_itvtm")
+texture = ExtResource("4_86iyc")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -863,7 +863,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(288, 162)
-texture = ExtResource("5_7d0ne")
+texture = ExtResource("5_qphiq")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -872,15 +872,15 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(288, 162)
-texture = ExtResource("6_srmai")
+texture = ExtResource("6_cncqr")
 
-[node name="Hud" parent="." instance=ExtResource("7_hubx5")]
+[node name="Hud" parent="." instance=ExtResource("7_wnc45")]
 position = Vector2(-268, -80)
 
-[node name="FinishPoint" parent="." instance=ExtResource("8_joixd")]
+[node name="FinishPoint" parent="." instance=ExtResource("8_qgmv7")]
 position = Vector2(1506, 224)
-target_scene = ExtResource("9_dcsa6")
+target_scene = ExtResource("9_ottnq")
 next_scene = "3-1"
 
-[node name="PauseMenu" parent="." instance=ExtResource("10_eoy1y")]
+[node name="PauseMenu" parent="." instance=ExtResource("10_4rq62")]
 position = Vector2(-268, -80)

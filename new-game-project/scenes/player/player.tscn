@@ -382,7 +382,7 @@ sync_with_global = true
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"attack2"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -417,7 +417,7 @@ disabled = true
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("5_b4k1q")
-damage = 3
+damage = 2
 
 [node name="Attack" type="CollisionShape2D" parent="HitBox2"]
 position = Vector2(16, 3)

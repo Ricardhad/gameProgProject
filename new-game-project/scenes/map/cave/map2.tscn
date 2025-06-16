@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://dwgdqkxthac43"]
 
-[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_a178l"]
+[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_a178l"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_mtw8c"]
 [ext_resource type="Texture2D" uid="uid://c1q21cdushp0e" path="res://assets/stage/cave/bg/2.png" id="3_o4l28"]
 [ext_resource type="Texture2D" uid="uid://caqjjb07gax18" path="res://assets/stage/cave/bg/3.png" id="4_uje1f"]
@@ -19,14 +19,30 @@
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
 
-var knight_scene = preload(\"res://scenes/player/player.tscn\")
+# --- TAMBAHKAN REFERENSI INI DI ATAS ---
+# Mendapatkan referensi ke node Hud dan Stage (TileMap)
+# Pastikan nama node ini sama persis dengan yang ada di scene tree Anda
+@onready var hud = $Hud
+@onready var stage_tilemap = $Stage
+# --------------------------------------
 
+var knight_scene = preload(\"res://scenes/player/player.tscn\")
 var current_player = knight_scene
 
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_cave()
+	
+	# --- TAMBAHKAN INI UNTUK MENGGAMBAR PETA DI MINIMAP ---
+	# Sebelum spawn player, kita perintahkan HUD untuk menyiapkan peta
+	if hud and stage_tilemap:
+		hud.setup_minimap(stage_tilemap)
+	else:
+		print(\"ERROR: Node 'Hud' atau 'Stage' tidak ditemukan di game.gd!\")
+	# ----------------------------------------------------
+	
 	spawn_character(current_player)
-
+	
 func remove_existing_players():
 	for child in get_children():
 		print(child)
@@ -40,6 +56,14 @@ func spawn_character(character_scene: PackedScene):
 	current_player = player
 	add_child(player)
 	player.add_to_group(\"player\")
+	
+	# --- TAMBAHKAN INI UNTUK MENGHUBUNGKAN PLAYER KE HUD ---
+	# Tepat setelah player di-add_child, kita kirim referensinya ke HUD
+	if hud:
+		hud.set_player_node(player)
+	else:
+		print(\"ERROR: Node 'Hud' tidak ditemukan saat mencoba set_player_node!\")
+	# ---------------------------------------------------
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mr02a"]

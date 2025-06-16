@@ -1,18 +1,18 @@
-[gd_scene load_steps=17 format=3 uid="uid://cic1b8vump1wj"]
+[gd_scene load_steps=17 format=3 uid="uid://d2xhet86atwwh"]
 
-[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_tll7t"]
-[ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_6pjcl"]
-[ext_resource type="Texture2D" uid="uid://c1q21cdushp0e" path="res://assets/stage/cave/bg/2.png" id="3_a4svr"]
-[ext_resource type="Texture2D" uid="uid://caqjjb07gax18" path="res://assets/stage/cave/bg/3.png" id="4_v635u"]
-[ext_resource type="Texture2D" uid="uid://bdt7llgoccret" path="res://assets/stage/cave/bg/4.png" id="5_trdv3"]
-[ext_resource type="Texture2D" uid="uid://tbj4gvnd80vo" path="res://assets/stage/cave/bg/5.png" id="6_w6s4s"]
-[ext_resource type="Texture2D" uid="uid://l7m7swpkuckk" path="res://assets/stage/cave/bg/6.png" id="7_mobfo"]
-[ext_resource type="Texture2D" uid="uid://cmag306b3hupv" path="res://assets/stage/cave/bg/7.png" id="8_0r64r"]
-[ext_resource type="Texture2D" uid="uid://cetptf6cbe02y" path="res://assets/stage/cave/bg/8.png" id="9_y17bc"]
-[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_2t47m"]
-[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_ha4n8"]
-[ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_fgvwg"]
-[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_0fcyc"]
+[ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/Tileset.png" id="1_5143h"]
+[ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_bqyoo"]
+[ext_resource type="Texture2D" uid="uid://c1q21cdushp0e" path="res://assets/stage/cave/bg/2.png" id="3_oy5nc"]
+[ext_resource type="Texture2D" uid="uid://caqjjb07gax18" path="res://assets/stage/cave/bg/3.png" id="4_b01cl"]
+[ext_resource type="Texture2D" uid="uid://bdt7llgoccret" path="res://assets/stage/cave/bg/4.png" id="5_rn00m"]
+[ext_resource type="Texture2D" uid="uid://tbj4gvnd80vo" path="res://assets/stage/cave/bg/5.png" id="6_35pcg"]
+[ext_resource type="Texture2D" uid="uid://l7m7swpkuckk" path="res://assets/stage/cave/bg/6.png" id="7_xlfdu"]
+[ext_resource type="Texture2D" uid="uid://cmag306b3hupv" path="res://assets/stage/cave/bg/7.png" id="8_6shb5"]
+[ext_resource type="Texture2D" uid="uid://cetptf6cbe02y" path="res://assets/stage/cave/bg/8.png" id="9_ayi3f"]
+[ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_eqs52"]
+[ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_l5ejl"]
+[ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_vp3m1"]
+[ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_3dydv"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -29,7 +29,7 @@ var current_player = knight_scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Bgm.play_music_cave()
+	Bgm.play_music_caveboss()
 	
 	# --- TAMBAHKAN INI UNTUK MENGGAMBAR PETA DI MINIMAP ---
 	# Sebelum spawn player, kita perintahkan HUD untuk menyiapkan peta
@@ -65,7 +65,7 @@ func spawn_character(character_scene: PackedScene):
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hmpr6"]
-texture = ExtResource("1_tll7t")
+texture = ExtResource("1_5143h")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -840,7 +840,7 @@ motion_mirroring = Vector2(576, 324)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2(288, 162)
-texture = ExtResource("2_6pjcl")
+texture = ExtResource("2_bqyoo")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -849,7 +849,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 position = Vector2(288, 162)
-texture = ExtResource("3_a4svr")
+texture = ExtResource("3_oy5nc")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -858,7 +858,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 position = Vector2(288, 162)
-texture = ExtResource("4_v635u")
+texture = ExtResource("4_b01cl")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -867,7 +867,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 position = Vector2(288, 162)
-texture = ExtResource("5_trdv3")
+texture = ExtResource("5_rn00m")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -876,7 +876,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 position = Vector2(288, 162)
-texture = ExtResource("6_w6s4s")
+texture = ExtResource("6_35pcg")
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -885,7 +885,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
 position = Vector2(288, 162)
-texture = ExtResource("7_mobfo")
+texture = ExtResource("7_xlfdu")
 
 [node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -894,7 +894,7 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
 position = Vector2(288, 162)
-texture = ExtResource("8_0r64r")
+texture = ExtResource("8_6shb5")
 
 [node name="ParallaxLayer8" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0)
@@ -903,16 +903,16 @@ motion_mirroring = Vector2(576, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer8"]
 position = Vector2(288, 162)
-texture = ExtResource("9_y17bc")
+texture = ExtResource("9_ayi3f")
 
-[node name="Hud" parent="." instance=ExtResource("10_2t47m")]
+[node name="Hud" parent="." instance=ExtResource("10_eqs52")]
 position = Vector2(288, 448)
 
-[node name="FinishPoint" parent="." instance=ExtResource("11_ha4n8")]
+[node name="FinishPoint" parent="." instance=ExtResource("11_l5ejl")]
 modulate = Color(3, 0, 0, 1)
 position = Vector2(2388, 222)
-target_scene = ExtResource("12_fgvwg")
+target_scene = ExtResource("12_vp3m1")
 next_scene = "3-1"
 
-[node name="PauseMenu" parent="." instance=ExtResource("13_0fcyc")]
+[node name="PauseMenu" parent="." instance=ExtResource("13_3dydv")]
 position = Vector2(280, 434)
