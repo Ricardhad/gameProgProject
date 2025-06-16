@@ -618,3 +618,14 @@ theme_override_font_sizes/font_size = 40
 text = "Buy
 "
 horizontal_alignment = 1
+
+[node name="LabelMessage" type="Label" parent="CanvasLayer/PanelSmith"]
+offset_left = 112.0
+offset_top = 371.0
+offset_right = 672.0
+offset_bottom = 444.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "Buy
+"
