@@ -110,7 +110,7 @@ func _on_health_changed(diff: int):
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			var dir = sign(global_position.x - player.global_position.x)
-			knockback_velocity = Vector2(KNOCKBACK_FORCE * dir, -100)
+			knockback_velocity = Vector2(KNOCKBACK_FORCE * dir, 0)
 # Add this function to your main enemy script (satyr1.gd)
 
 func retreat_from(target_position: Vector2):

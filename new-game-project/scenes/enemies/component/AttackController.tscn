@@ -20,7 +20,7 @@ collision_mask = 4
 position = Vector2(21, -15)
 shape = SubResource("RectangleShape2D_ww13n")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." groups=["damage_sources"]]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("2_5m2lt")

@@ -299,7 +299,7 @@ script = ExtResource("7_5ssos")
 position = Vector2(-0.499993, -19.5)
 shape = SubResource("RectangleShape2D_qcy7w")
 
-[node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") groups=["damage_sources"] instance=ExtResource("8_sp2jt")]
+[node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("8_sp2jt")]
 unique_name_in_owner = true
 projectile_scene = ExtResource("9_j17b5")
 projectile_spawn_point = NodePath("ProjectileSpawn")
@@ -307,12 +307,10 @@ projectile_spawn_point = NodePath("ProjectileSpawn")
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(30, -15)
 
-[node name="HitBox" parent="AttackController" index="1" groups=["damage_sources"]]
-
 [node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
 position = Vector2(30, -24)
 
-[node name="ProjectileSpawn" type="Marker2D" parent="AttackController" groups=["damage_sources"]]
+[node name="ProjectileSpawn" type="Marker2D" parent="AttackController"]
 position = Vector2(0, -32)
 
 [node name="Health" type="Node" parent="."]
