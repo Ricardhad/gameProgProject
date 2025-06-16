@@ -412,6 +412,8 @@ coin_scene = ExtResource("15_ri7ge")
 
 [node name="StateMachine" parent="." instance=ExtResource("16_udf07")]
 unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
 
 [node name="Senses" parent="." instance=ExtResource("16_qma6u")]
 unique_name_in_owner = true

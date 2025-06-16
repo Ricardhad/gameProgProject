@@ -301,6 +301,7 @@ shape = SubResource("RectangleShape2D_qcy7w")
 
 [node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("8_sp2jt")]
 unique_name_in_owner = true
+available_attacks = Array[String](["shoot"])
 projectile_scene = ExtResource("9_j17b5")
 projectile_spawn_point = NodePath("ProjectileSpawn")
 
@@ -337,6 +338,9 @@ visible = false
 
 [node name="StateMachine" parent="." instance=ExtResource("15_vro1u")]
 unique_name_in_owner = true
+enemy_behavior = 0
+RETREAT_DURATION = 2.0
+CHASE_DURATION = 2.0
 
 [editable path="AttackController"]
 [editable path="HurtBox"]

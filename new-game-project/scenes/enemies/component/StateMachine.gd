@@ -4,7 +4,9 @@ extends Node
 
 enum State { IDLE, PATROL, CHASE, PREPARE_ATTACK, ATTACK, COOLDOWN, RETREAT, HURT, DEAD }
 signal state_changed(new_state: State, previous_state: State)
+enum Behavior { KITER, BRAWLER, HYBRID }
 
+@export var enemy_behavior = Behavior.HYBRID
 # --- State Variables ---
 var current_state: State = State.IDLE
 var player_target: Node2D = null
@@ -14,12 +16,13 @@ var can_make_attack_decision: bool = true
 # --- Constants & Timers ---
 const PREPARE_DURATION = 0.5
 const ATTACK_COOLDOWN_DURATION = 0.4
-const RETREAT_DURATION = 0.8 # Increased duration for more effective retreat
+@export var RETREAT_DURATION = 0.8 # Increased duration for more effective retreat
 const DECISION_DELAY_DURATION = 0.2
-const CHASE_DURATION = 5.0
+@export var CHASE_DURATION = 5.0
 const CHASE_LOSE_COOLDOWN = 5.0
 const TURN_COOLDOWN_PATROL = 0.5
-const SHOOTING_RANGE = 60.0
+@export var SHOOTING_RANGE = 80.0
+@export var MINIMUM_SHOOTING_RANGE = 50.0
 
 var prepare_attack_timer = 0.0
 var chase_timer = 0.0
@@ -61,22 +64,67 @@ func _process(delta: float) -> void:
 				parent_character.turn_around()
 				turn_timer = TURN_COOLDOWN_PATROL
 				
+# In StateMachine.gd, replace the old CHASE block
+# In StateMachine.gd
+
+# Replace your ENTIRE "State.CHASE" block with this one
 		State.CHASE:
 			if not is_instance_valid(player_target):
 				change_state(State.PATROL); return
 			
-			parent_character.set_movement_speed(parent_character.CHASE_SPEED)
-			parent_character.move_towards(player_target.global_position)
+			var distance_to_player = player_target.global_position.distance_to(parent_character.global_position)
 			
+			# --- Decision-making logic block ---
 			if attack_controller.is_ready_to_attack() and can_make_attack_decision:
-				var distance_to_player = player_target.global_position.distance_to(parent_character.global_position)
 				
-				if attack_controller.can_perform_attack("shoot") and distance_to_player > SHOOTING_RANGE:
-					_prepare_to_attack("shoot")
-				
-			# 2. Check for melee capability AND if the player is in melee range
-				elif attack_controller.can_perform_attack("attack") and player_detect.overlaps_body(player_target):
-					_prepare_to_attack("attack")
+				# These booleans make the logic below much cleaner
+				var can_shoot = attack_controller.can_perform_attack("shoot")
+				var can_melee = attack_controller.can_perform_attack("attack")
+
+				# Use a match statement for clean, readable behavior control
+				match enemy_behavior:
+					"brawler":
+						# Brawlers want to melee. They only shoot if they can't melee yet.
+						if can_melee and player_detect.overlaps_body(player_target):
+							_prepare_to_attack("attack")
+						elif can_shoot and distance_to_player < SHOOTING_RANGE:
+							_prepare_to_attack("shoot")
+					
+					"kiter":
+						# Kiters want to shoot. They only melee if cornered and it's their only option.
+						# They will retreat if they can to get back into shooting range.
+						if can_shoot and distance_to_player < MINIMUM_SHOOTING_RANGE:
+							change_state(State.RETREAT)
+						elif can_melee and distance_to_player < MINIMUM_SHOOTING_RANGE:
+							_prepare_to_attack("attack") # Cornered! No choice but to melee.
+						elif can_shoot and distance_to_player < SHOOTING_RANGE:
+							_prepare_to_attack("shoot")
+
+					# The "hybrid" behavior can be an alias for "kiter", or you can give it unique logic.
+					# Using a comma lets both strings use the same logic block.
+					"hybrid":
+						# We'll make the default Hybrid act like a Kiter.
+						if can_shoot and distance_to_player < MINIMUM_SHOOTING_RANGE:
+							change_state(State.RETREAT)
+						elif can_melee and distance_to_player < MINIMUM_SHOOTING_RANGE:
+							_prepare_to_attack("attack")
+						elif can_shoot and distance_to_player < SHOOTING_RANGE:
+							_prepare_to_attack("shoot")
+
+					_: # Default case if the string is misspelled or empty
+						print("Enemy behavior not recognized! Defaulting to kiter logic.")
+						# Defaulting to kiter logic as it's the most versatile
+						if can_shoot and distance_to_player < MINIMUM_SHOOTING_RANGE:
+							change_state(State.RETREAT)
+						elif can_melee and distance_to_player < MINIMUM_SHOOTING_RANGE:
+							_prepare_to_attack("attack")
+						elif can_shoot and distance_to_player < SHOOTING_RANGE:
+							_prepare_to_attack("shoot")
+
+			# If no attack decision was made, continue chasing the player.
+			if current_state == State.CHASE:
+				parent_character.set_movement_speed(parent_character.CHASE_SPEED)
+				parent_character.move_towards(player_target.global_position)
 
 		State.PREPARE_ATTACK:
 			parent_character.stop_movement()
