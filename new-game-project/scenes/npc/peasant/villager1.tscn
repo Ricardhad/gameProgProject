@@ -620,6 +620,7 @@ text = "Buy
 horizontal_alignment = 1
 
 [node name="LabelMessage" type="Label" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
 offset_left = 112.0
 offset_top = 371.0
 offset_right = 672.0

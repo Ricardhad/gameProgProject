@@ -259,6 +259,7 @@ text = "0
 horizontal_alignment = 1
 
 [node name="TextureRectCard2" type="TextureRect" parent="CanvasLayer/PanelPause/LabelItems"]
+layout_mode = 0
 offset_left = 176.0
 offset_top = 44.0
 offset_right = 252.0
@@ -287,6 +288,7 @@ text = "0
 horizontal_alignment = 1
 
 [node name="TextureRectCard3" type="TextureRect" parent="CanvasLayer/PanelPause/LabelItems"]
+layout_mode = 0
 offset_left = 256.0
 offset_top = 43.0
 offset_right = 332.0
@@ -315,6 +317,7 @@ text = "0
 horizontal_alignment = 1
 
 [node name="TextureRectCard4" type="TextureRect" parent="CanvasLayer/PanelPause/LabelItems"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 45.0
 offset_right = 92.0
@@ -343,6 +346,7 @@ text = "0
 horizontal_alignment = 1
 
 [node name="TextureRectCard5" type="TextureRect" parent="CanvasLayer/PanelPause/LabelItems"]
+layout_mode = 0
 offset_left = 337.0
 offset_top = 42.0
 offset_right = 413.0
