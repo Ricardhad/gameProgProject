@@ -1159,16 +1159,15 @@ position = Vector2(-268, -80)
 [node name="FinishPoint" parent="." instance=ExtResource("3_cbkg6")]
 position = Vector2(1012, 238)
 target_scene = ExtResource("4_hqbgf")
-next_scene = "OutOFTavern"
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_wjocj")]
 position = Vector2(-268, -80)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("7_6u4ep")]
-position = Vector2(564, 305)
+position = Vector2(585, 305)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("6_au6i5")]
-position = Vector2(453, 304)
+position = Vector2(453, 305)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("8_sp1lq")]
-position = Vector2(339, 317)
+position = Vector2(317, 305)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ct0e7vwo1w3kc"]
+[gd_scene load_steps=19 format=3 uid="uid://ct0e7vwo1w3kc"]
 
 [ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_bjo4n"]
 [ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_60res"]
@@ -62,6 +62,9 @@ func spawn_character(character_scene: PackedScene):
 		print(\"ERROR: Node 'Hud' tidak ditemukan saat mencoba set_player_node!\")
 	# ---------------------------------------------------
 "
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_qbpdy"]
+tile_data = PackedInt32Array(0, 131073, 2, 65536, 131073, 3, 1, 196609, 2, 65537, 196609, 3)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y7dm4"]
 texture = ExtResource("1_bjo4n")
@@ -292,6 +295,7 @@ texture = ExtResource("1_bjo4n")
 
 [sub_resource type="TileSet" id="TileSet_3nju0"]
 sources/1 = SubResource("TileSetAtlasSource_y7dm4")
+pattern_0 = SubResource("TileMapPattern_qbpdy")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7kb6b"]
 texture = ExtResource("1_bjo4n")
@@ -1057,6 +1061,7 @@ script = SubResource("GDScript_lgw5x")
 [node name="BG" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3nju0")
 format = 2
+layer_0/tile_data = PackedInt32Array(-2293712, 131073, 2, -2228176, 131073, 3, -2293711, 196609, 2, -2228175, 196609, 3)
 
 [node name="Stage" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_781w1")
@@ -1114,7 +1119,7 @@ texture = ExtResource("6_wnfbc")
 position = Vector2(-268, -80)
 
 [node name="FinishPoint" parent="." instance=ExtResource("8_xjsel")]
-position = Vector2(77, -191)
+position = Vector2(94, -192)
 target_scene = ExtResource("9_x6bu6")
 next_scene = "2-2"
 

@@ -145,47 +145,48 @@ func acquire_temporary_buff(buff_id: String):
 func process_end_of_stage():
 	print("Memproses akhir stage, mengurangi durasi buff...")
 	
-	# Proses Buff HP
-	if hp_buff_duration > 0:
-		hp_buff_duration -= 1
-		if hp_buff_duration == 0:
-			maxhealth_player -= 10
-			health_player = min(health_player, maxhealth_player)
-			print("Buff HP SEMENTARA telah habis.")
-			
-	# Proses Buff ATK
-	if atk_buff_duration > 0:
-		atk_buff_duration -= 1
-		if atk_buff_duration == 0:
-			damage_player -= 2
-			print("Buff ATK SEMENTARA telah habis.")
-			
-	# Proses Buff DEF
-	if def_buff_duration > 0:
-		def_buff_duration -= 1
-		if def_buff_duration == 0:
-			print("Buff DEF SEMENTARA telah habis.")
+	if current_stage != "1-1" and current_stage != "2-1" and current_stage != "3-1" and current_stage != "4-1":
+		# Proses Buff HP
+		if hp_buff_duration > 0:
+			hp_buff_duration -= 1
+			if hp_buff_duration == 0:
+				maxhealth_player -= 10
+				health_player = min(health_player, maxhealth_player)
+				print("Buff HP SEMENTARA telah habis.")
+				
+		# Proses Buff ATK
+		if atk_buff_duration > 0:
+			atk_buff_duration -= 1
+			if atk_buff_duration == 0:
+				damage_player -= 2
+				print("Buff ATK SEMENTARA telah habis.")
+				
+		# Proses Buff DEF
+		if def_buff_duration > 0:
+			def_buff_duration -= 1
+			if def_buff_duration == 0:
+				print("Buff DEF SEMENTARA telah habis.")
 
-	# Proses Buff AGI
-	if agi_buff_duration > 0:
-		agi_buff_duration -= 1
-		if agi_buff_duration == 0:
-			print("Buff AGI SEMENTARA telah habis.")
-			
-	# Proses Buff LUCK
-	if luck_buff_duration > 0:
-		luck_buff_duration -= 1
-		if luck_buff_duration == 0:
-			print("Buff LUCK SEMENTARA telah habis.")
+		# Proses Buff AGI
+		if agi_buff_duration > 0:
+			agi_buff_duration -= 1
+			if agi_buff_duration == 0:
+				print("Buff AGI SEMENTARA telah habis.")
+				
+		# Proses Buff LUCK
+		if luck_buff_duration > 0:
+			luck_buff_duration -= 1
+			if luck_buff_duration == 0:
+				print("Buff LUCK SEMENTARA telah habis.")
 
-	# Proses Buff POTION
-	if potion_buff_duration > 0:
-		potion_buff_duration -= 1
-		if potion_buff_duration == 0:
-			print("Buff POTION SEMENTARA telah habis.")
+		# Proses Buff POTION
+		if potion_buff_duration > 0:
+			potion_buff_duration -= 1
+			if potion_buff_duration == 0:
+				print("Buff POTION SEMENTARA telah habis.")
 
-	# Proses Buff COIN
-	if coin_buff_duration > 0:
-		coin_buff_duration -= 1
-		if coin_buff_duration == 0:
-			print("Buff COIN SEMENTARA telah habis.")
+		# Proses Buff COIN
+		if coin_buff_duration > 0:
+			coin_buff_duration -= 1
+			if coin_buff_duration == 0:
+				print("Buff COIN SEMENTARA telah habis.")
