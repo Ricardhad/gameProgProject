@@ -1,12 +1,14 @@
-[gd_scene load_steps=53 format=3 uid="uid://c1g1vmycj3c21"]
+[gd_scene load_steps=56 format=3 uid="uid://c1g1vmycj3c21"]
 
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_8tbya"]
 [ext_resource type="Texture2D" uid="uid://d0nwoxs688xkv" path="res://assets/enemies/forest/skeleton/Skeleton_Archer/Shot_1.png" id="1_70ah4"]
 [ext_resource type="Texture2D" uid="uid://cmsc6eqlfumgk" path="res://assets/enemies/forest/skeleton/Skeleton_Archer/Dead.png" id="2_rc8y7"]
 [ext_resource type="Texture2D" uid="uid://duroxf4me3caq" path="res://assets/enemies/forest/skeleton/Skeleton_Archer/Hurt.png" id="3_306iu"]
 [ext_resource type="Texture2D" uid="uid://b63411ovnc18v" path="res://assets/enemies/forest/skeleton/Skeleton_Archer/Idle.png" id="4_bm2nh"]
 [ext_resource type="Texture2D" uid="uid://0g1c1ysex1v6" path="res://assets/enemies/forest/skeleton/Skeleton_Archer/Walk.png" id="5_j00c1"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="6_mt45q"]
-[ext_resource type="PackedScene" uid="uid://bler7fp0e70ao" path="res://scenes/enemies/component/enemy_projectile/dynamic_projectile.tscn" id="7_y6pfn"]
+[ext_resource type="Script" path="res://scenes/enemies/component/no_run_enemy_animation_controller.gd" id="7_5vawc"]
+[ext_resource type="PackedScene" uid="uid://bg0drwcj624vn" path="res://scenes/enemies/component/enemy_projectile/skeleton_projectile.tscn" id="7_wawse"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="8_mxw2u"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="9_1gayn"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="10_iw2ni"]
@@ -302,8 +304,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbcud"]
+size = Vector2(17, 46)
+
+[node name="skeleton_archer" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_8tbya")
+SPEED = 30.0
+CHASE_SPEED = 30.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -312,15 +320,23 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"shoot"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("7_5vawc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -19)
+shape = SubResource("RectangleShape2D_lbcud")
 
 [node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("6_mt45q")]
 unique_name_in_owner = true
 available_attacks = Array[String](["shoot"])
-projectile_scene = ExtResource("7_y6pfn")
+projectile_scene = ExtResource("7_wawse")
 projectile_spawn_point = NodePath("ProjectileSpawn")
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(30, -15)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 4
 
 [node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
 position = Vector2(30, -24)
@@ -331,6 +347,7 @@ position = Vector2(0, -32)
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("8_mxw2u")
+max_health = 5
 
 [node name="MovementChecker" parent="." instance=ExtResource("9_1gayn")]
 unique_name_in_owner = true
@@ -338,7 +355,7 @@ unique_name_in_owner = true
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("10_iw2ni")]
 collision_layer = 0
 collision_mask = 2
-health = NodePath("")
+health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(-0.5, -19)
@@ -355,6 +372,8 @@ unique_name_in_owner = true
 enemy_behavior = 0
 RETREAT_DURATION = 2.0
 CHASE_DURATION = 2.0
+SHOOTING_RANGE = 130.0
+MINIMUM_SHOOTING_RANGE = 90.0
 
 [editable path="AttackController"]
 [editable path="HurtBox"]
