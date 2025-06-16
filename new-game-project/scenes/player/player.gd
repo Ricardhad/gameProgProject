@@ -15,9 +15,8 @@ const HANG_GRACE_TIME = 0.2
 var respawn_position = Vector2(150, 150)
 
 var is_attacking = false
-var is_guarding = false
 var current_attack_index = 0
-var attack_animations = ["attack", "attack1", "attack2"]
+var attack_animations = ["attack", "attack1"]
 var air_attack_animation = "air_attack"
 
 
@@ -29,15 +28,15 @@ var dash_time = 0.0
 var max_jumps = 2
 var jump_count = 0
 
-@onready var attack_area_1: CollisionShape2D = $HitBox/Attack12
-@onready var attack_area_2: CollisionShape2D = $HitBox/Attack3
+@onready var attack_area_1: CollisionShape2D = $HitBox/Attack
+@onready var attack_area_2: CollisionShape2D = $HitBox2/Attack
 var original_attack_offset_x = 0.0
 var original_attack2_offset_x = 0.0
 
 @onready var health: Health = $Health
-
-
 @onready var hud = get_node("/root/game/Hud")
+
+var is_heavy_attacking = false
 
 func _ready():
 	original_attack_offset_x = attack_area_1.position.x
@@ -81,7 +80,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		hang_grace_timer -= delta
 
-	if not is_on_floor() and not is_attacking and not is_guarding and not is_dashing:
+	if not is_on_floor() and not is_attacking and not is_dashing:
 		if not is_hanging:
 			if can_hang():
 				is_hanging = true
@@ -112,7 +111,7 @@ func _physics_process(delta: float) -> void:
 		hud.dash_button_pressed = false # Reset penanda
 	# ----------------------------------------------
 
-	if dash_intent and not is_attacking and not is_guarding and dash_cooldown_timer <= 0:
+	if dash_intent and not is_attacking and dash_cooldown_timer <= 0:
 		var direction = Input.get_axis("left", "right")
 		if direction == 0:
 			direction = -1 if animated_sprite_2d.flip_h else 1
@@ -127,42 +126,34 @@ func _physics_process(delta: float) -> void:
 		global_position = respawn_position
 		velocity = Vector2.ZERO
 		is_attacking = false
-		is_guarding = false
 		current_attack_index = 0
 		animated_sprite_2d.animation = "idle"
 		return
-		
-	if Input.is_action_pressed("guard") and not is_attacking:
-		if not is_guarding:
-			is_guarding = true
-			animated_sprite_2d.animation = "guard"
-			animated_sprite_2d.frame = 0
-		velocity.x = 0
-		if not is_on_floor():
-			velocity += get_gravity() * delta
-		move_and_slide()
-		return
-	elif is_guarding:
-		is_guarding = false
 
-	if Input.is_action_just_pressed("attack") and not is_attacking and not is_guarding:
+	if Input.is_action_just_pressed("attack") and not is_attacking:
 		if is_on_floor():
 			perform_ground_attack()
 		else:
 			perform_air_attack()
 		return
+	
+	if Input.is_action_just_pressed("heavy_attack") and not is_attacking and not is_heavy_attacking:
+		perform_heavy_attack()
+		return
 
-	if is_attacking:
+	# Attack state handling
+	if is_attacking or is_heavy_attacking:
 		var current_anim = animated_sprite_2d.animation
 		var is_last_frame = animated_sprite_2d.frame == animated_sprite_2d.sprite_frames.get_frame_count(current_anim) - 1
 		
 		if is_last_frame:
 			is_attacking = false
+			is_heavy_attacking = false
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
 			attack_area_1.disabled = true
 			attack_area_2.disabled = true
 			if hud:
-				hud.set_attack_button_pressed(false)  # Reset tombol attack setelah selesai
+				hud.set_attack_button_pressed(false)
 		else:
 			if not is_on_floor():
 				velocity.x *= 0.95
@@ -208,7 +199,7 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 
-	if not is_attacking and not is_guarding:
+	if not is_attacking:
 		if not is_on_floor():
 			animated_sprite_2d.animation = "jump"
 		elif abs(velocity.x) > 1:
@@ -219,6 +210,17 @@ func _physics_process(delta: float) -> void:
 func update_attack_hitboxes(current_anim: String):
 	attack_area_1.disabled = not (current_anim == "attack" or current_anim == "attack1")
 	attack_area_2.disabled = current_anim != "attack2"
+
+func perform_heavy_attack():
+	animated_sprite_2d.animation = "attack2"
+	animated_sprite_2d.frame = 0
+	is_heavy_attacking = true
+	attack_area_2.disabled = false  # Enable the attack3 collision shape
+	attack_area_1.disabled = true   # Disable other attack shapes
+	attack_sound.play()
+	
+	if hud:
+		hud.set_attack_button_pressed(true)
 
 func perform_ground_attack():
 	var current_attack_animation = attack_animations[current_attack_index]
