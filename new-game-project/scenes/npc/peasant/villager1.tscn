@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://1ek76qkgonj2"]
+[gd_scene load_steps=51 format=3 uid="uid://1ek76qkgonj2"]
 
 [ext_resource type="Script" path="res://scenes/npc/peasant/villager_1.gd" id="1_7ls4i"]
 [ext_resource type="Texture2D" uid="uid://bipdxjuwamnum" path="res://assets/npc/villagers/Peasants_1/Dialogue.png" id="2_gh5ny"]
@@ -9,6 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://cpr8fh38ctns5" path="res://assets/selecting_menu/buttonClicked.png" id="7_y1h5o"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="8_dcdwr"]
 [ext_resource type="Texture2D" uid="uid://c10iv5slqi1fu" path="res://assets/selecting_menu/TextBox.png" id="9_3jsor"]
+[ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="10_ki3fk"]
+[ext_resource type="Texture2D" uid="uid://cxqc00nr1jkj" path="res://assets/main_menu/Icon_Coin.png" id="11_0b88s"]
+[ext_resource type="Texture2D" uid="uid://d3jneibdoktxq" path="res://assets/selecting_menu/menubox.png" id="12_lupxo"]
+[ext_resource type="Texture2D" uid="uid://bmc5wgdxqwokk" path="res://assets/item&buff/buff/HP.png" id="13_7ttuu"]
+[ext_resource type="Texture2D" uid="uid://bhg7a0aostjwt" path="res://assets/option_menu/UnClickedButton2.png" id="14_j3012"]
+[ext_resource type="Texture2D" uid="uid://bm7ut44gues5a" path="res://assets/option_menu/button_clicked_menu.png" id="15_icuon"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lhjwd"]
 atlas = ExtResource("2_gh5ny")
@@ -247,6 +253,9 @@ size = Vector2(63, 43)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1osah"]
 texture = ExtResource("9_3jsor")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i2vpa"]
+texture = ExtResource("10_ki3fk")
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_7ls4i")
@@ -269,7 +278,7 @@ collision_mask = 5
 position = Vector2(0.5, -22)
 shape = SubResource("RectangleShape2D_cljqm")
 
-[node name="ButtonATK" type="TextureButton" parent="."]
+[node name="ButtonChat" type="TextureButton" parent="."]
 offset_left = 15.0
 offset_top = -40.0
 offset_right = 32.0
@@ -281,7 +290,7 @@ texture_pressed = ExtResource("6_76qwl")
 texture_hover = ExtResource("7_y1h5o")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="ButtonATK"]
+[node name="Label" type="Label" parent="ButtonChat"]
 layout_mode = 2
 offset_left = -1.0
 offset_top = 1.0
@@ -294,7 +303,6 @@ text = "F"
 horizontal_alignment = 1
 
 [node name="PanelChatNPC" type="Panel" parent="."]
-visible = false
 anchors_preset = -1
 anchor_left = -0.781
 anchor_top = -0.485
@@ -319,3 +327,285 @@ theme_override_fonts/font = ExtResource("8_dcdwr")
 theme_override_font_sizes/font_size = 80
 text = "Passive: Immune to Bleed"
 autowrap_mode = 2
+
+[node name="ButtonUpgrade" type="TextureButton" parent="PanelChatNPC"]
+offset_left = 5.0
+offset_top = 18.0
+offset_right = 19.0
+offset_bottom = 32.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_7jiwd")
+texture_pressed = ExtResource("6_76qwl")
+stretch_mode = 0
+
+[node name="LabelUpgrade" type="Label" parent="PanelChatNPC/ButtonUpgrade"]
+layout_mode = 2
+offset_left = -3.0
+offset_top = -1.0
+offset_right = 67.0
+offset_bottom = 44.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "U"
+horizontal_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelSmith" type="Panel" parent="CanvasLayer"]
+offset_left = 170.0
+offset_top = 53.0
+offset_right = 1059.0
+offset_bottom = 558.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_i2vpa")
+
+[node name="LabelShopCoin" type="Label" parent="CanvasLayer/PanelSmith"]
+offset_left = 145.0
+offset_top = 89.0
+offset_right = 230.0
+offset_bottom = 134.0
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "0
+"
+
+[node name="Coin" type="Sprite2D" parent="CanvasLayer/PanelSmith/LabelShopCoin"]
+position = Vector2(-18, 24)
+scale = Vector2(5.20571, 5.56316)
+texture = ExtResource("11_0b88s")
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonCard1" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 157.0
+offset_top = 160.0
+offset_right = 336.0
+offset_bottom = 374.0
+size_flags_vertical = 3
+texture_normal = ExtResource("12_lupxo")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="CanvasLayer/PanelSmith/ButtonCard1"]
+layout_mode = 2
+offset_left = 28.0
+offset_top = 157.0
+offset_right = 168.0
+offset_bottom = 202.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelSmith/ButtonCard1"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 49.0
+offset_right = 143.0
+offset_bottom = 155.0
+texture = ExtResource("13_7ttuu")
+
+[node name="Coin" type="Sprite2D" parent="CanvasLayer/PanelSmith/ButtonCard1"]
+position = Vector2(118, 29)
+scale = Vector2(3.84, 3.793)
+texture = ExtResource("11_0b88s")
+
+[node name="LabelCoin" type="Label" parent="CanvasLayer/PanelSmith/ButtonCard1"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 13.0
+offset_right = 177.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "25"
+
+[node name="ButtonCard2" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 357.0
+offset_top = 160.0
+offset_right = 536.0
+offset_bottom = 374.0
+size_flags_vertical = 3
+texture_normal = ExtResource("12_lupxo")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="CanvasLayer/PanelSmith/ButtonCard2"]
+layout_mode = 2
+offset_left = 30.0
+offset_top = 155.0
+offset_right = 170.0
+offset_bottom = 200.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelSmith/ButtonCard2"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 49.0
+offset_right = 143.0
+offset_bottom = 155.0
+texture = ExtResource("13_7ttuu")
+
+[node name="Coin" type="Sprite2D" parent="CanvasLayer/PanelSmith/ButtonCard2"]
+position = Vector2(118, 29)
+scale = Vector2(3.84, 3.793)
+texture = ExtResource("11_0b88s")
+
+[node name="LabelCoin" type="Label" parent="CanvasLayer/PanelSmith/ButtonCard2"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 13.0
+offset_right = 177.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "25"
+
+[node name="ButtonCard3" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 553.0
+offset_top = 160.0
+offset_right = 732.0
+offset_bottom = 374.0
+size_flags_vertical = 3
+texture_normal = ExtResource("12_lupxo")
+stretch_mode = 0
+
+[node name="LabelDetail" type="Label" parent="CanvasLayer/PanelSmith/ButtonCard3"]
+layout_mode = 2
+offset_left = 28.0
+offset_top = 157.0
+offset_right = 168.0
+offset_bottom = 202.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "HP +10"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelSmith/ButtonCard3"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 49.0
+offset_right = 143.0
+offset_bottom = 155.0
+texture = ExtResource("13_7ttuu")
+
+[node name="Coin" type="Sprite2D" parent="CanvasLayer/PanelSmith/ButtonCard3"]
+position = Vector2(118, 29)
+scale = Vector2(3.84, 3.793)
+texture = ExtResource("11_0b88s")
+
+[node name="LabelCoin" type="Label" parent="CanvasLayer/PanelSmith/ButtonCard3"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 13.0
+offset_right = 177.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "25"
+
+[node name="ButtonRight" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 467.0
+offset_top = 94.0
+offset_right = 521.0
+offset_bottom = 152.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_7jiwd")
+texture_pressed = ExtResource("6_76qwl")
+texture_hover = ExtResource("7_y1h5o")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelSmith/ButtonRight"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 19.0
+offset_right = 103.0
+offset_bottom = 64.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "Right
+"
+horizontal_alignment = 1
+
+[node name="ButtonLeft" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 381.0
+offset_top = 98.0
+offset_right = 435.0
+offset_bottom = 156.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_7jiwd")
+texture_pressed = ExtResource("6_76qwl")
+texture_hover = ExtResource("7_y1h5o")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelSmith/ButtonLeft"]
+layout_mode = 2
+offset_left = 14.0
+offset_top = 17.0
+offset_right = 104.0
+offset_bottom = 62.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "Left
+"
+horizontal_alignment = 1
+
+[node name="ButtonBack" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 722.0
+offset_top = 100.0
+offset_right = 772.0
+offset_bottom = 152.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_7jiwd")
+texture_pressed = ExtResource("6_76qwl")
+texture_hover = ExtResource("7_y1h5o")
+stretch_mode = 0
+
+[node name="LabelBack" type="Label" parent="CanvasLayer/PanelSmith/ButtonBack"]
+layout_mode = 2
+offset_left = -7.0
+offset_top = 3.0
+offset_right = 78.0
+offset_bottom = 48.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "X"
+horizontal_alignment = 1
+
+[node name="ButtonUpgrade" type="TextureButton" parent="CanvasLayer/PanelSmith"]
+offset_left = 587.0
+offset_top = 374.0
+offset_right = 762.0
+offset_bottom = 426.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("14_j3012")
+texture_pressed = ExtResource("15_icuon")
+stretch_mode = 0
+
+[node name="LabelUpgrade" type="Label" parent="CanvasLayer/PanelSmith/ButtonUpgrade"]
+layout_mode = 2
+offset_left = -38.0
+offset_top = 1.0
+offset_right = 279.0
+offset_bottom = 101.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("8_dcdwr")
+theme_override_font_sizes/font_size = 40
+text = "Buy
+"
+horizontal_alignment = 1

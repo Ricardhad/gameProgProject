@@ -96,11 +96,12 @@ texture_progress = ExtResource("8_m4hna")
 texture_progress_offset = Vector2(1, 2)
 
 [node name="Label" type="Label" parent="CanvasLayer2/Panel/HealthBar"]
-offset_left = -0.333333
-offset_top = 1.33333
-offset_right = 119.667
-offset_bottom = 46.3333
-scale = Vector2(0.09, 0.09)
+top_level = true
+offset_left = 90.0
+offset_top = 3.0
+offset_right = 215.0
+offset_bottom = 48.0
+scale = Vector2(0.27, 0.27)
 theme_override_fonts/font = ExtResource("3_18l4s")
 theme_override_font_sizes/font_size = 40
 text = "100
