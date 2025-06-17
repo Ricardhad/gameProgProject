@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="14_6mmjq"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_ri7ge"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="16_qma6u"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="16_udf07"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="16_udf07"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52w2e"]
 atlas = ExtResource("5_ndp86")
@@ -403,9 +403,10 @@ script = ExtResource("3_v2gpr")
 [node name="MovementChecker" parent="." instance=ExtResource("4_4pr4l")]
 unique_name_in_owner = true
 
-[node name="HurtBox" parent="." instance=ExtResource("13_0kbtq")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_0kbtq")]
 collision_layer = 0
 collision_mask = 2
+health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("14_6mmjq")]
 coin_scene = ExtResource("15_ri7ge")

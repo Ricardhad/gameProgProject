@@ -1,6 +1,5 @@
-[gd_scene load_steps=78 format=3 uid="uid://vqxnhn2f0uel"]
+[gd_scene load_steps=68 format=3 uid="uid://vqxnhn2f0uel"]
 
-[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_jppv8"]
 [ext_resource type="Texture2D" uid="uid://dfv3bnj7kwfgk" path="res://assets/enemies/grass/orcChief/Attack_1.png" id="1_q8rha"]
 [ext_resource type="Texture2D" uid="uid://ypi84m530t6d" path="res://assets/enemies/grass/orcChief/Attack_2.png" id="2_aoijt"]
 [ext_resource type="Texture2D" uid="uid://de7iwmtydi6nn" path="res://assets/enemies/grass/orcChief/Dead.png" id="2_jh88j"]
@@ -10,15 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://spagb04q1bul" path="res://assets/enemies/grass/orcChief/Jump.png" id="5_5j4e7"]
 [ext_resource type="Texture2D" uid="uid://cr6ear5p67p4a" path="res://assets/enemies/grass/orcChief/Run.png" id="6_7mfhb"]
 [ext_resource type="Texture2D" uid="uid://dfd3byg0rivuf" path="res://assets/enemies/grass/orcChief/Walk.png" id="7_gqlbj"]
-[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_6n38m"]
-[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_hvqct"]
-[ext_resource type="Script" path="res://scenes/class/health.gd" id="13_gvrni"]
-[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_8o45w"]
-[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_7ly63"]
-[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_l5mrj"]
-[ext_resource type="PackedScene" uid="uid://bpvnyaxw60cg3" path="res://scenes/player/consumables/def.tscn" id="17_i0o8x"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="18_q4j2k"]
-[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_hr4d4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83xec"]
 atlas = ExtResource("1_q8rha")
@@ -107,6 +97,10 @@ region = Rect2(256, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8ffg"]
 atlas = ExtResource("4_ku3cn")
 region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu4j0"]
+atlas = ExtResource("4_ku3cn")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x6r4w"]
 atlas = ExtResource("4_ku3cn")
@@ -339,6 +333,9 @@ animations = [{
 "texture": SubResource("AtlasTexture_r8ffg")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_hu4j0")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_x6r4w")
 }, {
 "duration": 1.0,
@@ -460,71 +457,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlcw0"]
-size = Vector2(22, 45)
-
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("1_jppv8")
-SPEED = 30.0
-CHASE_SPEED = 60.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-6.99997, -44)
-scale = Vector2(0.65625, 0.6875)
+position = Vector2(-3.49997, -38.5)
+scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.929316
 flip_h = true
-script = ExtResource("11_6n38m")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(-1, -23.5)
-shape = SubResource("RectangleShape2D_qlcw0")
-
-[node name="AttackController" parent="." instance=ExtResource("12_hvqct")]
-unique_name_in_owner = true
-available_attacks = Array[String](["attack1", "attack2", "attack3"])
-
-[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
-position = Vector2(23.25, -15)
-
-[node name="HitBox" parent="AttackController" index="1"]
-damage = 5
-
-[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
-position = Vector2(23.25, -24)
-
-[node name="Health" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("13_gvrni")
-max_health = 30
-
-[node name="MovementChecker" parent="." instance=ExtResource("14_8o45w")]
-unique_name_in_owner = true
-
-[node name="WallCheck" parent="MovementChecker" index="2"]
-position = Vector2(-15, -4)
-
-[node name="HurtBox" parent="." instance=ExtResource("15_7ly63")]
-position = Vector2(0, -6)
-collision_layer = 0
-collision_mask = 2
-
-[node name="LootDropper" parent="." instance=ExtResource("16_l5mrj")]
-coin_scene = ExtResource("17_i0o8x")
-
-[node name="StateMachine" parent="." instance=ExtResource("18_q4j2k")]
-unique_name_in_owner = true
-enemy_behavior = 1
-RETREAT_DURATION = 0.0
-CHASE_DURATION = 11.0
-
-[node name="Senses" parent="." instance=ExtResource("19_hr4d4")]
-unique_name_in_owner = true
-visible = false
-
-[editable path="AttackController"]
-[editable path="MovementChecker"]

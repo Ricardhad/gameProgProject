@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="13_qaqly"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_cpb1a"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_js3u0"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="17_lqxyr"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="17_lqxyr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhd37"]
 atlas = ExtResource("1_5x7xg")
@@ -425,18 +425,12 @@ max_health = 10
 unique_name_in_owner = true
 position = Vector2(-8, -1)
 
-[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
-position = Vector2(13.0625, -15)
-
 [node name="HitBox" parent="AttackController" index="1"]
 damage = 3
 
-[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
-position = Vector2(31.125, -24)
-
 [node name="MovementChecker" parent="." instance=ExtResource("11_jikfs")]
 unique_name_in_owner = true
-position = Vector2(-12, -2)
+position = Vector2(-18, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -444,10 +438,11 @@ position = Vector2(-11, -18)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_wvgha")
 
-[node name="HurtBox" parent="." instance=ExtResource("12_dhdf8")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_dhdf8")]
 position = Vector2(-10, 0)
 collision_layer = 0
 collision_mask = 2
+health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("13_qaqly")]
 coin_scene = ExtResource("15_cpb1a")
