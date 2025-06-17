@@ -13,12 +13,11 @@ var jump_cooldown_timer = 0.0
 var jump_cd = 2.0
 var dash_cd = 2.0
 
-# --- PERUBAHAN HEAVY ATTACK ---
+# Heavy Attack Bar System
 var heavy_atk_charges = 0
-const MAX_HEAVY_ATK_CHARGES = 4 # Batas maksimal sekarang 4 kali
+const MAX_HEAVY_ATK_CHARGES = 3
 var heavy_atk_recharge_timer = 0.0
-const HEAVY_ATK_COOLDOWN_PER_CHARGE = 5.0 # Cooldown 5 detik per charge
-# -----------------------------
+const HEAVY_ATK_RECHARGE_TIME_PER_CHARGE = 2.0
 
 # --- Player State Variables ---
 enum PlayerState {
@@ -31,6 +30,7 @@ var hang_grace_timer = 0.0
 var dash_time = 0.0
 var jump_count = 0
 var max_jumps = 2
+
 var current_attack_index = 0
 var attack_animations = ["attack", "attack1"]
 var air_attack_animation = "air_attack"
@@ -59,9 +59,9 @@ func _ready():
 	health.set_health(GlobalVar.health_player)
 	
 	heavy_atk_charges = MAX_HEAVY_ATK_CHARGES
-	if hud: 
+	if hud:
 		hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES)
-
+	
 	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
 	animated_sprite_2d.animation_finished.connect(Callable(self, "_on_animated_sprite_2d_animation_finished"))
 	
@@ -73,10 +73,9 @@ func _physics_process(delta: float) -> void:
 	if jump_cooldown_timer > 0:
 		jump_cooldown_timer -= delta
 	
-	# --- Heavy Attack Bar Recharge Logic ---
 	if heavy_atk_charges < MAX_HEAVY_ATK_CHARGES:
 		heavy_atk_recharge_timer += delta
-		if heavy_atk_recharge_timer >= HEAVY_ATK_COOLDOWN_PER_CHARGE: # Menggunakan konstanta baru
+		if heavy_atk_recharge_timer >= HEAVY_ATK_RECHARGE_TIME_PER_CHARGE:
 			heavy_atk_charges += 1
 			heavy_atk_recharge_timer = 0.0
 			if hud:
@@ -114,7 +113,6 @@ func set_state(new_state: PlayerState):
 			attack_area_1.disabled = true
 			attack_area_2.disabled = true
 			if hud: hud.set_attack_button_pressed(false)
-		# ... (sisa exit logic) ...
 
 	current_state = new_state
 
@@ -163,9 +161,23 @@ func set_state(new_state: PlayerState):
 		PlayerState.HANG:
 			animated_sprite_2d.play("hang")
 			velocity = Vector2.ZERO
+		
+		# --- LOGIKA MEMANJAT TEBING ---
 		PlayerState.CLIMB_UP:
+			is_hanging = false
+			# Menggeser posisi player agar pas di atas tebing SEBELUM memanjat
+			var climb_offset_x = 20.0 
+			var climb_offset_y = -16.0
+			if animated_sprite_2d.flip_h:
+				climb_offset_x = -climb_offset_x
+
+			global_position.x += climb_offset_x
+			global_position.y += climb_offset_y
+			
 			animated_sprite_2d.play("pull_up")
-			velocity.y = JUMP_VELOCITY
+			velocity.y = JUMP_VELOCITY # Beri dorongan ke atas
+		# -----------------------------
+
 		PlayerState.DROP_DOWN:
 			animated_sprite_2d.play("jump")
 			global_position.y += 10
@@ -192,10 +204,18 @@ func handle_normal_movement(delta: float):
 	if Input.is_action_just_pressed("heavy_attack") and heavy_atk_charges > 0: set_state(PlayerState.HEAVY_ATTACK); return
 	if Input.is_action_just_pressed("heal"): set_state(PlayerState.HEAL); return
 
+	# --- LOGIKA MEMANJAT TEBING ---
 	if not is_on_floor():
-		if is_on_wall(): hang_grace_timer = HANG_GRACE_TIME
-		else: hang_grace_timer -= delta
-		if can_hang(): is_hanging = true; set_state(PlayerState.HANG); return
+		if is_on_wall():
+			hang_grace_timer = HANG_GRACE_TIME
+		else:
+			hang_grace_timer -= delta
+
+		if can_hang():
+			is_hanging = true
+			set_state(PlayerState.HANG)
+			return
+	# -----------------------------
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -227,7 +247,6 @@ func handle_normal_movement(delta: float):
 		velocity.x = move_toward(velocity.x, 0, 30)
 		if is_on_floor() and current_state != PlayerState.IDLE and abs(velocity.x) < 1: set_state(PlayerState.IDLE)
 
-# --- (Sisa fungsi handle... tidak berubah) ---
 
 func handle_dash_state(delta: float):
 	dash_time -= delta
@@ -245,10 +264,16 @@ func handle_heal_state(delta: float):
 	velocity.x = 0 if is_on_floor() else velocity.x
 	velocity.y += get_gravity().y * delta
 
+# --- LOGIKA MEMANJAT TEBING ---
 func handle_hang_state():
 	is_hanging = true
-	if Input.is_action_just_pressed("jump"): is_hanging = false; set_state(PlayerState.CLIMB_UP)
-	elif Input.is_action_just_pressed("down"): is_hanging = false; set_state(PlayerState.DROP_DOWN)
+	if Input.is_action_just_pressed("jump"):
+		is_hanging = false
+		set_state(PlayerState.CLIMB_UP)
+	elif Input.is_action_just_pressed("down"):
+		is_hanging = false
+		set_state(PlayerState.DROP_DOWN)
+# -----------------------------
 
 func handle_climb_up_state(delta: float):
 	velocity.y += get_gravity().y * delta
@@ -259,7 +284,13 @@ func handle_drop_down_state(delta: float):
 func _on_animated_sprite_2d_animation_finished():
 	match animated_sprite_2d.animation:
 		"heal": pass
-		"pull_up": set_state(PlayerState.IDLE if is_on_floor() else PlayerState.FALL)
+		
+		# --- LOGIKA MEMANJAT TEBING ---
+		"pull_up":
+			global_position.y -= 48
+			global_position.x += 24 * (-1 if animated_sprite_2d.flip_h else 1)
+			set_state(PlayerState.IDLE)
+
 		"attack", "attack1":
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
 			set_state(PlayerState.IDLE if is_on_floor() else PlayerState.FALL)
@@ -269,7 +300,7 @@ func _on_animated_sprite_2d_animation_finished():
 func _await_heal_animation_completion():
 	if animated_sprite_2d:
 		await animated_sprite_2d.animation_finished
-		health.heal(10) # Apply heal after animation
+		health.heal(10)
 		set_state(PlayerState.IDLE)
 	else:
 		printerr("AnimatedSprite2D node is not valid for heal await.")
@@ -280,12 +311,13 @@ func update_attack_hitboxes(current_anim: String):
 	elif current_anim == "attack2":
 		attack_area_2.disabled = false
 
-func can_hang():
+# --- LOGIKA MEMANJAT TEBING ---
+func can_hang() -> bool:
 	if not is_on_wall(): return false
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 	return hang_grace_timer > 0 and (hanging_left or hanging_right)
+# -----------------------------
 
 func _on_health_depleted():
-	# Transition1.change_scene("res://scenes/ui/GameOver.tscn")
 	get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")
