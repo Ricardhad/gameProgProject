@@ -1,6 +1,6 @@
 [gd_scene load_steps=51 format=3 uid="uid://1ek76qkgonj2"]
 
-[ext_resource type="Script" path="res://scenes/npc/peasant/villager_1.gd" id="1_7ls4i"]
+[ext_resource type="Script" uid="uid://cvuwyfycxhted" path="res://scenes/npc/peasant/villager_1.gd" id="1_7ls4i"]
 [ext_resource type="Texture2D" uid="uid://bipdxjuwamnum" path="res://assets/npc/villagers/Peasants_1/Dialogue.png" id="2_gh5ny"]
 [ext_resource type="Texture2D" uid="uid://bheif2d7l1ssp" path="res://assets/npc/villagers/Peasants_1/Idle.png" id="3_5wlg3"]
 [ext_resource type="Texture2D" uid="uid://bn4y8tr20wml4" path="res://assets/npc/villagers/Peasants_1/Idle_2.png" id="4_b1vxe"]

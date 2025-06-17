@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0x0tu62k0q3p"]
 
-[ext_resource type="Script" path="res://scenes/enemies/component/projectile.gd" id="1_bsxwn"]
+[ext_resource type="Script" uid="uid://y1yppr2or7wp" path="res://scenes/enemies/component/projectile.gd" id="1_bsxwn"]
 [ext_resource type="SpriteFrames" uid="uid://dhcdnrxeo7gu3" path="res://scenes/enemies/component/enemy_projectile/satyr3.tres" id="2_8hj1r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gm31j"]

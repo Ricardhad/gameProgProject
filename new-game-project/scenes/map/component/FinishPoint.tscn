@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bb1iase55k6j6"]
 
-[ext_resource type="Script" path="res://scenes/map/component/finish_point.gd" id="1_dqpsd"]
+[ext_resource type="Script" uid="uid://b0w1xitnqx2jf" path="res://scenes/map/component/finish_point.gd" id="1_dqpsd"]
 [ext_resource type="Texture2D" uid="uid://g68pj5jdjo0l" path="res://assets/stage/spritelevel/pillar-removebg-preview.png" id="2_ob7ty"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ec8s2"]

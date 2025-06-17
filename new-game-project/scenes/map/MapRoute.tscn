@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://jwwj5u53hp3c"]
 
-[ext_resource type="Script" path="res://scenes/map/map_route.gd" id="1_iof7n"]
+[ext_resource type="Script" uid="uid://ojuieeisbcjx" path="res://scenes/map/map_route.gd" id="1_iof7n"]
 [ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="2_qyx0x"]
 [ext_resource type="Texture2D" uid="uid://b26pde6jyfppi" path="res://assets/option_menu/Background_detail.png" id="3_555wi"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="4_k508b"]

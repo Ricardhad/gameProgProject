@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3e1pjx1qvgu6"]
 
-[ext_resource type="Script" path="res://scenes/enemies/component/AttackController.gd" id="1_sm4n6"]
-[ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="2_5m2lt"]
+[ext_resource type="Script" uid="uid://bywj2dkagggit" path="res://scenes/enemies/component/AttackController.gd" id="1_sm4n6"]
+[ext_resource type="Script" uid="uid://bqdulxf5rbrqi" path="res://scenes/class/hitbox.gd" id="2_5m2lt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ww13n"]
 size = Vector2(21, 31)

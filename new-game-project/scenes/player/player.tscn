@@ -1,13 +1,13 @@
 [gd_scene load_steps=60 format=3 uid="uid://cws2mh1ko3mg8"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_enxr5"]
+[ext_resource type="Script" uid="uid://dtbntpsty46dl" path="res://scenes/player/player.gd" id="1_enxr5"]
 [ext_resource type="Texture2D" uid="uid://b18q26imgxm3" path="res://assets/class/knight/player_sprites.png" id="2_8dkoq"]
 [ext_resource type="Texture2D" uid="uid://dxhgtold6fgsw" path="res://assets/class/knight/Hang.png" id="3_g4x7a"]
 [ext_resource type="Texture2D" uid="uid://vn3cm3cj8u27" path="res://assets/class/knight/Pull_up.png" id="4_am03k"]
 [ext_resource type="Texture2D" uid="uid://dn0cntngmfvdy" path="res://assets/class/knight/Elixir.png" id="5_a8mkw"]
-[ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="5_b4k1q"]
-[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="6_hf2xt"]
-[ext_resource type="Script" path="res://scenes/class/health.gd" id="7_v7flo"]
+[ext_resource type="Script" uid="uid://bqdulxf5rbrqi" path="res://scenes/class/hitbox.gd" id="5_b4k1q"]
+[ext_resource type="Script" uid="uid://brhj3bfbiok04" path="res://scenes/class/hurtbox.gd" id="6_hf2xt"]
+[ext_resource type="Script" uid="uid://citq65yomyyj6" path="res://scenes/class/health.gd" id="7_v7flo"]
 [ext_resource type="AudioStream" uid="uid://cd0x3but87egp" path="res://assets/sfx/Keugh.ogg" id="9_snrmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3alx"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=113 format=3 uid="uid://cf1raibso4mhe"]
 
 [ext_resource type="Texture2D" uid="uid://bkrxn0djghlbu" path="res://assets/enemies/kingdom/dragon/Attack_1.png" id="1_4ur64"]
-[ext_resource type="Script" path="res://scenes/enemies/kingdom/boss/dragon.gd" id="1_yw11o"]
+[ext_resource type="Script" uid="uid://b4p1aqkbb7i6l" path="res://scenes/enemies/kingdom/boss/dragon.gd" id="1_yw11o"]
 [ext_resource type="Texture2D" uid="uid://dvg1hupk65qjk" path="res://assets/enemies/kingdom/dragon/Attack_2.png" id="2_h8frx"]
 [ext_resource type="Texture2D" uid="uid://dxnib6du44jta" path="res://assets/enemies/kingdom/dragon/Dead.png" id="3_8u7sw"]
 [ext_resource type="Texture2D" uid="uid://cp5wv051v77ew" path="res://assets/enemies/kingdom/dragon/Flight.png" id="4_83m1v"]
@@ -1921,17 +1921,17 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e7151"]
 _data = {
-"RESET": SubResource("Animation_hvflq"),
-"attack1": SubResource("Animation_edmdc"),
-"attack2": SubResource("Animation_vhomk"),
-"dead": SubResource("Animation_nvxl6"),
-"flying": SubResource("Animation_4s7qg"),
-"hurt": SubResource("Animation_1bbqr"),
-"idle": SubResource("Animation_iw26p"),
-"landing": SubResource("Animation_sak1b"),
-"rise": SubResource("Animation_1j2qn"),
-"special": SubResource("Animation_w803q"),
-"walk": SubResource("Animation_5tk6n")
+&"RESET": SubResource("Animation_hvflq"),
+&"attack1": SubResource("Animation_edmdc"),
+&"attack2": SubResource("Animation_vhomk"),
+&"dead": SubResource("Animation_nvxl6"),
+&"flying": SubResource("Animation_4s7qg"),
+&"hurt": SubResource("Animation_1bbqr"),
+&"idle": SubResource("Animation_iw26p"),
+&"landing": SubResource("Animation_sak1b"),
+&"rise": SubResource("Animation_1j2qn"),
+&"special": SubResource("Animation_w803q"),
+&"walk": SubResource("Animation_5tk6n")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yao24"]
@@ -1967,6 +1967,7 @@ states/idle/position = Vector2(302, 100)
 states/walk/node = SubResource("AnimationNodeAnimation_ohgt2")
 states/walk/position = Vector2(437, 100)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_5vd82"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_v634i"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_snyoq"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_vrqrc"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_ewhr3")]
+graph_offset = Vector2(-73, 31)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ka006"]
 radius = 2.0
@@ -1980,7 +1981,7 @@ script = ExtResource("1_yw11o")
 position = Vector2(0, -77)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
 frame = 1
 flip_h = true
@@ -1992,7 +1993,7 @@ shape = SubResource("CapsuleShape2D_ia40c")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_e7151")
+&"": SubResource("AnimationLibrary_e7151")
 }
 
 [node name="AttackTimer" type="Timer" parent="."]

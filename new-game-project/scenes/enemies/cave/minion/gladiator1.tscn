@@ -1,7 +1,7 @@
 [gd_scene load_steps=79 format=3 uid="uid://m4arjnke8gme"]
 
 [ext_resource type="Texture2D" uid="uid://b2p5goy6hsr52" path="res://assets/enemies/cave/gladiator/Gladiator_1/Attack_1.png" id="1_jb46l"]
-[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_o5y0n"]
+[ext_resource type="Script" uid="uid://cwh6j0xof5cv3" path="res://scenes/enemies/component/EnemyScript.gd" id="1_o5y0n"]
 [ext_resource type="Texture2D" uid="uid://1yhjc21r7yb1" path="res://assets/enemies/cave/gladiator/Gladiator_1/Attack_2.png" id="2_kwe10"]
 [ext_resource type="Texture2D" uid="uid://dyyiq47clmdnr" path="res://assets/enemies/cave/gladiator/Gladiator_1/Dead.png" id="3_55le7"]
 [ext_resource type="Texture2D" uid="uid://bg833t7dmbi73" path="res://assets/enemies/cave/gladiator/Gladiator_1/Hurt.png" id="4_fql4q"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://31g6rx6v6emq" path="res://assets/enemies/cave/gladiator/Gladiator_1/Run.png" id="7_2fgpp"]
 [ext_resource type="Texture2D" uid="uid://tucmxidkjr1x" path="res://assets/enemies/cave/gladiator/Gladiator_1/Special.png" id="8_7gny2"]
 [ext_resource type="Texture2D" uid="uid://bcl4nx4ulr3xh" path="res://assets/enemies/cave/gladiator/Gladiator_1/Walk.png" id="9_g6p6y"]
-[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="10_iyakg"]
+[ext_resource type="Script" uid="uid://dxihks86w2f1e" path="res://scenes/enemies/component/AnimationController.gd" id="10_iyakg"]
 [ext_resource type="PackedScene" uid="uid://bftm30u88xwyc" path="res://scenes/enemies/component/Health.tscn" id="11_60u4u"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_25hu2"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="13_3vl3y"]
@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="15_1klqb"]
 [ext_resource type="PackedScene" uid="uid://bxq23tiialua0" path="res://scenes/player/consumables/hp.tscn" id="17_ssjjs"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="18_rvmuo"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="19_v1qfe"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="19_v1qfe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs8i3"]
 atlas = ExtResource("1_jb46l")

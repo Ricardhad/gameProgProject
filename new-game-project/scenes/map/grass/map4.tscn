@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_qa2wh"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_ayww3"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="2_tyl47"]
-[ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="3_uoie2"]
+[ext_resource type="Script" uid="uid://pogf6opbuiao" path="res://scenes/parallax_layer_2.gd" id="3_uoie2"]
 [ext_resource type="PackedScene" uid="uid://dnq4ygpd8l4jy" path="res://scenes/enemies/grass/minion/werewolf.tscn" id="3_ybomu"]
 [ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/stage/grass/bg/2.png" id="4_m0weu"]
 [ext_resource type="Texture2D" uid="uid://dfcwsowvc7emt" path="res://assets/stage/grass/bg/3.png" id="5_h22ly"]

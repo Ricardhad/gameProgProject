@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://c71qhc7m3tqb1"]
 
 [ext_resource type="Texture2D" uid="uid://cxqc00nr1jkj" path="res://assets/main_menu/Icon_Coin.png" id="1_6ib5d"]
-[ext_resource type="Script" path="res://scenes/player/consumables/coin.gd" id="1_q66w6"]
+[ext_resource type="Script" uid="uid://druhjsuw4g8ph" path="res://scenes/player/consumables/coin.gd" id="1_q66w6"]
 [ext_resource type="AudioStream" uid="uid://6fdelsww4h82" path="res://assets/sfx/coin_collect.mp3" id="3_ry1o6"]
 [ext_resource type="Texture2D" uid="uid://dy4qpm27hmn0a" path="res://assets/selecting_menu/coin_spin-Sheet.png" id="4_jyxxp"]
 

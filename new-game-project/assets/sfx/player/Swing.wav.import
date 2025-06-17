@@ -3,11 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://docffexijeayn"
-valid=false
+path="res://.godot/imported/Swing.wav-4e7239d858098616c394a89a55b82445.sample"
 
 [deps]
 
 source_file="res://assets/sfx/player/Swing.wav"
+dest_files=["res://.godot/imported/Swing.wav-4e7239d858098616c394a89a55b82445.sample"]
 
 [params]
 

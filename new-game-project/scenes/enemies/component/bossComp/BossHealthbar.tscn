@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c22ful68ijsx0"]
 
 [ext_resource type="Texture2D" uid="uid://dcxq1dnubjqvj" path="res://assets/option_menu/HealthBarOutline.png" id="1_o8scb"]
-[ext_resource type="Script" path="res://scenes/enemies/component/bossComp/margin_container.gd" id="1_wqkfv"]
+[ext_resource type="Script" uid="uid://rcpkol1p268u" path="res://scenes/enemies/component/bossComp/margin_container.gd" id="1_wqkfv"]
 [ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="2_uqoqd"]
 [ext_resource type="Texture2D" uid="uid://53yh3pihwlgy" path="res://assets/option_menu/HealthBar.png" id="2_x2vu7"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bv1vxbj5xnrae"]
 
-[ext_resource type="Script" path="res://scenes/player/consumables/maxPot.gd" id="1_4whmr"]
+[ext_resource type="Script" uid="uid://cbuceeudbjd1k" path="res://scenes/player/consumables/maxPot.gd" id="1_4whmr"]
 [ext_resource type="Texture2D" uid="uid://c4ckhuvatub1n" path="res://assets/item&buff/item/maxPot.png" id="2_purgc"]
 [ext_resource type="AudioStream" uid="uid://6fdelsww4h82" path="res://assets/sfx/coin_collect.mp3" id="3_00wgh"]
 

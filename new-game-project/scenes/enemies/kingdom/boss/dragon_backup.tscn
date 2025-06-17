@@ -1536,17 +1536,17 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e7151"]
 _data = {
-"RESET": SubResource("Animation_hvflq"),
-"attack1": SubResource("Animation_edmdc"),
-"attack2": SubResource("Animation_vhomk"),
-"dead": SubResource("Animation_nvxl6"),
-"flying": SubResource("Animation_4s7qg"),
-"hurt": SubResource("Animation_1bbqr"),
-"idle": SubResource("Animation_iw26p"),
-"landing": SubResource("Animation_sak1b"),
-"rise": SubResource("Animation_1j2qn"),
-"special": SubResource("Animation_w803q"),
-"walk": SubResource("Animation_5tk6n")
+&"RESET": SubResource("Animation_hvflq"),
+&"attack1": SubResource("Animation_edmdc"),
+&"attack2": SubResource("Animation_vhomk"),
+&"dead": SubResource("Animation_nvxl6"),
+&"flying": SubResource("Animation_4s7qg"),
+&"hurt": SubResource("Animation_1bbqr"),
+&"idle": SubResource("Animation_iw26p"),
+&"landing": SubResource("Animation_sak1b"),
+&"rise": SubResource("Animation_1j2qn"),
+&"special": SubResource("Animation_w803q"),
+&"walk": SubResource("Animation_5tk6n")
 }
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7mspw"]
@@ -1574,7 +1574,7 @@ shape = SubResource("CapsuleShape2D_ia40c")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_e7151")
+&"": SubResource("AnimationLibrary_e7151")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

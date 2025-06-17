@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxq23tiialua0"]
 
-[ext_resource type="Script" path="res://scenes/player/consumables/hp.gd" id="1_838xd"]
+[ext_resource type="Script" uid="uid://doros3hg4gti5" path="res://scenes/player/consumables/hp.gd" id="1_838xd"]
 [ext_resource type="Texture2D" uid="uid://cefhxut37ahm4" path="res://assets/item&buff/item/hp.png" id="2_17shd"]
 [ext_resource type="AudioStream" uid="uid://6fdelsww4h82" path="res://assets/sfx/coin_collect.mp3" id="3_0114i"]
 

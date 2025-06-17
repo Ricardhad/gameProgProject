@@ -1,6 +1,6 @@
 [gd_scene load_steps=98 format=3 uid="uid://c2ggiacjh7bhm"]
 
-[ext_resource type="Script" path="res://scenes/ui/cut_scene_2.gd" id="1_5eov8"]
+[ext_resource type="Script" uid="uid://c5tskmttyb14a" path="res://scenes/ui/cut_scene_2.gd" id="1_5eov8"]
 [ext_resource type="Texture2D" uid="uid://kyjwd5vdjbqm" path="res://assets/selecting_menu/castle_background_by_blossomblairr_d7s4uas-fullview.jpg" id="1_11mca"]
 [ext_resource type="Texture2D" uid="uid://b18q26imgxm3" path="res://assets/class/knight/player_sprites.png" id="1_ylbuy"]
 [ext_resource type="Texture2D" uid="uid://dxhgtold6fgsw" path="res://assets/class/knight/Hang.png" id="2_7175k"]

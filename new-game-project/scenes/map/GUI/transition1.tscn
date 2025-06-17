@@ -1,6 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://5gb0l1svp7uo"]
 
-[ext_resource type="Script" path="res://scenes/map/GUI/transition_1.gd" id="1_skjsm"]
+[ext_resource type="Script" uid="uid://bn8uoqt3gr2q3" path="res://scenes/map/GUI/transition_1.gd" id="1_skjsm"]
+
+[sub_resource type="Animation" id="Animation_pqd6s"]
+resource_name = "PLAY"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ysi7f"]
 resource_name = "RESET"
@@ -18,25 +33,10 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_pqd6s"]
-resource_name = "PLAY"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5a6gu"]
 _data = {
-"PLAY": SubResource("Animation_pqd6s"),
-"RESET": SubResource("Animation_ysi7f")
+&"PLAY": SubResource("Animation_pqd6s"),
+&"RESET": SubResource("Animation_ysi7f")
 }
 
 [node name="Transition1" type="CanvasLayer"]
