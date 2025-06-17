@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://bvr11bpv3bx5y"]
+[gd_scene load_steps=26 format=3 uid="uid://bvr11bpv3bx5y"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_sc4cw"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_sc4cw"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="3_ilt2a"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="4_5ffst"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="5_mra2u"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="14_krs4u"]
 [ext_resource type="PackedScene" uid="uid://dnq4ygpd8l4jy" path="res://scenes/enemies/grass/minion/werewolf.tscn" id="15_4rb80"]
 [ext_resource type="PackedScene" uid="uid://d0w7ypj1q0u1i" path="res://scenes/npc/peasant/peasant3.tscn" id="16_85ppo"]
+[ext_resource type="PackedScene" uid="uid://vqxnhn2f0uel" path="res://scenes/enemies/grass/miniboss/orcChief.tscn" id="17_h35cs"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -1306,3 +1307,6 @@ next_scene = "1-2"
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("16_85ppo")]
 position = Vector2(261, 288)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("17_h35cs")]
+position = Vector2(312, 289)

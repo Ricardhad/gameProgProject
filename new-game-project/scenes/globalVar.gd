@@ -1,5 +1,12 @@
 extends Node
 
+# --- BARU: Sinyal untuk memberitahu player saat status buff AGI berubah ---
+signal agility_buff_changed(is_active: bool)
+
+# --- BARU: Konstanta untuk nilai buff agar mudah diubah ---
+const DEF_BUFF_VALUE = 2  # Setiap tumpukan buff DEF akan mengurangi 2 damage
+const AGI_BUFF_COOLDOWN_REDUCTION = 2 # Pengurangan cooldown dari buff AGI
+
 # --- STATS ASLI ANDA ---
 var maxhealth_player = 10
 var health_player = 10
@@ -31,6 +38,17 @@ var agi_buff_duration = 0
 var luck_buff_duration = 0
 var potion_buff_duration = 0
 var coin_buff_duration = 0
+
+
+# --- BARU: Fungsi helper untuk menghitung total bonus defense ---
+# Player akan memanggil fungsi ini untuk mendapatkan total defense dari buff
+func get_total_defense_bonus() -> int:
+	# Jika buff aktif, kembalikan nilai defense berdasarkan jumlah tumpukan durasi
+	if def_buff_duration > 0:
+		# Setiap durasi memberikan bonus. Contoh: 2 durasi = 4 defense
+		return def_buff_duration * DEF_BUFF_VALUE
+	return 0
+
 
 # --- FUNGSI-FUNGSI ASLI ANDA ---
 
@@ -121,12 +139,19 @@ func acquire_temporary_buff(buff_id: String):
 			print("Buff ATK didapat! Durasi sekarang: %d stage" % atk_buff_duration)
 
 		"def_buff":
-			def_buff_duration += 1
-			print("Buff DEF didapat! Durasi sekarang: %d stage" % def_buff_duration)
+			def_buff_duration += 1 # Cukup tambah durasi, player akan cek nilainya
+			print("Buff DEF didapat! Durasi sekarang: %d stage. Total bonus defense: %d" % [def_buff_duration, get_total_defense_bonus()])
 			
 		"agi_buff":
+			# Cek jika ini adalah tumpukan buff AGI yang pertama
+			var was_inactive = (agi_buff_duration == 0)
+			
 			agi_buff_duration += 1
 			print("Buff AGI didapat! Durasi sekarang: %d stage" % agi_buff_duration)
+			
+			# Jika sebelumnya tidak aktif, kirim sinyal bahwa buff SEKARANG AKTIF
+			if was_inactive:
+				agility_buff_changed.emit(true)
 			
 		"luck_buff":
 			luck_buff_duration += 1
@@ -170,8 +195,11 @@ func process_end_of_stage():
 		# Proses Buff AGI
 		if agi_buff_duration > 0:
 			agi_buff_duration -= 1
+			# Jika durasi menjadi 0 setelah dikurangi, berarti buff habis
 			if agi_buff_duration == 0:
 				print("Buff AGI SEMENTARA telah habis.")
+				# Kirim sinyal bahwa buff SEKARANG TIDAK AKTIF
+				agility_buff_changed.emit(false)
 				
 		# Proses Buff LUCK
 		if luck_buff_duration > 0:

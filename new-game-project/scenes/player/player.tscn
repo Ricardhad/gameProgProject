@@ -363,9 +363,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ug1md")
 }],
-"loop": true,
+"loop": false,
 "name": &"pull_up",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -416,8 +416,10 @@ sync_with_global = true
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"attack2"
+animation = &"pull_up"
 autoplay = "idle"
+frame = 3
+frame_progress = 0.941628
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b8yrv")
@@ -428,11 +430,10 @@ volume_db = -5.0
 mix_target = 2
 bus = &"SFX"
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+[node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 20
 script = ExtResource("6_hf2xt")
-health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_b8yrv")
