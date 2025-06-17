@@ -424,9 +424,16 @@ max_health = 10
 [node name="AttackController" parent="." instance=ExtResource("10_ugej7")]
 unique_name_in_owner = true
 position = Vector2(-8, -1)
+available_attacks = Array[String](["attack"])
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(28, -15)
 
 [node name="HitBox" parent="AttackController" index="1"]
 damage = 3
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(28, -24)
 
 [node name="MovementChecker" parent="." instance=ExtResource("11_jikfs")]
 unique_name_in_owner = true

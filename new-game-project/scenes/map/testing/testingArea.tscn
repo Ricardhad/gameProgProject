@@ -913,6 +913,6 @@ position = Vector2(568, 274)
 position = Vector2(1044.89, 240.757)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("16_7dnx8")]
-position = Vector2(482.862, 241.97)
+position = Vector2(500, 286)
 
 [editable path="BossHealthbar"]

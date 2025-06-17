@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://cf1raibso4mhe"]
+[gd_scene load_steps=116 format=3 uid="uid://cf1raibso4mhe"]
 
 [ext_resource type="Texture2D" uid="uid://bkrxn0djghlbu" path="res://assets/enemies/kingdom/dragon/Attack_1.png" id="1_4ur64"]
 [ext_resource type="Script" uid="uid://b4p1aqkbb7i6l" path="res://scenes/enemies/kingdom/boss/dragon.gd" id="1_yw11o"]
@@ -840,70 +840,58 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("HitBox/CollisionShape2D:shape")
+tracks/7/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-50, -17)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("HitBox/CollisionShape2D:position")
+tracks/8/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-50, -17)]
+"values": [-0.247837]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("HitBox/CollisionShape2D:rotation")
+tracks/9/path = NodePath("HitBox/CollisionShape2D:shape:radius")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-0.247837]
+"values": [10.0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("HitBox/CollisionShape2D:shape:radius")
+tracks/10/path = NodePath("HitBox/CollisionShape2D:shape:height")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [10.0]
+"values": [30.0]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("HitBox/CollisionShape2D:shape:height")
+tracks/11/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [30.0]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("HitBox/CollisionShape2D:disabled")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -1934,40 +1922,57 @@ _data = {
 &"walk": SubResource("Animation_5tk6n")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yao24"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1dlqf"]
 animation = &"attack1"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eq3r6"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qu8no"]
+animation = &"attack2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7duvf"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ohgt2"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1j7xn"]
 animation = &"walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5vd82"]
-advance_condition = &"is_walking"
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k1wq8"]
+advance_mode = 2
+advance_condition = &"walk"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v634i"]
-advance_expression = "!is_walking"
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pttud"]
+advance_mode = 2
+advance_condition = &"idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_snyoq"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1dlqf"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vrqrc"]
-advance_condition = &"trigger_attack1"
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7duvf"]
+advance_mode = 2
+advance_condition = &"attack1"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ewhr3"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1j7xn"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p4du7"]
-states/attack1/node = SubResource("AnimationNodeAnimation_yao24")
-states/attack1/position = Vector2(397, 207)
-states/idle/node = SubResource("AnimationNodeAnimation_eq3r6")
-states/idle/position = Vector2(302, 100)
-states/walk/node = SubResource("AnimationNodeAnimation_ohgt2")
-states/walk/position = Vector2(437, 100)
-transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_5vd82"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_v634i"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_snyoq"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_vrqrc"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_ewhr3")]
-graph_offset = Vector2(-73, 31)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_joatp"]
+advance_mode = 2
+advance_condition = &"attack2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xhmox"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_joatp"]
+states/Start/position = Vector2(127, 68)
+states/attack1/node = SubResource("AnimationNodeAnimation_1dlqf")
+states/attack1/position = Vector2(401, 177)
+states/attack2/node = SubResource("AnimationNodeAnimation_qu8no")
+states/attack2/position = Vector2(525, 112)
+states/idle/node = SubResource("AnimationNodeAnimation_7duvf")
+states/idle/position = Vector2(303, 62)
+states/walk/node = SubResource("AnimationNodeAnimation_1j7xn")
+states/walk/position = Vector2(253, 147)
+transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_k1wq8"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_pttud"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_1dlqf"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_7duvf"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_1j7xn"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_joatp"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_xhmox")]
+graph_offset = Vector2(-69, 7)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ka006"]
 radius = 2.0
@@ -1996,6 +2001,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_e7151")
 }
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_process = 0
+callback_mode_method = 1
+tree_root = SubResource("AnimationNodeStateMachine_joatp")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/attack1 = false
+parameters/conditions/attack2 = false
+parameters/conditions/idle = false
+parameters/conditions/walk = false
+
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -2005,12 +2020,6 @@ visible = false
 position = Vector2(-7, -24)
 rotation = 1.63014
 shape = SubResource("CapsuleShape2D_ia40c")
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_p4du7")
-anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/is_walking = true
-parameters/conditions/trigger_attack1 = false
 
 [node name="HitBox" parent="." instance=ExtResource("12_bd34b")]
 
