@@ -217,6 +217,7 @@ text = "Passive: Immune to Bleed"
 autowrap_mode = 2
 
 [node name="ButtonYes" type="TextureButton" parent="PanelChatNPC"]
+layout_mode = 0
 offset_left = 25.0
 offset_top = 15.0
 offset_right = 39.0
@@ -242,6 +243,7 @@ text = "Y
 horizontal_alignment = 1
 
 [node name="ButtonNo" type="TextureButton" parent="PanelChatNPC"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 15.0
 offset_right = 22.0

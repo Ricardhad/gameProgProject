@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://71cvorklc8yo"]
+[gd_scene load_steps=22 format=3 uid="uid://71cvorklc8yo"]
 
 [ext_resource type="Script" path="res://scenes/map/GUI/pause_menu.gd" id="1_ihtfe"]
 [ext_resource type="Texture2D" uid="uid://npuvjm8tq6w3" path="res://assets/option_menu/menu_box.png" id="2_oi75q"]
@@ -25,13 +25,15 @@ texture = ExtResource("2_oi75q")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fwj8s"]
 texture = ExtResource("2_oi75q")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k21ui"]
+texture = ExtResource("2_oi75q")
+
 [node name="PauseMenu" type="Node2D"]
 script = ExtResource("1_ihtfe")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PanelPause" type="Panel" parent="CanvasLayer"]
-visible = false
 top_level = true
 custom_minimum_size = Vector2(241, 190)
 anchors_preset = 8
@@ -579,6 +581,27 @@ theme_override_font_sizes/font_size = 40
 text = "FullScreen
 "
 horizontal_alignment = 1
+
+[node name="PanelDetail" type="Panel" parent="CanvasLayer/PanelPause"]
+visible = false
+layout_mode = 0
+offset_left = 476.0
+offset_top = 90.0
+offset_right = 658.0
+offset_bottom = 273.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_k21ui")
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelDetail"]
+offset_left = 21.0
+offset_top = 25.0
+offset_right = 299.0
+offset_bottom = 303.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_pg4ev")
+theme_override_font_sizes/font_size = 40
+text = "Detail
+"
+autowrap_mode = 1
 
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Resumebtn" to="." method="_on_Resumebtn_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelPause/PanelButton/VBoxContainer/Optionbtn" to="." method="_on_options_pressed1"]

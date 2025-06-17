@@ -239,7 +239,8 @@ func _on_animated_sprite_2d_animation_finished():
 	match animated_sprite_2d.animation:
 		"heal": pass
 		"pull_up":
-			velocity.y = 0
+			global_position.y -= 48
+			global_position.x += 24 * (-1 if animated_sprite_2d.flip_h else 1)
 			set_state(PlayerState.IDLE)
 		"attack", "attack1":
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
