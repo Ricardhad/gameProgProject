@@ -10,10 +10,8 @@ const HANG_GRACE_TIME = 0.2
 # --- Cooldowns ---
 var dash_cooldown_timer = 0.0
 var jump_cooldown_timer = 0.0
-var base_jump_cd = 2.0
-var base_dash_cd = 2.0
-var jump_cd = 2.0
-var dash_cd = 2.0
+var jump_cd = 2.0 # Use float for consistency with delta
+var dash_cd = 2.0 # Use float for consistency with delta
 
 # --- Player State Variables ---
 enum PlayerState {
@@ -151,6 +149,16 @@ func set_state(new_state: PlayerState):
 			if hud:
 				hud.set_attack_button_pressed(true)
 
+		PlayerState.HEAVY_ATTACK:
+			animated_sprite_2d.animation = "attack2"
+			animated_sprite_2d.frame = 0
+			animated_sprite_2d.play()
+			attack_sound.play()
+			attack_area_2.disabled = false
+			attack_area_1.disabled = true # Ensure other attack hitbox is disabled
+			if hud:
+				hud.set_attack_button_pressed(true)
+
 		PlayerState.HEAL:
 			# Check heal condition here before starting animation
 			if health.health < health.max_health:
@@ -215,6 +223,8 @@ func handle_normal_movement(delta: float):
 	var dash_intent = Input.is_action_just_pressed("dash") or (hud and hud.dash_button_pressed)
 	if hud and hud.dash_button_pressed:
 		hud.dash_button_pressed = false # Reset marker
+
+	# --- Prioritized Input Checks for State Transitions ---
 
 	if dash_intent and dash_cooldown_timer <= 0:
 		var direction = Input.get_axis("left", "right")
