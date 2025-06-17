@@ -289,7 +289,6 @@ position = Vector2(23, -24)
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("9_h3w2l")
-max_health = 20
 
 [node name="MovementChecker" parent="." instance=ExtResource("10_campi")]
 unique_name_in_owner = true
