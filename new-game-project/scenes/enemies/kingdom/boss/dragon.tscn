@@ -2021,7 +2021,7 @@ position = Vector2(-7, -24)
 rotation = 1.63014
 shape = SubResource("CapsuleShape2D_ia40c")
 
-[node name="HitBox" parent="." instance=ExtResource("12_bd34b")]
+[node name="HitBox" parent="." groups=["damage_sources"] instance=ExtResource("12_bd34b")]
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(-50, -17)
