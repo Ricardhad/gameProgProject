@@ -363,7 +363,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ug1md")
 }],
-"loop": true,
+"loop": false,
 "name": &"pull_up",
 "speed": 5.0
 }, {
@@ -416,7 +416,7 @@ sync_with_global = true
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"attack2"
+animation = &"pull_up"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
