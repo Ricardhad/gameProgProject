@@ -32,6 +32,17 @@ var luck_buff_duration = 0
 var potion_buff_duration = 0
 var coin_buff_duration = 0
 
+var max_potions = 2       # Jumlah maksimal potion awal
+var current_potions = 2   # Jumlah potion saat ini
+# ----------------------------------------
+# ... (sisa stats Anda) ...
+
+# --- FUNGSI UTAMA ---
+func refill_potions():
+	current_potions = max_potions
+	print("Potions refilled. Current: %d/%d" % [current_potions, max_potions])
+
+
 # --- FUNGSI-FUNGSI ASLI ANDA ---
 
 func add_coin():
@@ -62,6 +73,8 @@ func reset_game():
 	agi = 0
 	maxPot = 0
 	
+	
+	
 	# Reset buff permanen
 	hp_buff = 0
 	atk_buff = 0
@@ -76,6 +89,10 @@ func reset_game():
 	luck_buff_duration = 0
 	potion_buff_duration = 0
 	coin_buff_duration = 0
+	
+	max_potions = 2
+	refill_potions()
+
 
 func add_item(itemName: String):
 	if(itemName == "hp"):
@@ -85,6 +102,10 @@ func add_item(itemName: String):
 	elif(itemName == "atk"):
 		atk += 1
 		damage_player += 2
+	elif itemName == "maxPot":
+		max_potions += 1
+		refill_potions() # Isi penuh potion saat max bertambah
+		print("Max Potions increased! New max: %d" % max_potions)
 	# ... dst ...
 
 func add_buff(buffName: String):

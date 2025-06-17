@@ -1,24 +1,24 @@
 extends Node2D
 
 #================================#
-#     VARIABEL UNTUK UI          #
+#     VARIABEL UNTUK UI          #
 #================================#
 @onready var sub_viewport: SubViewport = $CanvasLayer2/SubViewportContainer/SubViewport
 @onready var minimap_camera: Camera2D = $CanvasLayer2/SubViewportContainer/SubViewport/Camera2D
 @onready var player_icon: ColorRect = $CanvasLayer2/SubViewportContainer/SubViewport/PlayerIcon
 @onready var health_bar_label: Label = $CanvasLayer2/Panel/HealthBar/Label
-
-# --- BARU: Variabel untuk Heavy Attack Bar ---
-# Path ini sesuai dengan yang Anda berikan. Pastikan node ini adalah ProgressBar atau TextureProgressBar
 @onready var heavy_attack_bar: TextureProgressBar = $CanvasLayer2/Panel/CDBar
-# ---------------------------------------------
+
+# --- BARU: Variabel untuk Label Potion ---
+# Path ini sesuai dengan yang Anda berikan
+@onready var potion_label: Label = $CanvasLayer2/Panel/ButtonPotion/Label
+# ----------------------------------------
 
 # Variabel lain
 var player_node = null
 var current_minimap_tilemap: TileMap = null
 var jump_button_pressed = false
 var dash_button_pressed = false
-
 
 #================================#
 #      FUNGSI INTI MINIMAP       #
@@ -35,7 +35,6 @@ func setup_minimap(tilemap_from_world: TileMap):
 
 func set_player_node(p_node):
 	player_node = p_node
-
 
 #================================#
 # FUNGSI BAWAAN GODOT (_ready, _process) #
@@ -63,17 +62,19 @@ func _update_hud():
 	
 	health_bar_label.text = "%d / %d" % [GlobalVar.health_player, GlobalVar.maxhealth_player]
 
-# --- BARU: Fungsi untuk update Heavy Attack Bar ---
-# Player.gd akan memanggil fungsi ini setiap kali jumlah charge berubah.
 func update_heavy_attack_charges(current_charges: int, max_charges: int):
-	# Pastikan node progress bar ada untuk menghindari error
 	if heavy_attack_bar:
-		# Atur nilai maksimum dari bar sesuai dengan max charges
 		heavy_attack_bar.max_value = max_charges
-		# Atur nilai saat ini dari bar
 		heavy_attack_bar.value = current_charges
-# ----------------------------------------------------
 
+# --- BARU: Fungsi untuk update jumlah Potion ---
+# Player.gd akan memanggil fungsi ini saat potion digunakan atau diisi ulang.
+func update_potion_count(current: int, max: int):
+	# Pastikan node label ada untuk menghindari error
+	if potion_label:
+		# Update teks pada label untuk menunjukkan jumlah potion yang tersisa
+		potion_label.text = str(current)
+# ----------------------------------------------------
 
 func _on_ButtonJump_pressed():
 	jump_button_pressed = true

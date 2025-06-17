@@ -15,9 +15,9 @@ var dash_cd = 2.0
 
 # Heavy Attack Bar System
 var heavy_atk_charges = 0
-const MAX_HEAVY_ATK_CHARGES = 3
+const MAX_HEAVY_ATK_CHARGES = 4 # Sesuai permintaan terakhir Anda
 var heavy_atk_recharge_timer = 0.0
-const HEAVY_ATK_RECHARGE_TIME_PER_CHARGE = 2.0
+const HEAVY_ATK_COOLDOWN_PER_CHARGE = 5.0 # Sesuai permintaan terakhir Anda
 
 # --- Player State Variables ---
 enum PlayerState {
@@ -61,6 +61,8 @@ func _ready():
 	heavy_atk_charges = MAX_HEAVY_ATK_CHARGES
 	if hud:
 		hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES)
+		# --- BARU: Update HUD Potion saat game dimulai ---
+		hud.update_potion_count(GlobalVar.current_potions, GlobalVar.max_potions)
 	
 	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
 	animated_sprite_2d.animation_finished.connect(Callable(self, "_on_animated_sprite_2d_animation_finished"))
@@ -68,14 +70,12 @@ func _ready():
 	set_state(PlayerState.IDLE)
 
 func _physics_process(delta: float) -> void:
-	if dash_cooldown_timer > 0:
-		dash_cooldown_timer -= delta
-	if jump_cooldown_timer > 0:
-		jump_cooldown_timer -= delta
+	if dash_cooldown_timer > 0: dash_cooldown_timer -= delta
+	if jump_cooldown_timer > 0: jump_cooldown_timer -= delta
 	
 	if heavy_atk_charges < MAX_HEAVY_ATK_CHARGES:
 		heavy_atk_recharge_timer += delta
-		if heavy_atk_recharge_timer >= HEAVY_ATK_RECHARGE_TIME_PER_CHARGE:
+		if heavy_atk_recharge_timer >= HEAVY_ATK_COOLDOWN_PER_CHARGE:
 			heavy_atk_charges += 1
 			heavy_atk_recharge_timer = 0.0
 			if hud:
@@ -117,21 +117,14 @@ func set_state(new_state: PlayerState):
 	current_state = new_state
 
 	match current_state:
-		PlayerState.IDLE:
-			animated_sprite_2d.play("idle")
-			velocity.x = 0
-		PlayerState.RUN:
-			animated_sprite_2d.play("run")
-		PlayerState.JUMP:
-			animated_sprite_2d.play("jump")
-		PlayerState.FALL:
-			animated_sprite_2d.play("jump")
-		PlayerState.DASH:
-			animated_sprite_2d.play("run")
+		PlayerState.IDLE: animated_sprite_2d.play("idle"); velocity.x = 0
+		PlayerState.RUN: animated_sprite_2d.play("run")
+		PlayerState.JUMP: animated_sprite_2d.play("jump")
+		PlayerState.FALL: animated_sprite_2d.play("jump")
+		PlayerState.DASH: animated_sprite_2d.play("run")
 		PlayerState.ATTACK:
 			animated_sprite_2d.animation = attack_animations[current_attack_index]
-			animated_sprite_2d.frame = 0
-			animated_sprite_2d.play()
+			animated_sprite_2d.frame = 0; animated_sprite_2d.play()
 			attack_sound.play()
 			update_attack_hitboxes(animated_sprite_2d.animation)
 			if hud: hud.set_attack_button_pressed(true)
@@ -140,48 +133,46 @@ func set_state(new_state: PlayerState):
 				heavy_atk_charges -= 1
 				if hud: hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES)
 				animated_sprite_2d.animation = "attack2"
-				animated_sprite_2d.frame = 0
-				animated_sprite_2d.play()
+				animated_sprite_2d.frame = 0; animated_sprite_2d.play()
 				attack_sound.play()
-				attack_area_2.disabled = false
-				attack_area_1.disabled = true
+				attack_area_2.disabled = false; attack_area_1.disabled = true
 				if hud: hud.set_attack_button_pressed(true)
 			else:
-				set_state(PlayerState.IDLE)
-				printerr("Not enough heavy attack charges!")
+				set_state(PlayerState.IDLE); printerr("Not enough heavy attack charges!")
+		
+		# --- MODIFIKASI: Logika Potion ditambahkan di sini ---
 		PlayerState.HEAL:
-			if health.health < health.max_health:
+			# Cek dua kondisi: HP tidak penuh DAN punya potion
+			if health.health < health.max_health and GlobalVar.current_potions > 0:
+				# Jika valid, kurangi potion dan update HUD
+				GlobalVar.current_potions -= 1
+				if hud: hud.update_potion_count(GlobalVar.current_potions, GlobalVar.max_potions)
+				
+				# Lanjutkan dengan animasi dan proses heal
 				animated_sprite_2d.animation = "heal"
-				animated_sprite_2d.frame = 0
-				animated_sprite_2d.play()
+				animated_sprite_2d.frame = 0; animated_sprite_2d.play()
 				velocity = Vector2.ZERO
 				_await_heal_animation_completion()
 			else:
+				# Jika tidak bisa heal, langsung kembali ke IDLE
+				printerr("Cannot heal! HP is full or no potions left.")
 				set_state(PlayerState.IDLE)
-		PlayerState.HANG:
-			animated_sprite_2d.play("hang")
-			velocity = Vector2.ZERO
-		
-		# --- LOGIKA MEMANJAT TEBING ---
+		# --------------------------------------------------------
+
+		PlayerState.HANG: animated_sprite_2d.play("hang"); velocity = Vector2.ZERO
 		PlayerState.CLIMB_UP:
 			is_hanging = false
-			# Menggeser posisi player agar pas di atas tebing SEBELUM memanjat
-			var climb_offset_x = 20.0 
+			var climb_offset_x = 20.0
 			var climb_offset_y = -16.0
-			if animated_sprite_2d.flip_h:
-				climb_offset_x = -climb_offset_x
-
-			global_position.x += climb_offset_x
-			global_position.y += climb_offset_y
-			
+			if animated_sprite_2d.flip_h: climb_offset_x = -climb_offset_x
+			global_position.x += climb_offset_x; global_position.y += climb_offset_y
 			animated_sprite_2d.play("pull_up")
-			velocity.y = JUMP_VELOCITY # Beri dorongan ke atas
-		# -----------------------------
-
+			velocity.y = JUMP_VELOCITY
 		PlayerState.DROP_DOWN:
 			animated_sprite_2d.play("jump")
-			global_position.y += 10
-			velocity.y = 150.0
+			global_position.y += 10; velocity.y = 150.0
+
+# --- (Sisa kode tidak berubah) ---
 
 func handle_normal_movement(delta: float):
 	var jump_intent = Input.is_action_just_pressed("jump") or (hud and hud.jump_button_pressed)
@@ -204,18 +195,10 @@ func handle_normal_movement(delta: float):
 	if Input.is_action_just_pressed("heavy_attack") and heavy_atk_charges > 0: set_state(PlayerState.HEAVY_ATTACK); return
 	if Input.is_action_just_pressed("heal"): set_state(PlayerState.HEAL); return
 
-	# --- LOGIKA MEMANJAT TEBING ---
 	if not is_on_floor():
-		if is_on_wall():
-			hang_grace_timer = HANG_GRACE_TIME
-		else:
-			hang_grace_timer -= delta
-
-		if can_hang():
-			is_hanging = true
-			set_state(PlayerState.HANG)
-			return
-	# -----------------------------
+		if is_on_wall(): hang_grace_timer = HANG_GRACE_TIME
+		else: hang_grace_timer -= delta
+		if can_hang(): is_hanging = true; set_state(PlayerState.HANG); return
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -247,7 +230,6 @@ func handle_normal_movement(delta: float):
 		velocity.x = move_toward(velocity.x, 0, 30)
 		if is_on_floor() and current_state != PlayerState.IDLE and abs(velocity.x) < 1: set_state(PlayerState.IDLE)
 
-
 func handle_dash_state(delta: float):
 	dash_time -= delta
 	if dash_time <= 0:
@@ -264,16 +246,10 @@ func handle_heal_state(delta: float):
 	velocity.x = 0 if is_on_floor() else velocity.x
 	velocity.y += get_gravity().y * delta
 
-# --- LOGIKA MEMANJAT TEBING ---
 func handle_hang_state():
 	is_hanging = true
-	if Input.is_action_just_pressed("jump"):
-		is_hanging = false
-		set_state(PlayerState.CLIMB_UP)
-	elif Input.is_action_just_pressed("down"):
-		is_hanging = false
-		set_state(PlayerState.DROP_DOWN)
-# -----------------------------
+	if Input.is_action_just_pressed("jump"): is_hanging = false; set_state(PlayerState.CLIMB_UP)
+	elif Input.is_action_just_pressed("down"): is_hanging = false; set_state(PlayerState.DROP_DOWN)
 
 func handle_climb_up_state(delta: float):
 	velocity.y += get_gravity().y * delta
@@ -284,13 +260,9 @@ func handle_drop_down_state(delta: float):
 func _on_animated_sprite_2d_animation_finished():
 	match animated_sprite_2d.animation:
 		"heal": pass
-		
-		# --- LOGIKA MEMANJAT TEBING ---
 		"pull_up":
-			global_position.y -= 48
-			global_position.x += 24 * (-1 if animated_sprite_2d.flip_h else 1)
+			velocity.y = 0
 			set_state(PlayerState.IDLE)
-
 		"attack", "attack1":
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
 			set_state(PlayerState.IDLE if is_on_floor() else PlayerState.FALL)
@@ -311,13 +283,11 @@ func update_attack_hitboxes(current_anim: String):
 	elif current_anim == "attack2":
 		attack_area_2.disabled = false
 
-# --- LOGIKA MEMANJAT TEBING ---
 func can_hang() -> bool:
 	if not is_on_wall(): return false
 	var hanging_left = $WallRayCast/LedgeCheckLeft.is_colliding() and not $WallRayCast/CheckFloorAboveLeft.is_colliding()
 	var hanging_right = $WallRayCast/LedgeCheckRight.is_colliding() and not $WallRayCast/CheckFloorAboveRight.is_colliding()
 	return hang_grace_timer > 0 and (hanging_left or hanging_right)
-# -----------------------------
 
 func _on_health_depleted():
 	get_tree().change_scene_to_file("res://scenes/ui/GameOver.tscn")
