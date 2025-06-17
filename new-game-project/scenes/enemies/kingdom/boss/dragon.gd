@@ -5,9 +5,9 @@ extends CharacterBody2D
 @export var attack_range: float = 150.0
 @export var attack_cooldown: float = 3.0
 @export var walk_speed: float = 80.0
-@export var flight_duration: float = 10.0 # How long the dragon stays in the air
-@export var ground_duration: float = 5.0 # How long the dragon stays on the ground
-@export var fly_height: float = 100.0 # How high up the screen the dragon flies
+@export var flight_duration: float = 10.0
+@export var ground_duration: float = 15.0
+@export var fly_height: float = 100.0 # This is a Y-coordinate on the screen
 
 # --- Node References ---
 @onready var animation_player = $AnimationPlayer
@@ -25,13 +25,18 @@ var player = null
 # --- Godot Functions ---
 
 func _ready():
+	# Connect the timer's timeout signal to our phase-changing function
+	phase_timer.timeout.connect(_on_phase_timer_timeout)
+
 	attack_timer.wait_time = attack_cooldown
 	phase_timer.wait_time = ground_duration
 	phase_timer.start()
+	
 	change_state(State.IDLE)
 
+
 func _physics_process(delta):
-	# Apply gravity ONLY if the dragon is on the ground.
+	# Apply gravity ONLY when not in an airborne state.
 	if not is_airborne():
 		if not is_on_floor():
 			velocity.y += gravity * delta
@@ -42,49 +47,50 @@ func _physics_process(delta):
 			velocity.x = 0
 			move_and_slide()
 			return
-			
-	# --- Main State Logic ---
+	
+	# The decision to change phase is now handled by the timer's signal.
+	# The AI brain is now much simpler.
 	match current_state:
-		State.IDLE, State.WALK:
-			handle_ground_state()
+		State.IDLE:
+			handle_idle_state()
+		State.WALK:
+			handle_walk_state()
 		State.FLYING:
 			handle_flying_state(delta)
-		State.ATTACK, State.RISE, State.SPECIAL_ATTACK, State.LANDING, State.DEAD:
-			# In these states, we are waiting for an animation to finish, so we do nothing here.
-			pass
-			
+
 	move_and_slide()
+
+# --- Signal Callback Function ---
+
+func _on_phase_timer_timeout():
+	# This function is ONLY called when the PhaseTimer finishes.
+	print("--- PHASE TIMER TIMEOUT ---")
+	if is_airborne():
+		change_state(State.LANDING)
+	else:
+		change_state(State.RISE)
 
 # --- State Logic Functions ---
 
-func handle_ground_state():
-	# This function handles all ground-based logic (idle and walk)
-	if phase_timer.is_stopped(): # Time to change phase!
-		change_state(State.RISE)
-		return
-
-	var player_in_range = is_player_in_range()
-	if player_in_range:
-		change_state(State.IDLE)
-		if attack_timer.is_stopped():
-			change_state(State.ATTACK)
-	else:
+func handle_idle_state():
+	if not is_player_in_range():
 		change_state(State.WALK)
+	elif attack_timer.is_stopped():
+		change_state(State.ATTACK)
+
+func handle_walk_state():
+	if is_player_in_range():
+		change_state(State.IDLE)
+	else:
 		var direction = (player.global_position - global_position).normalized()
 		velocity.x = direction.x * walk_speed
 
 func handle_flying_state(delta):
-	# This function handles all air-based logic
-	if phase_timer.is_stopped(): # Time to change phase!
-		change_state(State.LANDING)
-		return
-
 	# Move towards the target flying height
 	var target_pos = Vector2(global_position.x, fly_height)
+	# Lerp smoothly moves the dragon towards the target position over time
 	global_position = global_position.lerp(target_pos, delta * 2.0)
-	# Add some horizontal flying movement logic here if you want
-	# e.g., velocity.x = 100
-	
+
 	# Decide to use special attack
 	if attack_timer.is_stopped():
 		change_state(State.SPECIAL_ATTACK)
@@ -92,7 +98,7 @@ func handle_flying_state(delta):
 # --- Main State-Changing Function ---
 
 func change_state(new_state):
-	if current_state == new_state and new_state != State.ATTACK:
+	if current_state == new_state and new_state != State.ATTACK and new_state != State.SPECIAL_ATTACK:
 		return
 
 	print("Changing state from ", State.keys()[current_state], " to ", State.keys()[new_state])
@@ -115,26 +121,27 @@ func change_state(new_state):
 			change_state(State.IDLE)
 			
 		State.RISE:
-			velocity = Vector2.ZERO # Stop all movement to rise
+			velocity = Vector2.ZERO
 			animation_player.play("rise")
 			await animation_player.animation_finished
-			phase_timer.wait_time = flight_duration # Set the timer for how long to fly
+			phase_timer.wait_time = flight_duration
 			phase_timer.start()
 			change_state(State.FLYING)
 
 		State.FLYING:
 			animation_player.play("flying")
+			velocity = Vector2.ZERO # Stop gravity/falling while flying
 			
 		State.SPECIAL_ATTACK:
 			animation_player.play("special")
 			await animation_player.animation_finished
-			attack_timer.start() # Start cooldown after special attack
-			change_state(State.FLYING) # Go back to flying after the attack
+			attack_timer.start()
+			change_state(State.FLYING)
 
 		State.LANDING:
 			animation_player.play("landing")
 			await animation_player.animation_finished
-			phase_timer.wait_time = ground_duration # Set timer for how long to be on ground
+			phase_timer.wait_time = ground_duration
 			phase_timer.start()
 			change_state(State.IDLE)
 			
@@ -149,5 +156,4 @@ func is_player_in_range() -> bool:
 	return false
 
 func is_airborne() -> bool:
-	# A helper to check if we are in any of the flying-related states
 	return current_state in [State.RISE, State.FLYING, State.SPECIAL_ATTACK, State.LANDING]

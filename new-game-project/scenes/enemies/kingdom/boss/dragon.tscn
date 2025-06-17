@@ -1926,6 +1926,7 @@ height = 20.0
 [node name="Dragon" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_yw11o")
+attack_range = 80.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -77)
