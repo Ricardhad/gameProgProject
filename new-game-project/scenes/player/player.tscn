@@ -416,10 +416,10 @@ sync_with_global = true
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"pull_up"
+animation = &"heal"
 autoplay = "idle"
 frame = 3
-frame_progress = 0.941628
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b8yrv")
@@ -487,7 +487,5 @@ position = Vector2(0, -12)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 position_smoothing_speed = 3.5
-
-[node name="HeavyAtkTimer" type="Timer" parent="."]
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
