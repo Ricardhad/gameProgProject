@@ -16,10 +16,11 @@ func _on_area_entered(area: Area2D) -> void:
 	# --- Step 2: Is the area in the correct group? ---
 	if area.is_in_group("damage_sources"):
 		print("HURTBOX: SUCCESS! The area is in the 'damage_sources' group.")
-
+		
 		# --- Step 3: Is the Health component connected? ---
 		if health != null:
 			print("HURTBOX: SUCCESS! The Health component is assigned.")
+			
 
 			# --- Step 4: Does the area have a damage variable? ---
 			if area.has_method("get") and area.get("damage") != null:

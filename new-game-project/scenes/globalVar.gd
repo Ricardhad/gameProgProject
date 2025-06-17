@@ -1,172 +1,180 @@
 extends Node
 
-# --- STATS ASLI ANDA ---
-var maxhealth_player = 10
-var health_player = 10
+# ===================================================================
+# == BAGIAN 1: STATS PEMAIN (DASAR & AKTIF)
+# ===================================================================
+
+# --- STATS DASAR (NILAI ASLI, TIDAK BERUBAH) ---
+const BASE_MAX_HEALTH = 10
+const BASE_DAMAGE = 1
+const BASE_DEFENSE = 0
+const BASE_SPEED = 120.0
+const BASE_JUMP_CD = 2.0
+const BASE_DASH_CD = 2.0
+const BASE_HEAL_AMOUNT = 5
+const BASE_MAX_POTIONS = 2
+const MAX_HEAVY_ATK_CHARGES = 4
+const HEAVY_ATK_COOLDOWN_PER_CHARGE = 5.0
+
+# --- STATS AKTIF (NILAI YANG DIGUNAKAN DALAM GAME & DIUBAH OLEH BUFF) ---
+var maxhealth_player = BASE_MAX_HEALTH
+var health_player = BASE_MAX_HEALTH
+var damage_player = BASE_DAMAGE
+var active_defense = BASE_DEFENSE
+var active_speed = BASE_SPEED
+var active_jump_cd = BASE_JUMP_CD
+var active_dash_cd = BASE_DASH_CD
+var active_heal_amount = BASE_HEAL_AMOUNT
+var max_potions = BASE_MAX_POTIONS
+var current_potions = BASE_MAX_POTIONS
+
+# --- Variabel Lainnya ---
 var coin_collected = 0
-var damage_player = 1
 var score = 0
 var kill_count = 0
 var current_stage = "1-1"
 
-# --- ITEMS PERMANEN (DARI FUNGSI add_item) ---
+# --- Variabel Durasi Buff ---
+var hp_buff_duration = 0
+var atk_buff_duration = 0
+var def_buff_duration = 0
+var agi_buff_duration = 0
+var potion_buff_duration = 0
+var coin_buff_duration = 0
+var luck_buff_duration = 0
+
+# --- Variabel Item & Buff Permanen (jika masih digunakan) ---
 var hp = 0
 var atk = 0
 var def = 0
 var agi = 0
 var maxPot = 0
-
-# --- BUFF PERMANEN (DARI FUNGSI add_buff LAMA) ---
 var hp_buff = 0
 var atk_buff = 0
 var def_buff= 0
 var agi_buff = 0
 
-# --- DATA UNTUK BUFF SEMENTARA (BARU) ---
-# Menyimpan durasi buff (dalam jumlah stage)
-var hp_buff_duration = 0
-var atk_buff_duration = 0
-var def_buff_duration = 0
-var agi_buff_duration = 0
-var luck_buff_duration = 0
-var potion_buff_duration = 0
-var coin_buff_duration = 0
 
-var max_potions = 2       # Jumlah maksimal potion awal
-var current_potions = 2   # Jumlah potion saat ini
-# ----------------------------------------
-# ... (sisa stats Anda) ...
+# ===================================================================
+# == BAGIAN 2: FUNGSI-FUNGSI UTAMA
+# ===================================================================
 
-# --- FUNGSI UTAMA ---
 func refill_potions():
 	current_potions = max_potions
 	print("Potions refilled. Current: %d/%d" % [current_potions, max_potions])
 
-
-# --- FUNGSI-FUNGSI ASLI ANDA ---
-
-func add_coin():
-	coin_collected += 1 # Tambah 1 koin dasar
-	
-	# Cek apakah buff koin aktif, lalu tambah bonus acak
+func add_coin(base_amount: int = 1):
+	coin_collected += base_amount
 	if coin_buff_duration > 0:
 		var bonus_coin = randi_range(1, 5)
 		coin_collected += bonus_coin
 		print("Buff COIN aktif! Mendapat bonus %d koin." % bonus_coin)
-		
 	print("Total koin: ", coin_collected)
 
 func reset_game():
-	# Reset stats dasar
-	maxhealth_player = 10
-	health_player = 10
+	# Kembalikan semua stat aktif ke nilai dasarnya
+	maxhealth_player = BASE_MAX_HEALTH
+	health_player = BASE_MAX_HEALTH
+	damage_player = BASE_DAMAGE
+	active_defense = BASE_DEFENSE
+	active_speed = BASE_SPEED
+	active_jump_cd = BASE_JUMP_CD
+	active_dash_cd = BASE_DASH_CD
+	active_heal_amount = BASE_HEAL_AMOUNT
+	max_potions = BASE_MAX_POTIONS
+	refill_potions()
+	
+	# Reset variabel lainnya
 	coin_collected = 0
-	damage_player = 1
 	score = 0
 	kill_count = 0
 	current_stage = "1-1"
 	
-	# Reset items permanen
-	hp = 0
-	atk = 0
-	def = 0
-	agi = 0
-	maxPot = 0
-	
-	
-	
-	# Reset buff permanen
-	hp_buff = 0
-	atk_buff = 0
-	def_buff = 0
-	agi_buff = 0
-	
-	# Reset semua durasi buff sementara
+	# Reset semua durasi buff
 	hp_buff_duration = 0
 	atk_buff_duration = 0
 	def_buff_duration = 0
 	agi_buff_duration = 0
-	luck_buff_duration = 0
 	potion_buff_duration = 0
 	coin_buff_duration = 0
+	luck_buff_duration = 0
 	
-	max_potions = 2
-	refill_potions()
-
+	print("Game has been reset.")
 
 func add_item(itemName: String):
-	if(itemName == "hp"):
+	if itemName == "hp":
 		hp += 1
+		# Efek permanen: Menambah max health
 		maxhealth_player += 3
-		health_player += 3
-	elif(itemName == "atk"):
+		health_player = maxhealth_player # Langsung sembuhkan penuh
+		print("Item HP dibeli! Max HP sekarang: ", maxhealth_player)
+		
+	elif itemName == "atk":
 		atk += 1
+		# Efek permanen: Menambah damage dasar
 		damage_player += 2
+		print("Item ATK dibeli! Damage dasar sekarang: ", damage_player)
+
+	# --- TAMBAHKAN ATAU GANTI DENGAN BLOK DI BAWAH INI ---
+	elif itemName == "def":
+		def += 1
+		# Efek permanen: Menambah defense aktif
+		active_defense += 1 
+		print("Item DEF dibeli! Defense aktif sekarang: ", active_defense)
+		
+	elif itemName == "agi":
+		agi += 1
+		# Efek permanen: Menambah kecepatan aktif
+		active_speed += 15.0 
+		print("Item AGI dibeli! Kecepatan aktif sekarang: ", active_speed)
+		
 	elif itemName == "maxPot":
+		maxPot += 1
 		max_potions += 1
-		refill_potions() # Isi penuh potion saat max bertambah
-		print("Max Potions increased! New max: %d" % max_potions)
-	# ... dst ...
+		refill_potions() # Langsung isi penuh potion saat max bertambah
+		print("Item Max Potion dibeli! Max Potion sekarang: %d" % max_potions)
+# ===================================================================
+# == BAGIAN 3: LOGIKA UTAMA BUFF
+# ===================================================================
 
-func add_buff(buffName: String):
-	if(buffName == "hp_buff"):
-		hp_buff += 1
-		maxhealth_player += 5
-		health_player += 5
-	elif(buffName == "atk_buff"):
-		atk_buff += 1
-		damage_player += 4
-	# ... dst ...
-
-
-#=============================================================
-#== SISTEM BUFF SEMENTARA (IMPLEMENTASI BARU YANG BENAR)
-#=============================================================
-
-# Fungsi ini dipanggil dari TOKO untuk mendapatkan buff
 func acquire_temporary_buff(buff_id: String):
 	match buff_id:
 		"hp_buff":
-			var bonus_value = 10
-			if hp_buff_duration == 0: # Hanya tambah Max HP di tumpukan pertama
-				maxhealth_player += bonus_value
-			health_player = min(maxhealth_player, health_player + bonus_value) # Sembuhkan & jangan melebihi Max HP
-			hp_buff_duration += 1 # Selalu tambah durasi
-			print("Buff HP didapat! Durasi sekarang: %d stage" % hp_buff_duration)
-
+			if hp_buff_duration == 0: maxhealth_player += 10
+			health_player = min(maxhealth_player, health_player + 10)
+			hp_buff_duration += 1
+			print("Buff HP didapat! Durasi: ", hp_buff_duration)
 		"atk_buff":
-			var bonus_value = 2 # Bonus damage
-			if atk_buff_duration == 0: # Hanya tambah damage di tumpukan pertama
-				damage_player += bonus_value
+			if atk_buff_duration == 0: damage_player += 2
 			atk_buff_duration += 1
-			print("Buff ATK didapat! Durasi sekarang: %d stage" % atk_buff_duration)
-
+			print("Buff ATK didapat! Durasi: ", atk_buff_duration)
 		"def_buff":
+			if def_buff_duration == 0: active_defense += 3
 			def_buff_duration += 1
-			print("Buff DEF didapat! Durasi sekarang: %d stage" % def_buff_duration)
-			
+			print("Buff DEF didapat! Defense aktif: ", active_defense)
 		"agi_buff":
+			if agi_buff_duration == 0:
+				active_speed = 200.0
+				active_jump_cd -= 1.0
+				active_dash_cd -= 1.0
 			agi_buff_duration += 1
-			print("Buff AGI didapat! Durasi sekarang: %d stage" % agi_buff_duration)
-			
+			print("Buff AGI didapat! Speed aktif: ", active_speed)
+		"potion_buff":
+			if potion_buff_duration == 0: active_heal_amount = 10
+			potion_buff_duration += 1
+			print("Buff POTION didapat! Heal aktif: ", active_heal_amount)
 		"luck_buff":
 			luck_buff_duration += 1
-			print("Buff LUCK didapat! Durasi sekarang: %d stage" % luck_buff_duration)
-
-		"potion_buff":
-			potion_buff_duration += 1
-			print("Buff POTION didapat! Durasi sekarang: %d stage" % potion_buff_duration)
-			
+			print("Buff LUCK didapat! Durasi: ", luck_buff_duration)
 		"coin_buff":
 			coin_buff_duration += 1
-			print("Buff COIN didapat! Durasi sekarang: %d stage" % coin_buff_duration)
+			print("Buff COIN didapat! Durasi: ", coin_buff_duration)
 
-
-# Fungsi ini dipanggil dari FINISH LINE di akhir stage
 func process_end_of_stage():
 	print("Memproses akhir stage, mengurangi durasi buff...")
 	
-	if current_stage != "1-1" and current_stage != "2-1" and current_stage != "3-1" and current_stage != "4-1":
+	# Hanya jalankan jika bukan stage pertama di setiap world
+	if not str(current_stage).ends_with("-1"):
 		# Proses Buff HP
 		if hp_buff_duration > 0:
 			hp_buff_duration -= 1
@@ -174,40 +182,30 @@ func process_end_of_stage():
 				maxhealth_player -= 10
 				health_player = min(health_player, maxhealth_player)
 				print("Buff HP SEMENTARA telah habis.")
-				
 		# Proses Buff ATK
 		if atk_buff_duration > 0:
 			atk_buff_duration -= 1
 			if atk_buff_duration == 0:
 				damage_player -= 2
 				print("Buff ATK SEMENTARA telah habis.")
-				
 		# Proses Buff DEF
 		if def_buff_duration > 0:
 			def_buff_duration -= 1
 			if def_buff_duration == 0:
+				active_defense -= 3
 				print("Buff DEF SEMENTARA telah habis.")
-
 		# Proses Buff AGI
 		if agi_buff_duration > 0:
 			agi_buff_duration -= 1
 			if agi_buff_duration == 0:
+				active_speed = BASE_SPEED
+				active_jump_cd = BASE_JUMP_CD
+				active_dash_cd = BASE_DASH_CD
 				print("Buff AGI SEMENTARA telah habis.")
-				
-		# Proses Buff LUCK
-		if luck_buff_duration > 0:
-			luck_buff_duration -= 1
-			if luck_buff_duration == 0:
-				print("Buff LUCK SEMENTARA telah habis.")
-
 		# Proses Buff POTION
 		if potion_buff_duration > 0:
 			potion_buff_duration -= 1
 			if potion_buff_duration == 0:
+				active_heal_amount = BASE_HEAL_AMOUNT
 				print("Buff POTION SEMENTARA telah habis.")
-
-		# Proses Buff COIN
-		if coin_buff_duration > 0:
-			coin_buff_duration -= 1
-			if coin_buff_duration == 0:
-				print("Buff COIN SEMENTARA telah habis.")
+		# ... (lanjutkan untuk buff lain jika perlu) ...
