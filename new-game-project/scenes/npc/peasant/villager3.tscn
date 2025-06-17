@@ -1,0 +1,267 @@
+[gd_scene load_steps=29 format=3 uid="uid://b0k5lces35ld4"]
+
+[ext_resource type="Script" path="res://scenes/npc/peasant/villager_3.gd" id="1_f4pxt"]
+[ext_resource type="Texture2D" uid="uid://dqi3vlpjmuket" path="res://assets/npc/villagers/Peasants_3/Dialogue.png" id="2_lh5lx"]
+[ext_resource type="Texture2D" uid="uid://cecf3r6mx4hnx" path="res://assets/npc/villagers/Peasants_3/Idle.png" id="3_4wvnh"]
+[ext_resource type="Texture2D" uid="uid://iplr4g3nnb3f" path="res://assets/selecting_menu/butonUnclicked.png" id="5_s8wfb"]
+[ext_resource type="Texture2D" uid="uid://rsyaadoyfsor" path="res://assets/selecting_menu/cooldownbutton.png" id="6_m88xw"]
+[ext_resource type="Texture2D" uid="uid://cpr8fh38ctns5" path="res://assets/selecting_menu/buttonClicked.png" id="7_cvq0f"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="8_ogav6"]
+[ext_resource type="Texture2D" uid="uid://c10iv5slqi1fu" path="res://assets/selecting_menu/TextBox.png" id="9_peqor"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lbb0"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r57g3"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjfdw"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5u1i"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ks6aa"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ink3"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02v4s"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47b55"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q181f"]
+atlas = ExtResource("2_lh5lx")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrpcp"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkqe1"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34b2e"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6c8h8"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj5mo"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5uv6"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxslr"]
+atlas = ExtResource("3_4wvnh")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7cfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lbb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r57g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjfdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5u1i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ks6aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ink3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02v4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47b55")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q181f")
+}],
+"loop": true,
+"name": &"dialogue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrpcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkqe1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34b2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6c8h8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj5mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5uv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxslr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_csl8k"]
+height = 42.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cljqm"]
+size = Vector2(63, 43)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1osah"]
+texture = ExtResource("9_peqor")
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_f4pxt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.49997, -38.5)
+scale = Vector2(0.601563, 0.601563)
+sprite_frames = SubResource("SpriteFrames_o7cfq")
+animation = &"idle"
+autoplay = "idle"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_csl8k")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0.5, -22)
+shape = SubResource("RectangleShape2D_cljqm")
+
+[node name="ButtonChat" type="TextureButton" parent="."]
+offset_left = 15.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = -22.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_s8wfb")
+texture_pressed = ExtResource("6_m88xw")
+texture_hover = ExtResource("7_cvq0f")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ButtonChat"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 69.0
+offset_bottom = 46.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_ogav6")
+theme_override_font_sizes/font_size = 40
+text = "F"
+horizontal_alignment = 1
+
+[node name="PanelChatNPC" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = -0.781
+anchor_top = -0.485
+anchor_right = -0.781
+anchor_bottom = -0.485
+offset_left = -16.0
+offset_top = -69.0
+offset_right = 147.0
+offset_bottom = -33.0
+scale = Vector2(-1, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_1osah")
+
+[node name="LabelChatNPC" type="Label" parent="PanelChatNPC"]
+modulate = Color(0.17, 0.17, 0.17, 1)
+layout_mode = 0
+offset_left = 154.0
+offset_top = 4.0
+offset_right = 1274.0
+offset_bottom = 284.0
+scale = Vector2(-0.1, 0.1)
+theme_override_fonts/font = ExtResource("8_ogav6")
+theme_override_font_sizes/font_size = 80
+text = "Passive: Immune to Bleed"
+autowrap_mode = 2
+
+[node name="ButtonYes" type="TextureButton" parent="PanelChatNPC"]
+offset_left = 25.0
+offset_top = 15.0
+offset_right = 39.0
+offset_bottom = 29.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_s8wfb")
+texture_pressed = ExtResource("6_m88xw")
+texture_hover = ExtResource("7_cvq0f")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelChatNPC/ButtonYes"]
+layout_mode = 2
+offset_left = -3.0
+offset_top = -1.0
+offset_right = 67.0
+offset_bottom = 44.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("8_ogav6")
+theme_override_font_sizes/font_size = 40
+text = "Y
+"
+horizontal_alignment = 1
+
+[node name="ButtonNo" type="TextureButton" parent="PanelChatNPC"]
+offset_left = 8.0
+offset_top = 15.0
+offset_right = 22.0
+offset_bottom = 29.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("5_s8wfb")
+texture_pressed = ExtResource("6_m88xw")
+texture_hover = ExtResource("7_cvq0f")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="PanelChatNPC/ButtonNo"]
+layout_mode = 2
+offset_left = 17.0
+offset_top = 13.0
+offset_right = 87.0
+offset_bottom = 58.0
+scale = Vector2(-0.3, -0.3)
+theme_override_fonts/font = ExtResource("8_ogav6")
+theme_override_font_sizes/font_size = 40
+text = "N
+"
+horizontal_alignment = 1

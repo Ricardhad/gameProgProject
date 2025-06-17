@@ -14,6 +14,8 @@ extends Node2D
 @onready var potion_label: Label = $CanvasLayer2/Panel/ButtonPotion/Label
 # ----------------------------------------
 
+@onready var label_quest: Label = $CanvasLayer2/LabelQuest
+
 # Variabel lain
 var player_node = null
 var current_minimap_tilemap: TileMap = null
@@ -61,6 +63,22 @@ func _update_hud():
 	$CanvasLayer2/Panel/HealthBar.max_value = GlobalVar.maxhealth_player
 	
 	health_bar_label.text = "%d / %d" % [GlobalVar.health_player, GlobalVar.maxhealth_player]
+	_update_quest_display()
+
+func _update_quest_display():
+	# Periksa apakah ada quest yang sedang aktif
+	if GlobalVar.is_quest_active and not GlobalVar.active_quest_data.is_empty():
+		# Ambil data progres dari GlobalVar
+		var progress = GlobalVar.kill_count - GlobalVar.initial_kill_count_on_accept
+		var target = GlobalVar.active_quest_data.kill_target
+		var quest_text = GlobalVar.active_quest_data.hud_text
+		
+		# Format teksnya dan tampilkan di label
+		label_quest.text = "%s: %d / %d" % [quest_text, progress, target]
+		label_quest.visible = true
+	else:
+		# Jika tidak ada quest, sembunyikan labelnya
+		label_quest.visible = false
 
 func update_heavy_attack_charges(current_charges: int, max_charges: int):
 	if heavy_attack_bar:

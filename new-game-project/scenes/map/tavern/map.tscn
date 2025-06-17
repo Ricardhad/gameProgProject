@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="5_wjocj"]
 [ext_resource type="PackedScene" uid="uid://1ek76qkgonj2" path="res://scenes/npc/peasant/villager1.tscn" id="6_au6i5"]
 [ext_resource type="PackedScene" uid="uid://bxl5n7q2288s6" path="res://scenes/npc/peasant/villager2.tscn" id="7_6u4ep"]
-[ext_resource type="PackedScene" uid="uid://d0w7ypj1q0u1i" path="res://scenes/npc/peasant/peasant3.tscn" id="8_sp1lq"]
+[ext_resource type="PackedScene" uid="uid://b0k5lces35ld4" path="res://scenes/npc/peasant/villager3.tscn" id="8_bwldq"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1169,5 +1169,5 @@ position = Vector2(585, 305)
 [node name="CharacterBody2D" parent="." instance=ExtResource("6_au6i5")]
 position = Vector2(453, 305)
 
-[node name="CharacterBody2D3" parent="." instance=ExtResource("8_sp1lq")]
-position = Vector2(317, 305)
+[node name="CharacterBody2D3" parent="." instance=ExtResource("8_bwldq")]
+position = Vector2(386, 301)

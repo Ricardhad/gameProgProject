@@ -208,6 +208,11 @@ text = "Heal
 "
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="CanvasLayer2/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Label_Stage-Level" type="Label" parent="CanvasLayer2"]
 offset_left = 934.0
 offset_top = -6.0
@@ -218,3 +223,13 @@ theme_override_fonts/font = ExtResource("3_18l4s")
 theme_override_font_sizes/font_size = 40
 text = "Stage 1-1"
 horizontal_alignment = 1
+
+[node name="LabelQuest" type="Label" parent="CanvasLayer2"]
+offset_left = 3.0
+offset_top = 158.0
+offset_right = 173.0
+offset_bottom = 204.0
+scale = Vector2(0.8, 0.8)
+theme_override_fonts/font = ExtResource("3_18l4s")
+theme_override_font_sizes/font_size = 40
+text = "Quest"

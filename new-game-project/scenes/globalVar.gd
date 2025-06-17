@@ -54,6 +54,13 @@ var atk_buff = 0
 var def_buff= 0
 var agi_buff = 0
 
+# Status untuk tahu apakah ada quest yang sedang berjalan
+var is_quest_active: bool = false
+# Untuk menyimpan data quest yang sedang aktif (target, reward, dll.)
+var active_quest_data: Dictionary = {}
+# Untuk mencatat jumlah kill SAAT quest diterima, agar progres akurat
+var initial_kill_count_on_accept: int = kill_count
+
 
 # ===================================================================
 # == BAGIAN 2: FUNGSI-FUNGSI UTAMA
@@ -98,6 +105,10 @@ func reset_game():
 	potion_buff_duration = 0
 	coin_buff_duration = 0
 	luck_buff_duration = 0
+	
+	is_quest_active = false
+	active_quest_data.clear()
+	initial_kill_count_on_accept = kill_count
 	
 	print("Game has been reset.")
 
