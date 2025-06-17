@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dy8j3k28sxqer"]
+[gd_scene load_steps=20 format=3 uid="uid://dy8j3k28sxqer"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_jqwck"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="3_r8ys0"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="13_led54"]
 [ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="15_0on3l"]
 [ext_resource type="PackedScene" uid="uid://c1g1vmycj3c21" path="res://scenes/enemies/forest/minion/sketelonArcher.tscn" id="15_j6ubl"]
+[ext_resource type="PackedScene" uid="uid://cf1raibso4mhe" path="res://scenes/enemies/kingdom/boss/dragon.tscn" id="16_7dnx8"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -910,5 +911,8 @@ position = Vector2(568, 274)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("15_j6ubl")]
 position = Vector2(1044.89, 240.757)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("16_7dnx8")]
+position = Vector2(482.862, 241.97)
 
 [editable path="BossHealthbar"]

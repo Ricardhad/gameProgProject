@@ -39,7 +39,7 @@ func get_damage() -> int:
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f4led"]
-size = Vector2(21, 14)
+size = Vector2(20.5, 14)
 
 [node name="HitBox" type="Area2D"]
 script = SubResource("GDScript_dpic4")

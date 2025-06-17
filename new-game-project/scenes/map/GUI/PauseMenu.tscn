@@ -31,6 +31,7 @@ script = ExtResource("1_ihtfe")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PanelPause" type="Panel" parent="CanvasLayer"]
+visible = false
 top_level = true
 custom_minimum_size = Vector2(241, 190)
 anchors_preset = 8
