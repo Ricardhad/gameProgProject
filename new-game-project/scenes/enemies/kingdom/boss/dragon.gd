@@ -6,13 +6,15 @@ extends CharacterBody2D
 @export var attack_cooldown: float = 3.0
 @export var special_attack_cooldown: float = 5.0 # Separate cooldown for special attack
 @export var walk_speed: float = 80.0
-@export var fly_speed: float = 120.0 # NEW: Speed for flying patrol
+@export var fly_speed: float = 120.0
 @export var flight_duration: float = 10.0
 @export var ground_duration: float = 15.0
-@export var fly_height: float = 100.0 # This is a Y-coordinate on the screen
+# MODIFIED: This is now how FAR UP the dragon flies from its starting point.
+@export var fly_height_offset: float = 200.0 
 
 # --- Node References ---
 @onready var animation_player = $AnimationPlayer
+@onready var sprite = $AnimatedSprite2D # IMPORTANT: Make sure this is your Sprite2D/AnimatedSprite2D node name
 @onready var attack_timer = $AttackTimer
 @onready var phase_timer = $PhaseTimer
 
@@ -24,7 +26,8 @@ var current_state = State.IDLE
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player = null
 var ground_y_position: float = 0.0
-var fly_patrol_direction = 1 # NEW: 1 for right, -1 for left
+var target_fly_y: float = 0.0 # NEW: Stores the calculated target flight Y-coordinate.
+var fly_patrol_direction = 1 # 1 for right, -1 for left
 
 # --- Godot Functions ---
 
@@ -34,6 +37,8 @@ func _ready():
 	phase_timer.wait_time = ground_duration
 	phase_timer.start()
 	change_state(State.IDLE)
+	# Store the initial position in case the dragon starts on the ground.
+	ground_y_position = global_position.y
 
 func _physics_process(delta):
 	# Apply gravity ONLY when not in an airborne state.
@@ -69,18 +74,25 @@ func _on_phase_timer_timeout():
 	if is_airborne():
 		change_state(State.LANDING)
 	else:
+		# When it's time to take off:
+		# 1. Store our current ground position so we know where to land.
 		ground_y_position = global_position.y
+		# 2. Calculate the absolute Y coordinate to fly to.
+		target_fly_y = ground_y_position - fly_height_offset
+		# 3. Start the rise sequence.
 		change_state(State.RISE)
 
 # --- State Logic Functions ---
 
 func handle_idle_state():
+	update_facing_direction()
 	if not is_player_in_range():
 		change_state(State.WALK)
 	elif attack_timer.is_stopped():
 		change_state(State.ATTACK)
 
 func handle_walk_state():
+	update_facing_direction()
 	if is_player_in_range():
 		change_state(State.IDLE)
 	else:
@@ -89,21 +101,22 @@ func handle_walk_state():
 
 func handle_flying_state(delta):
 	# --- Vertical Movement ---
-	# Move towards the target flying height
-	var target_y_pos = Vector2(global_position.x, fly_height)
+	# CORRECTED: Move towards the pre-calculated 'target_fly_y' position.
+	var target_y_pos = Vector2(global_position.x, target_fly_y)
 	global_position = global_position.lerp(target_y_pos, delta * 2.0)
 
 	# --- Attack Logic ---
-	# Only start attacking once we are near our flying height
-	if abs(global_position.y - fly_height) < 10:
+	# The 'abs()' function calculates the absolute (positive) difference.
+	if abs(global_position.y - target_fly_y) < 10:
 		# Decide to use special attack
 		if attack_timer.is_stopped():
 			change_state(State.SPECIAL_ATTACK)
 		
 		# --- Horizontal Patrol Movement ---
 		velocity.x = fly_speed * fly_patrol_direction
-		# Flip direction if near screen edges (this assumes your screen width is around 1152)
-		# You may need to adjust these values for your game's resolution.
+		sprite.flip_h = (fly_patrol_direction < 0)
+		
+		# Flip direction if near screen edges
 		if global_position.x > 1000:
 			fly_patrol_direction = -1
 		elif global_position.x < 150:
@@ -113,7 +126,7 @@ func handle_landing_state(delta):
 	# Smooth landing movement.
 	var target_pos = Vector2(global_position.x, ground_y_position)
 	global_position = global_position.lerp(target_pos, delta * 2.5)
-	velocity.x = 0 # Stop horizontal movement while landing
+	velocity.x = 0
 
 # --- Main State-Changing Function ---
 
@@ -134,6 +147,7 @@ func change_state(new_state):
 		
 		State.ATTACK:
 			velocity.x = 0
+			update_facing_direction()
 			var attack_name = ["attack1", "attack2"].pick_random()
 			animation_player.play(attack_name)
 			await animation_player.animation_finished
@@ -151,13 +165,12 @@ func change_state(new_state):
 
 		State.FLYING:
 			animation_player.play("flying")
-			# Start the cooldown for the first special attack immediately
 			if attack_timer.is_stopped():
-				attack_timer.wait_time = 0.5 # Wait just a moment before the first attack
+				attack_timer.wait_time = 0.5
 				attack_timer.start()
 			
 		State.SPECIAL_ATTACK:
-			velocity.x = 0 # Stop moving to perform the special attack
+			velocity.x = 0
 			animation_player.play("special")
 			await animation_player.animation_finished
 			attack_timer.wait_time = special_attack_cooldown
@@ -183,3 +196,10 @@ func is_player_in_range() -> bool:
 
 func is_airborne() -> bool:
 	return current_state in [State.RISE, State.FLYING, State.SPECIAL_ATTACK, State.LANDING]
+
+func update_facing_direction():
+	if player:
+		if player.global_position.x > global_position.x:
+			sprite.flip_h = false
+		else:
+			sprite.flip_h = true
