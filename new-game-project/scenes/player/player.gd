@@ -75,7 +75,7 @@ func _ready():
 	heavy_atk_charges = MAX_HEAVY_ATK_CHARGES
 	# If you want to update HUD immediately, assuming HUD has a method for this:
 	if hud: 
-		hud.update_heavy_attack_charges(heavy_atk_charges,MAX_HEAVY_ATK_CHARGES)
+		#hud._update_heavy_attack_charges(heavy_atk_charges,MAX_HEAVY_ATK_CHARGES)
 		hud.set_player_node(self) # <-- Corrected: Pass 'self' here
 	# Connect the health depletion signal
 	health.connect("health_depleted", Callable(self, "_on_health_depleted"))
@@ -101,7 +101,8 @@ func _physics_process(delta: float) -> void:
 			heavy_atk_recharge_timer = 0.0 # Reset timer for the next charge
 			# Update HUD to show new charge count
 			if hud:
-				hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES) # <-- Add this line
+				pass
+				#hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES) # <-- Add this line
 	# --- 2. Handle Game State Overrides (e.g., Respawn) ---
 	if global_position.y > 1000:
 		global_position = respawn_position
@@ -195,7 +196,8 @@ func set_state(new_state: PlayerState):
 				heavy_atk_charges -= 1 # Consume a charge
 				# Update HUD to show new charge count
 				if hud:
-					hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES) # <-- Add this line
+					pass
+					#hud.update_heavy_attack_charges(heavy_atk_charges, MAX_HEAVY_ATK_CHARGES) # <-- Add this line
 
 				animated_sprite_2d.animation = "attack2"
 				animated_sprite_2d.frame = 0
@@ -438,6 +440,7 @@ func _await_heal_animation_completion():
 
 # --- Helper Functions ---
 func update_attack_hitboxes(current_anim: String):
+	if current_anim == "attack" or current_anim == "attack1":
 		attack_area_1.disabled = false
 	elif current_anim == "attack2":
 		attack_area_2.disabled = false
