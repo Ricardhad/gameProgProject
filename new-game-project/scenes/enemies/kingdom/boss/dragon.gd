@@ -4,19 +4,21 @@ extends CharacterBody2D
 # --- Variables ---
 @export var attack_range: float = 150.0
 @export var attack_cooldown: float = 3.0
-@export var special_attack_cooldown: float = 5.0 # Separate cooldown for special attack
+@export var special_attack_cooldown: float = 5.0
 @export var walk_speed: float = 80.0
 @export var fly_speed: float = 120.0
 @export var flight_duration: float = 10.0
 @export var ground_duration: float = 15.0
-# MODIFIED: This is now how FAR UP the dragon flies from its starting point.
 @export var fly_height_offset: float = 200.0 
 
 # --- Node References ---
 @onready var animation_player = $AnimationPlayer
-@onready var sprite = $AnimatedSprite2D # IMPORTANT: Make sure this is your Sprite2D/AnimatedSprite2D node name
+@onready var sprite = $AnimatedSprite2D
 @onready var attack_timer = $AttackTimer
 @onready var phase_timer = $PhaseTimer
+@onready var health_component = $Health # Reference to the Health node
+@onready var hurtbox = $HurtBox # Reference to the HurtBox
+@onready var hitbox_pivot = $HitBox # Reference to the pivot for hitboxes
 
 # --- State Management ---
 enum State { IDLE, WALK, ATTACK, RISE, FLYING, SPECIAL_ATTACK, LANDING, DEAD }
@@ -26,21 +28,32 @@ var current_state = State.IDLE
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player = null
 var ground_y_position: float = 0.0
-var target_fly_y: float = 0.0 # NEW: Stores the calculated target flight Y-coordinate.
-var fly_patrol_direction = 1 # 1 for right, -1 for left
+var target_fly_y: float = 0.0
+var fly_patrol_direction = 1
 
 # --- Godot Functions ---
 
 func _ready():
+	# Connect signals for timers and health changes
 	phase_timer.timeout.connect(_on_phase_timer_timeout)
+	
+	# Connect to the health signals from your Health.gd script
+	health_component.health_changed.connect(_on_health_changed)
+	# CORRECTED: The signal name is "health_depleted", not "no_health"
+	health_component.health_depleted.connect(_on_health_depleted)
+
 	attack_timer.wait_time = attack_cooldown
 	phase_timer.wait_time = ground_duration
 	phase_timer.start()
+	
 	change_state(State.IDLE)
-	# Store the initial position in case the dragon starts on the ground.
 	ground_y_position = global_position.y
 
 func _physics_process(delta):
+	# If we are dead, do nothing else.
+	if current_state == State.DEAD:
+		return
+
 	# Apply gravity ONLY when not in an airborne state.
 	if not is_airborne() and not is_on_floor():
 		velocity.y += gravity * delta
@@ -67,20 +80,25 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-# --- Signal Callback Function ---
+# --- Signal Callback Functions ---
 
 func _on_phase_timer_timeout():
-	print("--- PHASE TIMER TIMEOUT ---")
 	if is_airborne():
 		change_state(State.LANDING)
 	else:
-		# When it's time to take off:
-		# 1. Store our current ground position so we know where to land.
 		ground_y_position = global_position.y
-		# 2. Calculate the absolute Y coordinate to fly to.
 		target_fly_y = ground_y_position - fly_height_offset
-		# 3. Start the rise sequence.
 		change_state(State.RISE)
+
+func _on_health_changed(new_health):
+	# Optional: You can add logic here, like flashing the sprite red.
+	pass
+
+# CORRECTED: Renamed function to match the signal from Health.gd
+func _on_health_depleted():
+	# This is called when health reaches zero.
+	if current_state != State.DEAD: # Prevent this from being called multiple times
+		change_state(State.DEAD)
 
 # --- State Logic Functions ---
 
@@ -100,30 +118,23 @@ func handle_walk_state():
 		velocity.x = direction.x * walk_speed
 
 func handle_flying_state(delta):
-	# --- Vertical Movement ---
-	# CORRECTED: Move towards the pre-calculated 'target_fly_y' position.
 	var target_y_pos = Vector2(global_position.x, target_fly_y)
 	global_position = global_position.lerp(target_y_pos, delta * 2.0)
 
-	# --- Attack Logic ---
-	# The 'abs()' function calculates the absolute (positive) difference.
 	if abs(global_position.y - target_fly_y) < 10:
-		# Decide to use special attack
 		if attack_timer.is_stopped():
 			change_state(State.SPECIAL_ATTACK)
 		
-		# --- Horizontal Patrol Movement ---
 		velocity.x = fly_speed * fly_patrol_direction
 		sprite.flip_h = (fly_patrol_direction < 0)
+		hitbox_pivot.scale.x = -1 if sprite.flip_h else 1 # Flip hitbox pivot with sprite
 		
-		# Flip direction if near screen edges
 		if global_position.x > 1000:
 			fly_patrol_direction = -1
 		elif global_position.x < 150:
 			fly_patrol_direction = 1
 
 func handle_landing_state(delta):
-	# Smooth landing movement.
 	var target_pos = Vector2(global_position.x, ground_y_position)
 	global_position = global_position.lerp(target_pos, delta * 2.5)
 	velocity.x = 0
@@ -185,7 +196,14 @@ func change_state(new_state):
 			change_state(State.IDLE)
 			
 		State.DEAD:
+			velocity = Vector2.ZERO
+			# Disable collisions so the dragon doesn't block things while dead
+			$CollisionShape2D.disabled = true
+			hurtbox.monitoring = false
 			animation_player.play("dead")
+			# Optional: wait for death animation to finish then remove the body
+			# await animation_player.animation_finished
+			# queue_free()
 
 # --- Helper Functions ---
 
@@ -199,7 +217,11 @@ func is_airborne() -> bool:
 
 func update_facing_direction():
 	if player:
+		# If player is to the right of the dragon, don't flip.
 		if player.global_position.x > global_position.x:
 			sprite.flip_h = false
+			hitbox_pivot.scale.x = -1 # Face right
+		# If player is to the left, flip.
 		else:
 			sprite.flip_h = true
+			hitbox_pivot.scale.x = 1 # Face left

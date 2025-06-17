@@ -2369,6 +2369,7 @@ shape = SubResource("CapsuleShape2D_7duvf")
 
 [node name="Health" parent="." instance=ExtResource("14_1j7xn")]
 unique_name_in_owner = true
+max_health = 20
 
 [editable path="HitBox"]
 [editable path="HurtBox"]
