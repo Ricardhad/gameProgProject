@@ -90,8 +90,8 @@ animations = [{
 size = Vector2(35, 16)
 
 [node name="Charge" type="Area2D"]
-collision_layer = 19
-collision_mask = 0
+collision_layer = 16
+collision_mask = 2
 script = SubResource("GDScript_kx1fn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -102,8 +102,8 @@ frame = 3
 frame_progress = 0.761269
 
 [node name="HitBox" type="Area2D" parent="." groups=["damage_sources"]]
-collision_layer = 19
-collision_mask = 0
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("2_pjrqc")
 damage = 5
 

@@ -531,8 +531,8 @@ autoplay = "idle"
 shape = SubResource("CapsuleShape2D_b8yrv")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 2
-collision_mask = 20
+collision_layer = 4
+collision_mask = 18
 script = ExtResource("12_df1lu")
 health = NodePath("../Health")
 

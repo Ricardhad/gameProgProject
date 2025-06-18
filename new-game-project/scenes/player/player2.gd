@@ -64,6 +64,14 @@ func spawn_charge2():
 	else:
 		direction = 1
 
+	arrow_spawn_point.position.x = abs(arrow_spawn_point.position.x) * direction
+	# --- END OF NEW LOGIC ---
+
+	# Now that the spawn point is in the correct flipped position, get its global position.
+	arrow_instance.global_position = arrow_spawn_point.global_position
+	arrow_instance.scale = Vector2(0.5, 0.5)
+
+	# Set the arrow's velocity using the same direction variable.
 	arrow_instance.velocity = Vector2(500 * direction, 0)
 
 func spawn_charge1():
@@ -78,6 +86,14 @@ func spawn_charge1():
 	else:
 		direction = 1
 
+	arrow_spawn_point.position.x = abs(arrow_spawn_point.position.x) * direction
+	# --- END OF NEW LOGIC ---
+
+	# Now that the spawn point is in the correct flipped position, get its global position.
+	arrow_instance.global_position = arrow_spawn_point.global_position
+	arrow_instance.scale = Vector2(0.5, 0.5)
+
+	# Set the arrow's velocity using the same direction variable.
 	arrow_instance.velocity = Vector2(500 * direction, 0)
 
 func _ready():
