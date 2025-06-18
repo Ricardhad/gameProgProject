@@ -1,6 +1,7 @@
-[gd_scene load_steps=67 format=3 uid="uid://dtpx2v2lq1lk7"]
+[gd_scene load_steps=78 format=3 uid="uid://dtpx2v2lq1lk7"]
 
 [ext_resource type="Texture2D" uid="uid://coofe3om71ijn" path="res://assets/enemies/snow/dwarf/Dwarf_3/Attack_1.png" id="1_arbm8"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_kk566"]
 [ext_resource type="Texture2D" uid="uid://mfmnqwondn6x" path="res://assets/enemies/snow/dwarf/Dwarf_3/Attack_2.png" id="2_o4r43"]
 [ext_resource type="Texture2D" uid="uid://drqq4vly2ima4" path="res://assets/enemies/snow/dwarf/Dwarf_3/Dead.png" id="3_lgnyq"]
 [ext_resource type="Texture2D" uid="uid://btlkpg0t8h7ag" path="res://assets/enemies/snow/dwarf/Dwarf_3/Hurt.png" id="4_sfhdc"]
@@ -9,6 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://c3e1wdf4olrci" path="res://assets/enemies/snow/dwarf/Dwarf_3/Run.png" id="7_sp0t3"]
 [ext_resource type="Texture2D" uid="uid://d1dbb2riorcwe" path="res://assets/enemies/snow/dwarf/Dwarf_3/Special.png" id="8_4j1mr"]
 [ext_resource type="Texture2D" uid="uid://cxsyx2qorfpd7" path="res://assets/enemies/snow/dwarf/Dwarf_3/Walk.png" id="9_8bdhu"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_exgp7"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_awd2s"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="13_d1y0v"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_cqwob"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_jdt0a"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_tr1wg"]
+[ext_resource type="PackedScene" uid="uid://bxq23tiialua0" path="res://scenes/player/consumables/hp.tscn" id="17_c53g6"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="18_ese0p"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_drmfa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jddmd"]
 atlas = ExtResource("1_arbm8")
@@ -450,13 +460,66 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwq86"]
+size = Vector2(20.75, 35)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_kk566")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"attack2"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("11_exgp7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.375004, -17.5)
+shape = SubResource("RectangleShape2D_wwq86")
+
+[node name="AttackController" parent="." instance=ExtResource("12_awd2s")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2"])
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(24.875, -15)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 10
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(24.875, -24)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_d1y0v")
+max_health = 50
+
+[node name="MovementChecker" parent="." instance=ExtResource("14_cqwob")]
+unique_name_in_owner = true
+position = Vector2(-4, -4)
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("15_jdt0a")]
+position = Vector2(2, 0)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="LootDropper" parent="." instance=ExtResource("16_tr1wg")]
+coin_scene = ExtResource("17_c53g6")
+coin_max_amount = 2
+
+[node name="StateMachine" parent="." instance=ExtResource("18_ese0p")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="." instance=ExtResource("19_drmfa")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]

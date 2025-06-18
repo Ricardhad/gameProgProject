@@ -4,7 +4,7 @@ extends Area2D
 
 var speed: float = 300.0
 var direction: Vector2 = Vector2.RIGHT
-var damage: int = 2
+@export var damage: int = 2
 
 func _ready():
 	# Connect the area's body_entered signal to our hit detection function.

@@ -50,7 +50,7 @@ func _process(delta: float):
 	# Update seluruh HUD setiap frame
 	_update_hud()
 	
-	if is_instance_valid(player_node):
+	if is_instance_valid(player_node): 
 		minimap_camera.position = player_node.global_position
 
 #================================#

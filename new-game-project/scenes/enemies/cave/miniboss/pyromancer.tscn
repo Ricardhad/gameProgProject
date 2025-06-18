@@ -1,6 +1,7 @@
-[gd_scene load_steps=84 format=3 uid="uid://befv4i5hq5bxu"]
+[gd_scene load_steps=96 format=3 uid="uid://befv4i5hq5bxu"]
 
 [ext_resource type="Texture2D" uid="uid://eaiocrvidu5h" path="res://assets/enemies/cave/pyromancer/Attack_1.png" id="1_rkdwk"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_v73vv"]
 [ext_resource type="Texture2D" uid="uid://dywlpraqukkku" path="res://assets/enemies/cave/pyromancer/Attack_2.png" id="2_02bds"]
 [ext_resource type="Texture2D" uid="uid://d10u75s51sydu" path="res://assets/enemies/cave/pyromancer/Attack_3.png" id="3_ges3j"]
 [ext_resource type="Texture2D" uid="uid://wxfs5t76urj7" path="res://assets/enemies/cave/pyromancer/Dead.png" id="4_ubv3j"]
@@ -9,42 +10,16 @@
 [ext_resource type="Texture2D" uid="uid://i4epq1aiwn5q" path="res://assets/enemies/cave/pyromancer/Jump.png" id="7_5os3k"]
 [ext_resource type="Texture2D" uid="uid://uwehb14q6t1m" path="res://assets/enemies/cave/pyromancer/Run.png" id="8_c8jbx"]
 [ext_resource type="Texture2D" uid="uid://62hl4ohtcw73" path="res://assets/enemies/cave/pyromancer/Walk.png" id="9_tf6vo"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0na1"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_74ip0"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q064j"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_copyo"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rsvnv"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yhbu"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3dfjv"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3srsm"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(896, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_etjnr"]
-atlas = ExtResource("1_rkdwk")
-region = Rect2(1024, 0, 128, 128)
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_hdjf4"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_e1id6"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="13_exk33"]
+[ext_resource type="PackedScene" uid="uid://ctj8pw7rpk0a8" path="res://scenes/enemies/component/enemy_projectile/pyromancer_projectile.tscn" id="13_sejsj"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_1jd71"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_covxb"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_sovrj"]
+[ext_resource type="PackedScene" uid="uid://dc5mlu3ec8hio" path="res://scenes/player/consumables/agi.tscn" id="17_l3ycc"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="18_wva6r"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_c332j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_02vlh"]
 atlas = ExtResource("2_02bds")
@@ -270,6 +245,42 @@ region = Rect2(1024, 0, 128, 128)
 atlas = ExtResource("8_c8jbx")
 region = Rect2(1152, 0, 128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0na1"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74ip0"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q064j"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_copyo"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsvnv"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yhbu"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dfjv"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3srsm"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etjnr"]
+atlas = ExtResource("1_rkdwk")
+region = Rect2(1024, 0, 128, 128)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_6jbx6"]
 atlas = ExtResource("9_tf6vo")
 region = Rect2(0, 0, 128, 128)
@@ -304,38 +315,6 @@ region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7cfq"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h0na1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74ip0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q064j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_copyo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rsvnv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2yhbu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3dfjv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3srsm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_etjnr")
-}],
-"loop": false,
-"name": &"attack1",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_02vlh")
@@ -541,6 +520,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h0na1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74ip0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q064j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_copyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsvnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yhbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dfjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3srsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etjnr")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6jbx6")
 }, {
 "duration": 1.0,
@@ -569,13 +580,72 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6fhl"]
+size = Vector2(18.75, 44)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_v73vv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.49997, -38.5)
+position = Vector2(-1.90735e-06, -39)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"idle"
+animation = &"shoot"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("11_hdjf4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1.375, -22)
+shape = SubResource("RectangleShape2D_l6fhl")
+
+[node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("12_e1id6")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack3", "attack2", "shoot"])
+shoot_frame = 5
+projectile_scene = ExtResource("13_sejsj")
+projectile_spawn_point = NodePath("ProjectileSpawn")
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(33.375, -15)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 7
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(33.6875, -28)
+
+[node name="ProjectileSpawn" type="Marker2D" parent="AttackController"]
+position = Vector2(0, -32)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_exk33")
+max_health = 30
+
+[node name="MovementChecker" parent="." instance=ExtResource("14_1jd71")]
+unique_name_in_owner = true
+position = Vector2(-4, -4)
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("15_covxb")]
+position = Vector2(2, -4)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="LootDropper" parent="." instance=ExtResource("16_sovrj")]
+coin_scene = ExtResource("17_l3ycc")
+coin_max_amount = 2
+
+[node name="StateMachine" parent="." instance=ExtResource("18_wva6r")]
+unique_name_in_owner = true
+enemy_behavior = 0
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="." instance=ExtResource("19_c332j")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]

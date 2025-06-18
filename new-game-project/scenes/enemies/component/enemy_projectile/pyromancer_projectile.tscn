@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlbhwemlyd15j"]
+[gd_scene load_steps=4 format=3 uid="uid://ctj8pw7rpk0a8"]
 
-[ext_resource type="Script" path="res://scenes/enemies/component/projectile.gd" id="1_j8jxg"]
-[ext_resource type="SpriteFrames" uid="uid://cyg4efoq28hom" path="res://scenes/enemies/component/enemy_projectile/satyr2.tres" id="2_5udmr"]
+[ext_resource type="Script" path="res://scenes/enemies/component/projectile.gd" id="1_6km6h"]
+[ext_resource type="SpriteFrames" uid="uid://cyg4efoq28hom" path="res://scenes/enemies/component/enemy_projectile/satyr2.tres" id="2_6gijk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gm31j"]
 radius = 3.0
@@ -10,11 +10,13 @@ height = 20.0
 [node name="Projectile" type="Area2D" groups=["damage_sources"]]
 collision_layer = 16
 collision_mask = 7
-script = ExtResource("1_j8jxg")
+script = ExtResource("1_6km6h")
+damage = 7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_5udmr")
-frame_progress = 0.57721
+position = Vector2(12, 3)
+sprite_frames = ExtResource("2_6gijk")
+frame_progress = 0.274501
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 3)
