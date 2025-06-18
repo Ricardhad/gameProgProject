@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d2xhet86atwwh"]
+[gd_scene load_steps=24 format=3 uid="uid://d2xhet86atwwh"]
 
 [ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_5143h"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_bqyoo"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_l5ejl"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_vp3m1"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_3dydv"]
+[ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="14_kd41f"]
+[ext_resource type="PackedScene" uid="uid://dfempmn8dpwa1" path="res://scenes/enemies/cave/boss/golem.tscn" id="15_hqcpp"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -28,10 +30,25 @@ const player = preload(\"res://scenes/player/player.tscn\")
 const player1 = preload(\"res://scenes/player/player1.tscn\")
 const player2 = preload(\"res://scenes/player/player2.tscn\")
 
+@export var hell_hound_boss: Node
+@export var boss_health_bar: Control # Remember to drag/drop the nodes in the Inspector
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_caveboss()
+	if not hell_hound_boss or not boss_health_bar:
+		printerr(\"Boss or Health Bar not assigned in the Inspector!\")
+		return
 	
+	# Get the Health component from the boss
+	var health_component = hell_hound_boss.get_node(\"Health\")
+	if not health_component:
+		printerr(\"Health component not found on boss!\")
+		return
+	boss_health_bar.initialize(health_component.max_health, health_component.health)
+	health_component.health_changed.connect(boss_health_bar.on_health_changed)
+	health_component.max_health_changed.connect(boss_health_bar.on_max_health_changed)
 	# --- TAMBAHKAN INI UNTUK MENGGAMBAR PETA DI MINIMAP ---
 	# Sebelum spawn player, kita perintahkan HUD untuk menyiapkan peta
 	if hud and stage_tilemap:
@@ -1069,8 +1086,10 @@ sources/1 = SubResource("TileSetAtlasSource_yaq5b")
 pattern_0 = SubResource("TileMapPattern_cgy3e")
 pattern_1 = SubResource("TileMapPattern_6hcgl")
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" node_paths=PackedStringArray("hell_hound_boss", "boss_health_bar")]
 script = SubResource("GDScript_lgw5x")
+hell_hound_boss = NodePath("golemfire")
+boss_health_bar = NodePath("BossHealthbar/MarginContainer")
 
 [node name="BG" type="TileMap" parent="."]
 modulate = Color(0.520041, 0.229166, 9.62615e-08, 1)
@@ -1168,3 +1187,13 @@ next_scene = "3-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_3dydv")]
 position = Vector2(280, 434)
+
+[node name="BossHealthbar" parent="." instance=ExtResource("14_kd41f")]
+
+[node name="MarginContainer" parent="BossHealthbar" index="0"]
+boss_name = "FIRE GOLEM"
+
+[node name="golemfire" parent="." instance=ExtResource("15_hqcpp")]
+position = Vector2(564, 287)
+
+[editable path="BossHealthbar"]

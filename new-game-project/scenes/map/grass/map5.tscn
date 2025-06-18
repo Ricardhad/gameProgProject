@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cjamhxagkehx8"]
+[gd_scene load_steps=24 format=3 uid="uid://cjamhxagkehx8"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_kmypm"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="2_24e1c"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_eba0g"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_vnijb"]
 [ext_resource type="PackedScene" uid="uid://cetk2gei7bxt2" path="res://scenes/enemies/grass/boss/golem.tscn" id="14_b3xav"]
+[ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="15_6pqol"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -24,6 +25,8 @@ script/source = "extends Node2D
 @onready var hud = $Hud
 @onready var stage_tilemap = $Stage
 # --------------------------------------
+@export var hell_hound_boss: Node
+@export var boss_health_bar: Control # Remember to drag/drop the nodes in the Inspector
 
 const player = preload(\"res://scenes/player/player.tscn\")
 const player1 = preload(\"res://scenes/player/player1.tscn\")
@@ -32,7 +35,13 @@ const player2 = preload(\"res://scenes/player/player2.tscn\")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Bgm.play_music_grasslandboss()
-	
+	var health_component = hell_hound_boss.get_node(\"Health\")
+	if not health_component:
+		printerr(\"Health component not found on boss!\")
+		return
+	boss_health_bar.initialize(health_component.max_health, health_component.health)
+	health_component.health_changed.connect(boss_health_bar.on_health_changed)
+	health_component.max_health_changed.connect(boss_health_bar.on_max_health_changed)
 	# --- TAMBAHKAN INI UNTUK MENGGAMBAR PETA DI MINIMAP ---
 	# Sebelum spawn player, kita perintahkan HUD untuk menyiapkan peta
 	if hud and stage_tilemap:
@@ -1196,8 +1205,10 @@ sources/0 = SubResource("TileSetAtlasSource_li7lg")
 pattern_0 = SubResource("TileMapPattern_4gfum")
 pattern_1 = SubResource("TileMapPattern_fgmaq")
 
-[node name="game" type="Node2D"]
+[node name="game" type="Node2D" node_paths=PackedStringArray("hell_hound_boss", "boss_health_bar")]
 script = SubResource("GDScript_xck3o")
+hell_hound_boss = NodePath("Node/CharacterBody2D")
+boss_health_bar = NodePath("BossHealthbar/MarginContainer")
 
 [node name="BG" type="TileMap" parent="."]
 modulate = Color(0.843184, 0.843184, 0.843184, 1)
@@ -1288,3 +1299,10 @@ next_scene = "2-1"
 
 [node name="CharacterBody2D" parent="Node" instance=ExtResource("14_b3xav")]
 position = Vector2(713, 288)
+
+[node name="BossHealthbar" parent="." instance=ExtResource("15_6pqol")]
+
+[node name="MarginContainer" parent="BossHealthbar" index="0"]
+boss_name = "GRASS GOLEM"
+
+[editable path="BossHealthbar"]
