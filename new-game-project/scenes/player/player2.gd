@@ -29,7 +29,7 @@ var current_state: PlayerState = PlayerState.IDLE
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_sound: AudioStreamPlayer = $AudioStreamPlayer
 @onready var health: Health = $Health
-@onready var hud = get_node("/root/game/Hud")
+@onready var hud := get_tree().current_scene.get_node_or_null("Hud")
 @onready var hurtbox: HurtBox = $HurtBox
 
 var respawn_position = Vector2(150, 150)

@@ -31,7 +31,7 @@ var current_state: PlayerState = PlayerState.IDLE
 @onready var attack_area_1: CollisionShape2D = $HitBox/Attack
 @onready var attack_area_2: CollisionShape2D = $HitBox/Attack1
 @onready var health: Health = $Health
-@onready var hud = get_node("/root/game/Hud")
+@onready var hud := get_tree().current_scene.get_node_or_null("Hud")
 @onready var hurtbox: HurtBox = $HurtBox
 
 var respawn_position = Vector2(150, 150)
