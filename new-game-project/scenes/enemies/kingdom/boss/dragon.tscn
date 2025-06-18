@@ -2310,8 +2310,8 @@ radius = 2.0
 height = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7duvf"]
-radius = 25.0
-height = 104.0
+radius = 33.2394
+height = 124.706
 
 [node name="Dragon" type="CharacterBody2D"]
 collision_layer = 2
@@ -2326,7 +2326,7 @@ fly_height_offset = 20.0
 position = Vector2(0, -77)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"dead"
+animation = &"rise"
 autoplay = "idle"
 frame = 1
 flip_h = true
@@ -2362,8 +2362,8 @@ collision_mask = 18
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-7, -24)
-rotation = 1.5708
+position = Vector2(-7, -54)
+rotation = 2.09614
 shape = SubResource("CapsuleShape2D_7duvf")
 
 [node name="Health" parent="." instance=ExtResource("14_1j7xn")]
