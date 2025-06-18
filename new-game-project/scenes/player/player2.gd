@@ -205,7 +205,7 @@ func set_state(new_state: PlayerState):
 		PlayerState.CLIMB_UP:
 			is_hanging = false
 			var climb_offset_x = 10.0
-			var climb_offset_y = -40.0
+			var climb_offset_y = -35.0
 			if animated_sprite_2d.flip_h: climb_offset_x = -climb_offset_x
 			global_position.x += climb_offset_x; global_position.y += climb_offset_y
 			animated_sprite_2d.play("pull_up")
@@ -300,9 +300,9 @@ func _on_animated_sprite_2d_animation_finished():
 		"heal": pass
 		"pull_up":
 			animated_sprite_2d.position = original_sprite_position  # Revert offset
-			global_position.y -= 24
-			global_position.x += 12 * (-1 if animated_sprite_2d.flip_h else 1)
-			set_state(PlayerState.IDLE)
+			global_position.y -= 0
+			global_position.x += 5 * (-1 if animated_sprite_2d.flip_h else 1)
+			set_state(PlayerState.IDLE)	
 		"attack", "attack1":
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()
 			set_state(PlayerState.IDLE if is_on_floor() else PlayerState.FALL)

@@ -2358,8 +2358,7 @@ disabled = true
 one_shot = true
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_7duvf")]
-collision_layer = 2
-collision_mask = 2
+collision_mask = 18
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]

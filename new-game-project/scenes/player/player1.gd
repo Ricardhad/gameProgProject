@@ -284,7 +284,7 @@ func _on_animated_sprite_2d_animation_finished():
 		"heal": pass
 		"pull_up":
 			animated_sprite_2d.position = original_sprite_position  # Revert offset
-			global_position.y -= 24
+			global_position.y -= 0
 			global_position.x += 12 * (-1 if animated_sprite_2d.flip_h else 1)
 			set_state(PlayerState.IDLE)
 		"attack", "attack1":
