@@ -1,5 +1,6 @@
-[gd_scene load_steps=63 format=3 uid="uid://mfp7tirhgp42"]
+[gd_scene load_steps=74 format=3 uid="uid://mfp7tirhgp42"]
 
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_duimj"]
 [ext_resource type="Texture2D" uid="uid://bdeavtvo556rg" path="res://assets/enemies/desert/hellhound/Hellhound_3/Attack_1.png" id="1_ngoyk"]
 [ext_resource type="Texture2D" uid="uid://mkn2dgf5gsxi" path="res://assets/enemies/desert/hellhound/Hellhound_3/Attack_2.png" id="2_138qv"]
 [ext_resource type="Texture2D" uid="uid://brmsbau3ien0c" path="res://assets/enemies/desert/hellhound/Hellhound_3/Attack_3.png" id="3_jcwk4"]
@@ -9,6 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://beg611yth2t1a" path="res://assets/enemies/desert/hellhound/Hellhound_3/Jump.png" id="7_iyfu1"]
 [ext_resource type="Texture2D" uid="uid://cpmc86b85vgc2" path="res://assets/enemies/desert/hellhound/Hellhound_3/Run.png" id="8_y8mhm"]
 [ext_resource type="Texture2D" uid="uid://bh0tsj57o1uad" path="res://assets/enemies/desert/hellhound/Hellhound_3/Walk.png" id="9_d7e0j"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="10_agqop"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_83ghm"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="11_cwcj5"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="12_r2l2g"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="13_bhgnv"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="14_7yaxm"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_n5iom"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="16_bamd6"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="17_2tk7n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wbn6y"]
 atlas = ExtResource("1_ngoyk")
@@ -422,8 +432,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6pm7v"]
+size = Vector2(59, 32)
+
+[node name="hellhound3" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_duimj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -432,3 +446,49 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("11_83ghm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-3, -16)
+shape = SubResource("RectangleShape2D_6pm7v")
+
+[node name="AttackController" parent="." instance=ExtResource("10_agqop")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2", "attack3"])
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(43, -16)
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(40, -25)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_cwcj5")
+
+[node name="MovementChecker" parent="." instance=ExtResource("12_r2l2g")]
+unique_name_in_owner = true
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_bhgnv")]
+position = Vector2(-21, -20)
+collision_mask = 18
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(25, -5)
+
+[node name="LootDropper" parent="." instance=ExtResource("14_7yaxm")]
+coin_scene = ExtResource("15_n5iom")
+
+[node name="StateMachine" parent="." instance=ExtResource("16_bamd6")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="." instance=ExtResource("17_2tk7n")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]
+[editable path="HurtBox"]
