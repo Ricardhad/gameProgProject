@@ -1,12 +1,16 @@
 # BossHealthBar.gd
 extends MarginContainer
 @export var boss_name = "null"
+@export var font_size: int = 24
 @onready var progress_bar: TextureProgressBar = $VBoxContainer/HealthBar
 @onready var boss_label: Label = $VBoxContainer/Label
 # The health bar will now store its own copy of the health values.
 var current_health: int
 var max_health: int
 
+func _ready():
+	# Apply the exported font size when the scene starts
+	boss_label.add_theme_font_size_override("font_size", font_size)
 # A new function to set up the bar with the boss's starting health.
 func initialize(start_max_health: int, start_current_health: int):
 	boss_label.text = boss_name
