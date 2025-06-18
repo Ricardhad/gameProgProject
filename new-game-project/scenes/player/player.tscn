@@ -422,7 +422,7 @@ bus = &"SFX"
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

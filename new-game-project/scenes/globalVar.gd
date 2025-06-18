@@ -32,6 +32,7 @@ var current_potions = BASE_MAX_POTIONS
 var coin_collected = 0
 var score = 0
 var kill_count = 0
+var hero_kontol = 1
 var current_stage = "1-1"
 
 # --- Variabel Durasi Buff ---
@@ -95,6 +96,7 @@ func reset_game():
 	coin_collected = 0
 	score = 0
 	kill_count = 0
+	hero_kontol = 1
 	current_stage = "1-1"
 	
 	# Reset semua durasi buff

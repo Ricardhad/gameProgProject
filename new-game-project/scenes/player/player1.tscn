@@ -551,7 +551,7 @@ bus = &"SFX"
 position = Vector2(0, -11)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_m04qe")
-animation = &"attack2"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
