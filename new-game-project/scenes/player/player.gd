@@ -37,10 +37,12 @@ var current_state: PlayerState = PlayerState.IDLE
 var respawn_position = Vector2(150, 150)
 var original_attack_offset_x = 0.0
 var original_attack2_offset_x = 0.0
+var original_sprite_position := Vector2.ZERO
 
 func _ready():
 	original_attack_offset_x = attack_area_1.position.x
 	original_attack2_offset_x = attack_area_2.position.x
+	original_sprite_position = animated_sprite_2d.position
 	randomize()
 	
 	# Inisialisasi dari GlobalVar
@@ -108,7 +110,10 @@ func set_state(new_state: PlayerState):
 	current_state = new_state
 
 	match current_state:
-		PlayerState.IDLE: animated_sprite_2d.play("idle"); velocity.x = 0
+		PlayerState.IDLE:
+			animated_sprite_2d.play("idle")
+			velocity.x = 0
+			animated_sprite_2d.position = original_sprite_position
 		PlayerState.RUN: animated_sprite_2d.play("run")
 		PlayerState.JUMP, PlayerState.FALL: animated_sprite_2d.play("jump")
 		PlayerState.DASH: animated_sprite_2d.play("run")
@@ -140,15 +145,21 @@ func set_state(new_state: PlayerState):
 			else:
 				printerr("Cannot heal! HP is full or no potions left.")
 				set_state(PlayerState.IDLE)
-		PlayerState.HANG: animated_sprite_2d.play("hang"); velocity = Vector2.ZERO
+		PlayerState.HANG:
+			animated_sprite_2d.play("hang")
+			velocity = Vector2.ZERO
+			var hang_offset = Vector2(2, 2)
+			if animated_sprite_2d.flip_h:
+				hang_offset.x = -hang_offset.x
+			animated_sprite_2d.position = original_sprite_position + hang_offset
 		PlayerState.CLIMB_UP:
 			is_hanging = false
-			var climb_offset_x = 20.0
+			var climb_offset_x = 10.0
 			var climb_offset_y = -16.0
 			if animated_sprite_2d.flip_h: climb_offset_x = -climb_offset_x
 			global_position.x += climb_offset_x; global_position.y += climb_offset_y
 			animated_sprite_2d.play("pull_up")
-			velocity.y = JUMP_VELOCITY
+			velocity = Vector2.ZERO
 		PlayerState.DROP_DOWN:
 			animated_sprite_2d.play("jump")
 			global_position.y += 10; velocity.y = 150.0
@@ -230,7 +241,7 @@ func handle_hang_state():
 	elif Input.is_action_just_pressed("down"): is_hanging = false; set_state(PlayerState.DROP_DOWN)
 
 func handle_climb_up_state(delta: float):
-	velocity.y += get_gravity().y * delta
+	velocity = Vector2.ZERO
 
 func handle_drop_down_state(delta: float):
 	velocity.y += get_gravity().y * delta
@@ -239,8 +250,9 @@ func _on_animated_sprite_2d_animation_finished():
 	match animated_sprite_2d.animation:
 		"heal": pass
 		"pull_up":
-			global_position.y -= 48
-			global_position.x += 24 * (-1 if animated_sprite_2d.flip_h else 1)
+			animated_sprite_2d.position = original_sprite_position  # Revert offset
+			global_position.y -= 24
+			global_position.x += 12 * (-1 if animated_sprite_2d.flip_h else 1)
 			set_state(PlayerState.IDLE)
 		"attack", "attack1":
 			current_attack_index = (current_attack_index + 1) % attack_animations.size()

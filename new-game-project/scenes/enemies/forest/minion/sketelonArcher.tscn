@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="11_8um51"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="12_3giyx"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="13_3wo2a"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="14_kd82r"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="14_kd82r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ennhk"]
 atlas = ExtResource("2_rc8y7")
@@ -319,6 +319,7 @@ scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"shoot"
 autoplay = "idle"
+frame = 12
 flip_h = true
 script = ExtResource("7_5vawc")
 
@@ -330,6 +331,7 @@ shape = SubResource("RectangleShape2D_lbcud")
 [node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("6_mt45q")]
 unique_name_in_owner = true
 available_attacks = Array[String](["shoot"])
+shoot_frame = 12
 projectile_scene = ExtResource("7_wawse")
 projectile_spawn_point = NodePath("ProjectileSpawn")
 
