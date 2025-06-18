@@ -79,7 +79,7 @@ func _process(delta: float) -> void:
 				
 				# These booleans make the logic below much cleaner
 				var can_shoot = attack_controller.can_perform_attack("shoot")
-				var can_melee = attack_controller.can_perform_attack("attack") || attack_controller.can_perform_attack("attack1") || attack_controller.can_perform_attack("attack2")
+				var can_melee = attack_controller.can_perform_attack("attack") || attack_controller.can_perform_attack("attack1") || attack_controller.can_perform_attack("attack2")|| attack_controller.can_perform_attack("attack3")
 
 				# Use a match statement for clean, readable behavior control
 				match enemy_behavior:

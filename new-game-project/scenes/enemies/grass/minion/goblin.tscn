@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cwlldkvstv10h"]
+[gd_scene load_steps=66 format=3 uid="uid://cwlldkvstv10h"]
 
 [ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_prq5b"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="2_gn05o"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://13cfhmmrxrvu" path="res://assets/enemies/grass/goblin/Run.png" id="10_c4owv"]
 [ext_resource type="Texture2D" uid="uid://ufo2gltdgoqy" path="res://assets/enemies/grass/goblin/Walk.png" id="11_u6tmw"]
 [ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="12_2srjl"]
-[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="13_0kbtq"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="13_3cmmh"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="14_6mmjq"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_ri7ge"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="16_qma6u"]
@@ -374,6 +374,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ffi"]
 size = Vector2(20.75, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbcud"]
+size = Vector2(15.3438, 26.2656)
+
 [node name="goblin" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_prq5b")
@@ -396,10 +399,6 @@ shape = SubResource("RectangleShape2D_n8ffi")
 unique_name_in_owner = true
 available_attacks = Array[String](["attack"])
 
-[node name="HitBox" parent="AttackController" index="1"]
-collision_layer = 16
-collision_mask = 4
-
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_v2gpr")
@@ -407,9 +406,15 @@ script = ExtResource("3_v2gpr")
 [node name="MovementChecker" parent="." instance=ExtResource("4_4pr4l")]
 unique_name_in_owner = true
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_0kbtq")]
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
 collision_mask = 18
+script = ExtResource("13_3cmmh")
 health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_lbcud")
 
 [node name="LootDropper" parent="." instance=ExtResource("14_6mmjq")]
 coin_scene = ExtResource("15_ri7ge")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dy8j3k28sxqer"]
+[gd_scene load_steps=17 format=3 uid="uid://dy8j3k28sxqer"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_jqwck"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="3_r8ys0"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://4d8cqfmyv3oa" path="res://assets/stage/forest/bg/7.png" id="9_1byby"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_6fbeu"]
 [ext_resource type="PackedScene" uid="uid://c22ful68ijsx0" path="res://scenes/enemies/component/bossComp/BossHealthbar.tscn" id="11_q3ky4"]
+[ext_resource type="PackedScene" uid="uid://mfp7tirhgp42" path="res://scenes/enemies/desert/boss/hellhound3.tscn" id="13_3oqlj"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_7fri4"]
 [ext_resource type="PackedScene" uid="uid://old3adk2wba4" path="res://scenes/enemies/snow/boss/golem.tscn" id="13_u4ptn"]
 
@@ -899,5 +900,8 @@ boss_name = "GOLEM"
 
 [node name="golem" parent="." instance=ExtResource("13_u4ptn")]
 position = Vector2(281.491, 250.984)
+
+[node name="hellhound3" parent="." instance=ExtResource("13_3oqlj")]
+position = Vector2(799, 282)
 
 [editable path="BossHealthbar"]

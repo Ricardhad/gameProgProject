@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://mfp7tirhgp42"]
+[gd_scene load_steps=75 format=3 uid="uid://mfp7tirhgp42"]
 
 [ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_duimj"]
 [ext_resource type="Texture2D" uid="uid://bdeavtvo556rg" path="res://assets/enemies/desert/hellhound/Hellhound_3/Attack_1.png" id="1_ngoyk"]
@@ -14,9 +14,9 @@
 [ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_83ghm"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="11_cwcj5"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="12_r2l2g"]
-[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="13_bhgnv"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="14_7yaxm"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="15_n5iom"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="15_qaq53"]
 [ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="16_bamd6"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="17_2tk7n"]
 
@@ -435,6 +435,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pm7v"]
 size = Vector2(59, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbcud"]
+size = Vector2(15.3438, 26.2656)
+
 [node name="hellhound3" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_duimj")
@@ -470,13 +473,17 @@ script = ExtResource("11_cwcj5")
 [node name="MovementChecker" parent="." instance=ExtResource("12_r2l2g")]
 unique_name_in_owner = true
 
-[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("13_bhgnv")]
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 position = Vector2(-21, -20)
+collision_layer = 2
 collision_mask = 18
+script = ExtResource("15_qaq53")
 health = NodePath("../Health")
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(25, -5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(30, -2)
+scale = Vector2(1, 0.977784)
+shape = SubResource("RectangleShape2D_lbcud")
 
 [node name="LootDropper" parent="." instance=ExtResource("14_7yaxm")]
 coin_scene = ExtResource("15_n5iom")
@@ -491,4 +498,3 @@ unique_name_in_owner = true
 visible = false
 
 [editable path="AttackController"]
-[editable path="HurtBox"]
