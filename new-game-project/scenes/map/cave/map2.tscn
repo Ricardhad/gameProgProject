@@ -26,8 +26,9 @@ script/source = "extends Node2D
 @onready var stage_tilemap = $Stage
 # --------------------------------------
 
-var knight_scene = preload(\"res://scenes/player/player.tscn\")
-var current_player = knight_scene
+const player = preload(\"res://scenes/player/player.tscn\")
+const player1 = preload(\"res://scenes/player/player1.tscn\")
+const player2 = preload(\"res://scenes/player/player2.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,8 +41,12 @@ func _ready() -> void:
 	else:
 		print(\"ERROR: Node 'Hud' atau 'Stage' tidak ditemukan di game.gd!\")
 	# ----------------------------------------------------
-	
-	spawn_character(current_player)
+	if(GlobalVar.hero_kontol == 1):
+		spawn_character(player)
+	elif(GlobalVar.hero_kontol == 2):
+		spawn_character(player1)
+	elif(GlobalVar.hero_kontol == 3):
+		spawn_character(player2)
 	
 func remove_existing_players():
 	for child in get_children():
@@ -53,7 +58,6 @@ func spawn_character(character_scene: PackedScene):
 	var player = character_scene.instantiate()
 	player.global_position = Vector2(100, 200)
 	player.scale = Vector2(2, 2)
-	current_player = player
 	add_child(player)
 	player.add_to_group(\"player\")
 	
