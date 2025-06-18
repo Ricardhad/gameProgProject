@@ -5,6 +5,11 @@ extends Node
 @onready var archer: AnimatedSprite2D = $Archer
 @onready var wizard: AnimatedSprite2D = $Wizard
 
+@onready var label_name: Label = $PanelBackGround/PanelDetail/LabelName
+@onready var label_hp: Label = $PanelBackGround/PanelDetail/LabelHP
+@onready var label_stamina: Label = $PanelBackGround/PanelDetail/LabelStamina
+@onready var label_passive: Label = $PanelBackGround/PanelDetail/LabelPassive
+
 var player := 1
 
 func _ready() -> void:
@@ -38,3 +43,21 @@ func _update_character_display() -> void:
 	knight.visible = (player == 1)
 	archer.visible = (player == 2)
 	wizard.visible = (player == 3)
+
+	# Update label sesuai karakter
+	match player:
+		1:
+			label_name.text = "Knight"
+			label_hp.text = "HP: 150"
+			label_stamina.text = "Mana: 70"
+			label_passive.text = "Passive: More Health"
+		2:
+			label_name.text = "Archer"
+			label_hp.text = "HP: 100"
+			label_stamina.text = "Mana: 100"
+			label_passive.text = "Passive: Melee and Projectile"
+		3:
+			label_name.text = "Wizard"
+			label_hp.text = "HP: 80"
+			label_stamina.text = "Mana: 150"
+			label_passive.text = "Passive: Fire Magic"
