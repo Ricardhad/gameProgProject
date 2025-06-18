@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dl4dplop5qxhc"]
+[gd_scene load_steps=17 format=3 uid="uid://dl4dplop5qxhc"]
 
 [ext_resource type="Texture2D" uid="uid://c170kqxhpvcb0" path="res://assets/stage/tavern/Terrain (32x32).png" id="1_wy2p7"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="2_suden"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://1ek76qkgonj2" path="res://scenes/npc/peasant/villager1.tscn" id="6_au6i5"]
 [ext_resource type="PackedScene" uid="uid://bxl5n7q2288s6" path="res://scenes/npc/peasant/villager2.tscn" id="7_6u4ep"]
 [ext_resource type="PackedScene" uid="uid://b0k5lces35ld4" path="res://scenes/npc/peasant/villager3.tscn" id="8_bwldq"]
+[ext_resource type="PackedScene" uid="uid://d0w7ypj1q0u1i" path="res://scenes/npc/peasant/peasant3.tscn" id="9_k5ce6"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1175,3 +1176,6 @@ position = Vector2(453, 305)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("8_bwldq")]
 position = Vector2(386, 301)
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("9_k5ce6")]
+position = Vector2(294, 311)
