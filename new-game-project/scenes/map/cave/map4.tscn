@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cic1b8vump1wj"]
+[gd_scene load_steps=25 format=3 uid="uid://cic1b8vump1wj"]
 
 [ext_resource type="Texture2D" uid="uid://de3qn7x528pr8" path="res://assets/stage/cave/tileset.png" id="1_tll7t"]
 [ext_resource type="Texture2D" uid="uid://nwwyx38qiajq" path="res://assets/stage/cave/bg/1.png" id="2_6pjcl"]
@@ -13,6 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_ha4n8"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_fgvwg"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_0fcyc"]
+[ext_resource type="PackedScene" uid="uid://utm575cxacob" path="res://scenes/enemies/cave/minion/demon3.tscn" id="14_ig554"]
+[ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="15_a6648"]
+[ext_resource type="PackedScene" uid="uid://cutxitiep84jb" path="res://scenes/enemies/cave/minion/gladiator2.tscn" id="16_x1yd2"]
+[ext_resource type="PackedScene" uid="uid://5yvbs8k67vnr" path="res://scenes/enemies/cave/minion/gladiator3.tscn" id="17_2hrdf"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1163,3 +1167,35 @@ next_scene = "3-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_0fcyc")]
 position = Vector2(280, 434)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("14_ig554")]
+position = Vector2(270, -165)
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("15_a6648")]
+position = Vector2(318, 289)
+
+[node name="CharacterBody2D2" parent="Node" instance=ExtResource("14_ig554")]
+position = Vector2(238, 50)
+
+[node name="gladiator3" parent="Node" instance=ExtResource("16_x1yd2")]
+position = Vector2(422, -622)
+
+[node name="gladiator2" parent="Node" instance=ExtResource("16_x1yd2")]
+position = Vector2(249, -386)
+
+[node name="gladiator4" parent="Node" instance=ExtResource("17_2hrdf")]
+position = Vector2(775, -629)
+
+[node name="CharacterBody2D4" parent="Node" instance=ExtResource("15_a6648")]
+position = Vector2(923, -362)
+
+[node name="CharacterBody2D5" parent="Node" instance=ExtResource("15_a6648")]
+position = Vector2(920, -166)
+
+[node name="CharacterBody2D6" parent="Node" instance=ExtResource("15_a6648")]
+position = Vector2(799, 60)
+
+[node name="CharacterBody2D7" parent="Node" instance=ExtResource("14_ig554")]
+position = Vector2(774, 288)

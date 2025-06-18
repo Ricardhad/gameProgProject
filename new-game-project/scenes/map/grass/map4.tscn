@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://gwe1ej6xs0v3"]
+[gd_scene load_steps=25 format=3 uid="uid://gwe1ej6xs0v3"]
 
 [ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_qa2wh"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_ayww3"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_a437u"]
 [ext_resource type="PackedScene" uid="uid://cjamhxagkehx8" path="res://scenes/map/grass/map5.tscn" id="12_7fehl"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_vb5p5"]
+[ext_resource type="PackedScene" uid="uid://vqxnhn2f0uel" path="res://scenes/enemies/grass/miniboss/orcChief.tscn" id="16_bvpom"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -1307,3 +1308,12 @@ target_scene = ExtResource("12_7fehl")
 next_scene = "1-5"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_vb5p5")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("16_bvpom")]
+position = Vector2(1391, 589)
+
+[node name="goblin" parent="CharacterBody2D" instance=ExtResource("2_ayww3")]
+position = Vector2(673, -352)
+
+[node name="CharacterBody2D" parent="CharacterBody2D/goblin" instance=ExtResource("3_ybomu")]
+position = Vector2(-162, 337)
