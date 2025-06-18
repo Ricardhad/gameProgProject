@@ -1197,7 +1197,7 @@ position = Vector2(0.375007, -18.5)
 shape = SubResource("RectangleShape2D_cjtvx")
 
 [node name="CharacterBody2D" parent="Node/CollisionShape2D" instance=ExtResource("15_g1jiu")]
-position = Vector2(2383.63, 66.5)
+position = Vector2(2399.63, 83.5)
 
 [node name="AttackController" parent="Node" instance=ExtResource("16_sc53m")]
 unique_name_in_owner = true
@@ -1221,11 +1221,10 @@ max_health = 30
 unique_name_in_owner = true
 position = Vector2(-4, -4)
 
-[node name="HurtBox" parent="Node" node_paths=PackedStringArray("health") instance=ExtResource("19_vborx")]
+[node name="HurtBox" parent="Node" instance=ExtResource("19_vborx")]
 position = Vector2(-3, -3)
 collision_layer = 0
 collision_mask = 2
-health = NodePath("")
 
 [node name="LootDropper" parent="Node" instance=ExtResource("20_apvpr")]
 coin_scene = ExtResource("21_3y8ow")

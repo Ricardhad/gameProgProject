@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://blvvm2nt2ioar"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_1lj0v"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_1lj0v"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_27r5e"]
 [ext_resource type="PackedScene" uid="uid://dnq4ygpd8l4jy" path="res://scenes/enemies/grass/minion/werewolf.tscn" id="3_6nnxe"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="4_mxigt"]
@@ -1220,9 +1220,6 @@ layer_0/tile_data = PackedInt32Array(1376327, 196608, 7, 1310791, 393216, 5, 124
 [node name="Goblin" parent="Enemy" instance=ExtResource("2_27r5e")]
 position = Vector2(448, 248)
 
-[node name="Werewolf" parent="Enemy" instance=ExtResource("3_6nnxe")]
-position = Vector2(1052, 281)
-
 [node name="Goblin2" parent="Enemy" instance=ExtResource("2_27r5e")]
 position = Vector2(1009, 72)
 
@@ -1235,17 +1232,26 @@ position = Vector2(1139, -136)
 [node name="Goblin5" parent="Enemy" instance=ExtResource("2_27r5e")]
 position = Vector2(684, -104)
 
-[node name="Werewolf2" parent="Enemy" instance=ExtResource("3_6nnxe")]
-position = Vector2(496, -104)
-
 [node name="Goblin6" parent="Enemy" instance=ExtResource("2_27r5e")]
 position = Vector2(106, -134)
 
 [node name="Goblin7" parent="Enemy" instance=ExtResource("2_27r5e")]
 position = Vector2(1207, -328)
 
+[node name="Goblin8" parent="Enemy" instance=ExtResource("2_27r5e")]
+position = Vector2(458, -627)
+
+[node name="Werewolf" parent="Enemy" instance=ExtResource("3_6nnxe")]
+position = Vector2(1052, 281)
+
+[node name="Werewolf2" parent="Enemy" instance=ExtResource("3_6nnxe")]
+position = Vector2(496, -104)
+
 [node name="Werewolf3" parent="Enemy" instance=ExtResource("3_6nnxe")]
 position = Vector2(413, -345)
+
+[node name="Werewolf4" parent="Enemy" instance=ExtResource("3_6nnxe")]
+position = Vector2(940, -626)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

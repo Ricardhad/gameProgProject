@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://v0067naaf7q6"]
+[gd_scene load_steps=27 format=3 uid="uid://v0067naaf7q6"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_ias2o"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="2_khmcn"]
@@ -12,6 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="10_nos5v"]
 [ext_resource type="PackedScene" uid="uid://bji83m10xvsax" path="res://scenes/map/forest/map4.tscn" id="11_qp0g4"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="12_3rc7a"]
+[ext_resource type="PackedScene" uid="uid://c1g1vmycj3c21" path="res://scenes/enemies/forest/minion/sketelonArcher.tscn" id="13_581hy"]
+[ext_resource type="PackedScene" uid="uid://b52w480asts86" path="res://scenes/enemies/forest/minion/sketelonWarrior.tscn" id="14_o205a"]
+[ext_resource type="PackedScene" uid="uid://bjjnw6twpbgx0" path="res://scenes/enemies/forest/minion/sketelonSpear.tscn" id="15_fph70"]
+[ext_resource type="PackedScene" uid="uid://br6ahdbxuxlvr" path="res://scenes/enemies/forest/minion/satyr3.tscn" id="16_v461q"]
+[ext_resource type="PackedScene" uid="uid://br31vv6je1vvw" path="res://scenes/enemies/forest/minion/satyr1.tscn" id="17_kme4e"]
+[ext_resource type="PackedScene" uid="uid://cfxmu00q14nxk" path="res://scenes/enemies/forest/minion/satyr2.tscn" id="18_g3ps0"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1165,3 +1171,32 @@ target_scene = ExtResource("11_qp0g4")
 next_scene = "1-4"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_3rc7a")]
+
+[node name="Enemy" type="Node" parent="."]
+
+[node name="skeleton_archer" parent="Enemy" instance=ExtResource("13_581hy")]
+position = Vector2(890, 143)
+
+[node name="CharacterBody2D" parent="Enemy" instance=ExtResource("14_o205a")]
+position = Vector2(691, 142)
+
+[node name="skeleton_archer2" parent="Enemy" instance=ExtResource("13_581hy")]
+position = Vector2(605, 287)
+
+[node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("15_fph70")]
+position = Vector2(872, 286)
+
+[node name="CharacterBody2D3" parent="Enemy" instance=ExtResource("16_v461q")]
+position = Vector2(211, 430)
+
+[node name="skeleton_archer3" parent="Enemy" instance=ExtResource("13_581hy")]
+position = Vector2(636, 557)
+
+[node name="skeleton_archer4" parent="Enemy" instance=ExtResource("13_581hy")]
+position = Vector2(928, 557)
+
+[node name="satyr1" parent="Enemy" instance=ExtResource("17_kme4e")]
+position = Vector2(1743, 270)
+
+[node name="CharacterBody2D4" parent="Enemy" instance=ExtResource("18_g3ps0")]
+position = Vector2(1555, 448)

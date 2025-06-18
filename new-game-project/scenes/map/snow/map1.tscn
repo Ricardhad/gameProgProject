@@ -1147,3 +1147,12 @@ position = Vector2(966, 149)
 
 [node name="CharacterBody2D" parent="Enemy" instance=ExtResource("11_16tqm")]
 position = Vector2(901, -206)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("11_16tqm")]
+position = Vector2(1640, -149)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("12_v0civ")]
+position = Vector2(1769, 205)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("12_v0civ")]
+position = Vector2(228, -98)
