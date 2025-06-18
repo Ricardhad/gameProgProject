@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://poaam77r350i"]
+[gd_scene load_steps=21 format=3 uid="uid://poaam77r350i"]
 
 [ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_e7nvv"]
 [ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_dh420"]
@@ -12,6 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="9_hqe2t"]
 [ext_resource type="PackedScene" uid="uid://utm575cxacob" path="res://scenes/enemies/cave/minion/demon3.tscn" id="11_i8e2x"]
 [ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="12_i7hei"]
+[ext_resource type="PackedScene" uid="uid://os5im4m3jacd" path="res://scenes/enemies/snow/minion/demon2.tscn" id="13_vo64n"]
+[ext_resource type="PackedScene" uid="uid://bmjugjh0ubuol" path="res://scenes/enemies/snow/minion/dwarf.tscn" id="14_qhnbk"]
+[ext_resource type="PackedScene" uid="uid://cd1jv7uu6m2u3" path="res://scenes/enemies/snow/minion/demon3.tscn" id="15_71cyp"]
+[ext_resource type="PackedScene" uid="uid://c7t1sre0ccrjn" path="res://scenes/npc/dwarf.tscn" id="16_adfkj"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -912,3 +916,24 @@ position = Vector2(1473, -193)
 
 [node name="CharacterBody2D2" parent="Enemy" instance=ExtResource("12_i7hei")]
 position = Vector2(2022, -222)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("13_vo64n")]
+position = Vector2(1672, 285)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("14_qhnbk")]
+position = Vector2(2312, 248)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("13_vo64n")]
+position = Vector2(3211, 124)
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("15_71cyp")]
+position = Vector2(2583, -259)
+
+[node name="CharacterBody2D5" parent="." instance=ExtResource("15_71cyp")]
+position = Vector2(3150, -292)
+
+[node name="CharacterBody2D6" parent="." instance=ExtResource("15_71cyp")]
+position = Vector2(3589, -430)
+
+[node name="CharacterBody2D7" parent="." instance=ExtResource("16_adfkj")]
+position = Vector2(4253, -576)

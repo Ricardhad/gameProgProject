@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://rhp7ds1qgeqd"]
+[gd_scene load_steps=20 format=3 uid="uid://rhp7ds1qgeqd"]
 
 [ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_xjixr"]
 [ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_xaibv"]
@@ -10,6 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_joixd"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="9_dcsa6"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_eoy1y"]
+[ext_resource type="PackedScene" uid="uid://dmc0nfkr5yllf" path="res://scenes/enemies/chest/chest1.tscn" id="11_nnwrf"]
+[ext_resource type="PackedScene" uid="uid://cd1jv7uu6m2u3" path="res://scenes/enemies/snow/minion/demon3.tscn" id="12_u6gv6"]
+[ext_resource type="PackedScene" uid="uid://cctd713gu8bdr" path="res://scenes/enemies/snow/minion/yokai.tscn" id="13_y3o5g"]
+[ext_resource type="PackedScene" uid="uid://os5im4m3jacd" path="res://scenes/enemies/snow/minion/demon2.tscn" id="14_pj8p6"]
+[ext_resource type="PackedScene" uid="uid://bmjugjh0ubuol" path="res://scenes/enemies/snow/minion/dwarf.tscn" id="15_wryga"]
+[ext_resource type="PackedScene" uid="uid://c7t1sre0ccrjn" path="res://scenes/npc/dwarf.tscn" id="16_ci6m7"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -891,3 +897,24 @@ next_scene = "3-1"
 position = Vector2(-268, -80)
 
 [node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("11_nnwrf")]
+position = Vector2(417, 16)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("12_u6gv6")]
+position = Vector2(377, 239)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("13_y3o5g")]
+position = Vector2(629, 207)
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("14_pj8p6")]
+position = Vector2(1019, 190)
+
+[node name="CharacterBody2D5" parent="." instance=ExtResource("12_u6gv6")]
+position = Vector2(1091, 32)
+
+[node name="CharacterBody2D6" parent="." instance=ExtResource("15_wryga")]
+position = Vector2(666, 15)
+
+[node name="CharacterBody2D7" parent="." instance=ExtResource("16_ci6m7")]
+position = Vector2(1400, 191)

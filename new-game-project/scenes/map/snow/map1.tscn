@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ct0e7vwo1w3kc"]
+[gd_scene load_steps=21 format=3 uid="uid://ct0e7vwo1w3kc"]
 
 [ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_bjo4n"]
 [ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_60res"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_juljm"]
 [ext_resource type="PackedScene" uid="uid://ivi0v3vwfrfi" path="res://scenes/enemies/cave/minion/demon2.tscn" id="11_16tqm"]
 [ext_resource type="PackedScene" uid="uid://utm575cxacob" path="res://scenes/enemies/cave/minion/demon3.tscn" id="12_v0civ"]
+[ext_resource type="PackedScene" uid="uid://os5im4m3jacd" path="res://scenes/enemies/snow/minion/demon2.tscn" id="13_j5d0x"]
+[ext_resource type="PackedScene" uid="uid://cd1jv7uu6m2u3" path="res://scenes/enemies/snow/minion/demon3.tscn" id="14_hyjcx"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1147,3 +1149,12 @@ position = Vector2(966, 149)
 
 [node name="CharacterBody2D" parent="Enemy" instance=ExtResource("11_16tqm")]
 position = Vector2(901, -206)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("13_j5d0x")]
+position = Vector2(1639, -151)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("14_hyjcx")]
+position = Vector2(1567, 282)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("14_hyjcx")]
+position = Vector2(459, -148)
