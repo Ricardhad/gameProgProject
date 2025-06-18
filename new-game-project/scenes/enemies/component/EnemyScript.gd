@@ -6,6 +6,7 @@ signal jumped
 @export var SPEED: float = 50.0
 @export var CHASE_SPEED: float = 100.0
 @export var GRAVITY: float = 800.0
+@export var TURN_DEAD_ZONE = 10.0
 
 @export_group("Combat Properties")
 @export var KNOCKBACK_FORCE: float = 150.0
@@ -18,7 +19,7 @@ signal jumped
 var movement_direction = 1 # -1 for left, 1 for right
 var movement_speed = SPEED
 var knockback_velocity = Vector2.ZERO
-const TURN_DEAD_ZONE = 10.0
+
 #var can_jump = true # // NEW: Added this back
 
 # --- Component and Node References ---
