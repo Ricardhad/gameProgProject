@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_yir5i"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_gqvvf"]
 [ext_resource type="PackedScene" uid="uid://cmkjgpkvnaf8b" path="res://scenes/player/consumables/atk.tscn" id="17_mu0vg"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="18_qsf8f"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="18_qsf8f"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_4w80w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryv8k"]
@@ -590,7 +590,7 @@ shape = SubResource("RectangleShape2D_bpyoc")
 
 [node name="AttackController" parent="." instance=ExtResource("12_ml2um")]
 unique_name_in_owner = true
-available_attacks = Array[String](["attack2", "attack3"])
+available_attacks = Array[String](["attack2", "attack3", "attack1", "special"])
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(23.25, -15)
