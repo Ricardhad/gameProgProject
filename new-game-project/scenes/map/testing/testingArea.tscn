@@ -814,7 +814,7 @@ sources/0 = SubResource("TileSetAtlasSource_waqkv")
 
 [node name="game" type="Node2D" node_paths=PackedStringArray("hell_hound_boss", "boss_health_bar")]
 script = SubResource("GDScript_lgw5x")
-hell_hound_boss = NodePath("CharacterBody2D2")
+hell_hound_boss = NodePath("golem")
 boss_health_bar = NodePath("BossHealthbar/MarginContainer")
 
 [node name="Stage" type="TileMap" parent="."]
@@ -893,11 +893,11 @@ texture = ExtResource("9_1byby")
 [node name="BossHealthbar" parent="." instance=ExtResource("11_q3ky4")]
 
 [node name="MarginContainer" parent="BossHealthbar" index="0"]
-boss_name = "Golem"
+boss_name = "GOLEM"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_7fri4")]
 
-[node name="CharacterBody2D2" parent="." instance=ExtResource("13_u4ptn")]
-position = Vector2(73, 281)
+[node name="golem" parent="." instance=ExtResource("13_u4ptn")]
+position = Vector2(281.491, 250.984)
 
 [editable path="BossHealthbar"]
