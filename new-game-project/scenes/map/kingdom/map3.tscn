@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cmgmwr8058yyj" path="res://assets/stage/kingdom/bg/4.png" id="5_mcp0t"]
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="6_607lm"]
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="7_i88ha"]
-[ext_resource type="PackedScene" uid="uid://bwngut7qvsjp0" path="res://scenes/ui/GameOver.tscn" id="8_ckvyq"]
+[ext_resource type="PackedScene" uid="uid://babjxy2w64ct6" path="res://scenes/ui/CutScene3.tscn" id="8_cnx64"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="9_aslv4"]
 [ext_resource type="PackedScene" uid="uid://cf1raibso4mhe" path="res://scenes/enemies/kingdom/boss/dragon.tscn" id="10_x4b6y"]
 
@@ -191,7 +191,7 @@ texture = ExtResource("5_mcp0t")
 [node name="FinishPoint" parent="." instance=ExtResource("7_i88ha")]
 modulate = Color(0.16, 0.064, 0.016, 1)
 position = Vector2(1042, 227)
-target_scene = ExtResource("8_ckvyq")
+target_scene = ExtResource("8_cnx64")
 next_scene = "4-3"
 
 [node name="PauseMenu" parent="." instance=ExtResource("9_aslv4")]
