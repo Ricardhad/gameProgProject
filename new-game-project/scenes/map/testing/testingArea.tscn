@@ -16,7 +16,7 @@
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
 
-var knight_scene = preload(\"res://scenes/player/player.tscn\")
+var knight_scene = preload(\"res://scenes/player/player1.tscn\")
 
 var current_player = knight_scene
 
