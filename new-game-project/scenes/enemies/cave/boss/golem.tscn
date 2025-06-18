@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://dfempmn8dpwa1"]
+[gd_scene load_steps=86 format=3 uid="uid://dfempmn8dpwa1"]
 
 [ext_resource type="Texture2D" uid="uid://bpxntp3lut4wv" path="res://assets/enemies/cave/golem/Attack_1.png" id="1_gothq"]
 [ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_hii48"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cmr6cq5y6640b" path="res://assets/enemies/cave/golem/Walk.png" id="9_chmxv"]
 [ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_0ulil"]
 [ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_hvaq0"]
+[ext_resource type="PackedScene" uid="uid://ctj8pw7rpk0a8" path="res://scenes/enemies/component/enemy_projectile/pyromancer_projectile.tscn" id="13_55j6c"]
 [ext_resource type="Script" path="res://scenes/class/health.gd" id="14_qkusd"]
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="15_po2kh"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="16_ppqqq"]
@@ -512,7 +513,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f431"]
 size = Vector2(20.75, 37)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="golemfire" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_hii48")
 
@@ -532,9 +533,11 @@ unique_name_in_owner = true
 position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_1f431")
 
-[node name="AttackController" parent="." instance=ExtResource("12_hvaq0")]
+[node name="AttackController" parent="." node_paths=PackedStringArray("projectile_spawn_point") instance=ExtResource("12_hvaq0")]
 unique_name_in_owner = true
-available_attacks = Array[String](["attack1", "attack2", "attack3"])
+available_attacks = Array[String](["shoot", "attack2", "attack3"])
+projectile_scene = ExtResource("13_55j6c")
+projectile_spawn_point = NodePath("Marker2D")
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(22, -18)
@@ -544,6 +547,8 @@ damage = 7
 
 [node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
 position = Vector2(22, -26)
+
+[node name="Marker2D" type="Marker2D" parent="AttackController"]
 
 [node name="Health" type="Node" parent="."]
 unique_name_in_owner = true
@@ -556,8 +561,7 @@ position = Vector2(-4, -7)
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("16_ppqqq")]
 position = Vector2(-2, -5)
-collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("17_lsn67")]

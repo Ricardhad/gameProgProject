@@ -1,6 +1,7 @@
-[gd_scene load_steps=76 format=3 uid="uid://cetk2gei7bxt2"]
+[gd_scene load_steps=88 format=3 uid="uid://cetk2gei7bxt2"]
 
 [ext_resource type="Texture2D" uid="uid://b2aiqaanisfqt" path="res://assets/enemies/grass/golem/Attack_1.png" id="1_00he3"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_qgk0e"]
 [ext_resource type="Texture2D" uid="uid://ci70oe8hdlgu7" path="res://assets/enemies/grass/golem/Attack_2.png" id="2_625sb"]
 [ext_resource type="Texture2D" uid="uid://cx86w5twk4b7x" path="res://assets/enemies/grass/golem/Attack_3.png" id="3_a3gnj"]
 [ext_resource type="Texture2D" uid="uid://bquc6hquq74mx" path="res://assets/enemies/grass/golem/Dead.png" id="4_k6xum"]
@@ -9,6 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://cad3esk53sh7v" path="res://assets/enemies/grass/golem/Jump.png" id="7_4k8hf"]
 [ext_resource type="Texture2D" uid="uid://bx1njho521mlv" path="res://assets/enemies/grass/golem/Run.png" id="8_bpf4m"]
 [ext_resource type="Texture2D" uid="uid://bdffjlvi73jt6" path="res://assets/enemies/grass/golem/Walk.png" id="9_j3cnc"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_3p5om"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_m518k"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="13_byk76"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_awaxd"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="15_g0awe"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_65wkw"]
+[ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="17_g5bxg"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="18_cvpp5"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_3wvxx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_avrva"]
 atlas = ExtResource("1_00he3")
@@ -513,8 +523,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rgpnq"]
+size = Vector2(20.75, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kt14c"]
+size = Vector2(15.3438, 26.2656)
+
+[node name="golemgrass" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_qgk0e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -524,3 +541,45 @@ animation = &"run"
 autoplay = "idle"
 frame_progress = 0.932025
 flip_h = true
+script = ExtResource("11_3p5om")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.375015, -16)
+shape = SubResource("RectangleShape2D_rgpnq")
+
+[node name="AttackController" parent="." instance=ExtResource("12_m518k")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2", "attack3"])
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_byk76")
+max_health = 30
+
+[node name="MovementChecker" parent="." instance=ExtResource("14_awaxd")]
+unique_name_in_owner = true
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 18
+script = ExtResource("15_g0awe")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_kt14c")
+
+[node name="LootDropper" parent="." instance=ExtResource("16_65wkw")]
+coin_scene = ExtResource("17_g5bxg")
+
+[node name="StateMachine" parent="." instance=ExtResource("18_cvpp5")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="." instance=ExtResource("19_3wvxx")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]
