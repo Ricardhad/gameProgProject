@@ -315,8 +315,7 @@ script = ExtResource("10_bs4u1")
 unique_name_in_owner = true
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_vjwp2")]
-collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]

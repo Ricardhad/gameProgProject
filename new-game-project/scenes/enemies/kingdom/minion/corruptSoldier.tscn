@@ -270,8 +270,7 @@ script = ExtResource("10_4a0fv")
 unique_name_in_owner = true
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_8t40q")]
-collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("13_ikrh2")]
