@@ -86,7 +86,7 @@ animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.0285376
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." groups=["damage_sources"]]
 collision_layer = 19
 collision_mask = 0
 script = ExtResource("2_hwyyj")
@@ -98,3 +98,7 @@ shape = SubResource("RectangleShape2D_a77ja")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(3, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.25, -0.5)
+shape = SubResource("RectangleShape2D_a77ja")
