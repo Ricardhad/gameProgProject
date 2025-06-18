@@ -9,7 +9,12 @@ func _ready() -> void:
 	$Panel/Panel/Label3.text = "Stage : " + GlobalVar.current_stage
 	$Panel/Panel/Label4.text = "Total Kills : " + str(GlobalVar.kill_count)
 	$Panel/Panel/Label5.text = "Coins : " + str(GlobalVar.coin_collected)
-
+	if(GlobalVar.hero_kontol == 1):
+		$Panel/Panel/Label7.text = "Class: Knight"
+	elif(GlobalVar.hero_kontol == 2):
+		$Panel/Panel/Label7.text = "Class: Archer"
+	elif(GlobalVar.hero_kontol == 3):
+		$Panel/Panel/Label7.text = "Class: Wizard"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
