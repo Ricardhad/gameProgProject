@@ -412,21 +412,21 @@ script = ExtResource("1_enxr5")
 script = ExtResource("7_v7flo")
 sync_with_global = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -4)
-scale = Vector2(0.354478, 0.354478)
-sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"pull_up"
-autoplay = "idle"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_b8yrv")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_snrmh")
 volume_db = -5.0
 mix_target = 2
 bus = &"SFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(0.354478, 0.354478)
+sprite_frames = SubResource("SpriteFrames_ncapl")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_b8yrv")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 2

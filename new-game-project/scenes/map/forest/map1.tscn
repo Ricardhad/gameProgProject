@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b77dkjexiy6mu"]
+[gd_scene load_steps=22 format=3 uid="uid://b77dkjexiy6mu"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_y03tw"]
 [ext_resource type="Texture2D" uid="uid://4d8cqfmyv3oa" path="res://assets/stage/forest/bg/7.png" id="2_cqe8p"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://crh1jsb6eg1ig" path="res://scenes/map/GUI/HUD.tscn" id="10_rsbji"]
 [ext_resource type="PackedScene" uid="uid://xmsvc7y23j2f" path="res://scenes/map/forest/map2.tscn" id="11_mp3vt"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="12_pak3y"]
+[ext_resource type="PackedScene" uid="uid://c1g1vmycj3c21" path="res://scenes/enemies/forest/minion/sketelonArcher.tscn" id="13_kexxl"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1160,3 +1161,6 @@ target_scene = ExtResource("11_mp3vt")
 next_scene = "1-2"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_pak3y")]
+
+[node name="skeleton_archer" parent="." instance=ExtResource("13_kexxl")]
+position = Vector2(615, 159)

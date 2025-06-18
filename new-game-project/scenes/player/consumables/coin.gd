@@ -6,8 +6,11 @@ var attracted = false
 var collect_delay = 0.3
 var time_alive = 0.0
 
-#func _ready() -> void:
-	#connect("body_entered", Callable(self, "_on_body_entered"))
+func _ready():
+	# Auto-assign player if in group
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		player = players[0]
 
 func _physics_process(delta: float) -> void:
 	if player == null:
@@ -27,8 +30,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		GlobalVar.add_coin()
 		$AudioStreamPlayer2D.play()
-		#$CollisionShape2D.disabled = true
-		#get_tree().get_current_scene().update_coin_label()
 		self.visible = false
 		await get_tree().create_timer(0.5).timeout
 		queue_free()
