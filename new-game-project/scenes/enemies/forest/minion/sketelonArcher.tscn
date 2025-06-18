@@ -272,7 +272,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -319,7 +319,8 @@ scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"shoot"
 autoplay = "idle"
-frame = 12
+frame = 14
+frame_progress = 1.0
 flip_h = true
 script = ExtResource("7_5vawc")
 

@@ -592,6 +592,7 @@ offset_bottom = 273.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_k21ui")
 
 [node name="Label" type="Label" parent="CanvasLayer/PanelPause/PanelDetail"]
+layout_mode = 0
 offset_left = 21.0
 offset_top = 25.0
 offset_right = 299.0

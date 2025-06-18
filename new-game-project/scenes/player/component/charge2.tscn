@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://3wmgwsneqv8c"]
+
+[ext_resource type="Texture2D" uid="uid://dxcdla7a4g7ki" path="res://scenes/player/component/Charge_2.png" id="1_ttx6u"]
+[ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="2_hwyyj"]
+
+[sub_resource type="GDScript" id="GDScript_kx1fn"]
+script/source = "extends Area2D
+
+var velocity: Vector2 = Vector2.ZERO
+@onready var collision_shape_2d: CollisionShape2D = $HitBox/CollisionShape2D
+
+func _ready():
+	connect(\"body_entered\", Callable(self, \"_on_hit\"))
+	connect(\"area_entered\", Callable(self, \"_on_hit\"))
+
+func _physics_process(delta):
+	position += velocity * delta
+
+func _on_hit(target):
+	if target.has_method(\"take_damage\"):
+		target.take_damage(5)
+	queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkw3l"]
+atlas = ExtResource("1_ttx6u")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r35go"]
+atlas = ExtResource("1_ttx6u")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ih0b"]
+atlas = ExtResource("1_ttx6u")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_012nb"]
+atlas = ExtResource("1_ttx6u")
+region = Rect2(192, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hubgc"]
+atlas = ExtResource("1_ttx6u")
+region = Rect2(256, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvclw"]
+atlas = ExtResource("1_ttx6u")
+region = Rect2(320, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2j7hs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkw3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r35go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ih0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_012nb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hubgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvclw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a77ja"]
+size = Vector2(28.5, 7)
+
+[node name="Charge" type="Area2D"]
+collision_layer = 19
+collision_mask = 0
+script = SubResource("GDScript_kx1fn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2j7hs")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0285376
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 19
+collision_mask = 0
+script = ExtResource("2_hwyyj")
+damage = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(3.25, -0.5)
+shape = SubResource("RectangleShape2D_a77ja")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(3, 0)

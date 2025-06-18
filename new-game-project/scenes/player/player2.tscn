@@ -1,15 +1,17 @@
-[gd_scene load_steps=83 format=3 uid="uid://d32slxhnuugkj"]
+[gd_scene load_steps=78 format=3 uid="uid://d32slxhnuugkj"]
 
-[ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="1_e60qw"]
+[ext_resource type="Script" path="res://scenes/player/player2.gd" id="1_0rox6"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="1_y2v5e"]
 [ext_resource type="Texture2D" uid="uid://d4fu23g2jt35y" path="res://assets/class/Wizard/Magic_arrow.png" id="2_qxhxc"]
+[ext_resource type="AudioStream" uid="uid://cd0x3but87egp" path="res://assets/sfx/Keugh.ogg" id="2_ua0tb"]
 [ext_resource type="Texture2D" uid="uid://cpk6ig5xrgeah" path="res://assets/class/Wizard/Magic_sphere.png" id="3_5onfd"]
-[ext_resource type="Texture2D" uid="uid://cd5erkqf7e1xm" path="res://assets/class/Wizard/Area_Attack.png" id="3_d3h3w"]
 [ext_resource type="Texture2D" uid="uid://boe5gl7581qhf" path="res://assets/class/Wizard/Hang.png" id="5_tm7ym"]
 [ext_resource type="Texture2D" uid="uid://b6c75i46phsmq" path="res://assets/class/Wizard/Idle.png" id="6_2bryu"]
 [ext_resource type="Texture2D" uid="uid://cimwopp44quol" path="res://assets/class/Wizard/Elixir.png" id="6_p6hw6"]
 [ext_resource type="Texture2D" uid="uid://cbanef7kbibko" path="res://assets/class/Wizard/Jump.png" id="7_3da3h"]
 [ext_resource type="Texture2D" uid="uid://d04e44wp2prgv" path="res://assets/class/Wizard/Pull up.png" id="8_yengf"]
 [ext_resource type="Texture2D" uid="uid://clbbr80djvxx8" path="res://assets/class/Wizard/Run.png" id="9_r0gnd"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="12_df1lu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ewoih"]
 atlas = ExtResource("2_qxhxc")
@@ -98,38 +100,6 @@ region = Rect2(1792, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hrdj5"]
 atlas = ExtResource("3_5onfd")
 region = Rect2(1920, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_05anq"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufr62"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ment2"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6w62j"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rnee7"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(512, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ccd6p"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(640, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_toau3"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(768, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_npsog"]
-atlas = ExtResource("3_d3h3w")
-region = Rect2(896, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87plq"]
 atlas = ExtResource("5_tm7ym")
@@ -371,36 +341,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack1",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_05anq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ufr62")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ment2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6w62j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rnee7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ccd6p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_toau3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_npsog")
-}],
-"loop": false,
-"name": &"attack2",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [],
 "loop": false,
@@ -561,8 +502,73 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="archer" instance=ExtResource("1_e60qw")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8yrv"]
+radius = 4.0
+height = 22.0
 
-[node name="AnimatedSprite2D" parent="." index="2"]
-position = Vector2(0, -11)
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 4
+script = ExtResource("1_0rox6")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("1_y2v5e")
+sync_with_global = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ua0tb")
+volume_db = -5.0
+mix_target = 2
+bus = &"SFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -11)
+scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_m04qe")
+animation = &"attack1"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_b8yrv")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("12_df1lu")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_b8yrv")
+
+[node name="WallRayCast" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="CheckFloorAboveRight" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -11)
+target_position = Vector2(10, -3)
+
+[node name="LedgeCheckLeft" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -9)
+target_position = Vector2(-6, 1)
+
+[node name="LedgeCheckRight" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -9)
+target_position = Vector2(6, 1)
+
+[node name="CheckFloor" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, 11)
+target_position = Vector2(0, 10)
+
+[node name="CheckFloorAboveLeft" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -11)
+target_position = Vector2(-10, -3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -12)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.5
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+position = Vector2(10, -6)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

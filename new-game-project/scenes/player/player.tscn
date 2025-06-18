@@ -399,10 +399,10 @@ radius = 4.0
 height = 22.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i77eq"]
-size = Vector2(15, 20)
+size = Vector2(15, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88e0o"]
-size = Vector2(16, 10)
+size = Vector2(16, 22)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
@@ -422,7 +422,7 @@ bus = &"SFX"
 position = Vector2(0, -4)
 scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_ncapl")
-animation = &"idle"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

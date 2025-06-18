@@ -1,6 +1,8 @@
-[gd_scene load_steps=77 format=3 uid="uid://bubsyxaycbi13"]
+[gd_scene load_steps=84 format=3 uid="uid://bubsyxaycbi13"]
 
-[ext_resource type="PackedScene" uid="uid://cws2mh1ko3mg8" path="res://scenes/player/player.tscn" id="1_fjnjo"]
+[ext_resource type="Script" path="res://scenes/player/player1.gd" id="1_58mmx"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="1_uiu0y"]
+[ext_resource type="AudioStream" uid="uid://cd0x3but87egp" path="res://assets/sfx/Keugh.ogg" id="2_ascrw"]
 [ext_resource type="Texture2D" uid="uid://depyanrukua3d" path="res://assets/class/Archer/Special_attack_1.png" id="2_b5lyo"]
 [ext_resource type="Texture2D" uid="uid://b6kaqcxs4x6kd" path="res://assets/class/Archer/Attack_2.png" id="3_sccsi"]
 [ext_resource type="Texture2D" uid="uid://dae05rjy1hv1d" path="res://assets/class/Archer/Shot.png" id="4_bw2cb"]
@@ -10,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://b5762lrnlq1w1" path="res://assets/class/Archer/Jump.png" id="7_kgou2"]
 [ext_resource type="Texture2D" uid="uid://b1ty37873jeoo" path="res://assets/class/Archer/Pull_up.png" id="8_lttaw"]
 [ext_resource type="Texture2D" uid="uid://h6uxt8nk4rrr" path="res://assets/class/Archer/Run.png" id="9_6h4dg"]
+[ext_resource type="Script" path="res://scenes/class/hurtbox.gd" id="12_rqdj4"]
+[ext_resource type="Script" path="res://scenes/class/hitbox.gd" id="13_4gplp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4b1p1"]
 atlas = ExtResource("2_b5lyo")
@@ -358,7 +362,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack2",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [],
 "loop": false,
@@ -465,7 +469,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ufpa7")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 7.5
 }, {
@@ -485,7 +489,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g7tmu")
 }],
-"loop": true,
+"loop": false,
 "name": &"pull_up",
 "speed": 5.0
 }, {
@@ -519,11 +523,94 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="archer" instance=ExtResource("1_fjnjo")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8yrv"]
+radius = 4.0
+height = 22.0
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i77eq"]
+size = Vector2(15, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_88e0o"]
+size = Vector2(16, 22)
+
+[node name="player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 4
+script = ExtResource("1_58mmx")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("1_uiu0y")
+sync_with_global = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ascrw")
+volume_db = -5.0
+mix_target = 2
+bus = &"SFX"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)
+scale = Vector2(0.354478, 0.354478)
 sprite_frames = SubResource("SpriteFrames_m04qe")
-animation = &"idle"
-frame = 0
-frame_progress = 0.0
+animation = &"attack2"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_b8yrv")
+
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 20
+script = ExtResource("12_rqdj4")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_b8yrv")
+
+[node name="HitBox" type="Area2D" parent="." groups=["damage_sources"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("13_4gplp")
+
+[node name="Attack" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(13, -2.5)
+shape = SubResource("RectangleShape2D_i77eq")
+disabled = true
+
+[node name="Attack1" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(15, -4)
+shape = SubResource("RectangleShape2D_88e0o")
+disabled = true
+
+[node name="WallRayCast" type="Node2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="CheckFloorAboveRight" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -11)
+target_position = Vector2(10, -3)
+
+[node name="LedgeCheckLeft" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -9)
+target_position = Vector2(-6, 1)
+
+[node name="LedgeCheckRight" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -9)
+target_position = Vector2(6, 1)
+
+[node name="CheckFloor" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, 11)
+target_position = Vector2(0, 10)
+
+[node name="CheckFloorAboveLeft" type="RayCast2D" parent="WallRayCast"]
+position = Vector2(0, -11)
+target_position = Vector2(-10, -3)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -12)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.5
+
+[node name="ProjectileSpawn" type="Marker2D" parent="."]
+position = Vector2(10, -7)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

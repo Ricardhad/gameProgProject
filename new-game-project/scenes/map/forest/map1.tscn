@@ -24,7 +24,7 @@ script/source = "extends Node2D
 @onready var stage_tilemap = $Stage
 # --------------------------------------
 
-var knight_scene = preload(\"res://scenes/player/player.tscn\")
+var knight_scene = preload(\"res://scenes/player/player2.tscn\")
 var current_player = knight_scene
 
 # Called when the node enters the scene tree for the first time.
@@ -1163,4 +1163,10 @@ next_scene = "1-2"
 [node name="PauseMenu" parent="." instance=ExtResource("12_pak3y")]
 
 [node name="skeleton_archer" parent="." instance=ExtResource("13_kexxl")]
-position = Vector2(615, 159)
+position = Vector2(747, 288)
+
+[node name="skeleton_archer2" parent="." instance=ExtResource("13_kexxl")]
+position = Vector2(690, 287)
+
+[node name="skeleton_archer3" parent="." instance=ExtResource("13_kexxl")]
+position = Vector2(625, 287)
