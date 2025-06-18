@@ -1,14 +1,15 @@
 # BossHealthBar.gd
 extends MarginContainer
-
+@export var boss_name = "null"
 @onready var progress_bar: TextureProgressBar = $VBoxContainer/HealthBar
-
+@onready var boss_label: Label = $VBoxContainer/Label
 # The health bar will now store its own copy of the health values.
 var current_health: int
 var max_health: int
 
 # A new function to set up the bar with the boss's starting health.
 func initialize(start_max_health: int, start_current_health: int):
+	boss_label.text = boss_name
 	max_health = start_max_health
 	current_health = start_current_health
 	_update_bar() # Update the visuals immediately
