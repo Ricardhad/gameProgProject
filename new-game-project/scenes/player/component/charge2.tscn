@@ -90,7 +90,7 @@ frame_progress = 0.0285376
 collision_layer = 16
 collision_mask = 2
 script = ExtResource("2_hwyyj")
-damage = 5
+damage = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(3.25, -0.5)
