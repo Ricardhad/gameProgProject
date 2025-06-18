@@ -1,0 +1,341 @@
+[gd_scene load_steps=9 format=3 uid="uid://btu1m38w3icy4"]
+
+[ext_resource type="Script" path="res://scenes/ui/tutorial.gd" id="1_3bfmt"]
+[ext_resource type="Texture2D" uid="uid://dwpp8v6xbx6ei" path="res://assets/selecting_menu/Wooden_Board.png" id="1_5jsl3"]
+[ext_resource type="Texture2D" uid="uid://iplr4g3nnb3f" path="res://assets/selecting_menu/butonUnclicked.png" id="2_5n7ht"]
+[ext_resource type="Texture2D" uid="uid://rsyaadoyfsor" path="res://assets/selecting_menu/cooldownbutton.png" id="3_wamay"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="4_8663l"]
+[ext_resource type="Texture2D" uid="uid://daw8gbqvteqi5" path="res://assets/option_menu/ButtonUnclicked.png" id="6_c8ncg"]
+[ext_resource type="Texture2D" uid="uid://bfabpf87xig08" path="res://assets/main_menu/button_clicked_menu.png" id="7_561th"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_52dqa"]
+texture = ExtResource("1_5jsl3")
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3bfmt")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_52dqa")
+
+[node name="ButtonATK" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 124.0
+offset_right = 213.0
+offset_bottom = 193.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "ATK
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 19.0
+offset_right = 256.0
+offset_bottom = 65.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press LMB
+"
+
+[node name="ButtonATK2" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 212.0
+offset_right = 215.0
+offset_bottom = 281.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK2"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Jump"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK2"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 19.0
+offset_right = 256.0
+offset_bottom = 65.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press Space
+"
+
+[node name="ButtonATK3" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 302.0
+offset_right = 216.0
+offset_bottom = 371.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK3"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Dash
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK3"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 19.0
+offset_right = 256.0
+offset_bottom = 65.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press Left Shift"
+
+[node name="ButtonATK4" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 389.0
+offset_right = 218.0
+offset_bottom = 458.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK4"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 58.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Heal
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK4"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 19.0
+offset_right = 256.0
+offset_bottom = 65.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press E
+"
+
+[node name="ButtonATK5" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 477.0
+offset_right = 217.0
+offset_bottom = 546.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK5"]
+layout_mode = 2
+offset_left = -22.0
+offset_top = 12.0
+offset_right = 136.0
+offset_bottom = 59.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Atk2"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK5"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 19.0
+offset_right = 256.0
+offset_bottom = 65.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press RMB"
+
+[node name="ButtonATK6" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 599.0
+offset_top = 142.0
+offset_right = 736.0
+offset_bottom = 211.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK6"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 171.0
+offset_bottom = 60.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Double J"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK6"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 14.0
+offset_right = 348.0
+offset_bottom = 60.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press Space 2x"
+
+[node name="ButtonATK7" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 557.0
+offset_top = 231.0
+offset_right = 775.0
+offset_bottom = 300.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK7"]
+layout_mode = 2
+offset_left = 23.0
+offset_top = 10.0
+offset_right = 278.0
+offset_bottom = 57.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Down Platform"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK7"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 14.0
+offset_right = 505.0
+offset_bottom = 60.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press S + Space"
+
+[node name="ButtonATK8" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 588.0
+offset_top = 320.0
+offset_right = 741.0
+offset_bottom = 389.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("2_5n7ht")
+texture_pressed = ExtResource("3_wamay")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonATK8"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 171.0
+offset_bottom = 60.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Interaction"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Panel/ButtonATK8"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 14.0
+offset_right = 348.0
+offset_bottom = 60.0
+scale = Vector2(0.7, 0.7)
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Press F"
+
+[node name="ButtonSkip" type="TextureButton" parent="Panel"]
+layout_mode = 0
+offset_left = 1039.0
+offset_top = 575.0
+offset_right = 1147.0
+offset_bottom = 645.0
+size_flags_vertical = 3
+texture_normal = ExtResource("6_c8ncg")
+texture_pressed = ExtResource("7_561th")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ButtonSkip"]
+layout_mode = 2
+offset_left = -21.0
+offset_top = 7.0
+offset_right = 137.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("4_8663l")
+theme_override_font_sizes/font_size = 40
+text = "Skip
+"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Panel/ButtonSkip" to="." method="_on_button_skip_pressed"]

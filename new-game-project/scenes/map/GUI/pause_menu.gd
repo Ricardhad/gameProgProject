@@ -43,6 +43,18 @@ const ITEM_DESCRIPTIONS = {
 @onready var panel_detail: Panel = $CanvasLayer/PanelPause/PanelDetail
 @onready var label_detail: Label = $CanvasLayer/PanelPause/PanelDetail/Label
 
+
+# @onready var item_atk: TextureRect = $CanvasLayer/PanelPause/LabelItems/TextureRectCard/TextureAtk # Ini adalah TextureRect
+@onready var label_item_atk: Label = $CanvasLayer/PanelPause/LabelItems/TextureRectCard1/TextureAtk/Label # BARU
+# @onready var item_agi: TextureRect = $CanvasLayer/PanelPause/LabelItems/TextureRectCard2/TextureAgi # Ini adalah TextureRect
+@onready var label_item_agi: Label = $CanvasLayer/PanelPause/LabelItems/TextureRectCard2/TextureAgi/Label # BARU
+# @onready var item_def: TextureRect = $CanvasLayer/PanelPause/LabelItems/TextureRectCard3/TextureDef # Ini adalah TextureRect
+@onready var label_item_def: Label = $CanvasLayer/PanelPause/LabelItems/TextureRectCard3/TextureDef/Label # BARU
+# @onready var item_hp: TextureRect = $CanvasLayer/PanelPause/LabelItems/TextureRectCard4/TextureHp # Ini adalah TextureRect
+@onready var label_item_hp: Label = $CanvasLayer/PanelPause/LabelItems/TextureRectCard4/TextureHp/Label # BARU
+# @onready var item_maxpot: TextureRect = $CanvasLayer/PanelPause/LabelItems/TextureRectCard5/TextureMaxPot # Ini adalah TextureRect
+@onready var label_item_maxpot: Label = $CanvasLayer/PanelPause/LabelItems/TextureRectCard5/TextureMaxPot/Label # BARU
+
 func _ready() -> void:
 	# Pengecekan keamanan sebelum mengakses node
 	if is_instance_valid($CanvasLayer/PanelPause):
@@ -93,11 +105,13 @@ func _input(event: InputEvent) -> void:
 			$CanvasLayer/PanelPause.visible = true
 			get_tree().paused = true
 			update_buff_display()
+			update_item_display()
 		else:
 			$CanvasLayer/PanelPause.visible = false
 			if is_instance_valid(panel_detail):
 				panel_detail.visible = false
 			get_tree().paused = false
+	
 
 func _on_icon_gui_input(event: InputEvent, key: String, type: String):
 	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -143,6 +157,27 @@ func update_buff_display():
 		if GlobalVar.coin_buff_duration > 0: tex_coin.modulate = color_active; label_coin.text = str(GlobalVar.coin_buff_duration)
 		else: tex_coin.modulate = color_dim; label_coin.text = "0"
 
+
+func update_item_display():
+	# Update jumlah item ATK
+	if is_instance_valid(label_item_atk):
+		label_item_atk.text = str(GlobalVar.atk) # Asumsi GlobalVar memiliki variabel 'atk'
+	
+	# Update jumlah item AGI
+	if is_instance_valid(label_item_agi):
+		label_item_agi.text = str(GlobalVar.agi) # Asumsi GlobalVar memiliki variabel 'agi'
+	
+	# Update jumlah item DEF
+	if is_instance_valid(label_item_def):
+		label_item_def.text = str(GlobalVar.def) # Asumsi GlobalVar memiliki variabel 'def'
+	
+	# Update jumlah item HP
+	if is_instance_valid(label_item_hp):
+		label_item_hp.text = str(GlobalVar.hp) # Asumsi GlobalVar memiliki variabel 'hp'
+	
+	# Update jumlah item Max Potion
+	if is_instance_valid(label_item_maxpot):
+		label_item_maxpot.text = str(GlobalVar.maxPot) # Asumsi GlobalVar memiliki variabel 'maxPot'
 
 func _on_HSliderMusic_value_changed_tutotrial1(value: float) -> void:
 	if is_instance_valid(music_slider): AudioServer.set_bus_volume_db(1, linear_to_db(value))

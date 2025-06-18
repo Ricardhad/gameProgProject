@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="12_brso6"]
 [ext_resource type="PackedScene" uid="uid://c71qhc7m3tqb1" path="res://scenes/player/consumables/coin.tscn" id="13_mivpo"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_5xje2"]
-[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/StateMachine.tscn" id="15_vsm4x"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="15_vsm4x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ek43r"]
 atlas = ExtResource("1_kisdn")
@@ -268,6 +268,7 @@ script = ExtResource("7_v54hi")
 
 [node name="AttackController" parent="." instance=ExtResource("8_ititf")]
 unique_name_in_owner = true
+available_attacks = Array[String](["attack"])
 
 [node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
 position = Vector2(27, -15)
@@ -306,6 +307,8 @@ shape = SubResource("RectangleShape2D_lbcud")
 
 [node name="StateMachine" parent="." instance=ExtResource("15_vsm4x")]
 unique_name_in_owner = true
+enemy_behavior = 1
+MINIMUM_SHOOTING_RANGE = 10.0
 
 [editable path="AttackController"]
 [editable path="HurtBox"]

@@ -430,7 +430,7 @@ damage = 3
 
 [node name="MovementChecker" parent="." instance=ExtResource("11_jikfs")]
 unique_name_in_owner = true
-position = Vector2(-18, -3)
+position = Vector2(-10, -3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -439,7 +439,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_wvgha")
 
 [node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("12_dhdf8")]
-position = Vector2(-10, 0)
+position = Vector2(-8, -2)
 collision_layer = 0
 collision_mask = 2
 health = NodePath("../Health")
