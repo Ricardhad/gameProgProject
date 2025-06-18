@@ -34,6 +34,7 @@ var score = 0
 var kill_count = 0
 var hero_kontol = 1
 var current_stage = "1-1"
+var can_enter_reststop: bool = false
 
 # --- Variabel Durasi Buff ---
 var hp_buff_duration = 0

@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://cjamhxagkehx8"]
+[gd_scene load_steps=23 format=3 uid="uid://cjamhxagkehx8"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_kmypm"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_kmypm"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="2_24e1c"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="3_jwcuj"]
 [ext_resource type="Texture2D" uid="uid://dqocjkhn3ta30" path="res://assets/stage/grass/bg/2.png" id="4_p62gj"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="11_1qohb"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="12_eba0g"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="13_vnijb"]
+[ext_resource type="PackedScene" uid="uid://cetk2gei7bxt2" path="res://scenes/enemies/grass/boss/golem.tscn" id="14_b3xav"]
 
 [sub_resource type="GDScript" id="GDScript_xck3o"]
 script/source = "extends Node2D
@@ -1282,3 +1283,8 @@ target_scene = ExtResource("12_eba0g")
 next_scene = "2-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("13_vnijb")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("14_b3xav")]
+position = Vector2(713, 288)

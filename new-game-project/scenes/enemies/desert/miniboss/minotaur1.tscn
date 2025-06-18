@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="10_2emi8"]
 [ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="11_gflan"]
 [ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="12_8muqb"]
-[ext_resource type="PackedScene" uid="uid://bpvnyaxw60cg3" path="res://scenes/player/consumables/def.tscn" id="13_mq1uf"]
+[ext_resource type="PackedScene" uid="uid://bv1vxbj5xnrae" path="res://scenes/player/consumables/maxPot.tscn" id="13_xitbi"]
 [ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="14_ybue5"]
 [ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="15_2omdq"]
 
@@ -341,7 +341,7 @@ collision_mask = 2
 health = NodePath("../Health")
 
 [node name="LootDropper" parent="." instance=ExtResource("12_8muqb")]
-coin_scene = ExtResource("13_mq1uf")
+coin_scene = ExtResource("13_xitbi")
 coin_max_amount = 2
 
 [node name="StateMachine" parent="." instance=ExtResource("14_ybue5")]

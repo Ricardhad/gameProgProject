@@ -32,6 +32,7 @@ texture = ExtResource("2_oi75q")
 script = ExtResource("1_ihtfe")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PanelPause" type="Panel" parent="CanvasLayer"]
 top_level = true

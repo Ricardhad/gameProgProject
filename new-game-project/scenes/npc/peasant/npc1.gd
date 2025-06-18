@@ -1,25 +1,59 @@
 extends CharacterBody2D
 
+signal interacted
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+# --- Referensi Node ---
+@onready var interaction_area: Area2D = $InteractionArea
+@onready var interaction_prompt: TextureButton = $ButtonATK
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var panel_chat: Panel = $PanelChatNPC
+@onready var label_chat: Label = $PanelChatNPC/LabelChatNPC
 
+var player_in_range: bool = false
+var has_rewarded: bool = false  # ✅ Tambahkan flag untuk interaksi pertama kali
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+func _ready():
+	interaction_prompt.visible = false
+	panel_chat.visible = false
+	
+	interaction_area.body_entered.connect(_on_interaction_area_body_entered)
+	interaction_area.body_exited.connect(_on_interaction_area_body_exited)
+	
+	animated_sprite.play("idle")
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+func _unhandled_input(event: InputEvent) -> void:
+	if player_in_range and event.is_action_pressed("interact"):
+		if panel_chat.visible:
+			panel_chat.visible = false
+		else:
+			trigger_dialogue()
+		get_viewport().set_input_as_handled()
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
+func trigger_dialogue():
+	var dialog_text = ""
+	
+	if not has_rewarded:
+		# Interaksi pertama: beri hadiah dan dialog terima kasih
+		GlobalVar.atk+= 5
+		dialog_text = "Terima kasih sudah Menemukanku akan ku upgrade senjata untukmu."
+		has_rewarded = true
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		# Interaksi berikutnya
+		dialog_text = "Terima kasih sudah membebaskan saudaraku yang sudah dikuasai oleh Dark magic"
 
-	move_and_slide()
+	label_chat.text = dialog_text
+	panel_chat.visible = true
+	
+	emit_signal("interacted")
+	print("Dialog ditampilkan. Koin pemain sekarang: %s" % GlobalVar.coin_collected)
+
+func _on_interaction_area_body_entered(body: Node2D):
+	if body.is_in_group("player"):
+		player_in_range = true
+		interaction_prompt.visible = true
+
+func _on_interaction_area_body_exited(body: Node2D):
+	if body.is_in_group("player"):
+		player_in_range = false
+		interaction_prompt.visible = false
+		panel_chat.visible = false

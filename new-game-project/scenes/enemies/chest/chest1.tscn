@@ -52,7 +52,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfbmp"]
-size = Vector2(31, 23)
+size = Vector2(33, 10.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -60,8 +60,8 @@ collision_layer = 0
 script = ExtResource("1_4opuc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.5, -10)
-scale = Vector2(-0.602, 0.602)
+position = Vector2(-5, -5)
+scale = Vector2(-0.306436, 0.318141)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
@@ -70,14 +70,14 @@ autoplay = "idle"
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(0, -11.5)
+position = Vector2(-4.5, -5.5)
 shape = SubResource("RectangleShape2D_vfbmp")
 
 [node name="ButtonATK" type="TextureButton" parent="."]
-offset_left = -4.0
-offset_top = -20.5
-offset_right = 10.0
-offset_bottom = -6.5
+offset_left = -7.5
+offset_top = -16.0
+offset_right = 6.5
+offset_bottom = -2.0
 scale = Vector2(0.5, 0.5)
 size_flags_vertical = 3
 toggle_mode = true

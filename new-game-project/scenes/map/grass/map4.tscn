@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://gwe1ej6xs0v3"]
 
-[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/tileset.png" id="1_qa2wh"]
+[ext_resource type="Texture2D" uid="uid://cn2m3gndp50e4" path="res://assets/stage/grass/Tileset.png" id="1_qa2wh"]
 [ext_resource type="PackedScene" uid="uid://cwlldkvstv10h" path="res://scenes/enemies/grass/minion/goblin.tscn" id="2_ayww3"]
 [ext_resource type="Texture2D" uid="uid://bqtwub5hugd7c" path="res://assets/stage/grass/bg/1.png" id="2_tyl47"]
 [ext_resource type="Script" path="res://scenes/parallax_layer_2.gd" id="3_uoie2"]

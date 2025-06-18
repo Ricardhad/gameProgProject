@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://xmsvc7y23j2f"]
+[gd_scene load_steps=33 format=3 uid="uid://xmsvc7y23j2f"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_6qq54"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="2_w1ife"]
@@ -12,8 +12,17 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="10_ny5wt"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="11_gndbr"]
 [ext_resource type="PackedScene" uid="uid://v0067naaf7q6" path="res://scenes/map/forest/map3.tscn" id="11_p726v"]
+[ext_resource type="PackedScene" uid="uid://cycbnp5xwn2f4" path="res://scenes/npc/peasant/peasant2.tscn" id="14_jmb1p"]
 [ext_resource type="PackedScene" uid="uid://c1g1vmycj3c21" path="res://scenes/enemies/forest/minion/sketelonArcher.tscn" id="14_nuwsw"]
-[ext_resource type="PackedScene" uid="uid://d0w7ypj1q0u1i" path="res://scenes/npc/peasant/peasant3.tscn" id="16_bsekq"]
+[ext_resource type="PackedScene" uid="uid://dmc0nfkr5yllf" path="res://scenes/enemies/chest/chest1.tscn" id="15_g1jiu"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="16_sc53m"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="17_0w4ev"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="18_5468j"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="19_vborx"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="20_apvpr"]
+[ext_resource type="PackedScene" uid="uid://cmkjgpkvnaf8b" path="res://scenes/player/consumables/atk.tscn" id="21_3y8ow"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="22_ouiro"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="23_udlsr"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1078,6 +1087,9 @@ sources/0 = SubResource("TileSetAtlasSource_waqkv")
 pattern_0 = SubResource("TileMapPattern_cucyd")
 pattern_1 = SubResource("TileMapPattern_ms4a0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjtvx"]
+size = Vector2(20.75, 37)
+
 [node name="game" type="Node2D"]
 script = SubResource("GDScript_lgw5x")
 
@@ -1168,8 +1180,64 @@ next_scene = "1-3"
 
 [node name="PauseMenu" parent="." instance=ExtResource("11_gndbr")]
 
-[node name="CharacterBody2D4" parent="." instance=ExtResource("16_bsekq")]
-position = Vector2(639, 80)
+[node name="Node" type="Node" parent="."]
 
-[node name="skeleton_archer" parent="." instance=ExtResource("14_nuwsw")]
+[node name="skeleton_archer" parent="Node" instance=ExtResource("14_nuwsw")]
 position = Vector2(1331, 239)
+
+[node name="CharacterBody2D3" parent="Node" instance=ExtResource("14_jmb1p")]
+position = Vector2(641, 82)
+
+[node name="CharacterBody2D4" parent="Node" instance=ExtResource("15_g1jiu")]
+position = Vector2(647, 322)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node"]
+unique_name_in_owner = true
+position = Vector2(0.375007, -18.5)
+shape = SubResource("RectangleShape2D_cjtvx")
+
+[node name="CharacterBody2D" parent="Node/CollisionShape2D" instance=ExtResource("15_g1jiu")]
+position = Vector2(2383.63, 66.5)
+
+[node name="AttackController" parent="Node" instance=ExtResource("16_sc53m")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2", "attack3"])
+
+[node name="CollisionShape2D" parent="Node/AttackController/PlayerDetect" index="0"]
+position = Vector2(23.25, -15)
+
+[node name="HitBox" parent="Node/AttackController" index="1"]
+damage = 7
+
+[node name="CollisionShape2D" parent="Node/AttackController/HitBox" index="0"]
+position = Vector2(23.25, -24)
+
+[node name="Health" type="Node" parent="Node"]
+unique_name_in_owner = true
+script = ExtResource("17_0w4ev")
+max_health = 30
+
+[node name="MovementChecker" parent="Node" instance=ExtResource("18_5468j")]
+unique_name_in_owner = true
+position = Vector2(-4, -4)
+
+[node name="HurtBox" parent="Node" node_paths=PackedStringArray("health") instance=ExtResource("19_vborx")]
+position = Vector2(-3, -3)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("")
+
+[node name="LootDropper" parent="Node" instance=ExtResource("20_apvpr")]
+coin_scene = ExtResource("21_3y8ow")
+coin_max_amount = 2
+
+[node name="StateMachine" parent="Node" instance=ExtResource("22_ouiro")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="Node" instance=ExtResource("23_udlsr")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="Node/AttackController"]

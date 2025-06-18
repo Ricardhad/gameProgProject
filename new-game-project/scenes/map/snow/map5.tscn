@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jral8grt1olr"]
+[gd_scene load_steps=15 format=3 uid="uid://jral8grt1olr"]
 
 [ext_resource type="Texture2D" uid="uid://dmenrq1oy2k5" path="res://assets/stage/snow/Tileset.png" id="1_s5mfd"]
 [ext_resource type="Texture2D" uid="uid://b30lr7fanw5ju" path="res://assets/stage/snow/bg/1.png" id="2_osn1p"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="8_qgmv7"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="9_ottnq"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="10_4rq62"]
+[ext_resource type="PackedScene" uid="uid://old3adk2wba4" path="res://scenes/enemies/snow/boss/golem.tscn" id="11_1qk6s"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -889,3 +890,6 @@ next_scene = "3-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_4rq62")]
 position = Vector2(-268, -80)
+
+[node name="golem" parent="." instance=ExtResource("11_1qk6s")]
+position = Vector2(643, 289)

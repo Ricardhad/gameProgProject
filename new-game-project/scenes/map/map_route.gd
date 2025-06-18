@@ -46,17 +46,17 @@ func is_stage_allowed(stage_name: String, current_stage: String) -> bool:
 		"1-1":
 			return stage_name.begins_with("Stage1")
 		"1-2":
-			return stage_name.begins_with("Stage1") or stage_name == "RestStop1"
+			return stage_name.begins_with("Stage1") 
 		"2-1":
-			return stage_name.begins_with("Stage2")
+			return stage_name.begins_with("Stage2")or stage_name == "RestStop1"
 		"2-2":
-			return stage_name.begins_with("Stage2") or stage_name == "RestStop2"
+			return stage_name.begins_with("Stage2") 
 		"3-1":
-			return stage_name.begins_with("Stage3")
+			return stage_name.begins_with("Stage3")or stage_name == "RestStop2"
 		"3-2":
-			return stage_name.begins_with("Stage3") or stage_name == "RestStop3"
+			return stage_name.begins_with("Stage3")
 		"4-1":
-			return stage_name == "Boss"
+			return stage_name == "Boss" or stage_name == "RestStop3"
 		_:
 			return stage_name == "Stage1(1)"  # Default hanya buka awal jika belum ada progres
 

@@ -155,7 +155,7 @@ func set_state(new_state: PlayerState):
 		PlayerState.CLIMB_UP:
 			is_hanging = false
 			var climb_offset_x = 10.0
-			var climb_offset_y = -16.0
+			var climb_offset_y = -36.0
 			if animated_sprite_2d.flip_h: climb_offset_x = -climb_offset_x
 			global_position.x += climb_offset_x; global_position.y += climb_offset_y
 			animated_sprite_2d.play("pull_up")

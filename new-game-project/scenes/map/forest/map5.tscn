@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bftas0gkjj1yu"]
+[gd_scene load_steps=22 format=3 uid="uid://bftas0gkjj1yu"]
 
 [ext_resource type="Texture2D" uid="uid://ctjhq6wpmmhej" path="res://assets/stage/forest/Tileset.png" id="1_1lhn0"]
 [ext_resource type="Texture2D" uid="uid://cjbf14155gr6p" path="res://assets/stage/forest/bg/1.png" id="2_ekcpp"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bb1iase55k6j6" path="res://scenes/map/component/FinishPoint.tscn" id="10_gy8tt"]
 [ext_resource type="PackedScene" uid="uid://jwwj5u53hp3c" path="res://scenes/map/MapRoute.tscn" id="11_t1u02"]
 [ext_resource type="PackedScene" uid="uid://71cvorklc8yo" path="res://scenes/map/GUI/PauseMenu.tscn" id="12_yklxj"]
+[ext_resource type="PackedScene" uid="uid://br1jbh2a3b74t" path="res://scenes/enemies/forest/boss/medusa.tscn" id="13_dcchy"]
 
 [sub_resource type="GDScript" id="GDScript_lgw5x"]
 script/source = "extends Node2D
@@ -1164,3 +1165,8 @@ target_scene = ExtResource("11_t1u02")
 next_scene = "2-1"
 
 [node name="PauseMenu" parent="." instance=ExtResource("12_yklxj")]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="CharacterBody2D" parent="Node" instance=ExtResource("13_dcchy")]
+position = Vector2(747, 686)

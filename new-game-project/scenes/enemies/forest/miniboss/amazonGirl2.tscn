@@ -1,6 +1,7 @@
-[gd_scene load_steps=77 format=3 uid="uid://ogoxnhspg0pp"]
+[gd_scene load_steps=88 format=3 uid="uid://ogoxnhspg0pp"]
 
 [ext_resource type="Texture2D" uid="uid://i7npkuj4yna8" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Attack_1.png" id="1_2rv26"]
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_80708"]
 [ext_resource type="Texture2D" uid="uid://dbvhfgaj30axc" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Attack_2.png" id="2_tbfko"]
 [ext_resource type="Texture2D" uid="uid://23wrx6l538q1" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Dead.png" id="3_ghg2a"]
 [ext_resource type="Texture2D" uid="uid://c777wfh4xtupi" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Hurt.png" id="4_jmnbx"]
@@ -9,6 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://dvanfabtm7237" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Run.png" id="7_oywtt"]
 [ext_resource type="Texture2D" uid="uid://calbvwtub52lm" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Special.png" id="8_tbcl0"]
 [ext_resource type="Texture2D" uid="uid://belcb8oujpomd" path="res://assets/enemies/forest/amazonGirl/Amazon_2/Walk.png" id="9_7t7fk"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_hxs5c"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_ftyqt"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="13_7u2ff"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_klcv0"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_36ydl"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_fe2c2"]
+[ext_resource type="PackedScene" uid="uid://cmkjgpkvnaf8b" path="res://scenes/player/consumables/atk.tscn" id="17_pnuob"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="18_tucoc"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_kbtgc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rorsu"]
 atlas = ExtResource("1_2rv26")
@@ -520,13 +530,66 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wiwr"]
+size = Vector2(28.75, 45)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_80708")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.49997, -38.5)
-scale = Vector2(0.601563, 0.601563)
+position = Vector2(-7.49997, -44)
+scale = Vector2(0.664063, 0.6875)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
 flip_h = true
+script = ExtResource("11_hxs5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-3.625, -22.5)
+shape = SubResource("RectangleShape2D_2wiwr")
+
+[node name="AttackController" parent="." instance=ExtResource("12_ftyqt")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack1", "attack2", "attack3"])
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(23.25, -15)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 7
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(23.25, -24)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_7u2ff")
+max_health = 30
+
+[node name="MovementChecker" parent="." instance=ExtResource("14_klcv0")]
+unique_name_in_owner = true
+position = Vector2(-4, -4)
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("15_36ydl")]
+position = Vector2(-8, -12)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="LootDropper" parent="." instance=ExtResource("16_fe2c2")]
+coin_scene = ExtResource("17_pnuob")
+coin_max_amount = 2
+
+[node name="StateMachine" parent="." instance=ExtResource("18_tucoc")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="." instance=ExtResource("19_kbtgc")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]

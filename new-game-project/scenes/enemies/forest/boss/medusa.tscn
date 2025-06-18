@@ -1,5 +1,6 @@
-[gd_scene load_steps=82 format=3 uid="uid://br1jbh2a3b74t"]
+[gd_scene load_steps=93 format=3 uid="uid://br1jbh2a3b74t"]
 
+[ext_resource type="Script" path="res://scenes/enemies/component/EnemyScript.gd" id="1_7b6uy"]
 [ext_resource type="Texture2D" uid="uid://icbxamkgq5of" path="res://assets/enemies/forest/medusa/Attack_1.png" id="1_ic4j0"]
 [ext_resource type="Texture2D" uid="uid://c2lg4fga5gibu" path="res://assets/enemies/forest/medusa/Attack_2.png" id="2_kpk10"]
 [ext_resource type="Texture2D" uid="uid://dsxw0tfr1iuop" path="res://assets/enemies/forest/medusa/Dead.png" id="2_rfosp"]
@@ -9,6 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://c2otde8p52sdc" path="res://assets/enemies/forest/medusa/Run.png" id="5_f5qs2"]
 [ext_resource type="Texture2D" uid="uid://dbpp26v37k7rk" path="res://assets/enemies/forest/medusa/Special.png" id="6_46hgj"]
 [ext_resource type="Texture2D" uid="uid://cxmqfgynu0x81" path="res://assets/enemies/forest/medusa/Walk.png" id="7_c57ge"]
+[ext_resource type="Script" path="res://scenes/enemies/component/AnimationController.gd" id="11_r1ugd"]
+[ext_resource type="PackedScene" uid="uid://3e1pjx1qvgu6" path="res://scenes/enemies/component/AttackController.tscn" id="12_ml2um"]
+[ext_resource type="Script" path="res://scenes/class/health.gd" id="13_m6i1p"]
+[ext_resource type="PackedScene" uid="uid://dx284c1eybrct" path="res://scenes/enemies/component/MovementChecker.tscn" id="14_nce8n"]
+[ext_resource type="PackedScene" uid="uid://b5hyfrfxa0q5d" path="res://scenes/enemies/component/HurtBox.tscn" id="15_yir5i"]
+[ext_resource type="PackedScene" uid="uid://bcdb7rwwc1nro" path="res://scenes/enemies/component/LootDropper.tscn" id="16_gqvvf"]
+[ext_resource type="PackedScene" uid="uid://cmkjgpkvnaf8b" path="res://scenes/player/consumables/atk.tscn" id="17_mu0vg"]
+[ext_resource type="PackedScene" uid="uid://dw48ep28cq3jo" path="res://scenes/enemies/component/Statemachine.tscn" id="18_qsf8f"]
+[ext_resource type="PackedScene" uid="uid://c11e1ja0r7a7q" path="res://scenes/enemies/component/Senses.tscn" id="19_4w80w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryv8k"]
 atlas = ExtResource("1_ic4j0")
@@ -555,15 +565,68 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpyoc"]
+size = Vector2(20.75, 37)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_7b6uy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
 scale = Vector2(0.601563, 0.601563)
 sprite_frames = SubResource("SpriteFrames_o7cfq")
-animation = &"attack2"
+animation = &"attack3"
 autoplay = "idle"
-frame = 6
+frame = 9
 frame_progress = 1.0
 flip_h = true
+script = ExtResource("11_r1ugd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.375007, -18.5)
+shape = SubResource("RectangleShape2D_bpyoc")
+
+[node name="AttackController" parent="." instance=ExtResource("12_ml2um")]
+unique_name_in_owner = true
+available_attacks = Array[String](["attack2", "attack3"])
+
+[node name="CollisionShape2D" parent="AttackController/PlayerDetect" index="0"]
+position = Vector2(23.25, -15)
+
+[node name="HitBox" parent="AttackController" index="1"]
+damage = 7
+
+[node name="CollisionShape2D" parent="AttackController/HitBox" index="0"]
+position = Vector2(23.25, -24)
+
+[node name="Health" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_m6i1p")
+max_health = 100
+
+[node name="MovementChecker" parent="." instance=ExtResource("14_nce8n")]
+unique_name_in_owner = true
+position = Vector2(-4, -4)
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("health") instance=ExtResource("15_yir5i")]
+position = Vector2(-3, -3)
+collision_layer = 0
+collision_mask = 2
+health = NodePath("../Health")
+
+[node name="LootDropper" parent="." instance=ExtResource("16_gqvvf")]
+coin_scene = ExtResource("17_mu0vg")
+coin_max_amount = 2
+
+[node name="StateMachine" parent="." instance=ExtResource("18_qsf8f")]
+unique_name_in_owner = true
+enemy_behavior = 1
+RETREAT_DURATION = 0.1
+
+[node name="Senses" parent="." instance=ExtResource("19_4w80w")]
+unique_name_in_owner = true
+visible = false
+
+[editable path="AttackController"]

@@ -31,22 +31,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().change_scene_to_file("res://scenes/map/testing/testingArea.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_1:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/grass/map1.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/grass/map5.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_2:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/cave/map1.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/cave/map5.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_3:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/forest/map1.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/forest/map5.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_4:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/snow/map1.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/snow/map5.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_5:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/desert/map1.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/desert/map5.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_6:
 			# Change this path to your actual testing area scene file
-			get_tree().change_scene_to_file("res://scenes/map/kingdom/map1.tscn")
+			get_tree().change_scene_to_file("res://scenes/map/kingdom/map3.tscn")
 		elif event.is_pressed() and not event.is_echo() and event.keycode == KEY_7:
 			# Change this path to your actual testing area scene file
 			get_tree().change_scene_to_file("res://scenes/map/cave/map5.tscn")

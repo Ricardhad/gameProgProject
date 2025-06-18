@@ -1,6 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7t1sre0ccrjn"]
+[gd_scene load_steps=18 format=3 uid="uid://c7t1sre0ccrjn"]
 
 [ext_resource type="Texture2D" uid="uid://gof7v0cam4f" path="res://assets/npc/dwarf/Idle.png" id="1_jalor"]
+[ext_resource type="Script" path="res://scenes/npc/peasant/npc1.gd" id="1_say14"]
+[ext_resource type="Texture2D" uid="uid://iplr4g3nnb3f" path="res://assets/selecting_menu/butonUnclicked.png" id="3_yirto"]
+[ext_resource type="Texture2D" uid="uid://rsyaadoyfsor" path="res://assets/selecting_menu/cooldownbutton.png" id="4_c6r61"]
+[ext_resource type="Texture2D" uid="uid://cpr8fh38ctns5" path="res://assets/selecting_menu/buttonClicked.png" id="5_8yqlc"]
+[ext_resource type="FontFile" uid="uid://xvt8u1vwhvci" path="res://assets/font_style/Tiny5-Regular.ttf" id="6_ydkio"]
+[ext_resource type="Texture2D" uid="uid://c10iv5slqi1fu" path="res://assets/selecting_menu/TextBox.png" id="7_mbwn8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pc5bl"]
 atlas = ExtResource("1_jalor")
@@ -52,8 +58,18 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nm6wr"]
+height = 42.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_de4wp"]
+size = Vector2(63, 43)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_otihs"]
+texture = ExtResource("7_mbwn8")
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
+script = ExtResource("1_say14")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3.49997, -38.5)
@@ -62,3 +78,64 @@ sprite_frames = SubResource("SpriteFrames_o7cfq")
 animation = &"idle"
 autoplay = "idle"
 flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_nm6wr")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0.5, -22)
+shape = SubResource("RectangleShape2D_de4wp")
+
+[node name="ButtonATK" type="TextureButton" parent="."]
+offset_left = 15.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = -22.0
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("3_yirto")
+texture_pressed = ExtResource("4_c6r61")
+texture_hover = ExtResource("5_8yqlc")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ButtonATK"]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 69.0
+offset_bottom = 46.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("6_ydkio")
+theme_override_font_sizes/font_size = 40
+text = "F"
+horizontal_alignment = 1
+
+[node name="PanelChatNPC" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = -0.781
+anchor_top = -0.485
+anchor_right = -0.781
+anchor_bottom = -0.485
+offset_left = -16.0
+offset_top = -69.0
+offset_right = 147.0
+offset_bottom = -33.0
+scale = Vector2(-1, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_otihs")
+
+[node name="LabelChatNPC" type="Label" parent="PanelChatNPC"]
+modulate = Color(0.17, 0.17, 0.17, 1)
+layout_mode = 0
+offset_left = 150.0
+offset_top = 5.0
+offset_right = 1580.0
+offset_bottom = 285.0
+scale = Vector2(-0.1, 0.1)
+theme_override_fonts/font = ExtResource("6_ydkio")
+theme_override_font_sizes/font_size = 80
+text = "Passive: Immune to Bleed"
+autowrap_mode = 2

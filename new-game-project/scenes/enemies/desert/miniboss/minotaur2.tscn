@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ddmp5oogyot6v"]
+[gd_scene load_steps=42 format=3 uid="uid://oy6fing0l7y8"]
 
 [ext_resource type="Texture2D" uid="uid://b3q3ips7g2xhn" path="res://assets/enemies/desert/minotaur/Minotaur_2/Attack.png" id="1_08f7y"]
 [ext_resource type="Texture2D" uid="uid://bfum7hisdqhj" path="res://assets/enemies/desert/minotaur/Minotaur_2/Dead.png" id="2_ejrqd"]
