@@ -913,3 +913,6 @@ position = Vector2(625, 207)
 
 [node name="CharacterBody2D5" parent="Enemy" instance=ExtResource("14_hfxk1")]
 position = Vector2(848, 46)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("16_ci6m7")]
+position = Vector2(474, 17)
